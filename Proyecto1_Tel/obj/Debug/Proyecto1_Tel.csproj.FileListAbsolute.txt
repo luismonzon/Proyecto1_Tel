@@ -1,0 +1,5 @@
+c:\users\lmonzon\documents\visual studio 2012\Projects\Proyecto1_Tel\Proyecto1_Tel\bin\Proyecto1_Tel.dll
+c:\users\lmonzon\documents\visual studio 2012\Projects\Proyecto1_Tel\Proyecto1_Tel\bin\Proyecto1_Tel.pdb
+c:\users\lmonzon\documents\visual studio 2012\Projects\Proyecto1_Tel\Proyecto1_Tel\obj\Debug\Proyecto1_Tel.csprojResolveAssemblyReference.cache
+c:\users\lmonzon\documents\visual studio 2012\Projects\Proyecto1_Tel\Proyecto1_Tel\obj\Debug\Proyecto1_Tel.dll
+c:\users\lmonzon\documents\visual studio 2012\Projects\Proyecto1_Tel\Proyecto1_Tel\obj\Debug\Proyecto1_Tel.pdb
