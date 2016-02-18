@@ -13,5 +13,10 @@ namespace Proyecto1_Tel.Code
         {
 
         }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            Server.Transfer("addRol.aspx");
+        }
     }
 }

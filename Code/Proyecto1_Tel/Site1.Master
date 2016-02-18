@@ -97,19 +97,22 @@
 
 				    <!-- Main navigation -->
 			        <ul class="navigation widget">
-			            <li class="active"><a href="index.html" title=""><i class="icon-home"></i>Dashboard</a></li>
-			            <li><a href="#" title="" class="expand"><i class="icon-reorder"></i>Form elements<strong>3</strong></a>
+			            <li class="active"><a href="index.html" title=""><i class="icon-home"></i>Home</a></li>
+			            <li><a href="#" title="" class="expand"><i class="icon-reorder"></i>Administrar<strong>4</strong></a>
 			                <ul>
-			                    <li><a href="forms.html" title="">Form components</a></li>
-			                    <li><a href="wysiwyg.html" title="">WYSIWYG editor</a></li>
-			                    <li><a href="form_wizards.html" title="">Wizards</a></li>
+			                    <li><a href="forms.html" title="">Usuarios</a></li>
+			                    <li><a href="Roles.aspx" title="">Roles</a></li>
+			                    <li><a href="form_wizards.html" title="">Productos</a></li>
+                                <li><a href="form_wizards.html" title="">Clientes</a></li>
+
+
 			                </ul>
 			            </li>
-			            <li><a href="#" title="" class="expand"><i class="icon-tasks"></i>Components<strong>4</strong></a>
+			            <li><a href="#" title="" class="expand"><i class="icon-tasks"></i>Reportes<strong>4</strong></a>
 			                <ul>
-			                    <li><a href="components.html" title="">Content components</a></li>
-			                    <li><a href="content_grid.html" title="">Content grid</a></li>
-			                    <li><a href="blank.html" title="">Blank page</a></li>
+			                    <li><a href="components.html" title="">Ventas</a></li>
+			                    <li><a href="content_grid.html" title="">Clientes</a></li>
+			                    <li><a href="blank.html" title="">Productos</a></li>
 			                </ul>
 			            </li>
 			            <li><a href="media.html" title=""><i class="icon-picture"></i>Media</a></li>

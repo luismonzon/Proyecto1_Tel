@@ -48,6 +48,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -57,13 +58,19 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Code\Test.aspx" />
+    <Content Include="Code\addRol.aspx" />
+    <Content Include="Code\Roles.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\style.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="img\actualizar-restaure-todas-las-pestanas-icono-7808-32.png" />
+    <Content Include="img\agregar-usuarios-icono-3782-32.png" />
+    <Content Include="img\cancelar-icono-9428-32.png" />
+    <Content Include="img\editar-usuario-icono-9786-32.png" />
+    <Content Include="img\eliminar-un-grupo-icono-6756-32.png" />
     <Content Include="Index.aspx" />
     <Content Include="packages.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -84,13 +91,20 @@
     <Content Include="Site1.Master" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Code\Conexion.cs" />
-    <Compile Include="Code\Test.aspx.cs">
-      <DependentUpon>Test.aspx</DependentUpon>
+    <Compile Include="Code\addRol.aspx.cs">
+      <DependentUpon>addRol.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Code\Test.aspx.designer.cs">
-      <DependentUpon>Test.aspx</DependentUpon>
+    <Compile Include="Code\addRol.aspx.designer.cs">
+      <DependentUpon>addRol.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Code\Conexion.cs" />
+    <Compile Include="Code\Roles.aspx.cs">
+      <DependentUpon>Roles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Code\Roles.aspx.designer.cs">
+      <DependentUpon>Roles.aspx</DependentUpon>
     </Compile>
     <Compile Include="Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
@@ -116,7 +130,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
