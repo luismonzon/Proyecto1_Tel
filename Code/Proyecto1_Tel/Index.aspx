@@ -26,17 +26,16 @@
 				
                     		<div class="form-group ">
 							<label for="login" class="sr-only">Usuario</label>
-								<input type="text" class="form-control" name="login" id="login_value" 
+								<input type="text" class="form-control" name="login" id="user" 
 									placeholder="Email" tabindex="1" value="" />
 						</div>
 						<div class="form-group ">
-							<label for="password" class="sr-only">Contraseñia</label>
+							<label for="password" class="sr-only">Contraseña</label>
 								<input type="password" class="form-control" name="password" id="password"
 									placeholder="Password" value="" tabindex="2" />
 						</div>
-						<div class="checkbox">
-								<label class="control-label" for="remember_me">
-									<input type="checkbox" name="remember_me" id="remember_me" value="1" class="" tabindex="3" /> Recordarme
+						<div class="form-group">
+								<label class="control-label" for="remember_me" id="respuesta">
 								</label>
 						</div>
 						<br/>
@@ -54,15 +53,27 @@
     <script src="Scripts/jquery-1.9.1.min.js"></script>
     <script type="text/javascript">
         $('#submit').on('click', function () {
+
+
+            var user = document.getElementById('user').value;
+            var pass = document.getElementById('password').value;
+            
             $.ajax({
                 type: 'POST',
-                url: 'Index.aspx/sayhello',
-                data: JSON.stringify({ name: 'John' }),
+                url: 'Index.aspx/Log',
+                data: JSON.stringify({ usuario: user, password: pass }),
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
                 success: function (msg) {
                     // Notice that msg.d is used to retrieve the result object
-                    alert(msg.d);
+                    if (msg.d == "1") {
+
+                        $("#respuesta").text("correcto");
+                    }
+                    else {
+
+                        $("#respuesta").text("incorrecto");
+                    }
                 }
             });
         });

@@ -15,9 +15,12 @@ namespace Proyecto1_Tel
         }
         
         [WebMethod]
-        public static string SayHello(string name)
+        public static string Log(string usuario, string password)
         {
-            return "Hello " + name;
+            if (usuario.Equals("Luis") && password.Equals("123")) {
+                return "1";
+            }
+            return "0";
         }
     }
 }
