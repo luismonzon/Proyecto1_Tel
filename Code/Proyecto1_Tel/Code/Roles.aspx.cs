@@ -47,7 +47,7 @@ namespace Proyecto1_Tel.Code
             if (roles != null) { 
                 
                     data= "<div class=\"table-overflow\"> "+
-                        "<table class=\"table table-striped table-bordered align-center\">"+
+                        "<table class=\"table table-striped table-bordered\" id=\"data-table\">"+
                             "<thead>"+
                                 "<tr>"+
                                    " <th align =\"center\">Codigo</th>" +
