@@ -61,9 +61,8 @@ namespace Proyecto1_Tel.Code
                     data += "<tr><td align =\"Center\">" + item["Rol"].ToString() + "</td><td>" + item["Nombre"].ToString() + "</td>";
                     data+= " <td>"+
                                         "<ul class=\"table-controls\">"+
-                                          "  <li><a href=\"#\" class=\"tip\" title=\"Publish\"><i class=\"fam-tick\"></i></a> </li>"+
-                                           " <li><a href=\"#\" class=\"tip\" title=\"Edit entry\"><i class=\"fam-pencil\"></i></a> </li>"+
-                                            "<li><a href=\"#\" class=\"tip\" title=\"Remove entry\"><i class=\"fam-cross\"></i></a> </li>"+
+                                          " <li><a href=\"javascript:Mostrar("+item["Rol"].ToString()+")\" class=\"tip\" title=\"Editar\"><i class=\"fam-pencil\"></i></a> </li>"+
+                                            "<li><a href=\"javascript:Mostrar(" + item["Rol"].ToString() + ")\" class=\"tip\" title=\"Eliminar\"><i class=\"fam-cross\"></i></a> </li>" +
                                     "</td>";
                     data+="</tr>";
 	            }

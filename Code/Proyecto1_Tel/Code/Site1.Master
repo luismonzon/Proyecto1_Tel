@@ -61,6 +61,16 @@
 <script type="text/javascript" src="js/charts/chart2.js"></script>
 <script type="text/javascript" src="js/charts/chart3.js"></script>
 
+<script type="text/javascript" >
+
+    function Mostrar(id) {
+
+        alert(id);
+    }
+
+
+</script>
+
 </head>
 
 <body>
