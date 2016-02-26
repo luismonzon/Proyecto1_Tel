@@ -61,7 +61,6 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Code\addRol.aspx" />
     <Content Include="Code\AddUser.aspx" />
     <Content Include="Code\css\login.css" />
     <Content Include="Code\Roles.aspx" />
@@ -96,13 +95,6 @@
     <Content Include="Code\Site1.Master" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Code\addRol.aspx.cs">
-      <DependentUpon>addRol.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Code\addRol.aspx.designer.cs">
-      <DependentUpon>addRol.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Code\AddUser.aspx.cs">
       <DependentUpon>AddUser.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -53,6 +53,51 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
         
+
+             <!-- Breadcrumbs line -->
+			    <div class="crumbs">
+		            <ul id="breadcrumbs" class="breadcrumb"> 
+		                <li><a href="index.html">Dashboard</a></li>
+		                <li class="active"><a href="AddUser.aspx" title="">Usuario</a></li>
+		            </ul>
+			        
+		            
+			    </div>
+			    <!-- /breadcrumbs line -->
+
+			    <!-- Page header -->
+			    <div class="page-header">
+			    	<div class="page-title">
+				    	<h5>Tables</h5>
+				    	<span>Static and dynamic tables</span>
+			    	</div>
+
+			    	<ul class="page-stats">
+			    		<li>
+			    			<div class="showcase">
+			    				<span>New visits</span>
+			    				<h2>22.504</h2>
+			    			</div>
+			    			<div id="total-visits" class="chart">10,14,8,45,23,41,22,31,19,12, 28, 21, 24, 20</div>
+			    		</li>
+			    		<li>
+			    			<div class="showcase">
+			    				<span>My balance</span>
+			    				<h2>$16.290</h2>
+			    			</div>
+			    			<div id="balance" class="chart">10,14,8,45,23,41,22,31,19,12, 28, 21, 24, 20</div>
+			    		</li>
+			    	</ul>
+			    </div>
+			    <!-- /page header -->
+
+	    <h5 class="widget-name"><i class="icon-columns"></i>Agregar Usuario</h5>
+        <!-- Some controlы -->
+        <div class="widget" id="tab_roles" runat="server">
+        </div>
+        <!-- /some controlы -->
+
+
         <form class="form-horizontal" action="#">
         <fieldset>   
             <!--<div class="navbar">

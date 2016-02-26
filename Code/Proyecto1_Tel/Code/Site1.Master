@@ -112,10 +112,10 @@
 			            <li class="active"><a href="Inicio.aspx" title=""><i class="icon-home"></i>Inicio</a></li>
 			            <li><a href="#" title="" class="expand"><i class="icon-reorder"></i>Administrar<strong>4</strong></a>
 			                <ul>
-			                    <li><a href="forms.html" title="">Roles</a></li>
-			                    <li><a href="form_wizards.html" title="">Usuarios</a></li>
-                                <li><a href="Cliente.aspx" title="">Clientes</a></li>
-			                    <li><a href="form_wizards.html" title="">Productos</a></li>
+			                    <li><a href="Roles.aspx" title="">Roles</a></li>
+			                    <li><a href="AddUser.aspx" title="">Usuarios</a></li>
+                                <li><a href="#" title="">Clientes</a></li>
+			                    <li><a href="#" title="">Productos</a></li>
                          
 			                </ul>
 			            </li>
