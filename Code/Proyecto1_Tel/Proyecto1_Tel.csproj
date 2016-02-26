@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Code\addRol.aspx" />
+    <Content Include="Code\AddUser.aspx" />
     <Content Include="Code\css\login.css" />
     <Content Include="Code\Roles.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -101,6 +102,13 @@
     </Compile>
     <Compile Include="Code\addRol.aspx.designer.cs">
       <DependentUpon>addRol.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Code\AddUser.aspx.cs">
+      <DependentUpon>AddUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Code\AddUser.aspx.designer.cs">
+      <DependentUpon>AddUser.aspx</DependentUpon>
     </Compile>
     <Compile Include="Code\Conexion.cs" />
     <Compile Include="Code\Roles.aspx.cs">

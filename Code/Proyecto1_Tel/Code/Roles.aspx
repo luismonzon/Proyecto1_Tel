@@ -1,6 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="Site1.Master" AutoEventWireup="true" CodeBehind="Roles.aspx.cs" Inherits="Proyecto1_Tel.Code.Test" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    
+    <script type="text/javascript" >
+        function Mostrar(id) {
+            alert(id);
+        }
+    </script>
+
+    <script type="text/javascript" src="scripts/MisScripts.js"></script>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">

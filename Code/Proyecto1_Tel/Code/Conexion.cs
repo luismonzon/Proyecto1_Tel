@@ -113,6 +113,40 @@ namespace Proyecto1_Tel.Code
             return respuesta;
         }
 
+        public int Count(string query) 
+        {
+
+            int respuesta = 0;
+
+
+            try
+            {
+                SqlCommand comando = new SqlCommand();
+                comando.Connection = conexion;
+                //UPDATE DEPARTAMENTO SET nombre_depto = 'San Marcos' WHERE cod_depto = 2;
+                comando.CommandText = query;
+                if (ConectarServer())
+                {
+                    Int32 c = (Int32)comando.ExecuteScalar();
+                    respuesta = c;
+                }
+                else
+                {
+                    respuesta = -1;
+                }
+            }
+            catch (Exception ex)
+            {
+                respuesta = -1;
+                MostrarError = "Mensaje de la excepcion: " + ex.Message.ToString();
+            }
+            finally
+            {
+                conexion.Close();
+            }
+            return respuesta;
+
+        }
 
         public bool Eliminar(string tabla, string condicion)
         {
