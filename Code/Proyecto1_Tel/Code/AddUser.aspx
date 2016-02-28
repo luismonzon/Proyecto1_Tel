@@ -49,22 +49,24 @@
         });
     </script>
 
-
+    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
-        
-
-             <!-- Breadcrumbs line -->
+           
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+      
+            <div class="wrapper">
+                 <!-- Breadcrumbs line -->
 			    <div class="crumbs">
 		            <ul id="breadcrumbs" class="breadcrumb"> 
-		                <li><a href="index.html">Dashboard</a></li>
-		                <li class="active"><a href="AddUser.aspx" title="">Usuario</a></li>
+		                <li><a href="../index.aspx">Inicio</a></li>
+		                <li><a href="AddUser.aspx">Agregar-Usuario</a></li>    
 		            </ul>
-			        
+			        </div>
 		            
 			    </div>
-			    <!-- /breadcrumbs line -->
-
+		</div>
 			    <!-- Page header -->
 			    <div class="page-header">
 			    	<div class="page-title">
@@ -122,10 +124,10 @@
 	                                	</div>
 	                                    <div class="control-group">
 		                                    <label class="control-label">Usuario:</label>
-		                                    <div class="controls"><input type="text" name="user" class="span12" placeholder="Usuario" id="user" runat="server" /></div>
+		                                    <div class="controls"><input type="text" required="required" name="user" class="span12" placeholder="Usuario" id="user" runat="server" /></div>
 
 		                                    <label class="control-label">Contraseña:</label>
-		                                    <div class="controls"><input class="span12" type="password" name="pass" placeholder="Contraseña" id="password" runat="server" /></div>
+		                                    <div class="controls"><input class="span12" required="required" type="password" name="pass" placeholder="Contraseña" id="password" runat="server" /></div>
 
 	                                        <label class="control-label">Rol:</label>
 	                                        <div class="controls">
@@ -152,8 +154,8 @@
         </form>
 
 
-</asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+                    
+
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="foot" runat="server">
 

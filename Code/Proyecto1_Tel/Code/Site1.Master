@@ -5,7 +5,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>Pannonia - premium responsive admin template by Eugene Kopyov</title>
+    <title>Proteccion Solar</title>
     <link href="css/main.css" rel="stylesheet" type="text/css" />
     <!--[if IE 8]><link href="css/ie8.css" rel="stylesheet" type="text/css" /><![endif]-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
@@ -47,7 +47,9 @@
     <script type="text/javascript" src="js/plugins/forms/jquery.validationEngine-en.js"></script>
     <script type="text/javascript" src="js/plugins/forms/jquery.form.wizard.js"></script>
     <script type="text/javascript" src="js/plugins/forms/jquery.form.js"></script>
-
+    
+    <script type="text/javascript" src="js/myjava.js"></script>
+    
     <script type="text/javascript" src="js/plugins/tables/jquery.dataTables.min.js"></script>
 
     <script type="text/javascript" src="js/files/bootstrap.min.js"></script>
@@ -109,10 +111,10 @@
 			        
 				    <!-- Main navigation -->
 			        <ul class="navigation widget">
-			            <li class="active"><a href="Inicio.aspx" title=""><i class="icon-home"></i>Inicio</a></li>
+			            <li class="active"><a href="../index.aspx" title=""><i class="icon-home"></i>Inicio</a></li>
 			            <li><a href="#" title="" class="expand"><i class="icon-reorder"></i>Administrar<strong>4</strong></a>
 			                <ul>
-			                    <li><a href="Roles.aspx" title="">Roles</a></li>
+			                    <li><a href="Rol.aspx" title="">Roles</a></li>
 			                    <li><a href="AddUser.aspx" title="">Usuarios</a></li>
                                 <li><a href="#" title="">Clientes</a></li>
 			                    <li><a href="#" title="">Productos</a></li>
@@ -163,7 +165,9 @@
 
 		    <!-- Content wrapper -->
 		    <div class="wrapper">
-                <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server"></asp:ContentPlaceHolder>
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+
+                </asp:ContentPlaceHolder>
 		            
     <!-- /breadcrumbs line -->
 	 

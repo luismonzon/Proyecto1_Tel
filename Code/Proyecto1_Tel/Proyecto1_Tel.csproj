@@ -63,7 +63,7 @@
   <ItemGroup>
     <Content Include="Code\AddUser.aspx" />
     <Content Include="Code\css\login.css" />
-    <Content Include="Code\Roles.aspx" />
+    <Content Include="Code\Rol.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -103,12 +103,12 @@
       <DependentUpon>AddUser.aspx</DependentUpon>
     </Compile>
     <Compile Include="Code\Conexion.cs" />
-    <Compile Include="Code\Roles.aspx.cs">
-      <DependentUpon>Roles.aspx</DependentUpon>
+    <Compile Include="Code\Rol.aspx.cs">
+      <DependentUpon>Rol.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Code\Roles.aspx.designer.cs">
-      <DependentUpon>Roles.aspx</DependentUpon>
+    <Compile Include="Code\Rol.aspx.designer.cs">
+      <DependentUpon>Rol.aspx</DependentUpon>
     </Compile>
     <Compile Include="Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>

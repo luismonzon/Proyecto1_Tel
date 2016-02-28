@@ -88,7 +88,7 @@ namespace Proyecto1_Tel.Code
                 SqlCommand comando = new SqlCommand();
                 comando.Connection = conexion;
                 //UPDATE DEPARTAMENTO SET nombre_depto = 'San Marcos' WHERE cod_depto = 2;
-                comando.CommandText = "UPDATE " + tabla + "SET" + campos + "WHERE" + condicion + ";";
+                comando.CommandText = "UPDATE " + tabla + " SET " + campos + " WHERE " + condicion + ";";
                 if (ConectarServer())
                 {
                     if (comando.ExecuteNonQuery() == 1)
@@ -245,6 +245,40 @@ namespace Proyecto1_Tel.Code
             return respuesta;
         }
 
+        public DataSet Buscar_Mostrar(string tabla, string condicion)
+        {
+            DataSet respuesta = new DataSet();
+            try
+            {
+                //SELECT cod_depto, nombre_depto FROM DEPARTAMENTO;
+                string instruccionSQL = "SELECT * FROM " + tabla + " WHERE " + condicion + ";";
+                SqlDataAdapter adaptador = new SqlDataAdapter(instruccionSQL, conexion);
+
+                if (ConectarServer())
+                {
+                    adaptador.Fill(respuesta, condicion);
+                }
+            }
+            catch (Exception ex)
+            {
+                MostrarError = "Mensaje de la exepción: " + ex.Message.ToString();
+            }
+            finally
+            {
+                conexion.Close();
+            }
+
+            return respuesta;
+        }
+
+
+        
 
     }
+
+
+
+
+
+
 }
