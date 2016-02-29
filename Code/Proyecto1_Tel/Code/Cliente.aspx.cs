@@ -122,9 +122,9 @@ namespace Proyecto1_Tel.Code
 
             Conexion conn = new Conexion();
 
-            int ds = conn.Count("Select count(nombre) from [Cliente] where nombre=\'" + nombre + "\';");
+            int ds = conn.Count("Select count(id) from [Cliente] where id=\'" + id + "\';");
 
-            if (ds == 0)
+            if (ds != 0)
             {
                 conn.Modificar("Cliente", "Nombre" + "=" + "\'" + nombre + "\' " + "," + " Nit " + " = " + "\'" + nit + "\' ", "Cliente" + "= " + id);
                 return true;

@@ -16,8 +16,8 @@
 			    <!-- Page header -->
 			    <div class="page-header">
 			    	<div class="page-title">
-				    	<h5>Roles</h5>
-				    	<span>Agregar, Editar o Eliminar un rol</span>
+				    	<h5>Proteccion Solar</h5>
+				    	<span>LA TORRE</span>
 			    	</div>
 
 			    	<ul class="page-stats">
@@ -82,8 +82,13 @@
 
                		</tr> 
                     <tr>
-                    	<td>Nombre: </td>
+                    	<td>*Nombre: </td>
                         <td><input type="text" required="required" name="nombre" id="nombre" runat="server" maxlength="100"/></td>
+                    </tr>
+                    <tr>
+                    	<td colspan="2">
+                        	<label>Campos Obligatorios (*)</label>
+                        </td>
                     </tr>
                     <tr>
                     	<td colspan="2">

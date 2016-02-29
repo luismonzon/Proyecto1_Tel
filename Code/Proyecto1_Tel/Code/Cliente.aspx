@@ -71,14 +71,18 @@
 
                		</tr> 
                     <tr>
-                    	<td>Nombre:</td>
+                    	<td>*Nombre:</td>
                         <td><input type="text" required="required" name="nombre" id="nombre" runat="server" maxlength="100"/></td>
                     </tr>
                     <tr>
-                    	<td>Nit:</td>
+                    	<td>*Nit:</td>
                         <td><input type="text" name="nit" id="nit" required="required" runat="server" maxlength="100"/></td>
                     </tr>
-                    
+                    <tr>
+                    	<td colspan="2">
+                        	<label>Campos Obligatorios (*)</label>
+                        </td>
+                    </tr>
                     <tr>
                     	<td colspan="2">
                         	<div  id="mensaje"></div>
@@ -161,10 +165,6 @@
 
                               $('#mensaje').addClass('alert alert-success').html('Registro editado con exito').show(200).delay(2500).hide(200);
                               return false;
-                          } else {
-                              $('#formulario-cliente')[0].reset();
-                              $('#mensaje').addClass('alert alert-danger').html('Nombre ya existe').show(200).delay(2500).hide(200);
-                              $('#edi').html('Cliente.aspx/Llenar_Cliente');
                           }
 
                       }
@@ -172,6 +172,7 @@
                   });
 
               }
+              $('#mensaje').addClass('alert alert-danger').html('No debe dejar campos vacios').show(200).delay(2500).hide(200);
               return false;
           });
 
