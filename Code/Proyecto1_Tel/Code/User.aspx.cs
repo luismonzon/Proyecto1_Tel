@@ -130,7 +130,13 @@ namespace Proyecto1_Tel.Code
 
             if (ds != 0)
             {
-                return conn.Modificar("Usuario", "Nombre" + "=" + "\'" + nombre + "\' " + "," + " Contrasenia " + " = " + "\'" + pass + "\' , Rol = " + rol + " ", "Usuario" + "= " + id);
+                int ds2 = conn.Count("Select count(usuario) from [Usuario] where Nombre = \'"+nombre+"\' and usuario != "+id+";");
+
+                if (ds2 == 0)
+                {
+                    return conn.Modificar("Usuario", "Nombre" + "=" + "\'" + nombre + "\' " + "," + " Contrasenia " + " = " + "\'" + pass + "\' , Rol = " + rol + " ", "Usuario" + "= " + id);
+                }
+                return false;
             }
             return false;
         }

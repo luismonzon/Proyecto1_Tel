@@ -121,7 +121,7 @@
              
                              } else {
                                  $('#mensaje').removeClass();
-                                 $('#mensaje').addClass('alert alert-danger').html('Rol ya existe').show(200).delay(2500).hide(200);
+                                 $('#mensaje').addClass('alert alert-danger').html('Cliente ya existe').show(200).delay(2500).hide(200);
 
                              }
 

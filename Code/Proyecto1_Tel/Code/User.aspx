@@ -103,6 +103,7 @@
             </div>
             
             <div class="modal-footer">
+            	<input type="submit" value="Registrar" class="btn btn-large btn-success " name="reg" id="reg"/>
                 <input type="submit" value="Editar" class="btn btn-large btn-warning"  id="edi"/>
             </div>
             </form>
@@ -117,27 +118,6 @@
     </div>
     <div>
     </div>
-    <!--
-        $.ajax({
-                 type: 'POST',
-                 url: 'User.aspx/BuscarUsuario',
-                 data: JSON.stringify({ id: identi }),
-                 contentType: 'application/json; charset=utf-8',
-                 dataType: 'json',
-                 success: function (response) {
-                     alert(response.d);
-                     var cliente = JSON.parse(response.d);
-                     var NombreCliente = cliente[0];
-                     var NitCliente = cliente[1];
-                     document.getElementById("<% = nombre.ClientID%>").value = NombreCliente;
-                     document.getElementById("<% = password.ClientID %>").value = NitCliente;
-                 }
-
-
-
-             });
-
-        -->
 
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="foot" runat="server">
@@ -151,7 +131,8 @@
              document.getElementById("<% = codigo.ClientID%>").value = id;
 
              var identi = document.getElementById("<% = codigo.ClientID%>").value;
-
+             $('#edi').show(); //escondemos el boton de edicion porque es un nuevo registro
+             $('#reg').hide(); //mostramos el boton de registro
              $('#editar-usuario').modal({ //
                  show: true, //mostramos el modal registra producto
                  backdrop: 'static' //hace que no se cierre el modal si le dan clic afuera del mismo.
@@ -189,25 +170,31 @@
              var rol = document.getElementById("<% = user_rol.ClientID %>").value;
              if (user != "" && pass != "" && rol != "") {
                  $.ajax({
-                     
+
                      type: 'POST',
                      url: 'User.aspx/EditUser',
-                     data: JSON.stringify({ id: id, nombre: user, rol: rol , pass: pass}),
+                     data: JSON.stringify({ id: id, nombre: user, rol: rol, pass: pass }),
                      contentType: 'application/json; charset=utf-8',
                      dataType: 'json',
                      success: function (response) {
                          if (response.d == true) {
-
-                             $('#mensaje').addClass('alert alert-success').html('Registro editado con exito').show(200).delay(2500).hide(200);
-                             return false;
+                             $('#mensaje').removeClass();
+                             $('#mensaje').addClass('alert alert-success').html('Registro editado exitosamente').show(200).delay(2500).hide(200);
+                         } else {
+                             $('#mensaje').removeClass();
+                             $('#mensaje').addClass('alert alert-danger').html('No se pudo editar el registro :(').show(200).delay(2500).hide(200);
                          }
 
                      }
 
                  });
 
+             } else
+             {
+                 $('#mensaje').removeClass();
+                 $('#mensaje').addClass('alert alert-danger').html('No debe dejar campos vacios').show(200).delay(2500).hide(200);
+                 Mostrar_cliente(id);
              }
-             $('#mensaje').addClass('alert alert-danger').html('No debe dejar campos vacios').show(200).delay(2500).hide(200);
              return false;
          });
 
@@ -221,6 +208,11 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
+                        if (response.d == true) {
+                            alert("Usuario Eliminado Exitosamente");
+                        } else {
+                            alert("El Usuario No Pudo Ser Eliminado");
+                        }
                     }
                 });
             }
