@@ -116,7 +116,7 @@
 			                <ul>
 			                    <li><a href="Rol.aspx" title="">Roles</a></li>
 			                    <li><a href="AddUser.aspx" title="">Usuarios</a></li>
-                                <li><a href="#" title="">Clientes</a></li>
+                                <li><a href="Cliente.aspx" title="">Clientes</a></li>
 			                    <li><a href="#" title="">Productos</a></li>
                          
 			                </ul>
@@ -165,15 +165,23 @@
 
 		    <!-- Content wrapper -->
 		    <div class="wrapper">
-                <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
-
-                </asp:ContentPlaceHolder>
+                 <!-- Breadcrumbs line -->
+			    <div class="crumbs">
+		            <ul id="breadcrumbs" class="breadcrumb"> 
+		                <li><a href="../index.aspx">Inicio</a></li>
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+                         </asp:ContentPlaceHolder>
 		            
+                    </ul>
+			        </div>
+		            
+			
+               
     <!-- /breadcrumbs line -->
 	 
             </div>
 			<!-- /content wraper -->
-			<div class="container">
+			<div class="wrapper">
     			<asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
             </div>
 

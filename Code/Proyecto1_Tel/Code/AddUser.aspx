@@ -1,77 +1,22 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Code/Site1.Master" AutoEventWireup="true" CodeBehind="AddUser.aspx.cs" Inherits="Proyecto1_Tel.Code.AddUser" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     
-    <script type="text/javascript">
-
-        $('#submit').on('click', function () {
-            $("#dvResult").text("");
-            var user = document.getElementById("<%=user.ClientID%>").value;
-            var pass = document.getElementById("<%=password.ClientID%>").value;
-            var rol = document.getElementById("<%=Rol.ClientID%>").value;
-            var msg = "";
-
-            if (user == "") {
-                msg += "<li>Por Favor ingrese el usuario</li>";
-            }
-            if (pass == "") {
-                msg += "<li>Por Favor ingrese la contraseña</li>";
-            }
-            if (msg.length == 0) {
-                $.ajax({
-
-                    type: 'POST',
-                    url: 'AddUser.aspx/Add',
-                    data: JSON.stringify({ usuario: user, password: pass, rol: rol }),
-                    contentType: 'application/json; charset=utf-8',
-                    dataType: 'json',
-                    success: function (response) {
-                        if (response.d == true) {
-                            $('#dvResult').text("Usuario agregado Correctamente");
-                        } else {
-                            $('#dvResult').text("Usuario no pudo ser agregado Correctamente");
-                        }
-                        $('#dvResult').fadeOut(6000);
-                    },
-                    error: function (xhr, textStatus, error) {
-                        $('#dvResult').text("Error: " + error);
-                    }
-
-
-                });
-            } else {
-                //Validation failure message
-                $('#dvResult').html('');
-                $('#dvResult').html(msg);
-            }
-            $('#dvResult').fadeIn();
-
-
-        });
-    </script>
-
+   
     
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
-           
+                        <li><a href="AddUser.aspx">Agregar-Usuario</a></li>    
+		
 </asp:Content>
+
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
       
-            <div class="wrapper">
-                 <!-- Breadcrumbs line -->
-			    <div class="crumbs">
-		            <ul id="breadcrumbs" class="breadcrumb"> 
-		                <li><a href="../index.aspx">Inicio</a></li>
-		                <li><a href="AddUser.aspx">Agregar-Usuario</a></li>    
-		            </ul>
-			        </div>
-		            
-			    </div>
-		</div>
+            
 			    <!-- Page header -->
 			    <div class="page-header">
 			    	<div class="page-title">
-				    	<h5>Tables</h5>
-				    	<span>Static and dynamic tables</span>
+				    	<h5>Proteccion Solar</h5>
+				    	<span>LA TORRE</span>
 			    	</div>
 
 			    	<ul class="page-stats">
@@ -159,7 +104,54 @@
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="foot" runat="server">
 
-    
+     <script type="text/javascript">
+
+         $('#submit').on('click', function () {
+             $("#dvResult").text("");
+             var user = document.getElementById("<%=user.ClientID%>").value;
+            var pass = document.getElementById("<%=password.ClientID%>").value;
+            var rol = document.getElementById("<%=Rol.ClientID%>").value;
+            var msg = "";
+
+            if (user == "") {
+                msg += "<li>Por Favor ingrese el usuario</li>";
+            }
+            if (pass == "") {
+                msg += "<li>Por Favor ingrese la contraseña</li>";
+            }
+            if (msg.length == 0) {
+                $.ajax({
+
+                    type: 'POST',
+                    url: 'AddUser.aspx/Add',
+                    data: JSON.stringify({ usuario: user, password: pass, rol: rol }),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.d == true) {
+                            $('#dvResult').text("Usuario agregado Correctamente");
+                        } else {
+                            $('#dvResult').text("Usuario no pudo ser agregado Correctamente");
+                        }
+                        $('#dvResult').fadeOut(6000);
+                    },
+                    error: function (xhr, textStatus, error) {
+                        $('#dvResult').text("Error: " + error);
+                    }
+
+
+                });
+            } else {
+                //Validation failure message
+                $('#dvResult').html('');
+                $('#dvResult').html(msg);
+            }
+            $('#dvResult').fadeIn();
+
+
+        });
+    </script>
+
 
 
 

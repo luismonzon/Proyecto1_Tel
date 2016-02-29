@@ -4,14 +4,12 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
-    <!-- Content wrapper -->
-                 <!-- Breadcrumbs line -->
-			    <div class="crumbs">
-		            <ul id="breadcrumbs" class="breadcrumb"> 
-		                <li><a href="../index.aspx">Inicio</a></li>
-		                <li><a href="Rol.aspx">Roles</a></li>    
-		            </ul>
-			        </div>
+    
+        <li><a href="Rol.aspx">Roles</a></li>    
+
+
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 		            
 		
 			
@@ -79,16 +77,13 @@
             <div class="modal-body">
 				<table border="0" width="100%">
                		<tr>
-                           <td style="visibility:hidden; >
-                               ID:
-                           </td>
-                           <td>
-                               <input type="text" style="visibility:hidden; height:5px;" readonly="readonly" hidden="hidden" required="required" name="codigo" id="codigo" runat="server" maxlength="100"/>
-                           </td>
+                           <td style="visibility:hidden; height:5px;" >ID </td>
+                        <td colspan="2"><input runat="server" type="text" required="required" readonly="readonly" id="codigo" name="codigo"  style="visibility:hidden; height:5px;"/></td>
+
                		</tr> 
                     <tr>
                     	<td>Nombre: </td>
-                        <td><input type="text" name="nombre" id="nombre" runat="server" maxlength="100"/></td>
+                        <td><input type="text" required="required" name="nombre" id="nombre" runat="server" maxlength="100"/></td>
                     </tr>
                     <tr>
                     	<td colspan="2">
@@ -107,10 +102,7 @@
         </div>
     
 
-</div>
-</asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    
+</div>    
     
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="foot" runat="server">
@@ -139,12 +131,11 @@
                             }
                             
                         }
-
-                        
-
                     });
 
                 }
+                $('#mensaje').addClass('alert alert-danger').html('Campos Vacios').show(200).delay(2500).hide(200);
+
                 return false;
             });
 

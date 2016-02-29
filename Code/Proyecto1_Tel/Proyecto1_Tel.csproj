@@ -61,7 +61,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Code\AddCliente.aspx" />
     <Content Include="Code\AddUser.aspx" />
+    <Content Include="Code\Cliente.aspx" />
     <Content Include="Code\css\login.css" />
     <Content Include="Code\Rol.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -95,12 +97,26 @@
     <Content Include="Code\Site1.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Code\AddCliente.aspx.cs">
+      <DependentUpon>AddCliente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Code\AddCliente.aspx.designer.cs">
+      <DependentUpon>AddCliente.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Code\AddUser.aspx.cs">
       <DependentUpon>AddUser.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Code\AddUser.aspx.designer.cs">
       <DependentUpon>AddUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Code\Cliente.aspx.cs">
+      <DependentUpon>Cliente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Code\Cliente.aspx.designer.cs">
+      <DependentUpon>Cliente.aspx</DependentUpon>
     </Compile>
     <Compile Include="Code\Conexion.cs" />
     <Compile Include="Code\Rol.aspx.cs">
