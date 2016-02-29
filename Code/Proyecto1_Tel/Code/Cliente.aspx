@@ -133,7 +133,7 @@
                  contentType: 'application/json; charset=utf-8',
                  dataType: 'json',
                  success: function (response) {
-                     alert(response.d);
+                     
                      var cliente = JSON.parse(response.d);
                      var NombreCliente = cliente[0];
                      var NitCliente = cliente[1];
@@ -162,19 +162,26 @@
                       dataType: 'json',
                       success: function (response) {
                           if (response.d == true) {
+                              $('#mensaje').removeClass();
+                              $('#mensaje').addClass('alert alert-success').html('Registro editado exitosamente').show(200).delay(2500).hide(200);
+                              
+                          } else {
+                              $('#mensaje').removeClass();
+                              $('#mensaje').addClass('alert alert-danger').html('Nit ya existe con otro cliente').show(200).delay(2500).hide(200);
 
-                              $('#mensaje').addClass('alert alert-success').html('Registro editado con exito').show(200).delay(2500).hide(200);
-                              return false;
                           }
-
+                          
                       }
-
+                        
                   });
-
+              } else {
+                  $('#mensaje').removeClass();
+                  $('#mensaje').addClass('alert alert-danger').html('No debe dejar campos vacios').show(200).delay(2500).hide(200);
+                  Mostrar_cliente(id);
               }
-              $('#mensaje').addClass('alert alert-danger').html('No debe dejar campos vacios').show(200).delay(2500).hide(200);
-              return false;
-          });
+              
+             return false;
+         });
 
         
 
@@ -194,7 +201,11 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
-                        row.remove();
+                        if (response.d == true) {
+                            alert("Cliente Eliminado Exitosamente");
+                        } else {
+                            alert("Cliente No Se Pudo Eliminar");
+                        }
                     }
                 });
             }

@@ -108,11 +108,12 @@ namespace Proyecto1_Tel.Code
         public static bool EliminarCliente(string id)
         {
             Conexion conn = new Conexion();
+            bool respuesta;
 
-            conn.Eliminar("Cliente", "Cliente" + "= " + id);
+            respuesta = conn.Eliminar("Cliente", "Cliente" + "= " + id);
+            
 
-
-            return true;
+            return respuesta;
         }
 
         [WebMethod]
@@ -123,6 +124,8 @@ namespace Proyecto1_Tel.Code
             Conexion conn = new Conexion();
 
             int ds = conn.Count("Select count(id) from [Cliente] where id=\'" + id + "\';");
+            int cantnit = conn.Count("Select count(nit) from [Cliente] where nit=\'" + nit + "\';");
+
 
             if (ds != 0)
             {

@@ -104,7 +104,8 @@
              
              
              if (nNombre != "" && nNit != "") {
-                
+                 
+
                      $.ajax({
                          type: 'POST',
                          url: 'AddCliente.aspx/Add',
@@ -113,20 +114,26 @@
                          dataType: 'json',
                          success: function (response) {
                              if (response.d == true) {
+                                 $('#mensaje').removeClass();
                                  $('#mensaje').addClass('alert alert-success').html('Cliente agregado con exito').show(200).delay(2500).hide(200);
-                                 
+                                 document.getElementById("<%=nombre.ClientID%>").value = "";
+                                 document.getElementById("<%=nit.ClientID%>").value = "";
+             
                              } else {
+                                 $('#mensaje').removeClass();
                                  $('#mensaje').addClass('alert alert-danger').html('Rol ya existe').show(200).delay(2500).hide(200);
+
                              }
 
                          }
                      });
                 
              } else {
-
+                 $('#mensaje').removeClass();
                  $('#mensaje').addClass('alert alert-danger').html('Revise los campos obligatorios marcados con (*)').show(200).delay(2500).hide(200);
 
              }
+             return false;
              
 
          });

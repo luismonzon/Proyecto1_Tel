@@ -128,19 +128,24 @@
                         success: function (response) {
                             if (response.d == true) {
                                 $('#formulario')[0].reset();
+                                $('#mensaje').removeClass();
                                 $('#mensaje').addClass('alert alert-success').html('Registro completado con exito').show(200).delay(2500).hide(200);
-                                return false;
+                                
                             } else {
                                 $('#formulario')[0].reset();
+                                $('#mensaje').removeClass();
                                 $('#mensaje').addClass('alert alert-danger').html('Rol ya existe').show(200).delay(2500).hide(200);
+                                
                             }
                             
                         }
                     });
 
-                }
-                $('#mensaje').addClass('alert alert-danger').html('Campos Vacios').show(200).delay(2500).hide(200);
+                } else {
+                    $('#mensaje').addClass('alert alert-danger').html('Campos Vacios').show(200).delay(2500).hide(200);
 
+                }
+                
                 return false;
             });
 
@@ -160,11 +165,11 @@
                         dataType: 'json',
                         success: function (response) {
                             if (response.d == true) {
-                                
+                                $('#mensaje').removeClass();
                                 $('#mensaje').addClass('alert alert-success').html('Registro editado con exito').show(200).delay(2500).hide(200);
                                 return false;
                             } else {
-                                $('#formulario')[0].reset();
+                                $('#mensaje').removeClass();
                                 $('#mensaje').addClass('alert alert-danger').html('Nombre ya existe').show(200).delay(2500).hide(200);
                                 $('#edi').html('Rol.aspx/Llenar_Roles');
                             }
@@ -173,6 +178,11 @@
                         
                     });
 
+                } else {
+                    $('#mensaje').removeClass();
+                    $('#mensaje').addClass('alert alert-danger').html('No debe dejar campos vacios :(').show(200).delay(2500).hide(200);
+                    Mostrar(id);
+                    
                 }
                 return false;
             });
@@ -219,7 +229,12 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
-                        row.remove();
+                        if (response.d == true) {
+                            alert("Registro eliminado con exito");
+                        } else {
+                            alert("Registro no se pudo eliminar");
+                        }
+                       
                     }
                 });
             }

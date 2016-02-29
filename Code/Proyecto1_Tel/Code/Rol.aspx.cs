@@ -146,10 +146,12 @@ namespace Proyecto1_Tel.Code
         {
             Conexion conn = new Conexion();
 
-            conn.Eliminar("Rol" , "Rol" + "= " + id);
+            bool respuesta;
 
+            respuesta = conn.Eliminar("Rol" , "Rol" + "= " + id);
+            
 
-            return true;
+            return respuesta;
         }
     }
 }
