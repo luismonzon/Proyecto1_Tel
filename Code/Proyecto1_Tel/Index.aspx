@@ -69,6 +69,7 @@
                     if (msg.d == "1") {
 
                         $("#respuesta").text("correcto");
+
                     }
                     else {
 

@@ -21,7 +21,10 @@ namespace Proyecto1_Tel.Code
         protected void Page_Load(object sender, EventArgs e)
         {
             conexion = new Conexion();
+            Load();
+        }
 
+        public void Load(){
             tab_roles.InnerHtml = "    <div class=\"navbar\"> " + "<div class=\"navbar-inner\">" +
                                                  "<h6>Roles de Usuarios</h6>" +
                                                     "  <div class=\"nav pull-right\">" +
@@ -36,8 +39,6 @@ namespace Proyecto1_Tel.Code
                                         "</div>" + Llenar_Roles();
 
         }
-
-
 
         [WebMethod]
         protected String Llenar_Roles()

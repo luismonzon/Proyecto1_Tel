@@ -271,6 +271,46 @@ namespace Proyecto1_Tel.Code
             return respuesta;
         }
 
+        public bool Entrar(string user, string password) {
+
+            try
+            {
+                System.Data.SqlClient.SqlCommand cmd;
+                cmd = new System.Data.SqlClient.SqlCommand();
+                cmd.Connection = conexion;
+                cmd.CommandText = "Select count(Usuario) From Empleados Where Nombre = @User and Contrasenia=@pass";
+
+                System.Data.SqlClient.SqlParameter param;
+                param = new System.Data.SqlClient.SqlParameter();
+                param.ParameterName = "@User";
+                param.SqlDbType = SqlDbType.VarChar;
+                param.Size = 50;
+                param.Value = user;
+
+                System.Data.SqlClient.SqlParameter param2;
+                param2 = new System.Data.SqlClient.SqlParameter();
+                param2.ParameterName = "@pass";
+                param2.SqlDbType = SqlDbType.VarChar;
+                param2.Size = 50;
+                param2.Value = user;
+
+
+                cmd.Parameters.Add(param);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MostrarError = "Mensaje de la exepción: " + ex.Message.ToString();
+            }
+            finally
+            {
+                conexion.Close();
+            }
+
+
+            return false;
+        }
+
 
         
 
