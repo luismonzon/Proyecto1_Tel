@@ -40,3 +40,10 @@ C:\Users\Wilder\Documents\GitHub\Proyecto1_Tel\Code\Proyecto1_Tel\bin\AjaxContro
 C:\Users\Wilder\Documents\GitHub\Proyecto1_Tel\Code\Proyecto1_Tel\obj\Debug\Proyecto1_Tel.csprojResolveAssemblyReference.cache
 C:\Users\Wilder\Documents\GitHub\Proyecto1_Tel\Code\Proyecto1_Tel\obj\Debug\Proyecto1_Tel.dll
 C:\Users\Wilder\Documents\GitHub\Proyecto1_Tel\Code\Proyecto1_Tel\obj\Debug\Proyecto1_Tel.pdb
+C:\Users\Luis\Documents\Proyecto1_Tel\Code\Proyecto1_Tel\bin\Proyecto1_Tel.dll.config
+C:\Users\Luis\Documents\Proyecto1_Tel\Code\Proyecto1_Tel\bin\Proyecto1_Tel.dll
+C:\Users\Luis\Documents\Proyecto1_Tel\Code\Proyecto1_Tel\bin\Proyecto1_Tel.pdb
+C:\Users\Luis\Documents\Proyecto1_Tel\Code\Proyecto1_Tel\bin\AjaxControlToolkit.dll
+C:\Users\Luis\Documents\Proyecto1_Tel\Code\Proyecto1_Tel\obj\Debug\Proyecto1_Tel.dll
+C:\Users\Luis\Documents\Proyecto1_Tel\Code\Proyecto1_Tel\obj\Debug\Proyecto1_Tel.pdb
+C:\Users\Luis\Documents\Proyecto1_Tel\Code\Proyecto1_Tel\obj\Debug\Proyecto1_Tel.csprojResolveAssemblyReference.cache
