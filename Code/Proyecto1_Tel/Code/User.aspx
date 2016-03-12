@@ -96,7 +96,11 @@
             </div>
             
             <div class="modal-footer">
+<<<<<<< HEAD
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+=======
+            	<input type="submit" value="Registrar" class="btn btn-large btn-success " name="reg" id="reg"/>
+>>>>>>> origin/develop
                 <input type="submit" value="Editar" class="btn btn-large btn-warning"  id="edi"/>
                 <input type="submit" value="Registrar" class="btn btn-large btn-warning"  id="reg"/>
             </div>
@@ -107,6 +111,15 @@
 
 </div>
 
+<<<<<<< HEAD
+=======
+    <div>
+        <h1 style="font-family: Calibri; font-size: 50px"></h1>
+    </div>
+    <div>
+    </div>
+
+>>>>>>> origin/develop
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="foot" runat="server">
 
@@ -118,8 +131,13 @@
          function Mostrar_usuario(id) {
              document.getElementById("<% = codigo.ClientID%>").value = id;
              var identi = document.getElementById("<% = codigo.ClientID%>").value;
+<<<<<<< HEAD
 
              $('#reg').hide(); //escondemos el boton de registro
+=======
+             $('#edi').show(); //escondemos el boton de edicion porque es un nuevo registro
+             $('#reg').hide(); //mostramos el boton de registro
+>>>>>>> origin/develop
              $('#editar-usuario').modal({ //
                  show: true, //mostramos el modal registra producto
                  backdrop: 'static' //hace que no se cierre el modal si le dan clic afuera del mismo.
@@ -163,6 +181,7 @@
              var nick = document.getElementById("<%=nickname.ClientID%>").value;
              var id = document.getElementById("<%=codigo.ClientID%>").value;
              var pass = document.getElementById("<%=password.ClientID%>").value;
+<<<<<<< HEAD
              var rol = document.getElementById("<% = Rol.ClientID %>").value;
              var nombre = document.getElementById("<% = nombre.ClientID %>").value;;
              var apellido = document.getElementById("<% = apellido.ClientID %>").value;;
@@ -190,6 +209,24 @@
 
                              }
 
+=======
+             var rol = document.getElementById("<% = user_rol.ClientID %>").value;
+             if (user != "" && pass != "" && rol != "") {
+                 $.ajax({
+
+                     type: 'POST',
+                     url: 'User.aspx/EditUser',
+                     data: JSON.stringify({ id: id, nombre: user, rol: rol, pass: pass }),
+                     contentType: 'application/json; charset=utf-8',
+                     dataType: 'json',
+                     success: function (response) {
+                         if (response.d == true) {
+                             $('#mensaje').removeClass();
+                             $('#mensaje').addClass('alert alert-success').html('Registro editado exitosamente').show(200).delay(2500).hide(200);
+                         } else {
+                             $('#mensaje').removeClass();
+                             $('#mensaje').addClass('alert alert-danger').html('No se pudo editar el registro :(').show(200).delay(2500).hide(200);
+>>>>>>> origin/develop
                          }
 
                      });
@@ -198,6 +235,7 @@
                      $('#mensaje').removeClass();
                      $('#mensaje').addClass('alert alert-danger').html('No debe dejar campos vacios').show(200).delay(5500).hide(200);
 
+<<<<<<< HEAD
                  }
 
              } else {
@@ -207,6 +245,15 @@
 
              
                           return false;
+=======
+             } else
+             {
+                 $('#mensaje').removeClass();
+                 $('#mensaje').addClass('alert alert-danger').html('No debe dejar campos vacios').show(200).delay(2500).hide(200);
+                 Mostrar_cliente(id);
+             }
+             return false;
+>>>>>>> origin/develop
          });
 
     //--------- ELIMINAR CLIENTE -->
@@ -219,6 +266,11 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
+                        if (response.d == true) {
+                            alert("Usuario Eliminado Exitosamente");
+                        } else {
+                            alert("El Usuario No Pudo Ser Eliminado");
+                        }
                     }
                 });
             }

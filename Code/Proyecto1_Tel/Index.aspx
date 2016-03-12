@@ -67,8 +67,8 @@
                 success: function (msg) {
                     // Notice that msg.d is used to retrieve the result object
                     if (msg.d == "1") {
+                        window.location.href = "/Code/Rol.aspx";
 
-                        $("#respuesta").text("correcto");
                     }
                     else {
 

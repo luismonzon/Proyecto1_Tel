@@ -37,25 +37,22 @@
                             </div>
                             <div class="well body">
                                     <div class="well">
-                                        <div class="alert margin">
-	                                		<button type="button" class="close" data-dismiss="alert">×</button>
-	                                		Debe llenar todos los Campos
-	                                	</div>
 	                                    <div class="control-group">
-		                                    <label class="control-label">Usuario:</label>
+		                                    <label class="control-label">*Usuario:</label>
 		                                    <div class="controls"><input type="text" required="required" name="user" class="span12" placeholder="Usuario" id="user" runat="server" /></div>
 
-		                                    <label class="control-label">Contraseña:</label>
+		                                    <label class="control-label">*Contraseña:</label>
 		                                    <div class="controls"><input class="span12" required="required" type="password" name="pass" placeholder="Contraseña" id="password" runat="server" /></div>
 
-	                                        <label class="control-label">Rol:</label>
+	                                        <label class="control-label">*Rol:</label>
 	                                        <div class="controls">
 	                                            <select name="Rol" class="styled" runat="server" id="Rol">
 
 	                                            </select>
 	                                        </div>
                                             <br />
-                                            <div id="dvResult"></div>
+                                            <label>Los campos marcados con (*) son obligatorios</label>
+                                            <div id="mensaje"> </div> 
                                             <div class="form-actions align-right">
 	                                            <button type="submit" id="submit" class="btn btn-primary" onclick="Save() return false;">Ingresar</button>
 	                                            <button type="button" class="btn btn-danger">Cancelar</button>
@@ -85,15 +82,8 @@
              var user = document.getElementById("<%=user.ClientID%>").value;
             var pass = document.getElementById("<%=password.ClientID%>").value;
             var rol = document.getElementById("<%=Rol.ClientID%>").value;
-            var msg = "";
-
-            if (user == "") {
-                msg += "<li>Por Favor ingrese el usuario</li>";
-            }
-            if (pass == "") {
-                msg += "<li>Por Favor ingrese la contraseña</li>";
-            }
-            if (msg.length == 0) {
+            
+            if (user != "" && pass != "" && rol != "") {
                 $.ajax({
 
                     type: 'POST',
@@ -103,24 +93,23 @@
                     dataType: 'json',
                     success: function (response) {
                         if (response.d == true) {
-                            $('#dvResult').text("Usuario agregado Correctamente");
+                            $('#mensaje').removeClass();
+                            $('#mensaje').addClass('alert alert-success').html('Usuario agregado con exito').show(200).delay(2500).hide(200);
+                            document.getElementById("<%=user.ClientID%>").value = "";
+                            document.getElementById("<%=password.ClientID%>").value = "";
                         } else {
-                            $('#dvResult').text("Usuario no pudo ser agregado Correctamente");
+                            $('#mensaje').removeClass();
+                            $('#mensaje').addClass('alert alert-danger').html('El Usuario ya existe').show(200).delay(2500).hide(200);
                         }
-                        $('#dvResult').fadeOut(6000);
-                    },
-                    error: function (xhr, textStatus, error) {
-                        $('#dvResult').text("Error: " + error);
                     }
-
 
                 });
             } else {
-                //Validation failure message
-                $('#dvResult').html('');
-                $('#dvResult').html(msg);
+                $('#mensaje').removeClass();
+                $('#mensaje').addClass('alert alert-danger').html('Revise los campos obligatorios marcados con (*)').show(200).delay(2500).hide(200);
+
             }
-            $('#dvResult').fadeIn();
+            return false;
 
 
         });
