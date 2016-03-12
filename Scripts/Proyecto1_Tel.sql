@@ -3,21 +3,21 @@ use PROYECT_1
 go
 --Si ya eliminaron las tablas dejen asi
 --si no descomenten lo de drop table
-/*
+
 drop table DetalleVenta;
 drop table Venta;
 drop table Bodega;
-drop table Sucursal;
 drop table Pago;
 drop table Deuda;
 drop table Cliente;
 drop table Inventario;
-drop table Tipo;
+drop table Sucursal;
 drop table Producto;
-drop table Rol;
+drop table Tipo;
 drop table Usuario;
+drop table Rol;
 go
-*/
+
 create table Sucursal(
 	Sucursal int identity(1,1) not null,
 	Direccion varchar(50) not null,
@@ -40,8 +40,8 @@ Create table Usuario (
 	Usuario int identity(1,1) not null,
 	NickName varchar(30) not null,
 	Nombre varchar(50) not null,
-	Apellido varchar(50) not null,
-	Dpi varchar(13) not null,
+	Apellido varchar(50) null,
+	Dpi varchar(13) null,
 	Rol int not null,
 	Contrasenia varchar(50) not null,
 	Constraint pk_usuario Primary Key (Usuario),
