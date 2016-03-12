@@ -38,10 +38,10 @@ namespace Proyecto1_Tel.Code
 
                 DataSet ds = conexion.Mostrar("Rol", "Rol,Nombre");
 
-                user_rol.DataSource = ds;
-                user_rol.DataTextField = "Nombre";
-                user_rol.DataValueField = "Rol";
-                user_rol.DataBind();
+                Rol.DataSource = ds;
+                Rol.DataTextField = "Nombre";
+                Rol.DataValueField = "Rol";
+                Rol.DataBind();
                 
                 
        
@@ -50,7 +50,7 @@ namespace Proyecto1_Tel.Code
 
         protected String Llenar_Usuarios()
         {
-            DataSet clientes = conexion.Mostrar("USUARIO U, ROL R where U.ROL = R.ROL ", " U.USUARIO , U.NOMBRE, U.CONTRASENIA, R.NOMBRE ROL ");
+            DataSet clientes = conexion.Mostrar("USUARIO U, ROL R where U.ROL = R.ROL ", " U.USUARIO , U.NOMBRE, U.NICKNAME, U.APELLIDO, U.DPI, R.NOMBRE ROL ");
             String data = "No hay Usuarios Disponibles";
             if (clientes != null)
             {
@@ -59,9 +59,10 @@ namespace Proyecto1_Tel.Code
                     "<table class=\"table table-striped table-bordered\" id=\"data-table\">" +
                         "<thead>" +
                             "<tr>" +
-                                "<th  align =\"center\">ID</th>" +
+                                "<th  align =\"center\">Nick Name</th>" +
                                " <th  align =\"center\">Nombre</th>" +
-                                "<th align =\"center\">Contraseña</th>" +
+                               " <th  align =\"center\">Apellido</th>" +
+                               " <th  align =\"center\">Dpi</th>"+
                                 "<th align =\"center\">Rol</th>" +
                                 "<th align =\"center\">Acciones</th>" +
                             "</tr>" +
@@ -70,13 +71,14 @@ namespace Proyecto1_Tel.Code
                 foreach (DataRow item in clientes.Tables[0].Rows)
                 {
                     data += "<tr>"+
-                        "<td id=\"codigo\" runat=\"server\" align =\"Center\">" + item["USUARIO"].ToString() +"</td>"+
+                        "<td id=\"codigo\" runat=\"server\" align =\"Center\">" + item["NICKNAME"].ToString() +"</td>"+
                         "<td id=\"codigo\" runat=\"server\" >" + item["NOMBRE"].ToString() + "</td>" +
-                        "<td id=\"codigo\" runat=\"server\" align =\"Center\">" + item["CONTRASENIA"].ToString() + "</td>"+
+                        "<td id=\"codigo\" runat=\"server\" align =\"Center\">" + item["APELLIDO"].ToString() + "</td>"+
+                        "<td id=\"codigo\" runat=\"server\" align =\"Center\">" + item["DPI"].ToString() + "</td>" +
                         "<td id=\"codigo\" runat=\"server\" align =\"Center\">" + item["ROL"].ToString() + "</td> ";
                     data += " <td>" +
                                         "<ul class=\"table-controls\">" +
-                                          " <li><a href=\"javascript:Mostrar_cliente(" + item["USUARIO"].ToString() + ")\" id=\"edit\" class=\"tip\" CssClass=\"Edit\" title=\"Editar\"><i class=\"fam-pencil\"></i></a> </li>" +
+                                          " <li><a href=\"javascript:Mostrar_usuario(" + item["USUARIO"].ToString() + ")\" id=\"edit\" class=\"tip\" CssClass=\"Edit\" title=\"Editar\"><i class=\"fam-pencil\"></i></a> </li>" +
                                           "<li><a  href=\"javascript:Eliminar_Usuario(" + item["USUARIO"].ToString() + ")\" class=\"tip\" CssClass=\"Elim\" title=\"Eliminar\"><i class=\"fam-cross\"></i></a> </li>" +
                                     "</td>";
                     data += "</tr>";
@@ -107,20 +109,38 @@ namespace Proyecto1_Tel.Code
             XmlNodeList Cliente = xDoc.GetElementsByTagName("NewDataSet");
             XmlNodeList lista = ((XmlElement)Cliente[0]).GetElementsByTagName("Usuario_x003D__x0020_" + id);
 
-            XmlNodeList nNombre = ((XmlElement)lista[0]).GetElementsByTagName("Nombre");
+            XmlNodeList nNick = ((XmlElement)lista[0]).GetElementsByTagName("NickName");
+            XmlNodeList nNombre = ((XmlElement)lista[0]).GetElementsByTagName("Nombre");    
+            XmlNodeList nApellido = ((XmlElement)lista[0]).GetElementsByTagName("Apellido");
+            XmlNodeList nDpi = ((XmlElement)lista[0]).GetElementsByTagName("Dpi");
             XmlNodeList nPass = ((XmlElement)lista[0]).GetElementsByTagName("Contrasenia");
             XmlNodeList nRol = ((XmlElement)lista[0]).GetElementsByTagName("Rol");
-            string[] usuario = new string[3];
-            usuario[0] = nNombre[0].InnerText;
-            usuario[1] = nPass[0].InnerText;
+
+
+
+            string[] usuario = new string[6];
+            usuario[0] = nNick[0].InnerText;
+            usuario[1] = nNombre[0].InnerText;
             usuario[2] = nRol[0].InnerText;
+            usuario[3] = nApellido[0].InnerText;
+            if (nDpi.Count == 0)
+            { //si no tiene nit
+                usuario[4] = "";
+            }
+            else
+            {
+                usuario[4] = nDpi[0].InnerText;
+            }
+
+            usuario[5] = nPass[0].InnerText;
+
             string json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(usuario);
             return json;
         }
 
         //Editar Usuario
         [WebMethod]
-        public static bool EditUser(string id, string nombre, string rol, string pass)
+        public static bool EditUser(string id, string nickname, string nombre, string apellido, string rol, string pass, string dpi)
         {
 
 
@@ -130,7 +150,12 @@ namespace Proyecto1_Tel.Code
 
             if (ds != 0)
             {
-                return conn.Modificar("Usuario", "Nombre" + "=" + "\'" + nombre + "\' " + "," + " Contrasenia " + " = " + "\'" + pass + "\' , Rol = " + rol + " ", "Usuario" + "= " + id);
+                int cantnick = conn.Count("Select count(nickname) from [Usuario] where NickName=\'" + nickname + "\'  And Usuario!= " + id + ";");
+                 if (cantnick == 0)
+                 {
+                     return conn.Modificar("Usuario", "Nombre" + "=" + "\'" + nombre + "\' " + "," + " Contrasenia " + " = " + "\'" + pass + "\' , Rol = " + rol + "," + " NickName " + " = " + "\'" + nickname + "\' " + "," + " Apellido " + " = " + "\'" + apellido + "\', " + " Dpi " + " = " + "\'" + dpi + "\' ", "Usuario" + "= " + id);
+                 }
+                
             }
             return false;
         }
@@ -149,6 +174,27 @@ namespace Proyecto1_Tel.Code
             }
             return false;
         }
+
+
+        [WebMethod]
+        public static bool Add(string nickname, string nombre, string apellido, string dpi, string password, string rol)
+        {
+
+
+            Conexion conn = new Conexion();
+
+            int ds = conn.Count("Select count(NickName) from [usuario] where NickName=\'" + nickname + "\';");
+
+            if (ds == 0)
+            {
+                conn.Crear("Usuario", "NickName,Nombre, Apellido,Dpi,Rol,Contrasenia", "\'" + nickname + "',\'" + nombre + "',\'" + apellido + "',\'" + dpi + "\'," + rol + ",\'" + password + "\'");
+                return true;
+            }
+
+            return false;
+        }
+
+
 
     }
 }

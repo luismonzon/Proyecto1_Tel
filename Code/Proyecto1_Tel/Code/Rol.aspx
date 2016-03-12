@@ -12,46 +12,12 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 		            
 		
-			
-			    <!-- Page header -->
-			    <div class="page-header">
-			    	<div class="page-title">
-				    	<h5>Proteccion Solar</h5>
-				    	<span>LA TORRE</span>
-			    	</div>
-
-			    	<ul class="page-stats">
-			    		<li>
-			    			<div class="showcase">
-			    				<span>New visits</span>
-			    				<h2>22.504</h2>
-			    			</div>
-			    			<div id="total-visits" class="chart">10,14,8,45,23,41,22,31,19,12, 28, 21, 24, 20</div>
-			    		</li>
-			    		<li>
-			    			<div class="showcase">
-			    				<span>My balance</span>
-			    				<h2>$16.290</h2>
-			    			</div>
-			    			<div id="balance" class="chart">10,14,8,45,23,41,22,31,19,12, 28, 21, 24, 20</div>
-			    		</li>
-			    	</ul>
-			    </div>
-			    <!-- /page header -->
-        <section>
-            <form>
-
-            </form>
-               <div class="semi-widget row-fluid">
-                    <div  class="span4"><a style="visibility:hidden; class="btn btn-danger btn-block bs-alert" title="Simple Alert">Alert dialog</a></div>
-	                           
-                    <div style="align-content:center" class="span4"><a  id="nuevo-rol" class="btn btn-success btn-block">Agregar Rol</a></div>
-                 </div>
-            
-
-    </section>
 
 	    <h5 class="widget-name"><i class="icon-columns"></i>Roles</h5>
+    <div>
+        <div><a style="font-size: 13px" id="nuevo-rol" class="btn btn-success"> Agregar Rol <i class="icon-plus-sign" >&nbsp;</i></a></div>
+    </div>
+    
         <!-- Some controlы -->
         <div class="widget" id="tab_roles" runat="server">
         </div>
@@ -65,13 +31,19 @@
     <div>
     </div>
 
-    <!-- MODAL PARA EL REGISTRO DE PRODUCTOS-->
+    <!-- MODAL PARA EL REGISTRO DE ROLES-->
     <div class="modal fade" id="registra-rol" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-              <h4 class="modal-title" id="myModalLabel"><b>Administrar Rol</b></h4>
+
+                <div class="step-title">
+                            	<i>R</i>
+					    		<h5>Administrar Rol</h5>
+					    		<span>Agregar o Editar un Rol</span>
+				</div>
+
             </div>
             <form id="formulario" name="formulario" class="formulario">
             <div class="modal-body">
@@ -82,13 +54,16 @@
 
                		</tr> 
                     <tr>
-                    	<td>*Nombre: </td>
-                        <td><input type="text" required="required" name="nombre" id="nombre" runat="server" maxlength="100"/></td>
+                    	<td style="font-size: 15px;">*Nombre Rol: </td>
+                        <td><input type="text" style="font-size: 15px;" required="required" name="nombre" id="nombre" runat="server" maxlength="100"/></td>
                     </tr>
                     <tr>
                     	<td colspan="2">
-                        	<label>Campos Obligatorios (*)</label>
-                        </td>
+                        	<div class="alert margin">
+	                            <button type="button" class="close" data-dismiss="alert">×</button>
+	                                Campos Obligatorios (*)
+	                        </div>
+	                   </td>
                     </tr>
                     <tr>
                     	<td colspan="2">
@@ -99,6 +74,7 @@
             </div>
             
             <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
             	<input type="submit" value="Registrar" class="btn btn-large btn-success " name="reg" id="reg"/>
                 <input type="submit" value="Editar" class="btn btn-large btn-warning"  id="edi"/>
             </div>
@@ -111,18 +87,20 @@
     
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="foot" runat="server">
+
+
         <script type="text/javascript">
 
             $('#reg').on('click', function () {
 
-                var user = document.getElementById("<%=nombre.ClientID%>").value;
-                if (user != "") {
+                var nombre = document.getElementById("<%=nombre.ClientID%>").value;
+                if (nombre != "") {
 
                     $.ajax({
 
                         type: 'POST',
                         url: 'Rol.aspx/InsertRol',
-                        data: JSON.stringify({ name: user }),
+                        data: JSON.stringify({ name: nombre }),
                         contentType: 'application/json; charset=utf-8',
                         dataType: 'json',
                         success: function (response) {
@@ -142,7 +120,8 @@
                     });
 
                 } else {
-                    $('#mensaje').addClass('alert alert-danger').html('Campos Vacios').show(200).delay(2500).hide(200);
+                    $('#mensaje').removeClass();
+                    $('#mensaje').addClass('alert alert-danger').html('Revise los campos obligatorios marcados con (*)').show(200).delay(2500).hide(200);
 
                 }
                 
@@ -152,15 +131,16 @@
            
             $('#edi').on('click', function () {
                 
-                var user = document.getElementById("<%=nombre.ClientID%>").value;
+                var nombre = document.getElementById("<%=nombre.ClientID%>").value;
                 var id = document.getElementById("<%=codigo.ClientID%>").value;
-                if (user != "") {
+
+                if (nombre != "") {
 
                     $.ajax({
 
                         type: 'POST',
                         url: 'Rol.aspx/EditRol',
-                        data: JSON.stringify({ name: user, id: id }),
+                        data: JSON.stringify({ name: nombre, id: id }),
                         contentType: 'application/json; charset=utf-8',
                         dataType: 'json',
                         success: function (response) {
@@ -170,7 +150,7 @@
                                 return false;
                             } else {
                                 $('#mensaje').removeClass();
-                                $('#mensaje').addClass('alert alert-danger').html('Nombre ya existe').show(200).delay(2500).hide(200);
+                                $('#mensaje').addClass('alert alert-danger').html('Rol ya existe').show(200).delay(2500).hide(200);
                                 $('#edi').html('Rol.aspx/Llenar_Roles');
                             }
                             
@@ -180,7 +160,7 @@
 
                 } else {
                     $('#mensaje').removeClass();
-                    $('#mensaje').addClass('alert alert-danger').html('No debe dejar campos vacios :(').show(200).delay(2500).hide(200);
+                    $('#mensaje').addClass('alert alert-danger').html('No debe dejar campos vacios').show(200).delay(2500).hide(200);
                     Mostrar(id);
                     
                 }
@@ -240,6 +220,11 @@
             }
 
         }
+
+
+        
+
+
     </script>
 
 </asp:Content>

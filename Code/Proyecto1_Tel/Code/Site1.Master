@@ -115,13 +115,13 @@
 			            <li><a href="#" title="" class="expand"><i class="icon-reorder"></i>Administrar<strong>4</strong></a>
 			                <ul>
 			                    <li><a href="Rol.aspx" title="">Roles</a></li>
-			                    <li><a href="AddUser.aspx" title="">Usuarios</a></li>
+			                    <li><a href="User.aspx" title="">Usuarios</a></li>
                                 <li><a href="Cliente.aspx" title="">Clientes</a></li>
 			                    <li><a href="#" title="">Productos</a></li>
                          
 			                </ul>
 			            </li>
-			            <li><a href="#" title="" class="expand"><i class="icon-tasks"></i>Reportes<strong>4</strong></a>
+			            <li><a href="#" title="" class="expand"><i class="icon-tasks"></i>Reportes<strong>3</strong></a>
 			                <ul>
 			                    <li><a href="components.html" title="">Ventas</a></li>
 			                    <li><a href="content_grid.html" title="">Clientes</a></li>
@@ -170,7 +170,7 @@
 		            <ul id="breadcrumbs" class="breadcrumb"> 
 		                <li><a href="../index.aspx">Inicio</a></li>
                         <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
-                         </asp:ContentPlaceHolder>
+                            </asp:ContentPlaceHolder>
 		            
                     </ul>
 			        </div>
@@ -180,9 +180,38 @@
     <!-- /breadcrumbs line -->
 	 
             </div>
+
 			<!-- /content wraper -->
 			<div class="wrapper">
-    			<asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+                <!-- Page header -->
+			    <div class="page-header">
+			    	<div class="page-title">
+				    	<h5>Proteccion Solar</h5>
+				    	<span>LA TORRE</span>
+			    	</div>
+
+			    	<ul class="page-stats">
+			    		<li>
+			    			<div class="showcase">
+			    				<span>Ventas Semanales</span>
+			    				<h2>2,504</h2>
+			    			</div>
+			    			<div id="total-visits" class="chart">10,14,20,45,23,41,22,31,19,12, 28, 21, 24, 20</div>
+			    		</li>
+			    		<li>
+			    			<div class="showcase">
+			    				<span>Ganancias Diarias</span>
+			    				<h2>Q. 16,290</h2>
+			    			</div>
+			    			<div id="balance" class="chart">10,14,8,45,23,41,22,31,19,12, 28, 21, 24, 20</div>
+			    		</li>
+			    	</ul>
+			    </div>
+			    <!-- /page header -->
+                    
+    			<asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                         
+    			</asp:ContentPlaceHolder>
             </div>
 
 		   
@@ -196,7 +225,7 @@
 	<!-- Footer -->
 	<div id="footer">
         
-		<div class="copyrights">&copy;  Monzolutions de Guatemala 2016</div>
+		<div class="copyrights">&copy;  Codeland de Guatemala 2016</div>
 		
 	</div>
 	<!-- /footer -->

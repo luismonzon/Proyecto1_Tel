@@ -1,4 +1,6 @@
-﻿$(function () {
+﻿//MOSTRAR MODAL PARA AGREGAR ROL
+
+$(function () {
     
     $('#nuevo-rol').on('click', function () {
         $('#formulario')[0].reset(); //formulario lo inicializa con datos vacios
@@ -16,26 +18,32 @@
 });
 
 
-function agregaRegistro() {
-    var url = '../Rol.aspx/InsertRol.php';
-    $.ajax({
-        type: 'POST',
-        url: url,
-        data: $('#formulario').serialize(),
-        success: function (registro) {
-            if ($('#pro').val() == 'Registro') {
-                $('#formulario')[0].reset();
-                $('#mensaje').addClass('bien').html('Registro completado con exito').show(200).delay(2500).hide(200);
-                $('#agrega-registros').html(registro);
-                return false;
-            } else {
-                $('#mensaje').addClass('bien').html('Edicion completada con exito').show(200).delay(2500).hide(200);
-                $('#agrega-registros').html(registro);
-                return false;
-            }
-        }
+//MUESTRA EL MODAL PARA AGREGAR CLIENTE
+$(function () {
+
+    $('#nuevo-cliente').on('click', function () {
+        $('#formulario-cliente')[0].reset(); //formulario lo inicializa con datos vacios
+        $('#pro').val('Registro'); //crea nuestra caja de procesos y se agrega el valor del registro
+        $('#reg').show(); //mostramos el boton de registro
+        $('#edi').hide();//se esconde el boton de editar
+        $('#editar-cliente').modal({ //
+            show: true, //mostramos el modal registra producto
+            //backdrop: 'static' //hace que no se cierre el modal si le dan clic afuera del mismo.
+        });
     });
-    return false;
-}
+});
 
+//MUESTRA EL MODAL PARA AGREGAR USUARIO
 
+$(function () {
+
+    $('#nuevo-usuario').on('click', function () {
+        $('#formulario-usuario')[0].reset(); //formulario lo inicializa con datos vacios
+        $('#reg').show(); //mostramos el boton de registro
+        $('#edi').hide();//se esconde el boton de editar
+        $('#editar-usuario').modal({ //
+            show: true, //mostramos el modal registra producto
+            backdrop: 'static' //hace que no se cierre el modal si le dan clic afuera del mismo.
+        });
+    });
+});

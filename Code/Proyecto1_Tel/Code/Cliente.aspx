@@ -10,104 +10,102 @@
 
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 <!--- TODO EL CONTENIDO DE LA PAGINA--->    
-			    <!-- Page header -->
-			    <div class="page-header">
-			    	<div class="page-title">
-				    	<h5>Proteccion Solar</h5>
-				    	<span>LA TORRE</span>
-			    	</div>
-
-			    	<ul class="page-stats">
-			    		<li>
-			    			<div class="showcase">
-			    				<span>New visits</span>
-			    				<h2>22.504</h2>
-			    			</div>
-			    			<div id="total-visits" class="chart">10,14,8,45,23,41,22,31,19,12, 28, 21, 24, 20</div>
-			    		</li>
-			    		<li>
-			    			<div class="showcase">
-			    				<span>My balance</span>
-			    				<h2>$16.290</h2>
-			    			</div>
-			    			<div id="balance" class="chart">10,14,8,45,23,41,22,31,19,12, 28, 21, 24, 20</div>
-			    		</li>
-			    	</ul>
-			    </div>
-			    <!-- /page header -->
-        <section>
-            <form>
-
-            </form>
-               <div class="semi-widget row-fluid">
-                    <div  class="span4"><a style="visibility:hidden; class="btn btn-danger btn-block bs-alert" title="Simple Alert">Alert dialog</a></div>
-	                           
-                    <div style="align-content:center" class="span4"><a href="AddCliente.aspx"  id="nuevo-cliente" class="btn btn-success btn-block">Agregar Cliente</a></div>
-                 </div>
-            
-
-    </section>
-
-	    <h5 class="widget-name"><i class="icon-columns"></i>Clientes</h5>
-        <!-- Some controlы -->
+    <h5 class="widget-name"><i class="icon-columns"></i>Clientes</h5>
+    
+    
+    <div>
+        <div><a title="Agregar Cliente" style="font-size: 13px" id="nuevo-cliente" class="btn btn-success"> Agregar Cliente <i class="icon-plus-sign" >&nbsp;</i></a></div>
+    </div>
+    
+	    <!-- Some controlы -->
         <div class="widget" id="tab_clientes" runat="server">
         </div>
         <!-- /some controlы -->
 
-     <!-- MODAL PARA EDITAR CLIENTES-->
+    <!-- MODAL PARA CLIENTES-->
     <div class="modal fade" id="editar-cliente" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-              <h4 class="modal-title" id="myModalLabel"><b>Editar Cliente</b></h4>
+                
+                <div class="step-title">
+                            	<i>C</i>
+					    		<h5>Administrar Cliente</h5>
+					    		<span>Agregar o Editar un cliente</span>
+				</div>
+                        	
             </div>
-            <form id="formulario-cliente" name="formulario-cliente" class="formulario">
+            <form id="formulario-cliente" class="form-horizontal row-fluid well">
             <div class="modal-body">
-				<table border="0" width="100%">
-               		<tr>
-                           <td style="visibility:hidden; height:5px;" >ID </td>
+				<table border="0" width="100%" >
+                    <tr>
+                         <td style="visibility:hidden; height:5px;" >ID </td>
                         <td colspan="2"><input runat="server" type="text" required="required" readonly="readonly" id="codigo" name="codigo"  style="visibility:hidden; height:5px;"/></td>
 
-               		</tr> 
-                    <tr>
-                    	<td>*Nombre:</td>
-                        <td><input type="text" required="required" name="nombre" id="nombre" runat="server" maxlength="100"/></td>
                     </tr>
-                    <tr>
-                    	<td>*Nit:</td>
-                        <td><input type="text" name="nit" id="nit" required="required" runat="server" maxlength="100"/></td>
-                    </tr>
+                    
+                        <div>
+	                            <div class="control-group">
+	                                <label class="control-label" style="font-size: 15px;" ><b>*Nombre:</b></label>
+	                                <div class="controls"><input required="required" placeholder="Nombres" style="font-size: 15px;" type="text" name="username" id="nombre" runat="server" class="span12" /></div>
+	                            </div>
+	                            <div class="control-group">
+	                                <label class="control-label" style="font-size: 15px;" ><b>Apellido:</b></label>
+	                                <div class="controls"><input style="font-size: 15px;" placeholder="Apellidos" type="text" class="span12" id="apellido" runat="server" /></div>
+	                            </div>
+	                            <div class="control-group">
+	                                <label class="control-label" style="font-size: 15px;" ><b>Nit:</b></label>
+	                                <div class="controls"><input style="font-size: 15px;" id="nit" placeholder="NIT" runat="server" type="text" class="span12" /></div>
+	                            </div>
+                                <div class="control-group">
+	                                <label class="control-label" style="font-size: 15px;" ><b>Direccion:</b></label>
+	                                <div class="controls"><input placeholder="Direccion" style="font-size: 15px;" id="direccion" runat="server" type="text" class="span12" /></div>
+	                            </div>
+                                <div class="control-group">
+	                                <label class="control-label" style="font-size: 15px;"><b>Telefono:</b></label>
+	                                <div class="controls"><input style="font-size: 15px;" placeholder="Telefono" id="telefono" runat="server" type="text" class="span12" /></div>
+	                            </div>
+	                        </div>
+                
                     <tr>
                     	<td colspan="2">
-                        	<label>Campos Obligatorios (*)</label>
-                        </td>
-                    </tr>
-                    <tr>
-                    	<td colspan="2">
-                        	<div  id="mensaje"></div>
+                            <div id="mensaje"></div>
+                            <div class="alert margin">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+	                                Campos Obligatorios (*)
+
+                            </div>
+                            
+                            
                         </td>
                     </tr>
                 </table>
             </div>
             
             <div class="modal-footer">
-            	<input type="submit" value="Registrar" class="btn btn-large btn-success " name="reg" id="reg"/>
-                <input type="submit" value="Editar" class="btn btn-large btn-warning"  id="edi"/>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            	<input type="submit" value="Registrar" class="btn btn-success" id="reg"/>
+                <input type="submit" value="Editar" class="btn btn-warning"  id="edi"/>
             </div>
             </form>
           </div>
         </div>
-    
-
-</div>
-
+      </div>
+   
     <div>
         <h1 style="font-family: Calibri; font-size: 50px"></h1>
     </div>
     <div>
     </div>
+
+<!---FINALIZA HTML--->
 </asp:Content>
+
+
+
+
+
 <asp:Content ID="Content4" ContentPlaceHolderID="foot" runat="server">
     <!--- COGIGO JAVASCRIPT --->
 
@@ -137,8 +135,17 @@
                      var cliente = JSON.parse(response.d);
                      var NombreCliente = cliente[0];
                      var NitCliente = cliente[1];
+                     var ApellCliente = cliente[2];
+                     var DireCliente = cliente[3];
+                     var TeleCliente = cliente[4];
+
+
                      document.getElementById("<% = nombre.ClientID%>").value = NombreCliente;
                      document.getElementById("<% = nit.ClientID %>").value = NitCliente;
+                     document.getElementById("<% = apellido.ClientID %>").value = ApellCliente;
+                     document.getElementById("<% = direccion.ClientID %>").value = DireCliente;
+                     document.getElementById("<% = telefono.ClientID %>").value = TeleCliente;
+                     
                  }
 
 
@@ -148,16 +155,20 @@
 
          $('#edi').on('click', function () {
 
-             var user = document.getElementById("<%=nombre.ClientID%>").value;
-             var id = document.getElementById("<%=codigo.ClientID%>").value;
-             var nit = document.getElementById("<%=nit.ClientID%>").value;
-              if (user != "") {
+             var Nombre = document.getElementById("<%=nombre.ClientID%>").value;
+             var Id = document.getElementById("<%=codigo.ClientID%>").value;
+             var Nit = document.getElementById("<%=nit.ClientID%>").value;
+             var Apellido = document.getElementById("<% = apellido.ClientID %>").value;
+             var Direccion = document.getElementById("<% = direccion.ClientID %>").value;
+             var Telefono = document.getElementById("<% = telefono.ClientID %>").value;
+                    
+              if (Nombre != "") {
 
                   $.ajax({
 
                       type: 'POST',
                       url: 'Cliente.aspx/EditCliente',
-                      data: JSON.stringify({ id: id, nombre: user, nit: nit }),
+                      data: JSON.stringify({ id: Id, nombre: Nombre, nit: Nit, apellido: Apellido, direccion: Direccion, telefono: Telefono }),
                       contentType: 'application/json; charset=utf-8',
                       dataType: 'json',
                       success: function (response) {
@@ -184,6 +195,7 @@
          });
 
         
+         
 
     </script>
 
@@ -211,7 +223,58 @@
             }
 
         }
-    </script>
+
+
+
+        //AGREGAR CLIENTE
+
+        $('#reg').on('click', function () {
+
+            var nNombre = document.getElementById("<%=nombre.ClientID%>").value;
+            var nNit = document.getElementById("<%=nit.ClientID%>").value;
+            var nDireccion = document.getElementById("<%=direccion.ClientID%>").value;
+            var nTelefono = document.getElementById("<%=telefono.ClientID%>").value;
+            var nApellido = document.getElementById("<%=apellido.ClientID%>").value;
+           
+
+
+            if (nNombre != "") {
+
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'Cliente.aspx/Add',
+                    data: JSON.stringify({ nombre: nNombre, nit: nNit, apellido: nApellido, direccion: nDireccion, telefono: nTelefono  }),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.d == true) {
+                            $('#mensaje').removeClass();
+                            $('#mensaje').addClass('alert alert-success').html('Cliente agregado con exito').show(200).delay(2500).hide(200);
+                            $('#formulario-cliente')[0].reset();
+                             } else {
+                                 $('#mensaje').removeClass();
+                                 $('#mensaje').addClass('alert alert-danger').html('Cliente ya existe').show(200).delay(2500).hide(200);
+
+                             }
+
+                         }
+                     });
+
+                 } else {
+                     $('#mensaje').removeClass();
+                     $('#mensaje').addClass('alert alert-danger').html('Revise los campos obligatorios marcados con (*)').show(200).delay(2500).hide(200);
+
+                 }
+            return false;
+
+
+        });
+
+
+        
+        
+        </script>
 
    
 </asp:Content>

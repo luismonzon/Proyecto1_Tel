@@ -27,36 +27,5 @@ namespace Proyecto1_Tel.Code
             }
         }
 
-        [WebMethod]
-        public static bool Add(string usuario, string password, string rol)
-        {
-
-            bool retorno = true;
-
-            Conexion conn = new Conexion();
-
-            int ds = conn.Count("Select count(nombre) from [usuario] where nombre=\'"+usuario+"\';");
-
-            if (ds == 0)
-            {
-                conn.Crear("Usuario", "Nombre,Rol,Contrasenia", "\'" + usuario + "\'," + rol + ",\'" + password + "\'");
-                return true;
-            }
-
-            return false;
-            /*if (ds.Tables[0].Columns.Count > 0)
-            {
-                return 1;
-
-            }
-            else
-            {
-
-                conn.Crear("Usuario", "Nombre,Rol,Contrasenia", "\'" + usuario + "\'," + rol + ",\'" + password + "\'");
-                return 0;
-
-            }*/
-        }
-
     }
 }

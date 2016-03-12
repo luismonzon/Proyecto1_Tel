@@ -8,34 +8,7 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    
-			    <!-- Page header -->
-			    <div class="page-header">
-			    	<div class="page-title">
-				    	<h5>Proteccion Solar</h5>
-				    	<span>LA TORRE</span>
-			    	</div>
-
-			    	<ul class="page-stats">
-			    		<li>
-			    			<div class="showcase">
-			    				<span>New visits</span>
-			    				<h2>22.504</h2>
-			    			</div>
-			    			<div id="total-visits" class="chart">10,14,8,45,23,41,22,31,19,12, 28, 21, 24, 20</div>
-			    		</li>
-			    		<li>
-			    			<div class="showcase">
-			    				<span>My balance</span>
-			    				<h2>$16.290</h2>
-			    			</div>
-			    			<div id="balance" class="chart">10,14,8,45,23,41,22,31,19,12, 28, 21, 24, 20</div>
-			    		</li>
-			    	</ul>
-			    </div>
-			    <!-- /page header -->
-
-	    <h5 class="widget-name"><i class="icon-columns"></i>Cliente</h5>
+        <h5 class="widget-name"><i class="icon-columns"></i>Cliente</h5>
         <!-- Some controlы -->
         <div class="widget" id="tab_roles" runat="server">
         </div>
@@ -98,7 +71,7 @@
      <script type="text/javascript">
 
          $('#agregar-cliente').on('click', function () {
-             $("#dvResult").text("");
+             
              var nNombre = document.getElementById("<%=nombre.ClientID%>").value;
              var nNit = document.getElementById("<%=nit.ClientID%>").value;
              
@@ -121,7 +94,7 @@
              
                              } else {
                                  $('#mensaje').removeClass();
-                                 $('#mensaje').addClass('alert alert-danger').html('Rol ya existe').show(200).delay(2500).hide(200);
+                                 $('#mensaje').addClass('alert alert-danger').html('Cliente ya existe').show(200).delay(2500).hide(200);
 
                              }
 
@@ -137,6 +110,7 @@
              
 
          });
+
     </script>
 
 
