@@ -96,13 +96,9 @@
             </div>
             
             <div class="modal-footer">
-<<<<<<< HEAD
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-=======
             	<input type="submit" value="Registrar" class="btn btn-large btn-success " name="reg" id="reg"/>
->>>>>>> origin/develop
                 <input type="submit" value="Editar" class="btn btn-large btn-warning"  id="edi"/>
-                <input type="submit" value="Registrar" class="btn btn-large btn-warning"  id="reg"/>
             </div>
             </form>
           </div>
@@ -111,15 +107,6 @@
 
 </div>
 
-<<<<<<< HEAD
-=======
-    <div>
-        <h1 style="font-family: Calibri; font-size: 50px"></h1>
-    </div>
-    <div>
-    </div>
-
->>>>>>> origin/develop
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="foot" runat="server">
 
@@ -131,13 +118,10 @@
          function Mostrar_usuario(id) {
              document.getElementById("<% = codigo.ClientID%>").value = id;
              var identi = document.getElementById("<% = codigo.ClientID%>").value;
-<<<<<<< HEAD
 
              $('#reg').hide(); //escondemos el boton de registro
-=======
              $('#edi').show(); //escondemos el boton de edicion porque es un nuevo registro
              $('#reg').hide(); //mostramos el boton de registro
->>>>>>> origin/develop
              $('#editar-usuario').modal({ //
                  show: true, //mostramos el modal registra producto
                  backdrop: 'static' //hace que no se cierre el modal si le dan clic afuera del mismo.
@@ -167,9 +151,6 @@
                      document.getElementById("<% = password1.ClientID %>").value = PassUsuario;
 
                  }
-
-
-
              });
              
          }
@@ -181,7 +162,6 @@
              var nick = document.getElementById("<%=nickname.ClientID%>").value;
              var id = document.getElementById("<%=codigo.ClientID%>").value;
              var pass = document.getElementById("<%=password.ClientID%>").value;
-<<<<<<< HEAD
              var rol = document.getElementById("<% = Rol.ClientID %>").value;
              var nombre = document.getElementById("<% = nombre.ClientID %>").value;;
              var apellido = document.getElementById("<% = apellido.ClientID %>").value;;
@@ -209,128 +189,99 @@
 
                              }
 
-=======
-             var rol = document.getElementById("<% = user_rol.ClientID %>").value;
-             if (user != "" && pass != "" && rol != "") {
-                 $.ajax({
 
-                     type: 'POST',
-                     url: 'User.aspx/EditUser',
-                     data: JSON.stringify({ id: id, nombre: user, rol: rol, pass: pass }),
-                     contentType: 'application/json; charset=utf-8',
-                     dataType: 'json',
-                     success: function (response) {
-                         if (response.d == true) {
-                             $('#mensaje').removeClass();
-                             $('#mensaje').addClass('alert alert-success').html('Registro editado exitosamente').show(200).delay(2500).hide(200);
-                         } else {
-                             $('#mensaje').removeClass();
-                             $('#mensaje').addClass('alert alert-danger').html('No se pudo editar el registro :(').show(200).delay(2500).hide(200);
->>>>>>> origin/develop
+
                          }
 
                      });
 
                  } else {
                      $('#mensaje').removeClass();
-                     $('#mensaje').addClass('alert alert-danger').html('No debe dejar campos vacios').show(200).delay(5500).hide(200);
-
-<<<<<<< HEAD
+                     $('#mensaje').addClass('alert alert-danger').html('No deje campos obligatorios (*) vacios').show(200).delay(5500).hide(200);
                  }
-
              } else {
                  $('#mensaje').removeClass();
-                 $('#mensaje').addClass('alert alert-danger').html('Contrasena no coincide').show(200).delay(5500).hide(200);
-             }
-
-             
-                          return false;
-=======
-             } else
-             {
-                 $('#mensaje').removeClass();
-                 $('#mensaje').addClass('alert alert-danger').html('No debe dejar campos vacios').show(200).delay(2500).hide(200);
-                 Mostrar_cliente(id);
+                 $('#mensaje').addClass('alert alert-danger').html('Contraseña no coincide').show(200).delay(5500).hide(200);
              }
              return false;
->>>>>>> origin/develop
+
          });
 
-    //--------- ELIMINAR CLIENTE -->
-        function Eliminar_Usuario(id) {
-            if (confirm("Esta seguro que desea eliminar al usuario?")) {
-                $.ajax({
-                    type: "POST",
-                    url: "User.aspx/DeleteUser",
-                    data: JSON.stringify({ id: id }),
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                        if (response.d == true) {
-                            alert("Usuario Eliminado Exitosamente");
-                        } else {
-                            alert("El Usuario No Pudo Ser Eliminado");
-                        }
-                    }
-                });
-            }
+             //--------- ELIMINAR CLIENTE -->
+             function Eliminar_Usuario(id) {
+                 if (confirm("Esta seguro que desea eliminar al usuario?")) {
+                     $.ajax({
+                         type: "POST",
+                         url: "User.aspx/DeleteUser",
+                         data: JSON.stringify({ id: id }),
+                         contentType: "application/json; charset=utf-8",
+                         dataType: "json",
+                         success: function (response) {
+                             if (response.d == true) {
+                                 alert("Usuario Eliminado Exitosamente");
+                             } else {
+                                 alert("El Usuario No Pudo Ser Eliminado");
+                             }
+                         }
+                     });
+                 }
 
-        }
+             }
 
-        //AGREGAR USUARIO
+             //AGREGAR USUARIO
 
-        $('#reg').on('click', function () {
+             $('#reg').on('click', function () {
 
-            var nNick = document.getElementById("<%=nickname.ClientID%>").value;
-            var nNombre = document.getElementById("<%=nombre.ClientID%>").value;
-            var nApellido = document.getElementById("<%=apellido.ClientID%>").value;
-            var nDPI = document.getElementById("<%=dpi.ClientID%>").value;
-            var nContrasena = document.getElementById("<%=password.ClientID%>").value;
-            var nContrasena1 = document.getElementById("<%=password1.ClientID%>").value;
-            var nRol = document.getElementById("<%=Rol.ClientID%>").value;
+                 var nNick = document.getElementById("<%=nickname.ClientID%>").value;
+                 var nNombre = document.getElementById("<%=nombre.ClientID%>").value;
+                 var nApellido = document.getElementById("<%=apellido.ClientID%>").value;
+                 var nDPI = document.getElementById("<%=dpi.ClientID%>").value;
+                 var nContrasena = document.getElementById("<%=password.ClientID%>").value;
+                 var nContrasena1 = document.getElementById("<%=password1.ClientID%>").value;
+                 var nRol = document.getElementById("<%=Rol.ClientID%>").value;
 
-            if (nContrasena == nContrasena1) {
-                if (nNick != "" && nNombre != "" && nApellido != "" && nRol != "") {
-
-
-                    $.ajax({
-                        type: 'POST',
-                        url: 'User.aspx/Add',
-                        data: JSON.stringify({ nickname: nNick, nombre: nNombre, apellido: nApellido, dpi: nDPI, password: nContrasena, rol: nRol}),
-                        contentType: 'application/json; charset=utf-8',
-                        dataType: 'json',
-                        success: function (response) {
-                            if (response.d == true) {
-                                $('#mensaje').removeClass();
-                                $('#mensaje').addClass('alert alert-success').html('Cliente agregado con exito').show(200).delay(5500).hide(200);
-                                $('#formulario-cliente')[0].reset();
-                            } else {
-                                $('#mensaje').removeClass();
-                                $('#mensaje').addClass('alert alert-danger').html('Cliente ya existe').show(200).delay(5500).hide(200);
-
-                            }
-
-                        }
-                    });
-
-                } else {
-                    $('#mensaje').removeClass();
-                    $('#mensaje').addClass('alert alert-danger').html('Revise los campos obligatorios marcados con (*)').show(200).delay(5500).hide(200);
-
-                }
+                 if (nContrasena == nContrasena1) {
+                     if (nNick != "" && nNombre != "" && nApellido != "" && nRol != "") {
 
 
-            }else{
-                $('#mensaje').removeClass();
-                $('#mensaje').addClass('alert alert-danger').html('Contrasena no coincide').show(200).delay(5500).hide(200);
+                         $.ajax({
+                             type: 'POST',
+                             url: 'User.aspx/Add',
+                             data: JSON.stringify({ nickname: nNick, nombre: nNombre, apellido: nApellido, dpi: nDPI, password: nContrasena, rol: nRol}),
+                             contentType: 'application/json; charset=utf-8',
+                             dataType: 'json',
+                             success: function (response) {
+                                 if (response.d == true) {
+                                     $('#mensaje').removeClass();
+                                     $('#mensaje').addClass('alert alert-success').html('Cliente agregado con exito').show(200).delay(5500).hide(200);
+                                     $('#formulario-cliente')[0].reset();
+                                 } else {
+                                     $('#mensaje').removeClass();
+                                     $('#mensaje').addClass('alert alert-danger').html('Cliente ya existe').show(200).delay(5500).hide(200);
 
-            }
-            return false;
+                                 }
+
+                             }
+                         });
+
+                     } else {
+                         $('#mensaje').removeClass();
+                         $('#mensaje').addClass('alert alert-danger').html('Revise los campos obligatorios marcados con (*)').show(200).delay(5500).hide(200);
+
+                     }
 
 
-        });
+                 }else{
+                     $('#mensaje').removeClass();
+                     $('#mensaje').addClass('alert alert-danger').html('Contrasena no coincide').show(200).delay(5500).hide(200);
+
+                 }
+                 return false;
 
 
+             });
+
+         
 
 
     </script>
