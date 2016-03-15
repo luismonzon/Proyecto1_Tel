@@ -17,46 +17,23 @@
 	            
 	            	<!-- Column -->
 	                <div class="span6">
+                        
+	                    <div class="form-horizontal">
 	                                <div class="widget">
 	                            <div class="navbar"><div class="navbar-inner"><h6>Nueva Venta</h6></div></div>
 
 	                            <div class="well">
 	                            
-	                                <div class="control-group">
-	                                    <label class="control-label">Codigo Cliente</label>
-	                                    <div class="controls">
-                                            <input type="text" name="regular" class="span12" id="idcliente" placeholder="Cod. Cliente" />
-	                                        <button  id="busca" class="btn btn-primary">Buscar</button>
-
-	                                    </div>
-	                                </div>
-	                                 <div class="control-group">
-	                                    <label class="control-label">Codigo Cliente</label>
-	                               
-                                            <input type="text" name="regular" disabled="disabled" class="span12" id="codigo_cliente" placeholder="Cod. Cliente" />
-
-	                                 </div>
-	                                <div class="control-group">
-	                                    <label class="control-label">Nombre Cliente</label>
-	                               
-                                            <input type="text" name="regular"  disabled="disabled" class="span12" id="nombre_cliente" placeholder="Nombre Cliente" />
-
-	                                </div>
 	                                
-	                                <div class="control-group">
-	                                    <label class="control-label">Nit Cliente</label>
-	                                      <input type="text" name="regular"  disabled="disabled" class="span8" id="nit_cliente" placeholder="Nit Cliente" />
-
-	                                </div>
 	                                
                                     <div  class="control-group">
                                         <label class="control-label">Agregar Producto</label>
-                                        <div id="productos" runat="server">
-
-                                        </div>
-                                        <input type="text" name="regular"  disabled="disabled" class="span3" id="cantidad" placeholder="Nit Cliente" />
-
-                                         <button  id="agregar" class="btn btn-primary">Agregar</button>
+                                        
+                                            <div class="align-center">
+                                                <div id="productos" class="span6"  runat="server">
+                                                </div>
+                                                <button  id="agregar" class="btn btn-primary ">Agregar</button>
+                                             </div>
                                     </div>
 	                              
 	                               
@@ -70,7 +47,7 @@
 	                            </div>
 	                            
 	                        </div>
-	                   
+	                   </div>
 
 	                    
 	                </div>
@@ -80,95 +57,52 @@
 	                <div class="span6">
 	                	
 	                    <!-- Horizontal form -->
-	                    <form action="#" class="form-horizontal">
+	                    <div class="form-horizontal">
 	                        <div class="widget">
-	                            <div class="navbar"><div class="navbar-inner"><h6>Horizontal form</h6></div></div>
+	                            <div class="navbar"><div class="navbar-inner"><h6>Cliente</h6></div></div>
 
 	                            <div class="well">
-	                            
-	                                <div class="control-group">
-	                                    <label class="control-label">Input field</label>
-	                                    <div class="controls"><input type="text" name="regular" class="span12" placeholder="Regular field" /></div>
-	                                </div>
-	                                
-	                                <div class="control-group">
-	                                    <label class="control-label">Password field</label>
-	                                    <div class="controls"><input type="password" name="regular" class="span12" placeholder="Regular field" /></div>
-	                                </div>
-	                                
-	                                <div class="control-group">
-	                                    <label class="control-label">Checkboxes</label>
+	                             <div class="control-group">
+	                                    <label class="control-label">Buscar</label>
 	                                    <div class="controls">
-	                                        <label class="checkbox"><input type="checkbox" value="" checked>Option one is this and that—be sure to include why it's great</label>
-	                                        <div class="gap"></div>
-	                                        <label class="radio"><input type="radio" name="optionsRadios" id="optionsRadios3" value="option1" checked>Option one is this and that—be sure to include why it's great</label>
-	                                        <label class="radio"><input type="radio" name="optionsRadios" id="optionsRadios4" value="option2">Option two can be something else and selecting it will deselect option one</label>
+                                            <div class="align-center">
+                                                <input type="text" name="regular" class="span6" id="idcliente" placeholder="Cod. Cliente" />
+	                                         
+                                            <button  id="busca" class="btn btn-primary">Buscar</button>
+                                             </div>
 	                                    </div>
 	                                </div>
 	                                
+	                                 <div class="control-group">                                  
+	                                    <label class="control-label">Codigo Cliente</label>
+	                                        <div class=" align-center"> 
+                                            <input type="text" name="regular" disabled="disabled" class="span6" id="codigo_cliente" placeholder="Cod. Cliente" />
+                                            </div>
+	                                 </div>
 	                                <div class="control-group">
-	                                    <label class="control-label">Inline checkboxes:</label>
-	                                    <div class="controls">
-	                                        <label class="checkbox inline"><input type="checkbox" id="inlineCheckbox10" value="option1" checked>1</label>
-	                                        <label class="checkbox inline"><input type="checkbox" id="inlineCheckbox11" value="option2">2</label>
-	                                        <label class="checkbox inline"><input type="checkbox" id="inlineCheckbox12" value="option3">3</label>
-	                                    </div>
+	                                    <label class="control-label">Nombre Cliente  </label>
+	                                        <div class=" align-center"> 
+                                            <input type="text" name="regular"  disabled="disabled" class="span6" id="nombre_cliente" placeholder="Nombre Cliente" />
+                                        </div>
 	                                </div>
 	                                
 	                                <div class="control-group">
-	                                    <label class="control-label">Textarea:</label>
-	                                    <div class="controls">
-	                                        <textarea rows="5" cols="5" name="textarea" class="span12"></textarea>
-	                                    </div>
+	                                    <label class="control-label">Nit Cliente</label>
+	                                      <div class=" align-center"> 
+                                            <input type="text" name="regular"  disabled="disabled" class="span6" id="nit_cliente" placeholder="Nit Cliente" />
+                                        </div>
 	                                </div>
+	                                
 	                                
 	                                <div class="form-actions align-right">
-	                                    <button type="submit" class="btn btn-primary">Submit</button>
-	                                    <button type="button" class="btn btn-danger">Cancel</button>
-	                                    <button type="reset" class="btn">Reset</button>
 	                                </div>
 
 	                            </div>
 	                            
 	                        </div>
-	                    </form>
+	                    </div>
 	                    <!-- /horizontal form -->
 	                	
-	                    <!-- Form inline -->
-	                    <form action="#" class="form-inline">
-	                        <div class="widget">
-	                            <div class="navbar"><div class="navbar-inner"><h6>Inline form</h6></div></div>
-	                            
-	                            <div class="well">
-
-	                                <div class="control-group">
-	                                    <input type="text" class="input-small" placeholder="Email">
-	                                    <input type="password" class="input-small" placeholder="Password">
-										<label class="checkbox"><input type="checkbox" class="styled">Remember me</label>
-										<button type="submit" class="btn">Sign in</button>
-	                                </div>
-	                                <div class="control-group">
-	                                    <label class="checkbox"><input type="checkbox" name="checkbox1" class="styled" value="" >Unchecked</label>
-	                                    <label class="radio"><input type="radio" name="radio" class="styled" value="" >Unchecked</label>
-	                                    <select name="select2" class="styled">
-	                                        <option value="opt1">Usual select box</option>
-	                                        <option value="opt2">Option 2</option>
-	                                        <option value="opt3">Option 3</option>
-	                                        <option value="opt4">Option 4</option>
-	                                        <option value="opt5">Option 5</option>
-	                                        <option value="opt6">Option 6</option>
-	                                        <option value="opt7">Option 7</option>
-	                                        <option value="opt8">Option 8</option>
-	                                    </select>
-	                                    <span class="help-inline">This is help note</span>
-	                                    <button type="submit" class="btn btn-primary">Sign in</button>
-	                                </div>
-
-	                            </div>
-	                        </div>
-	                    </form>
-	                    <!-- /form inline -->
-
 	                </div>
 	                <!-- /column --> 
 	            </div>
