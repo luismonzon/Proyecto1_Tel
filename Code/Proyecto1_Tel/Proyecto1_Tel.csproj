@@ -65,10 +65,8 @@
     <Content Include="Code\ClienteMasGasta.aspx" />
     <Content Include="Code\ClientesDeuda.aspx" />
     <Content Include="Code\css\login.css" />
-
     <Content Include="Code\ProductosInventario.aspx" />
     <Content Include="Code\ProductosMasVenden.aspx" />
-
     <Content Include="Code\Inv_Bodega.aspx" />
     <Content Include="Code\Inv_tienda.aspx" />
     <Content Include="Code\Producto.aspx" />
@@ -129,7 +127,6 @@
       <DependentUpon>ClientesDeuda.aspx</DependentUpon>
     </Compile>
     <Compile Include="Code\Conexion.cs" />
-
     <Compile Include="Code\ProductosInventario.aspx.cs">
       <DependentUpon>ProductosInventario.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -238,7 +235,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>2874</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:7652/</IISUrl>
+          <IISUrl>http://localhost:7653/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
