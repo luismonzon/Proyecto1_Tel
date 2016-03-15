@@ -5,6 +5,7 @@ using System.Web;
 using System.Data;
 using System.Data.SqlClient;
 
+
 namespace Proyecto1_Tel.Code
 {
     public class Conexion
@@ -88,7 +89,7 @@ namespace Proyecto1_Tel.Code
                 SqlCommand comando = new SqlCommand();
                 comando.Connection = conexion;
                 //UPDATE DEPARTAMENTO SET nombre_depto = 'San Marcos' WHERE cod_depto = 2;
-                comando.CommandText = "UPDATE " + tabla + "SET" + campos + "WHERE" + condicion + ";";
+                comando.CommandText = "UPDATE " + tabla + " SET " + campos + " WHERE " + condicion + ";";
                 if (ConectarServer())
                 {
                     if (comando.ExecuteNonQuery() == 1)
@@ -113,6 +114,40 @@ namespace Proyecto1_Tel.Code
             return respuesta;
         }
 
+        public int Count(string query) 
+        {
+
+            int respuesta = 0;
+
+
+            try
+            {
+                SqlCommand comando = new SqlCommand();
+                comando.Connection = conexion;
+                //UPDATE DEPARTAMENTO SET nombre_depto = 'San Marcos' WHERE cod_depto = 2;
+                comando.CommandText = query;
+                if (ConectarServer())
+                {
+                    Int32 c = (Int32)comando.ExecuteScalar();
+                    respuesta = c;
+                }
+                else
+                {
+                    respuesta = -1;
+                }
+            }
+            catch (Exception ex)
+            {
+                respuesta = -1;
+                MostrarError = "Mensaje de la excepcion: " + ex.Message.ToString();
+            }
+            finally
+            {
+                conexion.Close();
+            }
+            return respuesta;
+
+        }
 
         public bool Eliminar(string tabla, string condicion)
         {
@@ -211,6 +246,93 @@ namespace Proyecto1_Tel.Code
             return respuesta;
         }
 
+        public DataSet Buscar_Mostrar(string tabla, string condicion)
+        {
+            DataSet respuesta = new DataSet();
+            try
+            {
+                //SELECT cod_depto, nombre_depto FROM DEPARTAMENTO;
+                string instruccionSQL = "SELECT * FROM " + tabla + " WHERE " + condicion + ";";
+                SqlDataAdapter adaptador = new SqlDataAdapter(instruccionSQL, conexion);
+
+                if (ConectarServer())
+                {
+                    adaptador.Fill(respuesta, condicion);
+                }
+            }
+            catch (Exception ex)
+            {
+                MostrarError = "Mensaje de la exepción: " + ex.Message.ToString();
+            }
+            finally
+            {
+                conexion.Close();
+            }
+
+            return respuesta;
+        }
+
+        public bool Entrar(string user, string password) {
+            bool val = false;
+            try
+            {
+                if (ConectarServer())
+                {
+                    System.Data.SqlClient.SqlCommand cmd;
+                    cmd = new System.Data.SqlClient.SqlCommand();
+                    cmd.Connection = conexion;
+                    cmd.CommandText = "Select count(Usuario) as val From Usuario Where Nombre = @User and Contrasenia=@pass";
+
+                    System.Data.SqlClient.SqlParameter param;
+                    param = new System.Data.SqlClient.SqlParameter();
+                    param.ParameterName = "@User";
+                    param.SqlDbType = SqlDbType.VarChar;
+                    param.Size = 50;
+                    param.Value = user;
+
+                    System.Data.SqlClient.SqlParameter param2;
+                    param2 = new System.Data.SqlClient.SqlParameter();
+                    param2.ParameterName = "@pass";
+                    param2.SqlDbType = SqlDbType.VarChar;
+                    param2.Size = 50;
+                    param2.Value = password;
+
+
+
+                    cmd.Parameters.Add(param);
+                    cmd.Parameters.Add(param2);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        int var = reader.GetInt32(0);
+                            if (var > 0)
+                                val = true;
+                           
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MostrarError = "Mensaje de la exepción: " + ex.Message.ToString();
+            }
+            finally
+            {
+                conexion.Close();
+            }
+
+
+            return val;
+        }
+
+
+        
 
     }
+
+
+
+
+
+
 }
