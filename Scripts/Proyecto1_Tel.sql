@@ -1,5 +1,9 @@
 use PROYECT_1
-
+  SELECT  P.PRODUCTO, P.ABREVIATURA, P.DESCRIPCION, P.PORCENTAJE,P.LARGO, P.ANCHO, P.MARCA, T.DESCRIPCION NOMBRETIPO, B.CANTIDAD CANTIDAD FROM Producto P, Tipo T , Bodega B Where P.Producto = B.Producto  and T.Tipo = P.Tipo;
+	SELECT * FROM Bodega;
+	SELECT * FROM Inventario;
+	SELECT * FROM Bodega WHERE Producto= 2;
+	UPDATE Inventario SET Cantidad =12, Metros_Cuadrados=110,00 WHERE Producto=18;
 go
 --Si ya eliminaron las tablas dejen asi
 --si no descomenten lo de drop table

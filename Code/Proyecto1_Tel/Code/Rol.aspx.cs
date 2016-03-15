@@ -46,7 +46,7 @@ namespace Proyecto1_Tel.Code
 
             DataSet roles = conexion.Mostrar(" Rol ", " * ");
             String data = "No hay Roles Disponibles";
-            if (roles != null)
+            if (roles.Tables.Count>0)
             {
 
                 data = "<div class=\"table-overflow\"> " +

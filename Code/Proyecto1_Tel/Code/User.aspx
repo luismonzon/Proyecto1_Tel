@@ -16,7 +16,7 @@
         <div><a style="font-size: 13px" id="nuevo-usuario" class="btn btn-success"> Agregar Usuario <i class="icon-plus-sign" >&nbsp;</i></a></div>
     </div>
     
-
+                    <!---TABLA QUE MUESTRA LOS USUARIOS--->
 	    <!-- Some controlы -->
         <div class="widget" id="tab_usuarios" runat="server">
         </div>
@@ -70,13 +70,10 @@
                                 <div class="control-group">
 	                                <label class="control-label" style="font-size: 15px;"><b>*Rol:</b></label>
                                      <div class="controls">
-	                                            <select name="Rol" class="styled" runat="server" id="Rol">
+	                                            <select name="Rol" class="select" runat="server" id="Rol">
 
 	                                            </select>
 	                                 </div>
-                                  
-	                                
-	                            
 	                        </div>
                     <tr>
                     	<td colspan="2">
@@ -182,7 +179,7 @@
                          success: function (response) {
                              if (response.d == true) {
                                  $('#mensaje').removeClass();
-                                 $('#mensaje').addClass('alert alert-success').html('Registro editado con exito').show(200).delay(5500).hide(200);
+                                 $('#mensaje').addClass('alert alert-success').html('Usuario editado con exito').show(200).delay(5500).hide(200);
                              } else {
                                  $('#mensaje').removeClass();
                                  $('#mensaje').addClass('alert alert-danger').html('Nick ya existe con otro usuario').show(200).delay(5500).hide(200);
@@ -253,11 +250,11 @@
                              success: function (response) {
                                  if (response.d == true) {
                                      $('#mensaje').removeClass();
-                                     $('#mensaje').addClass('alert alert-success').html('Cliente agregado con exito').show(200).delay(5500).hide(200);
-                                     $('#formulario-cliente')[0].reset();
+                                     $('#mensaje').addClass('alert alert-success').html('Usuario agregado con exito').show(200).delay(5500).hide(200);
+                                     $('#formulario-usuario')[0].reset();
                                  } else {
                                      $('#mensaje').removeClass();
-                                     $('#mensaje').addClass('alert alert-danger').html('Cliente ya existe').show(200).delay(5500).hide(200);
+                                     $('#mensaje').addClass('alert alert-danger').html('Nick ya existe').show(200).delay(5500).hide(200);
 
                                  }
 
@@ -281,7 +278,8 @@
 
              });
 
-         
+
+       
 
 
     </script>
