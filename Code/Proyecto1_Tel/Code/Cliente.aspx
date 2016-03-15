@@ -203,7 +203,7 @@
     <!--- ELIMINAR CLIENTE -->
     <script type="text/javascript">
         function Eliminar_Cliente(id) {
-            if (confirm("Esta seguro que desea eliminar al usuario?")) {
+            if (confirm("Esta seguro que desea eliminar al Cliente?")) {
                 var row = $(this).closest("tr");
                 var ClienteId = id;
                 $.ajax({
@@ -254,7 +254,7 @@
                             $('#formulario-cliente')[0].reset();
                              } else {
                                  $('#mensaje').removeClass();
-                                 $('#mensaje').addClass('alert alert-danger').html('Cliente ya existe').show(200).delay(2500).hide(200);
+                                 $('#mensaje').addClass('alert alert-danger').html('Nit ya existe').show(200).delay(2500).hide(200);
 
                              }
 

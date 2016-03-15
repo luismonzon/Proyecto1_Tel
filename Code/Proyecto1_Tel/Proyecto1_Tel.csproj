@@ -65,8 +65,14 @@
     <Content Include="Code\ClienteMasGasta.aspx" />
     <Content Include="Code\ClientesDeuda.aspx" />
     <Content Include="Code\css\login.css" />
+<<<<<<< HEAD
     <Content Include="Code\ProductosInventario.aspx" />
     <Content Include="Code\ProductosMasVenden.aspx" />
+=======
+    <Content Include="Code\Inv_Bodega.aspx" />
+    <Content Include="Code\Inv_tienda.aspx" />
+    <Content Include="Code\Producto.aspx" />
+>>>>>>> f693837f1a60bd535333892a586714ec4f0004bc
     <Content Include="Code\Rol.aspx" />
     <Content Include="Code\User.aspx" />
     <Content Include="Code\Venta.aspx" />
@@ -124,6 +130,7 @@
       <DependentUpon>ClientesDeuda.aspx</DependentUpon>
     </Compile>
     <Compile Include="Code\Conexion.cs" />
+<<<<<<< HEAD
     <Compile Include="Code\ProductosInventario.aspx.cs">
       <DependentUpon>ProductosInventario.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -137,6 +144,28 @@
     </Compile>
     <Compile Include="Code\ProductosMasVenden.aspx.designer.cs">
       <DependentUpon>ProductosMasVenden.aspx</DependentUpon>
+=======
+    <Compile Include="Code\Inv_Bodega.aspx.cs">
+      <DependentUpon>Inv_Bodega.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Code\Inv_Bodega.aspx.designer.cs">
+      <DependentUpon>Inv_Bodega.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Code\Inv_tienda.aspx.cs">
+      <DependentUpon>Inv_tienda.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Code\Inv_tienda.aspx.designer.cs">
+      <DependentUpon>Inv_tienda.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Code\Producto.aspx.cs">
+      <DependentUpon>Producto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Code\Producto.aspx.designer.cs">
+      <DependentUpon>Producto.aspx</DependentUpon>
+>>>>>>> f693837f1a60bd535333892a586714ec4f0004bc
     </Compile>
     <Compile Include="Code\Rol.aspx.cs">
       <DependentUpon>Rol.aspx</DependentUpon>

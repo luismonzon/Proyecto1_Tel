@@ -23,7 +23,10 @@
         </div>
         <!-- /some controlы -->
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> f693837f1a60bd535333892a586714ec4f0004bc
     <div>
         <h1 style="font-family: Calibri; font-size: 50px"></h1>
     </div>
@@ -106,7 +109,7 @@
                             if (response.d == true) {
                                 $('#formulario')[0].reset();
                                 $('#mensaje').removeClass();
-                                $('#mensaje').addClass('alert alert-success').html('Registro completado con exito').show(200).delay(2500).hide(200);
+                                $('#mensaje').addClass('alert alert-success').html('Rol completado con exito').show(200).delay(2500).hide(200);
                                 
                             } else {
                                 $('#formulario')[0].reset();
@@ -145,7 +148,7 @@
                         success: function (response) {
                             if (response.d == true) {
                                 $('#mensaje').removeClass();
-                                $('#mensaje').addClass('alert alert-success').html('Registro editado con exito').show(200).delay(2500).hide(200);
+                                $('#mensaje').addClass('alert alert-success').html('Rol editado con exito').show(200).delay(2500).hide(200);
                                 return false;
                             } else {
                                 $('#mensaje').removeClass();
@@ -198,7 +201,7 @@
     </script>
     <script type="text/javascript">
         function Eliminar(id) {
-            if (confirm("Esta seguro que desea eliminar al usuario?")) {
+            if (confirm("Esta seguro que desea eliminar el Rol?")) {
                 var row = $(this).closest("tr");
                 var RolId = id;
                 $.ajax({
@@ -209,9 +212,9 @@
                     dataType: "json",
                     success: function (response) {
                         if (response.d == true) {
-                            alert("Registro eliminado con exito");
+                            alert("Rol eliminado con exito");
                         } else {
-                            alert("Registro no se pudo eliminar");
+                            alert("Rol no se pudo eliminar");
                         }
                        
                     }

@@ -16,8 +16,8 @@ namespace Proyecto1_Tel.Code
 
         public string MostrarError
         {
-            get { return mostrarError; }
-            set { mostrarError = value; }
+            get { return mostrarError;}
+            set { mostrarError = value;}
         }
 
 
@@ -251,7 +251,6 @@ namespace Proyecto1_Tel.Code
             DataSet respuesta = new DataSet();
             try
             {
-                //SELECT cod_depto, nombre_depto FROM DEPARTAMENTO;
                 string instruccionSQL = "SELECT * FROM " + tabla + " WHERE " + condicion + ";";
                 SqlDataAdapter adaptador = new SqlDataAdapter(instruccionSQL, conexion);
 

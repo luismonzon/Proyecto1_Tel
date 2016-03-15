@@ -17,16 +17,18 @@ namespace Proyecto1_Tel.Code
             conexion = new Conexion();
             DataSet Productos = conexion.Mostrar("Producto", "producto, abreviatura");
             String html = "<select data-placeholder=\"Agregar producto\" class=\"select\" tabindex=\"2\">";
-          
+            html+="<option value=\"\"></option> ";
 
             foreach (DataRow item in Productos.Tables[0].Rows)
             {
                 html += "<option value=\""+item["producto"]+"\">"+item["Abreviatura"]+"</option> ";
+              
             }
 
             html += "</select>";
-
-           // this.productos.InnerHtml = html;
+            
+          
+           this.productos.InnerHtml = html;
 
         }
 

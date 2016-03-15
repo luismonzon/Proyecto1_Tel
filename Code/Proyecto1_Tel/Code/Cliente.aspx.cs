@@ -33,12 +33,12 @@ namespace Proyecto1_Tel.Code
                                                             "</ul>" +
                                                       "</div>" +
                                               "</div>" +
-                                        "</div>" + Llenar_Roles();
+                                        "</div>" + Llenar_Clientes();
 
 
         }
 
-        protected String Llenar_Roles()
+        protected String Llenar_Clientes()
         {
 
             DataSet clientes = conexion.Mostrar("Cliente ", " * ");
@@ -170,6 +170,8 @@ namespace Proyecto1_Tel.Code
 
             Conexion conn = new Conexion();
 
+
+
             int ds = conn.Count("Select count(id) from [Cliente] where id=\'" + id + "\';");
             
 
@@ -177,6 +179,7 @@ namespace Proyecto1_Tel.Code
             if (ds != 0)
             {
                 int cantnit = conn.Count("Select count(nit) from [Cliente] where nit=\'" + nit + "\'  And Cliente!= " + id + ";");
+
                 if (cantnit == 0)
                 {
                     conn.Modificar("Cliente", "Nombre" + "=" + "\'" + nombre + "\' " + "," + " Nit " + " = " + "\'" + nit + "\' " + "," + " Apellido " + " = " + "\'" + apellido + "\' " + "," + " Direccion " + " = " + "\'" + direccion + "\' " + "," + " Telefono " + " = " + "\'" + telefono + "\' ", "Cliente" + "= " + id);
@@ -198,12 +201,21 @@ namespace Proyecto1_Tel.Code
 
             Conexion conn = new Conexion();
 
-            int ds = conn.Count("Select count(nit) from [cliente] where nit=\'" + nit + "\';");
-
-            if (ds == 0)
+            if( nit != "")
             {
-                conn.Crear("Cliente", "Nombre , Nit, Apellido, Direccion, Telefono ", "\'" + nombre + "\','" + nit + "\','" + apellido + "\','" + direccion + "\','" + telefono + "\'");
-                return true;
+                int ds = conn.Count("Select count(nit) from [cliente] where nit=\'" + nit + "\';");
+
+                if (ds == 0)
+                {
+                    return conn.Crear("Cliente", "Nombre , Nit, Apellido, Direccion, Telefono ", "\'" + nombre + "\','" + nit + "\','" + apellido + "\','" + direccion + "\','" + telefono + "\'");
+                    
+                }
+
+
+            }
+            else
+            {
+                return conn.Crear("Cliente", "Nombre , Nit, Apellido, Direccion, Telefono ", "\'" + nombre + "\','" + nit + "\','" + apellido + "\','" + direccion + "\','" + telefono + "\'");
             }
 
             return false;
