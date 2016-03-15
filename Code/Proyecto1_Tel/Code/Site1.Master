@@ -123,9 +123,29 @@
 			            </li>
 			            <li><a href="#" title="" class="expand"><i class="icon-tasks"></i>Reportes<strong>3</strong></a>
 			                <ul>
-			                    <li><a href="components.html" title="">Ventas</a></li>
-			                    <li><a href="content_grid.html" title="">Clientes</a></li>
-			                    <li><a href="blank.html" title="">Productos</a></li>
+			                    <li>
+                                    <a href="components.html" title="" class="expand">Ventas</a>
+                                    <ul>
+					                    <li><a href="VentaDiaria.aspx" title="">Diaria</a></li>
+					                    <li><a href="#" title="">Semanal</a></li>
+					                    <li><a href="#" title="">Mensual</a></li>
+					                    <li><a href="#" title="">Anual</a></li>
+					                </ul>
+			                    </li>
+			                    <li>
+                                    <a href="content_grid.html" title="" class="expand">Clientes</a>
+                                    <ul>
+					                    <li><a href="ClientesDeuda.aspx" title="">Clientes con Credito</a></li>
+					                    <li><a href="ClienteMasGasta.aspx" title="">Que Mas Compran</a></li>
+					                </ul>
+			                    </li>
+			                    <li>
+                                    <a href="blank.html" title="" class="expand">Productos</a>
+                                    <ul>
+					                    <li><a href="ProductosInventario.aspx" title="">Inventario</a></li>
+					                    <li><a href="ProductosMasVenden.aspx" title="">Mas Vendido</a></li>
+					                </ul>
+			                    </li>
 			                </ul>
 			            </li>
 			            <li><a href="charts.html" title=""><i class="icon-signal"></i>Charts &amp; graphs</a></li>

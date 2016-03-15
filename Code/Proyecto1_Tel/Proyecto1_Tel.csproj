@@ -62,10 +62,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Code\Cliente.aspx" />
+    <Content Include="Code\ClienteMasGasta.aspx" />
+    <Content Include="Code\ClientesDeuda.aspx" />
     <Content Include="Code\css\login.css" />
+    <Content Include="Code\ProductosInventario.aspx" />
+    <Content Include="Code\ProductosMasVenden.aspx" />
     <Content Include="Code\Rol.aspx" />
     <Content Include="Code\User.aspx" />
     <Content Include="Code\Venta.aspx" />
+    <Content Include="Code\VentaDiaria.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -104,7 +109,35 @@
     <Compile Include="Code\Cliente.aspx.designer.cs">
       <DependentUpon>Cliente.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Code\ClienteMasGasta.aspx.cs">
+      <DependentUpon>ClienteMasGasta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Code\ClienteMasGasta.aspx.designer.cs">
+      <DependentUpon>ClienteMasGasta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Code\ClientesDeuda.aspx.cs">
+      <DependentUpon>ClientesDeuda.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Code\ClientesDeuda.aspx.designer.cs">
+      <DependentUpon>ClientesDeuda.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Code\Conexion.cs" />
+    <Compile Include="Code\ProductosInventario.aspx.cs">
+      <DependentUpon>ProductosInventario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Code\ProductosInventario.aspx.designer.cs">
+      <DependentUpon>ProductosInventario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Code\ProductosMasVenden.aspx.cs">
+      <DependentUpon>ProductosMasVenden.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Code\ProductosMasVenden.aspx.designer.cs">
+      <DependentUpon>ProductosMasVenden.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Code\Rol.aspx.cs">
       <DependentUpon>Rol.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -125,6 +158,13 @@
     </Compile>
     <Compile Include="Code\Venta.aspx.designer.cs">
       <DependentUpon>Venta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Code\VentaDiaria.aspx.cs">
+      <DependentUpon>VentaDiaria.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Code\VentaDiaria.aspx.designer.cs">
+      <DependentUpon>VentaDiaria.aspx</DependentUpon>
     </Compile>
     <Compile Include="Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>

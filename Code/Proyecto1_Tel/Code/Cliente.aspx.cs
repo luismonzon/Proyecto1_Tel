@@ -43,7 +43,7 @@ namespace Proyecto1_Tel.Code
 
             DataSet clientes = conexion.Mostrar("Cliente ", " * ");
             String data = "No hay Clientes Disponibles";
-            if (clientes != null)
+            if (clientes.Tables.Count>0)
             {
 
                 data = "<div class=\"table-overflow\"> " +

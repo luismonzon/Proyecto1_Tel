@@ -52,7 +52,7 @@ namespace Proyecto1_Tel.Code
         {
             DataSet clientes = conexion.Mostrar("USUARIO U, ROL R where U.ROL = R.ROL ", " U.USUARIO , U.NOMBRE, U.NICKNAME, U.APELLIDO, U.DPI, R.NOMBRE ROL ");
             String data = "No hay Usuarios Disponibles";
-            if (clientes != null)
+            if (clientes.Tables.Count>0)
             {
 
                 data = "<div class=\"table-overflow\"> " +
