@@ -10,10 +10,24 @@ namespace Proyecto1_Tel.Code
 {
     public partial class Venta : System.Web.UI.Page
     {
+        Conexion conexion;
         protected void Page_Load(object sender, EventArgs e)
         {
 
-        
+            conexion = new Conexion();
+            DataSet Productos = conexion.Mostrar("Producto", "producto, abreviatura");
+            String html = "<select data-placeholder=\"Agregar producto\" class=\"select\" tabindex=\"2\">";
+          
+
+            foreach (DataRow item in Productos.Tables[0].Rows)
+            {
+                html += "<option value=\""+item["producto"]+"\">"+item["Abreviatura"]+"</option> ";
+            }
+
+            html += "</select>";
+
+           // this.productos.InnerHtml = html;
+
         }
 
 
