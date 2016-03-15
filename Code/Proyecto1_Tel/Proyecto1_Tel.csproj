@@ -63,6 +63,9 @@
   <ItemGroup>
     <Content Include="Code\Cliente.aspx" />
     <Content Include="Code\css\login.css" />
+    <Content Include="Code\Inv_Bodega.aspx" />
+    <Content Include="Code\Inv_tienda.aspx" />
+    <Content Include="Code\Producto.aspx" />
     <Content Include="Code\Rol.aspx" />
     <Content Include="Code\User.aspx" />
     <Content Include="Code\Venta.aspx" />
@@ -105,6 +108,27 @@
       <DependentUpon>Cliente.aspx</DependentUpon>
     </Compile>
     <Compile Include="Code\Conexion.cs" />
+    <Compile Include="Code\Inv_Bodega.aspx.cs">
+      <DependentUpon>Inv_Bodega.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Code\Inv_Bodega.aspx.designer.cs">
+      <DependentUpon>Inv_Bodega.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Code\Inv_tienda.aspx.cs">
+      <DependentUpon>Inv_tienda.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Code\Inv_tienda.aspx.designer.cs">
+      <DependentUpon>Inv_tienda.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Code\Producto.aspx.cs">
+      <DependentUpon>Producto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Code\Producto.aspx.designer.cs">
+      <DependentUpon>Producto.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Code\Rol.aspx.cs">
       <DependentUpon>Rol.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

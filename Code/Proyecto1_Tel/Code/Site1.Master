@@ -114,11 +114,16 @@
 			            <li class="active"><a href="../index.aspx" title=""><i class="icon-home"></i>Inicio</a></li>
 			            <li><a href="#" title="" class="expand"><i class="icon-reorder"></i>Administrar<strong>4</strong></a>
 			                <ul>
-			                    <li><a href="Rol.aspx" title="">Roles</a></li>
-			                    <li><a href="User.aspx" title="">Usuarios</a></li>
-                                <li><a href="Cliente.aspx" title="">Clientes</a></li>
-			                    <li><a href="#" title="">Productos</a></li>
-                         
+			                    <li><a href="Rol.aspx" title="Roles">Roles</a></li>
+			                    <li><a href="User.aspx" title="Usuarios">Usuarios</a></li>
+                                <li><a href="Cliente.aspx" title="Clientes">Clientes</a></li>
+			                    <li><a href="Producto.aspx" title="Productos">Productos</a></li>
+                                 <li><a  title="Inventario" class="expand">Inventario</a>
+					                <ul>
+					                    <li><a href="Inv_tienda.aspx" title="Tienda">Tienda</a></li>
+					                    <li><a href="Inv_Bodega.aspx" title="Bodega">Bodega</a></li>
+					                </ul>
+			                    </li>
 			                </ul>
 			            </li>
 			            <li><a href="#" title="" class="expand"><i class="icon-tasks"></i>Reportes<strong>3</strong></a>
@@ -186,8 +191,8 @@
                 <!-- Page header -->
 			    <div class="page-header">
 			    	<div class="page-title">
-				    	<h5>Proteccion Solar</h5>
-				    	<span>LA TORRE</span>
+				    	<h5 style="font-size: 22px;">Proteccion Solar</h5>
+				    	<span style="font-size: 13px;">LA TORRE</span>
 			    	</div>
 
 			    	<ul class="page-stats">
