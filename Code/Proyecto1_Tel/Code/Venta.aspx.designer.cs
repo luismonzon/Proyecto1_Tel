@@ -13,17 +13,13 @@ namespace Proyecto1_Tel.Code {
     public partial class Venta {
         
         /// <summary>
-<<<<<<< HEAD
-        /// Control tab_roles.
-=======
+      /// Control tab_roles.
         /// productos control.
->>>>>>> origin/develop
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-<<<<<<< HEAD
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl tab_roles;
         
         /// <summary>
@@ -43,8 +39,7 @@ namespace Proyecto1_Tel.Code {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText nombre;
-=======
+
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl productos;
->>>>>>> origin/develop
     }
 }
