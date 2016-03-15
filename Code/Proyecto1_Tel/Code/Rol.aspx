@@ -13,7 +13,7 @@
 		            
 		
 
-	    <h5 class="widget-name"><i class="icon-columns"></i>Roles</h5>
+	<h5 class="widget-name"><i class="icon-columns"></i>Roles</h5>
     <div>
         <div><a style="font-size: 13px" id="nuevo-rol" class="btn btn-success"> Agregar Rol <i class="icon-plus-sign" >&nbsp;</i></a></div>
     </div>
@@ -23,7 +23,6 @@
         </div>
         <!-- /some controlы -->
 
-    </div>
 
     <div>
         <h1 style="font-family: Calibri; font-size: 50px"></h1>

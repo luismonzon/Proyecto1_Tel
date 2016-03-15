@@ -48,7 +48,6 @@
         </div>
         <!-- /some controlы -->
 
-    </div>
 
     <div>
         <h1 style="font-family: Calibri; font-size: 50px"></h1>
