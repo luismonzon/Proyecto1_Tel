@@ -20,7 +20,7 @@ $(function () {
 //MUESTRA EL MODAL PARA AGREGAR CLIENTE
 $(function () {
 
-    $('#nuevo-cliente').on('click', function () {
+    $('#nuevo-cliente').on('click', function () { // nuevo-cliente es el id del boton para agregar al cliente
         $('#formulario-cliente')[0].reset(); //formulario lo inicializa con datos vacios
         $('#pro').val('Registro'); //crea nuestra caja de procesos y se agrega el valor del registro
         $('#reg').show(); //mostramos el boton de registro
@@ -76,6 +76,7 @@ $(function () {
     $('#nuevo-bodega').on('click', function () {
         $('#formulario-pro_bodega')[0].reset(); //formulario lo inicializa con datos vacios
         $('#edi').hide(); //escondemos el boton de edicion porque es un nuevo registro
+        $('#divcantidad').hide();
         $('#radio').hide();
         $('#reg').show(); //mostramos el boton de registro
         $('#modal-pro_bodega').modal({ //
@@ -92,6 +93,8 @@ $(function () {
     $('#nuevo-tienda').on('click', function () {
         $('#formulario-pro_tienda')[0].reset(); //formulario lo inicializa con datos vacios
         $('#edi').hide(); //escondemos el boton de edicion porque es un nuevo registro
+        $('#divnmetros').hide();
+        $('#div_disponible').hide();
         $('#radio').hide();
         $('#reg').show(); //mostramos el boton de registro
         $('#modal-pro_tienda').modal({ //

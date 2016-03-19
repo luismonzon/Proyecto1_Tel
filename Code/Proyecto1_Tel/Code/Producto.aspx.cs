@@ -47,7 +47,7 @@ namespace Proyecto1_Tel.Code
         protected String Llenar_Productos()
         {
             DataSet productos = conexion.Mostrar("Producto P, Tipo T Where P.Tipo = T.tipo ", " P.PRODUCTO, P.ABREVIATURA, P.DESCRIPCION, P.PORCENTAJE,"+ 
-             "P.LARGO, P.ANCHO, P.MARCA, T.DESCRIPCION NOMBRETIPO ");
+             "P.ANCHO, P.MARCA, T.DESCRIPCION NOMBRETIPO ");
             String data = "No hay Productos Disponibles";
             if (productos != null)
             {
@@ -60,7 +60,6 @@ namespace Proyecto1_Tel.Code
                                " <th  align =\"center\">Descripcion</th>" +
                                " <th  align =\"center\">Tipo</th>" +
                                 "<th align =\"center\">Porcentaje</th>" +
-                                " <th  align =\"center\">Largo</th>" +
                                 " <th  align =\"center\">Ancho</th>" +
                                 " <th  align =\"center\">Marca</th>" +
                                 "<th align =\"center\">Acciones</th>" +
@@ -70,13 +69,12 @@ namespace Proyecto1_Tel.Code
                 foreach (DataRow item in productos.Tables[0].Rows)
                  {
                     data += "<tr>"+
-                        "<td id=\"codigo\" runat=\"server\" align =\"Center\">" + item["ABREVIATURA"].ToString() +"</td>"+
-                        "<td id=\"codigo\" runat=\"server\" >" + item["DESCRIPCION"].ToString() + "</td>" +
-                        "<td id=\"codigo\" runat=\"server\" align =\"Center\">" + item["NOMBRETIPO"].ToString() + "</td>"+
-                        "<td id=\"codigo\" runat=\"server\" align =\"Center\">" + item["PORCENTAJE"].ToString() + "</td>" +
-                        "<td id=\"codigo\" runat=\"server\" align =\"Center\">" + item["LARGO"].ToString() + "</td>" +
-                        "<td id=\"codigo\" runat=\"server\" align =\"Center\">" + item["ANCHO"].ToString() + "</td>" +
-                        "<td id=\"codigo\" runat=\"server\" align =\"Center\">" + item["MARCA"].ToString() + "</td> ";
+                        "<td id=\"abreviatura\" runat=\"server\" align =\"Center\">" + item["ABREVIATURA"].ToString() +"</td>"+
+                        "<td id=\"descripcion\" runat=\"server\" >" + item["DESCRIPCION"].ToString() + "</td>" +
+                        "<td id=\"nombretipo\" runat=\"server\" align =\"Center\">" + item["NOMBRETIPO"].ToString() + "</td>"+
+                        "<td id=\"porcentaje\" runat=\"server\" align =\"Center\">" + item["PORCENTAJE"].ToString() + "</td>" +
+                        "<td id=\"ancho\" runat=\"server\" align =\"Center\">" + item["ANCHO"].ToString() + "</td>" +
+                        "<td id=\"marca\" runat=\"server\" align =\"Center\">" + item["MARCA"].ToString() + "</td> ";
                     data += " <td>" +
                                         "<ul class=\"table-controls\">" +
                                           " <li><a href=\"javascript:Mostrar_Producto(" + item["PRODUCTO"].ToString() + ")\" id=\"edit\" class=\"tip\" CssClass=\"Edit\" title=\"Editar\"><i class=\"fam-pencil\"></i></a> </li>" +
@@ -125,11 +123,10 @@ namespace Proyecto1_Tel.Code
             
 
             XmlNodeList nPorcentaje = ((XmlElement)lista_producto[0]).GetElementsByTagName("Porcentaje");
-            XmlNodeList nLargo = ((XmlElement)lista_producto[0]).GetElementsByTagName("Largo");
             XmlNodeList nAncho = ((XmlElement)lista_producto[0]).GetElementsByTagName("Ancho");
             XmlNodeList nMarca = ((XmlElement)lista_producto[0]).GetElementsByTagName("Marca");
 
-            string[] producto = new string[8];
+            string[] producto = new string[7];
             producto[0] = nAbreviatura[0].InnerText;
             producto[1] = nDescripcion[0].InnerText;
             producto[2] = nTipo[0].InnerText;
@@ -144,26 +141,17 @@ namespace Proyecto1_Tel.Code
             }
 
 
-            if (nLargo.Count == 0)
+            if (nAncho.Count == 0)
             { 
                 producto[4] = "";
             }
             else
             {
-                producto[4] = nLargo[0].InnerText;
+                producto[4] = nAncho[0].InnerText;
             }
 
-            if (nAncho.Count == 0)
-            { 
-                producto[5] = "";
-            }
-            else
-            {
-                producto[5] = nAncho[0].InnerText;
-            }
-
-            producto[6] = nMarca[0].InnerText;
-            producto[7] = nDescripcionTipo[0].InnerText;
+            producto[5] = nMarca[0].InnerText;
+            producto[6] = nDescripcionTipo[0].InnerText;
 
 
 
@@ -176,26 +164,21 @@ namespace Proyecto1_Tel.Code
         }
 
         [WebMethod]
-        public static bool Add(string abrevia, string descripcion, string tipo, string marca, string largo, string ancho, string porc)
+        public static bool Add(string abrevia, string descripcion, string tipo, string marca, string ancho, string porc)
         {
 
             Boolean respuesta;
             Conexion conn = new Conexion();
 
-            if (largo == "")
-            {
-                largo = "null";
-                
-                
-            }
+            
             if (ancho == "")
             {
-                ancho = "null";
+                ancho = "0";
             }
 
             if (porc == "")
             {
-                porc = "null";
+                porc = "0";
             }
             
 
@@ -204,7 +187,7 @@ namespace Proyecto1_Tel.Code
 
             if (ds == 0)
             {
-               respuesta = conn.Crear("Producto", "Abreviatura,Descripcion, Porcentaje,Largo,Tipo,Ancho, Marca", "\'" + abrevia + "',\'" + descripcion + "\'," + porc +"," + largo + "," + tipo + "," + ancho +"," + "\'" + marca + "\'" );
+               respuesta = conn.Crear("Producto", "Abreviatura,Descripcion, Porcentaje,Tipo,Ancho, Marca", "\'" + abrevia + "',\'" + descripcion + "',\'" + porc + "'," + tipo + "," + ancho +"," + "\'" + marca + "\'" );
                 return respuesta;
             }
             return false;
@@ -212,7 +195,7 @@ namespace Proyecto1_Tel.Code
 
         //Editar Usuario
         [WebMethod]
-        public static bool EditPro(string id, string abrevia, string descripcion, string tipo, string marca, string largo, string ancho, string porc)
+        public static bool EditPro(string id, string abrevia, string descripcion, string tipo, string marca, string ancho, string porc)
         {
 
 
@@ -220,20 +203,15 @@ namespace Proyecto1_Tel.Code
 
             int ds = conn.Count("Select count(Producto) from [Producto] where usuario=\'" + id + "\';");
 
-            if (largo == "")
-            {
-                largo = "null";
-
-
-            }
+            
             if (ancho == "")
             {
-                ancho = "null";
+                ancho = "0";
             }
 
             if (porc == "")
             {
-                porc = "null";
+                porc = "0";
             }
             
 
@@ -243,7 +221,7 @@ namespace Proyecto1_Tel.Code
                 int cantnick = conn.Count("Select count(Abreviatura) from [Producto] where Abreviatura=\'" + abrevia + "\'  And Producto!= " + id + ";");
                 if (cantnick == 0)
                 {
-                    return conn.Modificar("Producto", "Abreviatura" + "=" + "\'" + abrevia + "\' " + "," + "Descripcion " + " = " + "\'" + descripcion + "\' , Tipo = " + tipo + "," + " Marca " + " = " + "\'" + marca + "\' " + "," + " Largo " + " = "  + largo +  ", " + " Ancho " + " = " + "" + ancho + ", " + " Porcentaje " + " = " + "" + porc  , "Producto" + "= " + id);
+                    return conn.Modificar("Producto", "Abreviatura" + "=" + "\'" + abrevia + "\' " + "," + "Descripcion " + " = " + "\'" + descripcion + "\' , Tipo = " + tipo + "," + " Marca " + " = " + "\'" + marca + "\' " + ","  + " Ancho " + " = " + "" + ancho + ", " + " Porcentaje " + " = " + "'" + porc + "'" , " Producto" + "= " + id);
                 }
 
             }

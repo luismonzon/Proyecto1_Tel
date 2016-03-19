@@ -23,10 +23,6 @@
         </div>
         <!-- /some controlы -->
 
-<<<<<<< HEAD
-
-=======
->>>>>>> f693837f1a60bd535333892a586714ec4f0004bc
     <div>
         <h1 style="font-family: Calibri; font-size: 50px"></h1>
     </div>
@@ -122,6 +118,7 @@
                     });
 
                 } else {
+                    document.getElementById("<%=nombre.ClientID%>").focus();
                     $('#mensaje').removeClass();
                     $('#mensaje').addClass('alert alert-danger').html('Revise los campos obligatorios marcados con (*)').show(200).delay(2500).hide(200);
 
@@ -161,6 +158,7 @@
                     });
 
                 } else {
+                    document.getElementById("<%=nombre.ClientID%>").focus();
                     $('#mensaje').removeClass();
                     $('#mensaje').addClass('alert alert-danger').html('No debe dejar campos vacios').show(200).delay(2500).hide(200);
                     Mostrar(id);

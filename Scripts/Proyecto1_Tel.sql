@@ -1,9 +1,8 @@
 use PROYECT_1
-  SELECT  P.PRODUCTO, P.ABREVIATURA, P.DESCRIPCION, P.PORCENTAJE,P.LARGO, P.ANCHO, P.MARCA, T.DESCRIPCION NOMBRETIPO, B.CANTIDAD CANTIDAD FROM Producto P, Tipo T , Bodega B Where P.Producto = B.Producto  and T.Tipo = P.Tipo;
-	SELECT * FROM Bodega;
-	SELECT * FROM Inventario;
-	SELECT * FROM Bodega WHERE Producto= 2;
-	UPDATE Inventario SET Cantidad =12, Metros_Cuadrados=110,00 WHERE Producto=18;
+  	
+	--se elimino la columna de largo en la tabla producto
+	INSERT INTO Producto(Abreviatura,Descripcion, Porcentaje,Tipo,Ancho, Marca) VALUES('Eco 35 g','Economico 35 Grande','35%',2,1.52,'Economico');
+	INSERT INTO Inventario(Sucursal, Producto, Cantidad, Precio, Metros_Cuadrados ) VALUES(1,3,1,15,200);
 go
 --Si ya eliminaron las tablas dejen asi
 --si no descomenten lo de drop table
@@ -60,7 +59,7 @@ create table Cliente (
 	Apellido varchar(50) null,
 	Nit varchar(15) null,
 	Direccion varchar(50) null,
-	Telefono int null,
+	Telefono varchar(50) null,
 	Constraint pk_Cliente Primary key (Cliente)
 )
 
@@ -114,8 +113,7 @@ Create table Producto(
 	Abreviatura varchar(50) not null,
 	Descripcion varchar (100) null,
 	Tipo int not null,
-	Porcentaje numeric null,
-	Largo numeric(9,2) null,
+	Porcentaje varchar(50) null,
 	Ancho numeric(9,2) null,
 	Marca varchar(50) null,
 	constraint pk_Producto Primary Key (Producto),

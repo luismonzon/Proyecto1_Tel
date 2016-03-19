@@ -52,9 +52,9 @@ namespace Proyecto1_Tel.Code
         protected String Llenar_Productos()
         {
             DataSet productos = conexion.Mostrar("Producto P, Tipo T , Bodega B Where P.Producto = B.Producto  and T.Tipo = P.Tipo ", " P.PRODUCTO, P.ABREVIATURA, P.DESCRIPCION, P.PORCENTAJE," +
-             "P.LARGO, P.ANCHO, P.MARCA, T.DESCRIPCION NOMBRETIPO, B.CANTIDAD CANTIDAD, B.BODEGA");
-            String data = "No hay Productos Disponibles";
-            if (productos != null)
+             "P.ANCHO, P.MARCA, T.DESCRIPCION NOMBRETIPO, B.CANTIDAD CANTIDAD, B.BODEGA");
+            String data = "";
+            if (productos.Tables[0].Rows.Count > 0)
             {
 
                 data = "<div class=\"table-overflow\"> " +
@@ -81,6 +81,7 @@ namespace Proyecto1_Tel.Code
                     data += " <td>" +
                                         "<ul class=\"table-controls\">" +
                                           " <li><a href=\"javascript:Editar_Bodega(" + item["PRODUCTO"].ToString() + ")\" id=\"edit\" class=\"tip\" CssClass=\"Edit\" title=\"Editar\"><i class=\"fam-pencil\"></i></a> </li>" +
+                                          " <li><a href=\"javascript:Eliminar_Bodega(" + item["PRODUCTO"].ToString() + ")\" id=\"edit\" class=\"tip\" CssClass=\"Edit\" title=\"Eliminar\"><i class=\"fam-cross\"></i></a> </li>" +
                                     "</td>";
                     data += "</tr>";
                 }
@@ -136,15 +137,7 @@ namespace Proyecto1_Tel.Code
 
             Conexion conn = new Conexion();
 
-            int ds = conn.Count("Select count(producto) from [Bodega] where producto=\'" + producto + "\';");
-
-            if (ds == 0)
-            {
-                return conn.Crear("Bodega", "Producto, Cantidad ", "\'" + producto + "\'," + cantidad);
-
-            }
-            else
-            {
+           
                 DataSet Producto_ = conn.Buscar_Mostrar("Bodega", "Producto" + "= " + producto);
 
                 XmlDocument xDoc = new XmlDocument();
@@ -164,7 +157,7 @@ namespace Proyecto1_Tel.Code
                 }   
 
                 
-            }
+            
 
 
         }
@@ -196,13 +189,40 @@ namespace Proyecto1_Tel.Code
 
             string[] producto = new string[2];
             producto[0] = nDescripcion[0].InnerText;
-            producto[1] = Cantidad[0].InnerText;
 
+            try
+            {
 
+                producto[1] = Cantidad[0].InnerText;
 
+            }
+            catch (Exception ex)
+            {
+               string MostrarError = "Mensaje de la excepcion: " + ex.Message.ToString();
+            }
 
             string json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(producto);
             return json;
         }
+
+        //ELIMINAR PRODUCTO DE TIENDA
+        [WebMethod]
+
+        public static bool DeleteProd(string id)
+        {
+            Conexion conn = new Conexion();
+
+            int ds = conn.Count("Select count(Producto) from [Bodega] where Producto=\'" + id + "\';");
+
+            if (ds != 0)
+            {
+                return conn.Eliminar("Bodega", "Producto = " + id);
+            }
+            return false;
+        }
+
+
+
+
     }
 }

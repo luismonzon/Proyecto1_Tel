@@ -49,6 +49,15 @@ namespace Proyecto1_Tel.Code {
         protected global::System.Web.UI.HtmlControls.HtmlInputText descripcion;
         
         /// <summary>
+        /// Control cantdisponible.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl cantdisponible;
+        
+        /// <summary>
         /// Control cantidad.
         /// </summary>
         /// <remarks>

@@ -65,6 +65,7 @@
     <Content Include="Code\ClienteMasGasta.aspx" />
     <Content Include="Code\ClientesDeuda.aspx" />
     <Content Include="Code\css\login.css" />
+    <Content Include="Code\Inicio.aspx" />
     <Content Include="Code\ProductosInventario.aspx" />
     <Content Include="Code\ProductosMasVenden.aspx" />
     <Content Include="Code\Inv_Bodega.aspx" />
@@ -127,6 +128,13 @@
       <DependentUpon>ClientesDeuda.aspx</DependentUpon>
     </Compile>
     <Compile Include="Code\Conexion.cs" />
+    <Compile Include="Code\Inicio.aspx.cs">
+      <DependentUpon>Inicio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Code\Inicio.aspx.designer.cs">
+      <DependentUpon>Inicio.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Code\ProductosInventario.aspx.cs">
       <DependentUpon>ProductosInventario.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
