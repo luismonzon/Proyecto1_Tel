@@ -10,7 +10,7 @@
     
 	    <h4 class="widget-name"><i class="icon-columns"></i>Bodega</h4>
     <div>
-        <div><a style="font-size: 13px" id="nuevo-bodega" onclick="cambio();" class="btn btn-success"> Agregar Producto a inventario <i class="icon-plus-sign" >&nbsp;</i></a></div>
+        <div><a style="font-size: 13px" id="nuevo-bodega" onclick="cambio();" class="btn btn-success"> Agregar Producto a Bodega <i class="icon-plus-sign" >&nbsp;</i></a></div>
     </div>
     
         <!-- Some controlы -->
@@ -22,14 +22,16 @@
 
     
      <!-- MODAL PARA PRODUCTOS EN BODEGA-->
-    <div class="modal fade" id="modal-pro_bodega" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="row-fluid well body">
+	                    <div class="span6">
+	          <div class="modal fade" id="modal-pro_bodega" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" onclick="reloadTable();" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 
                 <div class="step-title">
-                            	<i>P</i>
+                            	<i>B</i>
 					    		<h5>Producto en Bodega</h5>
 					    		<span>Agregar o Editar Productos en Bodega</span>
 				</div>
@@ -56,12 +58,16 @@
 	                                <div class="controls"><input   readonly="readonly" style="font-size: 15px;" placeholder="Descripcion" type="text" class="span12" id="descripcion" runat="server" /></div>
 	                            </div>
                                 
-
-	                             <div class="control-group">
+                                <div id="divcantidad" class="control-group">
+	                                <label class="control-label" style="font-size: 15px;" ><b>*Cantidad Disponible:</b></label>
+	                                <div class="controls"><input readonly="readonly" required="required" style="font-size: 13px;" type="number"  id="cantdisponible" runat="server" /></div>
+	                            </div>
+                                    
+	                            <div class="control-group">
 	                                <label class="control-label" style="font-size: 15px;" ><b>*Cantidad:</b></label>
 	                                <div class="controls"><input  required="required" style="font-size: 13px;" type="number"  id="cantidad" runat="server" /></div>
 	                            </div>
-                                <div id="radio" class="control-group">
+                                <div id="radio" >
                                     <label class="radio">
                                     <input type="radio" name="opcion" id="agregar" class="styled" value="1" checked="checked">
 									    Agregar
@@ -101,6 +107,10 @@
             </div>
             
           </div>
+        </div>
+    
+                            
+                                  </div>
         </div>
       
    
@@ -170,6 +180,7 @@
                 });
 
             } else {
+                document.getElementById("<%= cantidad.ClientID %>").focus();
                 $('#mensaje').removeClass();
                 $('#mensaje').addClass('alert alert-danger').html('Revise los campos obligatorios marcados con (*)').show(200).delay(2500).hide(200);
 
@@ -201,7 +212,7 @@
                     var Cantidad = produc[1];
                     document.getElementById("<% = descripcion.ClientID %>").value = Descripcion;
                     document.getElementById("<% = producto.ClientID %>").value = id;
-                    document.getElementById("<% = cantidad.ClientID %>").value = Cantidad;
+                    document.getElementById("<% = cantdisponible.ClientID %>").value = Cantidad;
                     
                 }
             });
@@ -268,6 +279,31 @@
 
 
         });
+
+
+        //--------- ELIMINAR PRODUCTO DE BODEGA -->
+        function Eliminar_Bodega(id) {
+            if (confirm("Esta seguro que desea eliminar el producto?")) {
+                $.ajax({
+                    type: "POST",
+                    url: "Inv_Bodega.aspx/DeleteProd",
+                    data: JSON.stringify({ id: id }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.d == true) {
+                            reloadTable();
+                            alert("Producto Eliminado Exitosamente");
+                        } else {
+                            alert("El Producto No Pudo Ser Eliminado");
+                        }
+                    }
+                });
+            }
+
+        }
+
+
 
 </script>
 

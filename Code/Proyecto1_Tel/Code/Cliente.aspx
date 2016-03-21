@@ -64,7 +64,7 @@
 	                            </div>
                                 <div class="control-group">
 	                                <label class="control-label" style="font-size: 15px;"><b>Telefono:</b></label>
-	                                <div class="controls"><input style="font-size: 15px;" placeholder="Telefono" id="telefono" runat="server" type="text" class="span12" /></div>
+	                                <div class="controls"><input style="font-size:  15px;" placeholder="Telefono" data-mask="9999-9999" id="telefono" runat="server" type="text" class="span12" /></div>
 	                            </div>
 	                        </div>
                 

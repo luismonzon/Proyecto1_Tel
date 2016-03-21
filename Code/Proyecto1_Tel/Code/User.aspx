@@ -22,6 +22,7 @@
         </div>
         <!-- /some controlы -->
 
+
      <!-- MODAL PARA EDITAR USUARIO-->
     <div class="modal fade" id="editar-usuario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -53,9 +54,9 @@
 	                            </div>
 	                            <div class="control-group">
 	                                <label class="control-label" style="font-size: 15px;" ><b>*Nombre:</b></label>
-	                                <div class="controls"><input style="font-size: 15px;" placeholder="Nombre" type="text" class="span12" id="nombre" runat="server" /></div>
+	                                <div class="controls"><input required="required" style="font-size: 15px;" placeholder="Nombre" type="text" class="span12" id="nombre" runat="server" /></div>
                                      <label class="control-label" style="font-size: 15px;" ><b>*Apellido:</b></label>
-	                                <div class="controls"><input style="font-size: 15px;" id="apellido" placeholder="Apellido" runat="server" type="text" class="span12" /></div>
+	                                <div class="controls"><input required="required" style="font-size: 15px;" id="apellido" placeholder="Apellido" runat="server" type="text" class="span12" /></div>
 	                            </div>
                                 <div class="control-group">
 	                                <label class="control-label" style="font-size: 15px;" ><b>DPI:</b></label>
@@ -63,9 +64,9 @@
 	                            </div>
                                 <div class="control-group">
 	                                <label class="control-label" style="font-size: 15px;"><b>*Contraseña:</b></label>
-	                                <div class="controls"><input style="font-size: 15px;" placeholder="Password" id="password" runat="server" type="password" class="span12" /></div>
+	                                <div class="controls"><input required="required" style="font-size: 15px;" placeholder="Password" id="password" runat="server" type="password" class="span12" /></div>
                                      <label class="control-label" style="font-size: 15px;"><b>*Repetir Contraseña:</b></label>
-	                                <div class="controls"><input style="font-size: 15px;" placeholder="Repetir Contraseña" id="password1" runat="server" type="password" class="span12" /></div>
+	                                <div class="controls"><input required="required" style="font-size: 15px;" placeholder="Repetir Contraseña" id="password1" runat="server" type="password" class="span12" /></div>
 	                            </div>
                                 <div class="control-group">
 	                                <label class="control-label" style="font-size: 15px;"><b>*Rol:</b></label>

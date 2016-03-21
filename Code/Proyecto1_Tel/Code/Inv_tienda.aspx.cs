@@ -52,9 +52,9 @@ namespace Proyecto1_Tel.Code
         protected String Llenar_Productos()
         {
             DataSet productos = conexion.Mostrar("Producto P, Inventario I, TIPO T Where P.Producto = I.Producto AND P.Tipo = T.Tipo ", " P.PRODUCTO, P.ABREVIATURA, P.DESCRIPCION, P.PORCENTAJE," +
-             "P.LARGO, P.ANCHO, P.MARCA, T.DESCRIPCION NOMBRETIPO, I.SUCURSAL SUCURSAL, I.PRECIO PRECIO, I.CANTIDAD CANTIDAD, I.METROS_CUADRADOS METROS");
+             "P.ANCHO, P.MARCA, T.DESCRIPCION NOMBRETIPO, I.SUCURSAL SUCURSAL, I.PRECIO PRECIO, I.CANTIDAD CANTIDAD, I.METROS_CUADRADOS METROS");
             String data = "No hay Productos Disponibles";
-            if (productos != null)
+            if (productos.Tables[0].Rows.Count > 0 )
             {
 
                 data = "<div class=\"table-overflow\"> " +
@@ -67,7 +67,7 @@ namespace Proyecto1_Tel.Code
                                 " <th  align =\"center\">Marca</th>" +
                                 "<th align =\"center\">Cantidad Inventario</th>" +
                                 "<th align =\"center\">Metros Disponibles</th>" +
-                                "<th align =\"center\">Precio Unidad/Metro</th>" +
+                                "<th align =\"center\">Precio Q.: Unidad / Metro Cuadrado</th>" +
                                 "<th align =\"center\">Acciones</th>" +
                             "</tr>" +
                         "</thead>" + "<tbody>";
@@ -84,7 +84,8 @@ namespace Proyecto1_Tel.Code
                         "<td id=\"cant\" runat=\"server\" align =\"Center\">" + item["PRECIO"].ToString() + "</td> ";
                     data += " <td>" +
                                         "<ul class=\"table-controls\">" +
-                                          " <li><a href=\"javascript:Editar_Bodega(" + item["PRODUCTO"].ToString() + ")\" id=\"edit\" class=\"tip\" CssClass=\"Edit\" title=\"Editar\"><i class=\"fam-pencil\"></i></a> </li>" +
+                                          " <li><a href=\"javascript:Editar_Tienda(" + item["PRODUCTO"].ToString() + ")\" id=\"edit\" class=\"tip\" CssClass=\"Edit\" title=\"Editar\"><i class=\"fam-pencil\"></i></a> </li>" +
+                                          " <li><a href=\"javascript:Eliminar_Tienda(" + item["PRODUCTO"].ToString() + ")\" id=\"edit\" class=\"tip\" CssClass=\"Edit\" title=\"Eliminar\"><i class=\"fam-cross\"></i></a> </li>" +
                                     "</td>";
                     data += "</tr>";
                 }
@@ -138,26 +139,36 @@ namespace Proyecto1_Tel.Code
             string verifica = Inventario.GetXml();
             string precio;
 
-            if (verifica == "<NewDataSet />"){
-                precio = "0";
-            }
-            else
+            if (Inventario.Tables[0].Rows.Count > 0)
             {
                 precio = "1";
             }
-                
-           
+            else
+            {
+                precio = "0";
+            }
+
             string[] producto = new string[4];
-            producto[0] = nDescripcion[0].InnerText;
-            producto[1] = Cantidad[0].InnerText;
-            producto[2] = Tipo_Descripcion[0].InnerText;
-            producto[3] = precio;
+            try
+            {
+                producto[0] = nDescripcion[0].InnerText;
+                producto[1] = Cantidad[0].InnerText;
+                producto[2] = Tipo_Descripcion[0].InnerText;
+                producto[3] = precio;
+                
+            }
+            catch(Exception ex)
+            {
 
-
+                string MostrarError = "Mensaje de la excepcion: " + ex.Message.ToString();
+            }
 
 
             string json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(producto);
             return json;
+
+
+          
         }
 
 
@@ -165,16 +176,32 @@ namespace Proyecto1_Tel.Code
         public static bool Add(string producto, string cantidad, string precio, string metros)
         {
 
-
+            bool respuesta;
             Conexion conn = new Conexion();
 
             int ds = conn.Count("Select count(producto) from [Inventario] where producto=\'" + producto + "\';");
 
             if (ds == 0)
             {
-                Inv_Bodega(producto, cantidad);
+                try
+                {
+                    
+                    respuesta =  conn.Crear("Inventario", "Sucursal, Producto, Cantidad, Precio, Metros_Cuadrados ", "1 ," + producto + "," + cantidad + "," + precio + "," + metros);
 
-                return conn.Crear("Inventario", "Sucursal, Producto, Cantidad, Precio, Metros_Cuadrados ", "1 ," + producto + ","+ cantidad+ "," + precio + "," + metros );
+                    if (respuesta)
+                    {
+                        return Inv_Bodega(producto, cantidad);
+                    }
+                    else
+                    {
+                        return false;
+                    }
+
+                }
+                catch
+                {
+                    return false;
+                }
                 
             }
             else
@@ -182,7 +209,7 @@ namespace Proyecto1_Tel.Code
 
                 
 
-                Inv_Bodega(producto, cantidad);
+                
                 DataSet Producto_ = conn.Buscar_Mostrar("Inventario", "Producto" + "= " + producto);
 
                 XmlDocument xDoc = new XmlDocument();
@@ -192,13 +219,35 @@ namespace Proyecto1_Tel.Code
                 XmlNodeList cant = ((XmlElement)_Producto[0]).GetElementsByTagName("Cantidad");
                 XmlNodeList metros_cuad = ((XmlElement)_Producto[0]).GetElementsByTagName("Metros_Cuadrados");
 
-                string metros_cuadrados = metros_cuad[0].InnerText;
-                string cantid = cant[0].InnerText;
-                decimal metros1 = Convert.ToDecimal(metros_cuadrados, CultureInfo.CreateSpecificCulture("en-US"));
-                decimal metros2 = Convert.ToDecimal(metros, CultureInfo.CreateSpecificCulture("en-US"));
 
-                decimal metrostotales =metros1 + metros2;
-                return conn.Modificar("Inventario", "Cantidad =" + (Convert.ToInt64(cantid) + Convert.ToInt64(cantidad)) + ", Metros_Cuadrados=" + Convert.ToString(metrostotales).Replace(",",".") , "Producto=" + producto);
+                try
+                {
+
+                    string metros_cuadrados = metros_cuad[0].InnerText;
+                    string cantid = cant[0].InnerText;
+                    decimal metros1 = Convert.ToDecimal(metros_cuadrados, CultureInfo.CreateSpecificCulture("en-US"));
+                    decimal metros2 = Convert.ToDecimal(metros, CultureInfo.CreateSpecificCulture("en-US"));
+
+                    decimal metrostotales = metros1 + metros2;
+                    respuesta = conn.Modificar("Inventario", "Cantidad =" + (Convert.ToInt64(cantid) + Convert.ToInt64(cantidad)) + ", Metros_Cuadrados=" + Convert.ToString(metrostotales).Replace(",", "."), "Producto=" + producto);
+                    if (respuesta == true)
+                    {
+                        return Inv_Bodega(producto, cantidad);
+                    }
+                    else
+                    {
+                        return false;
+                    }
+
+                
+                }
+                catch (Exception ex)
+                {
+                   string mensaje = "Mensaje excepcion" + ex.Message.ToString();
+                   return false;
+                }
+
+
 
              
                 
@@ -209,7 +258,12 @@ namespace Proyecto1_Tel.Code
         }
 
 
-        public static void Inv_Bodega(string producto, string cantidad){
+
+
+
+        public static bool Inv_Bodega(string producto, string cantidad){
+
+                
                 
                 Conexion conn = new Conexion();
                 DataSet Producto_ = conn.Buscar_Mostrar("Bodega", "Producto" + "= " + producto);
@@ -219,12 +273,206 @@ namespace Proyecto1_Tel.Code
 
                 XmlNodeList _Producto = xDoc.GetElementsByTagName("NewDataSet");
                 XmlNodeList cant = ((XmlElement)_Producto[0]).GetElementsByTagName("Cantidad");
+
                 string cantid = cant[0].InnerText;
 
-                conn.Modificar("Bodega", "Cantidad =" + (Convert.ToInt64(cantid) - Convert.ToInt64(cantidad)), "Producto=" + producto);
+                if (Convert.ToInt64(cantid) > Convert.ToInt64(cantidad))
+                {
+
+                    return conn.Modificar("Bodega", "Cantidad =" + (Convert.ToInt64(cantid) - Convert.ToInt64(cantidad)), "Producto=" + producto);
+                }
+                else
+                {
+                    return false;
+                }
 
 
         }
+
+
+        //Enviar datos a modal
+
+        [WebMethod]
+        public static string Busca_Descripcion(string id)
+        {
+            Conexion conn = new Conexion();
+
+            DataSet Producto_ = conn.Buscar_Mostrar("Producto", "Producto" + "= " + id);
+            XmlDocument xDoc = new XmlDocument();
+            xDoc.LoadXml(Producto_.GetXml());
+            XmlNodeList _Producto = xDoc.GetElementsByTagName("NewDataSet");
+            XmlNodeList lista_producto = ((XmlElement)_Producto[0]).GetElementsByTagName("Producto_x003D__x0020_" + id);
+
+
+            XmlNodeList nDescripcion = ((XmlElement)lista_producto[0]).GetElementsByTagName("Descripcion");
+            XmlNodeList nTipo = ((XmlElement)lista_producto[0]).GetElementsByTagName("Tipo");
+
+
+            DataSet Tienda_ = conn.Buscar_Mostrar("Inventario", "Producto" + "= " + id);
+            XmlDocument xTienda = new XmlDocument();
+            xTienda.LoadXml(Tienda_.GetXml());
+            XmlNodeList _Tienda = xTienda.GetElementsByTagName("NewDataSet");
+            XmlNodeList Cantidad = ((XmlElement)_Tienda[0]).GetElementsByTagName("Cantidad");
+            XmlNodeList nPrecio = ((XmlElement)_Tienda[0]).GetElementsByTagName("Precio");
+            XmlNodeList nMetros = ((XmlElement)_Tienda[0]).GetElementsByTagName("Metros_Cuadrados");
+
+            DataSet Tipo_Pro = conn.Buscar_Mostrar("Tipo", "Tipo" + "= " + nTipo[0].InnerText);
+            XmlDocument xDocu = new XmlDocument();
+            xDocu.LoadXml(Tipo_Pro.GetXml());
+            XmlNodeList Tipopro = xDocu.GetElementsByTagName("NewDataSet");
+            XmlNodeList lista_tipo = ((XmlElement)Tipopro[0]).GetElementsByTagName("Tipo_x003D__x0020_" + nTipo[0].InnerText);
+            XmlNodeList nDescripcionTipo = ((XmlElement)lista_tipo[0]).GetElementsByTagName("Descripcion");
+
+           
+
+
+            
+
+            string[] producto = new string[5];
+
+            try
+            {
+                producto[0] = nDescripcion[0].InnerText;
+                producto[1] = Cantidad[0].InnerText;
+                producto[2] = nDescripcionTipo[0].InnerText;
+                producto[3] = nPrecio[0].InnerText;
+                producto[4] = nMetros[0].InnerText;
+
+            }
+            catch (Exception ex)
+            {
+                string MostrarError = "Mensaje de la excepcion: " + ex.Message.ToString();
+            }
+
+
+
+
+
+
+
+            string json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(producto);
+            return json;
+        }
+
+
+        [WebMethod]
+        public static bool Rest(string producto, string cantidad, string precio, string metros)
+        {
+
+
+            Conexion conn = new Conexion();
+
+
+            DataSet Producto_ = conn.Buscar_Mostrar("Inventario", "Producto" + "= " + producto);
+
+            XmlDocument xDoc = new XmlDocument();
+            xDoc.LoadXml(Producto_.GetXml());
+
+            XmlNodeList _Producto = xDoc.GetElementsByTagName("NewDataSet");
+            XmlNodeList cant = ((XmlElement)_Producto[0]).GetElementsByTagName("Cantidad");
+            XmlNodeList Metros = ((XmlElement)_Producto[0]).GetElementsByTagName("Metros_Cuadrados");
+            XmlNodeList Precio = ((XmlElement)_Producto[0]).GetElementsByTagName("Precio");
+
+            string cantid = cant[0].InnerText;
+            string nPrecio = Precio[0].InnerText;
+            string metros_cuadrados = Metros[0].InnerText;
+
+            if (cantidad == "")
+            {
+                cantidad = "0";
+            }
+            else if (metros == "")
+            {
+                metros = "0";
+            }
+
+            decimal metros1 = Convert.ToDecimal(metros_cuadrados, CultureInfo.CreateSpecificCulture("en-US"));
+            decimal metros2 = Convert.ToDecimal(metros, CultureInfo.CreateSpecificCulture("en-US"));
+
+            
+            if (Convert.ToInt64(cantidad) > Convert.ToInt64(cantid) || metros2 > metros1)
+            {
+                return false;
+            }
+            else
+            {
+                decimal metrostotales = metros1 - metros2;
+                return conn.Modificar("Inventario", "Cantidad =" + (Convert.ToInt64(cantid) - Convert.ToInt64(cantidad)) + ", Precio = " + precio + ", Metros_Cuadrados = " + Convert.ToString( metrostotales).Replace(",","."), "Producto=" + producto);
+            }   
+
+           
+
+        }
+
+
+
+        [WebMethod]
+        public static bool Agregar(string producto, string cantidad, string precio, string metros)
+        {
+
+            Conexion conn = new Conexion();
+
+            if (cantidad == "")
+            {
+                cantidad = "0";
+            }
+            else if (metros == "")
+            {
+                metros = "0";
+            }
+
+
+            try
+            {
+                DataSet Producto_ = conn.Buscar_Mostrar("Inventario", "Producto" + "= " + producto);
+
+                XmlDocument xDoc = new XmlDocument();
+                xDoc.LoadXml(Producto_.GetXml());
+
+                XmlNodeList _Producto = xDoc.GetElementsByTagName("NewDataSet");
+                XmlNodeList cant = ((XmlElement)_Producto[0]).GetElementsByTagName("Cantidad");
+                XmlNodeList metros_cuad = ((XmlElement)_Producto[0]).GetElementsByTagName("Metros_Cuadrados");
+
+
+
+                string metros_cuadrados = metros_cuad[0].InnerText;
+                string cantid = cant[0].InnerText;
+                decimal metros1 = Convert.ToDecimal(metros_cuadrados, CultureInfo.CreateSpecificCulture("en-US"));
+                decimal metros2 = Convert.ToDecimal(metros, CultureInfo.CreateSpecificCulture("en-US"));
+
+                decimal metrostotales = metros1 + metros2;
+                return  conn.Modificar("Inventario", "Cantidad =" + (Convert.ToInt64(cantid) + Convert.ToInt64(cantidad)) + ", Metros_Cuadrados=" + Convert.ToString(metrostotales).Replace(",", "."), "Producto=" + producto);
+                
+
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "Mensaje excepcion" + ex.Message.ToString();
+                return false;
+            }
+            
+        
+
+        }
+
+
+        //ELIMINAR PRODUCTO DE TIENDA
+        [WebMethod]
+
+        public static bool DeleteProd(string id)
+        {
+            Conexion conn = new Conexion();
+
+            int ds = conn.Count("Select count(Producto) from [Inventario] where Producto=\'" + id + "\';");
+
+            if (ds != 0)
+            {
+                return conn.Eliminar("Inventario", "Producto = " + id);
+            }
+            return false;
+        }
+
+
 
 
     }
