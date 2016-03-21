@@ -24,6 +24,7 @@ namespace Proyecto1_Tel.Code
         private bool ConectarServer()
         {
             bool respuesta = false;
+            //JARVIS\SQLEXPRESS
             string cadenaConexion = @"Data Source=(local);Initial Catalog=PROYECT_1;Integrated Security=True";
             try
             {
