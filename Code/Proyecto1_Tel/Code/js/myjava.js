@@ -1,20 +1,5 @@
 ﻿//MOSTRAR MODAL PARA AGREGAR ROL
 
-$(function () {
-    
-    $('#nuevo-rol').on('click', function () {
-        $('#formulario')[0].reset(); //formulario lo inicializa con datos vacios
-        $('#edi').hide(); //escondemos el boton de edicion porque es un nuevo registro
-        $('#reg').show(); //mostramos el boton de registro
-        $('#registra-rol').modal({ //
-            show: true, //mostramos el modal registra producto
-            backdrop: 'static' //hace que no se cierre el modal si le dan clic afuera del mismo.
-        });
-    });
-    
-    
-    
-});
 
 
 //MUESTRA EL MODAL PARA AGREGAR CLIENTE
@@ -32,26 +17,16 @@ $(function () {
     });
 });
 
-//MUESTRA EL MODAL PARA AGREGAR USUARIO
 
-$(function () {
-
-    $('#nuevo-usuario').on('click', function () {
-        $('#formulario-usuario')[0].reset(); //formulario lo inicializa con datos vacios
-        $('#reg').show(); //mostramos el boton de registro
-        $('#edi').hide();//se esconde el boton de editar
-        $('#editar-usuario').modal({ //
-            show: true, //mostramos el modal registra producto
-            backdrop: 'static' //hace que no se cierre el modal si le dan clic afuera del mismo.
-        });
-    });
-});
 
 //MUESTRA EL MODAL PARA AGREGAR PRODUCTO
 
 $(function () {
 
     $('#nuevo-producto').on('click', function () {
+
+
+
         $('#formulario-producto')[0].reset(); //formulario lo inicializa con datos vacios
         $('#reg').show(); //mostramos el boton de registro
         $('#edi').hide();//se esconde el boton de editar

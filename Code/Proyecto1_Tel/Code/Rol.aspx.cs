@@ -55,7 +55,6 @@ namespace Proyecto1_Tel.Code
                             "<tr>" +
                                " <th  align =\"center\">Codigo</th>" +
                                 "<th align =\"center\">Nombre</th>" +
-                                "<th align =\"center\">Acciones</th>" +
                             "</tr>" +
                         "</thead>" + "<tbody>";
 
@@ -63,11 +62,7 @@ namespace Proyecto1_Tel.Code
                 {
                     data += "<tr><td id=\"codigo\" runat=\"server\" align =\"Center\">" + item["Rol"].ToString() +
                         "</td><td>" + item["Nombre"].ToString() + "</td>";
-                    data += " <td>" +
-                                        "<ul class=\"table-controls\">" +
-                                          " <li><a href=\"javascript:Mostrar(" + item["Rol"].ToString() + ")\" id=\"edit\" class=\"tip\" CssClass=\"Edit\" title=\"Editar\"><i class=\"fam-pencil\"></i></a> </li>" +
-                                          "<li><a  href=\"javascript:Eliminar(" + item["Rol"].ToString() + ")\" class=\"tip\" CssClass=\"Elim\" title=\"Eliminar\"><i class=\"fam-cross\"></i></a> </li>" +
-                                    "</td>";
+
                     data += "</tr>";
                 }
 
@@ -81,7 +76,7 @@ namespace Proyecto1_Tel.Code
             return data;
         }
 
-
+/*
 
         [WebMethod]
         public static bool InsertRol(string name)
@@ -154,5 +149,6 @@ namespace Proyecto1_Tel.Code
 
             return respuesta;
         }
+*/    
     }
 }

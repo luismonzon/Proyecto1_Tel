@@ -1,5 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Code/Site1.Master" AutoEventWireup="true" CodeBehind="ClienteMasGasta.aspx.cs" Inherits="Proyecto1_Tel.Code.ClienteMasGasta" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script type="text/javascript">
+            
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
 
@@ -19,9 +22,9 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="foot" runat="server">
-
+    
     <script type="text/javascript">
-
+        
         function VerProductos(id)
         {
             document.getElementById("<% = codigo.ClientID%>").value = id;
@@ -39,12 +42,12 @@
                         show: true, //mostramos el modal registra producto
                         backdrop: 'static' //hace que no se cierre el modal si le dan clic afuera del mismo.
                     });
-
+                    
                     //$('#modal-pago').modal('hide').data('bs.modal', null);
                 }
             });
         }
-
+        
     </script>
-
+  
 </asp:Content>

@@ -13,15 +13,6 @@ namespace Proyecto1_Tel.Code {
     public partial class ClientesDeuda {
         
         /// <summary>
-        /// Control tab_roles.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tab_roles;
-        
-        /// <summary>
         /// Control codigo.
         /// </summary>
         /// <remarks>
@@ -31,21 +22,21 @@ namespace Proyecto1_Tel.Code {
         protected global::System.Web.UI.HtmlControls.HtmlInputText codigo;
         
         /// <summary>
-        /// Control cDeuda.
+        /// Control modalpago.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect cDeuda;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl modalpago;
         
         /// <summary>
-        /// Control cantidad.
+        /// Control tab_roles.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl cantidad;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tab_roles;
     }
 }

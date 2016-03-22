@@ -13,12 +13,21 @@ namespace Proyecto1_Tel.Code {
     public partial class VentaDiaria {
         
         /// <summary>
-        /// Control tab_roles.
+        /// Control codigo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tab_roles;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText codigo;
+        
+        /// <summary>
+        /// Control modaldetalle.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl modaldetalle;
     }
 }

@@ -35,7 +35,7 @@ namespace Proyecto1_Tel.Code
                                             "</div>" + Llenar_Usuarios();
 
 
-
+/*
                 DataSet ds = conexion.Mostrar("Rol", "Rol,Nombre");
 
                 Rol.DataSource = ds;
@@ -43,7 +43,7 @@ namespace Proyecto1_Tel.Code
                 Rol.DataValueField = "Rol";
                 Rol.DataBind();
                 
-                
+ */               
        
             } 
         }
@@ -195,7 +195,121 @@ namespace Proyecto1_Tel.Code
             return false;
         }
 
+        [WebMethod]
 
+        public static string MostrarModal(string id) 
+        {
+            string innerhtml =
+                "<div class=\"modal fade\" id=\"editar-usuario\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\"> \n" +
+                "<div class=\"modal-dialog\"> \n" +
+                "<div class=\"modal-content\"> \n" +
+                "<div class=\"modal-header\"> \n" +
+                "<button type=\"button\" onclick=\"reloadTable();\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button> \n" +
+                "<div class=\"step-title\"> \n" +
+                "<i>R</i> \n" +
+                "<h5>Administrar Usuario</h5> \n" +
+                "<span>Agregar o Editar un Usuario </span> \n" +
+                "</div> \n" +
+                "</div>\n"
+                ;
+            //content del modal
+
+            innerhtml += 
+                "<form id=\"formulario-usuario\" class=\"form-horizontal row-fluid well\"> \n" +
+                "<div class=\"modal-body\"> \n" +
+                "<table border=\"0\" width=\"100%\" > \n" +
+                "<div> \n" +
+                "<div class=\"control-group\"> \n" +
+                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Usuario:</b></label> \n" +
+                "<div class=\"controls\"><input placeholder=\"NickName\" required=\"required\" style=\"font-size: 15px;\" type=\"text\" name=\"nickname\" id=\"nickname\" runat=\"server\" class=\"span12\" /></div> \n" +
+                "</div> \n" +
+                "<div class=\"control-group\"> \n" +
+                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Nombre:</b></label> \n" +
+                "<div class=\"controls\"><input  required=\"required\" style=\"font-size: 13px;\" type=\"text\" placeholder=\"Nombre\" id=\"nombre\" runat=\"server\" /></div> \n" +
+                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Apellid:</b></label> \n" +
+                "<div class=\"controls\"><input  required=\"required\" style=\"font-size: 13px;\" type=\"text\" placeholder=\"Apellido\" id=\"apellido\" runat=\"server\" /></div> \n" +
+                "</div> \n" +
+                "<div class=\"control-group\"> \n" +
+                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*DPI:</b></label> \n" +
+                "<div class=\"controls\"><input placeholder=\"DPI\" required=\"required\" style=\"font-size: 15px;\" type=\"text\" name=\"dpi\" id=\"dpi\" runat=\"server\" class=\"span12\" /></div> \n" +
+                "</div> \n" +
+                "<div class=\"control-group\"> \n" +
+                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Contraseña:</b></label> \n" +
+                "<div class=\"controls\"><input  required=\"required\" style=\"font-size: 13px;\" type=\"text\" placeholder=\"Contraseña\" id=\"password\" runat=\"server\" /></div> \n" +
+                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Repetir Contraseña:</b></label> \n" +
+                "<div class=\"controls\"><input  required=\"required\" style=\"font-size: 13px;\" type=\"text\" placeholder=\"Repetir Contraseña\" id=\"password1\" runat=\"server\" /></div> \n" +
+                "</div> \n" +
+                "<div class=\"control-group\"> \n" +
+                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Rol:</b></label> \n" +
+                "<div class=\"controls\"><select name=\"Rol\" class=\"select\" id=\"Rol\"></select></div> \n" +
+                "</div> \n" +
+                "<tr> \n" +
+                "<td colspan=\"2\"> \n" +
+                "<div id=\"mensaje\"></div> \n" +
+                "<div class=\"alert margin\"> \n" +
+                "<button type=\"button\"  class=\"close\" data-dismiss=\"alert\">×</button> \n" +
+                "Campos Obligatorios (*) \n" +
+                "</div> \n" +
+                "<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" onclick=\"reloadTable();\" id=\"cerrar\">Cerrar</button>\n" +
+                "<button type=\"button\" class=\"btn btn-large btn-success\" onclick=\"AddUser();\" name=\"reg\" id=\"reg\">Registrar</button>\n" +
+                "<button type=\"button\" class=\"btn btn-large btn-warning\" onclick=\"Edit();\" name=\"edi\" id=\"edi\">Editar</button>\n" +
+                "</td> \n" +
+                "</tr> \n" +
+                "</div> \n" +
+                "</table> \n" +
+                "</div> \n"
+                ;
+
+
+            //footer del modal
+            innerhtml += "</div>\n" +
+                "<div class=\"modal-footer\">\n" +
+                "</div>\n" +
+                "</div>\n" +
+                "</div>\n"
+            ;
+
+            return innerhtml;
+        }
+
+        [WebMethod]
+
+        public static string Fill() 
+        {
+            Conexion con = new Conexion();
+
+            DataSet data = con.Mostrar("Rol", "Rol,Nombre");
+
+            XmlDocument xDoc = new XmlDocument();
+            xDoc.LoadXml(data.GetXml());
+
+            XmlNodeList _Deudas = xDoc.GetElementsByTagName("NewDataSet");
+
+
+            string deuda = "";
+            XmlNodeList lista = ((XmlElement)_Deudas[0]).GetElementsByTagName("Rol_x002C_Nombre");
+            int cant = lista.Count;
+            for (int i = 0; i < cant; i++)
+            {
+
+                XmlNodeList key = ((XmlElement)lista[i]).GetElementsByTagName("Rol");
+                XmlNodeList value = ((XmlElement)lista[i]).GetElementsByTagName("Nombre");
+
+                deuda += "{ \"key\":\"" + key[0].InnerText + "\",\"value\":\"" + value[0].InnerText + "\"}";
+                if (i != cant - 1)
+                {
+                    deuda += ",";
+                }
+
+            }
+
+            deuda = "[" + deuda + "]";
+            //string json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(deuda);
+
+            return deuda;
+        }
 
     }
+
+
 }

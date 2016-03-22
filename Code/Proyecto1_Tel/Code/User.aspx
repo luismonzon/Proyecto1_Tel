@@ -8,6 +8,11 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
+        <!-- MODAL -->
+    <input runat="server" type="text" required="required" readonly="readonly" name="codigo" id="codigo"  style="visibility:hidden; height:5px;"/>
+        <div id="modalusuario" runat="server">
+        
+        </div>
     <!--- TODO EL CONTENIDO DE LA PAGINA--->    
 			   
      <h5 class="widget-name"><i class="icon-columns"></i>Usuarios</h5>
@@ -23,87 +28,6 @@
         <!-- /some controlы -->
 
 
-     <!-- MODAL PARA EDITAR USUARIO-->
-    <div class="modal fade" id="editar-usuario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <div class="step-title">
-                            	<i>R</i>
-					    		<h5>Administrar Usuario</h5>
-					    		<span>Agregar o Editar un Usuario</span>
-				</div>
-
-
-              
-            </div>
-            <form id="formulario-usuario" name="formulario-usuario" class="form-horizontal row-fluid well">
-            <div class="modal-body">
-				<table border="0" width="100%">
-               		<tr>
-                        <td style="visibility:hidden; height:5px;" >ID </td>
-                        <td colspan="2"><input runat="server" type="text" required="required" readonly="readonly" id="codigo" name="codigo"  style="visibility:hidden; height:5px;"/></td>
-
-               		</tr> 
-
-                        <div>
-	                            <div class="control-group">
-	                                <label class="control-label" style="font-size: 15px;" ><b>*Usuario:</b></label>
-	                                <div class="controls"><input placeholder="NickName" required="required" style="font-size: 15px;" type="text" name="nickname" id="nickname" runat="server" class="span12" /></div>
-	                            </div>
-	                            <div class="control-group">
-	                                <label class="control-label" style="font-size: 15px;" ><b>*Nombre:</b></label>
-	                                <div class="controls"><input required="required" style="font-size: 15px;" placeholder="Nombre" type="text" class="span12" id="nombre" runat="server" /></div>
-                                     <label class="control-label" style="font-size: 15px;" ><b>*Apellido:</b></label>
-	                                <div class="controls"><input required="required" style="font-size: 15px;" id="apellido" placeholder="Apellido" runat="server" type="text" class="span12" /></div>
-	                            </div>
-                                <div class="control-group">
-	                                <label class="control-label" style="font-size: 15px;" ><b>DPI:</b></label>
-	                                <div class="controls"><input placeholder="DPI" style="font-size: 15px;" id="dpi" runat="server" type="text" class="span12" /></div>
-	                            </div>
-                                <div class="control-group">
-	                                <label class="control-label" style="font-size: 15px;"><b>*Contraseña:</b></label>
-	                                <div class="controls"><input required="required" style="font-size: 15px;" placeholder="Password" id="password" runat="server" type="password" class="span12" /></div>
-                                     <label class="control-label" style="font-size: 15px;"><b>*Repetir Contraseña:</b></label>
-	                                <div class="controls"><input required="required" style="font-size: 15px;" placeholder="Repetir Contraseña" id="password1" runat="server" type="password" class="span12" /></div>
-	                            </div>
-                                <div class="control-group">
-	                                <label class="control-label" style="font-size: 15px;"><b>*Rol:</b></label>
-                                     <div class="controls">
-	                                            <select name="Rol" class="select" runat="server" id="Rol">
-
-	                                            </select>
-	                                 </div>
-	                        </div>
-                    <tr>
-                    	<td colspan="2">
-                        	<div  id="mensaje"></div>
-                        </td>
-                    </tr>
-                    <tr>
-                    	<td colspan="2">
-                        	<div class="alert margin">
-	                            <button type="button" class="close" data-dismiss="alert">×</button>
-	                                Campos Obligatorios (*)
-	                        </div>
-	                   </td>
-                    </tr>
-                    
-                </table>
-            </div>
-            
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-            	<input type="submit" value="Registrar" class="btn btn-large btn-success " name="reg" id="reg"/>
-                <input type="submit" value="Editar" class="btn btn-large btn-warning"  id="edi"/>
-            </div>
-            </form>
-          </div>
-        </div>
-    
-
-</div>
 
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="foot" runat="server">
@@ -113,58 +37,126 @@
 
      <script type="text/javascript">
 
+         function FillCombo() {
+             $.ajax({
+                 type: 'POST',
+                 url: 'User.aspx/Fill',
+                 contentType: 'application/json; charset=utf-8',
+                 dataType: 'json',
+                 success: function (response) {
+                     var data = JSON.parse(response.d);
+                     var $select = $('#Rol');
+                     var options = '';
+                     for (var i = 0; i < data.length; i++) {
+                         options += '<option value="' + data[i].key + '">' + data[i].value + '</option>';
+                     }
+                     $select.html(options);
+                 }
+             });
+         }
+
+        $('#nuevo-usuario').on('click', function () {
+            $.ajax({
+                type: 'POST',
+                url: 'User.aspx/MostrarModal',
+                data: JSON.stringify({ id: "" }),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (response) {
+                    //se escribe el modal
+                    var $modal = $('#ContentPlaceHolder1_modalusuario');
+                    $modal.html(response.d);
+                    $('#editar-usuario').on('show.bs.modal', function () {
+                        $('.modal .modal-body').css('overflow-y', 'auto');
+                        $('.modal .modal-body').css('max-height', $(window).height() * 0.7);
+                        $('.modal .modal-body').css('height', $(window).height() * 0.7);
+                    });
+
+                    //MUESTRA EL MODAL PARA AGREGAR USUARIO
+                    FillCombo();
+                    $('#formulario-usuario')[0].reset(); //formulario lo inicializa con datos vacios
+                    $('#edi').hide(); //escondemos el boton de edicion porque es un nuevo registro
+                    $('#reg').show(); //mostramos el boton de registro
+                    $('#editar-usuario').modal({ //
+                        show: true, //mostramos el modal registra producto
+                        backdrop: 'static' //hace que no se cierre el modal si le dan clic afuera del mismo.
+                    });
+                }
+            });
+
+        });
          function Mostrar_usuario(id) {
              document.getElementById("<% = codigo.ClientID%>").value = id;
              var identi = document.getElementById("<% = codigo.ClientID%>").value;
-
-             $('#reg').hide(); //escondemos el boton de registro
-             $('#edi').show(); //escondemos el boton de edicion porque es un nuevo registro
-             $('#reg').hide(); //mostramos el boton de registro
-             $('#editar-usuario').modal({ //
-                 show: true, //mostramos el modal registra producto
-                 backdrop: 'static' //hace que no se cierre el modal si le dan clic afuera del mismo.
-             });
-
              $.ajax({
                  type: 'POST',
-                 url: 'User.aspx/BuscarUsuario',
+                 url: 'User.aspx/MostrarModal',
                  data: JSON.stringify({ id: identi }),
                  contentType: 'application/json; charset=utf-8',
                  dataType: 'json',
                  success: function (response) {
-                     var usuario = JSON.parse(response.d);
-                     var NickUsuario = usuario[0];
-                     var NombreUsuario = usuario[1];
-                     var RolUsuario = usuario[2];
-                     var ApellidoUsuario = usuario[3];
-                     var DpiUsuario = usuario[4];
-                     var PassUsuario = usuario[5];
+                     //se escribe el modal
+                     var $modal = $('#ContentPlaceHolder1_modalusuario');
+                     $modal.html(response.d);
+                     $('#editar-usuario').on('show.bs.modal', function () {
+                         $('.modal .modal-body').css('overflow-y', 'auto');
+                         $('.modal .modal-body').css('max-height', $(window).height() * 0.7);
+                         $('.modal .modal-body').css('height', $(window).height() * 0.7);
+                     });
+                     FillCombo();
+                     //Acciones Anteriores
+                     $('#reg').hide(); //escondemos el boton de registro
+                     $('#edi').show(); //escondemos el boton de edicion porque es un nuevo registro
+                     $('#reg').hide(); //mostramos el boton de registro
+                     $('#editar-usuario').modal({ //
+                         show: true, //mostramos el modal registra producto
+                         backdrop: 'static' //hace que no se cierre el modal si le dan clic afuera del mismo.
+                     });
 
-                     document.getElementById("<% = nombre.ClientID %>").value = NombreUsuario;
-                     document.getElementById("<% = nickname.ClientID %>").value = NickUsuario;
-                     document.getElementById("<% = apellido.ClientID %>").value = ApellidoUsuario;
-                     document.getElementById("<% = dpi.ClientID %>").value = DpiUsuario;
-                     document.getElementById("<% = Rol.ClientID %>").value = RolUsuario;
-                     document.getElementById("<% = password.ClientID %>").value = PassUsuario;
-                     document.getElementById("<% = password1.ClientID %>").value = PassUsuario;
+                     $.ajax({
+                         type: 'POST',
+                         url: 'User.aspx/BuscarUsuario',
+                         data: JSON.stringify({ id: identi }),
+                         contentType: 'application/json; charset=utf-8',
+                         dataType: 'json',
+                         success: function (response) {
+                             var usuario = JSON.parse(response.d);
+                             var NickUsuario = usuario[0];
+                             var NombreUsuario = usuario[1];
+                             var RolUsuario = usuario[2];
+                             var ApellidoUsuario = usuario[3];
+                             var DpiUsuario = usuario[4];
+                             var PassUsuario = usuario[5];
 
+                             document.getElementById("nombre").value = NombreUsuario;
+                             document.getElementById("nickname").value = NickUsuario;
+                             document.getElementById("apellido").value = ApellidoUsuario;
+                             document.getElementById("dpi").value = DpiUsuario;
+                             document.getElementById("Rol").value = RolUsuario;
+                             document.getElementById("password").value = PassUsuario;
+                             document.getElementById("password1").value = PassUsuario;
+
+                         }
+                    });
                  }
              });
+
+
+             
              
          }
 
          //Editar Usuario
+         function Edit(){
 
-         $('#edi').on('click', function () {
-
-             var nick = document.getElementById("<%=nickname.ClientID%>").value;
+             var nick = document.getElementById("nickname").value;
              var id = document.getElementById("<%=codigo.ClientID%>").value;
-             var pass = document.getElementById("<%=password.ClientID%>").value;
-             var rol = document.getElementById("<% = Rol.ClientID %>").value;
-             var nombre = document.getElementById("<% = nombre.ClientID %>").value;;
-             var apellido = document.getElementById("<% = apellido.ClientID %>").value;;
-             var dpi = document.getElementById("<% = dpi.ClientID %>").value;
-             var nContrasena1 = document.getElementById("<% = password1.ClientID %>").value;
+             var pass = document.getElementById("password").value;
+             var rol = document.getElementById("Rol").value;
+             var nombre = document.getElementById("nombre").value;;
+             var apellido = document.getElementById("apellido").value;;
+             var dpi = document.getElementById("dpi").value;
+             var nContrasena1 = document.getElementById("password1").value;
 
              if (pass == nContrasena1) {
                  if (nick != "" && pass != "" && rol != "" && nombre != "" && apellido != "") {
@@ -203,7 +195,7 @@
              }
              return false;
 
-         });
+         }
 
              //--------- ELIMINAR CLIENTE -->
              function Eliminar_Usuario(id) {
@@ -217,6 +209,7 @@
                          success: function (response) {
                              if (response.d == true) {
                                  alert("Usuario Eliminado Exitosamente");
+                                 reloadTable();
                              } else {
                                  alert("El Usuario No Pudo Ser Eliminado");
                              }
@@ -227,17 +220,16 @@
              }
 
              //AGREGAR USUARIO
+             function AddUser() {
 
-             $('#reg').on('click', function () {
-
-                 var nNick = document.getElementById("<%=nickname.ClientID%>").value;
-                 var nNombre = document.getElementById("<%=nombre.ClientID%>").value;
-                 var nApellido = document.getElementById("<%=apellido.ClientID%>").value;
-                 var nDPI = document.getElementById("<%=dpi.ClientID%>").value;
-                 var nContrasena = document.getElementById("<%=password.ClientID%>").value;
-                 var nContrasena1 = document.getElementById("<%=password1.ClientID%>").value;
-                 var nRol = document.getElementById("<%=Rol.ClientID%>").value;
-
+                 var nNick = document.getElementById("nickname").value;
+                 var nNombre = document.getElementById("nombre").value;
+                 var nApellido = document.getElementById("apellido").value;
+                 var nDPI = document.getElementById("dpi").value;
+                 var nContrasena = document.getElementById("password").value;
+                 var nContrasena1 = document.getElementById("password1").value;
+                 var nRol = document.getElementById("Rol").value;
+                 alert(".");
                  if (nContrasena == nContrasena1) {
                      if (nNick != "" && nNombre != "" && nApellido != "" && nRol != "") {
 
@@ -277,7 +269,7 @@
                  return false;
 
 
-             });
+             }
 
 
        

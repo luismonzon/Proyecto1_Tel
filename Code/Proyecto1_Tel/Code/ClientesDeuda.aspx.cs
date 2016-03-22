@@ -21,18 +21,19 @@ namespace Proyecto1_Tel.Code
         }
 
         protected void Cargar() {
-            tab_roles.InnerHtml = "    <div class=\"navbar\"> " + "<div class=\"navbar-inner\">" +
-                                                     "<h6>Clientes</h6>" +
-                                                        "  <div class=\"nav pull-right\">" +
-                                                            "<a href=\"#\" class=\"dropdown-toggle just-icon\" data-toggle=\"dropdown\"><i class=\"font-cog\"></i></a>" +
-                                                                "<ul class=\"dropdown-menu pull-right\">" +
-                                                                    "<li><a href=\"#\"><i class=\"font-heart\"></i>Favorite it</a></li>" +
-                                                                    "<li><a href=\"#\"><i class=\"font-refresh\"></i>Reload page</a></li>" +
-                                                                     "<li><a href=\"#\"><i class=\"font-link\"></i>Attach something</a></li>" +
-                                                                "</ul>" +
-                                                          "</div>" +
-                                                  "</div>" +
-                                            "</div>" + LLenar_Tabla();
+            tab_roles.InnerHtml = "<div class=\"navbar\"> " + 
+                                        "<div class=\"navbar-inner\">" +
+                                                    "<h6>Clientes</h6>" +
+                                                    "<div class=\"nav pull-right\">" +
+                                                        "<a href=\"#\" class=\"dropdown-toggle just-icon\" data-toggle=\"dropdown\"><i class=\"font-cog\"></i></a>" +
+                                                            "<ul class=\"dropdown-menu pull-right\">" +
+                                                                "<li><a href=\"#\"><i class=\"font-heart\"></i>Favorite it</a></li>" +
+                                                                "<li><a href=\"#\"><i class=\"font-refresh\"></i>Reload page</a></li>" +
+                                                                    "<li><a href=\"#\"><i class=\"font-link\"></i>Attach something</a></li>" +
+                                                            "</ul>" +
+                                                        "</div>" +
+                                                "</div>" +
+                                        "</div>" + LLenar_Tabla();
         }
 
         [WebMethod]
@@ -176,6 +177,134 @@ namespace Proyecto1_Tel.Code
             return con.Crear(" Pago ", " Abono , Deuda , Fecha ", " " + Cantidad + " , " + id + " , CONVERT (date, GETDATE()) ");
 
         }
-    
+
+        [WebMethod]
+
+        public static string MostrarModal(string id)
+        {
+            //head del modal
+            string innerhtml = "<div class=\"modal fade\" id=\"modal-pago\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\"> \n" +
+                "<div class=\"modal-dialog\"> \n" +
+                "<div class=\"modal-content\"> \n" +
+                "<div class=\"modal-header\"> \n" +
+                "<button type=\"button\" onclick=\"reloadTable();\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button> \n" +
+                "<div class=\"step-title\"> \n" +
+                "<i>P</i> \n" +
+                "<h5>Abonar Pago</h5> \n" +
+                "<span>Abonar pago a la deuda del cliente </span> \n" +
+                "</div> \n" +
+                "</div>\n"
+                ;
+            //content del modal
+
+            innerhtml += "<form id=\"formulario-pago\" class=\"form-horizontal row-fluid well\"> \n"+
+                "<div class=\"modal-body\"> \n" +
+                "<table border=\"0\" width=\"100%\" > \n" +
+                "<tr> \n" +
+                "</tr> \n" +
+                "<div> \n" +
+                "<div class=\"control-group\"> \n" +
+                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Deuda:</b></label> \n" +
+                "<select class=\"select2\"  runat=\"server\" required=\"required\" id=\"cDeuda\"> \n" +
+                "</select> \n" +
+                "</div> \n" +
+                "<div class=\"control-group\"> \n" +
+                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Cantidad:</b></label> \n" +
+                "<div class=\"controls\"><input  required=\"required\" style=\"font-size: 13px;\" type=\"number\"  id=\"cantidad\" runat=\"server\" /></div> \n" +
+                "</div> \n" +
+                "<tr> \n" +
+                "<td colspan=\"2\"> \n" +
+                "<div id=\"mensaje\"></div> \n" +
+                "<div class=\"alert margin\"> \n" +
+                "<button type=\"button\"  class=\"close\" data-dismiss=\"alert\">×</button> \n" +
+                "Campos Obligatorios (*) \n" +
+                "</div> \n" +
+                "</td> \n" +
+                "</tr> \n" +
+                "</div> \n" +
+                "</table> \n" +
+                "</div> \n"
+                ;
+
+
+            //footer del modal
+            innerhtml += "</div>\n" +
+            "<div class=\"modal-footer\">\n" +
+                "<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" onclick=\"reloadTable();\" id=\"cerrar\">Cerrar</button>\n" +
+                "<button type=\"button\" class=\"btn btn-success\" onclick=\"RealizarAbono();\" id=\"abonar\">Abonar</button>\n"+
+            "</div>\n" +
+            "</div>\n" +
+            "</div>\n"
+            ;
+
+            return innerhtml;
+        }
+        /*
+         
+        <div class="modal fade" id="modal-pago" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" onclick="reloadTable();" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                
+                <div class="step-title">
+                            	<i>P</i>
+					    		<h5>Abonar Pago</h5>
+					    		<span>Abonar pago a la deuda del cliente</span>
+				</div>
+                        	
+            </div>
+            <form id=\"formulario-pago\" class=\"form-horizontal row-fluid well\">
+            <div class=\"modal-body\">
+				<table border=\"0\" width=\"100%\" >
+                    <tr>
+                         <td style=\"visibility:hidden; height:5px;\" >ID</td>
+                        <td colspan=\"2\"><input runat=\"server\" type=\"text\" required=\"required\" readonly=\"readonly\" id=\"codigo\" name=\"codigo\"  style=\"visibility:hidden; height:5px;\"/></td>
+
+                    </tr>
+                    
+                        <div>
+	                            <div class=\"control-group\">
+	                                <label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Deuda:</b></label>
+                                    <select class=\"select2\"  runat=\"server\" required=\"required\" id=\"cDeuda\">
+                                    </select>
+	                             
+	                            </div>
+
+	                            <div class=\"control-group\">
+	                                <label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Cantidad:</b></label>
+	                                <div class=\"controls\"><input  required=\"required\" style=\"font-size: 13px;\" type=\"number\"  id=\"cantidad\" runat=\"server\" /></div>
+	                                </div>
+                    <tr>
+                    	<td colspan=\"2\">
+                            <div id=\"mensaje\"></div>
+                            <div class=\"alert margin\">
+                                <button type=\"button\"  class=\"close\" data-dismiss=\"alert\">×</button>
+	                                Campos Obligatorios (*)
+
+                            </div>
+                            
+                            
+                        </td>
+                    </tr>
+                </div>
+
+                    </table>
+                 </div>
+                
+                    
+                </form>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="reloadTable();" id="cerrar">Cerrar</button>
+            	<input type="submit" value="Abonar" class="btn btn-success" id="abonar"/>
+            </div>
+            
+          </div>
+        </div>
+         
+         */
+
     }
 }
