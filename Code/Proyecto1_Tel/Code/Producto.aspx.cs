@@ -47,12 +47,12 @@ namespace Proyecto1_Tel.Code
                                                    "</div>" +
                                              "</div>" + Llenar_Productos();
 
-                 DataSet ds = conexion.Mostrar("Tipo", "Tipo,Descripcion");
+                 //DataSet ds = conexion.Mostrar("Tipo", "Tipo,Descripcion");
 
-                 tipopro.DataSource = ds;
+                 /*tipopro.DataSource = ds;
                  tipopro.DataTextField = "Descripcion";
                  tipopro.DataValueField = "Tipo";
-                 tipopro.DataBind();
+                 tipopro.DataBind();*/
                 
              }
          }
@@ -167,11 +167,6 @@ namespace Proyecto1_Tel.Code
             producto[6] = nDescripcionTipo[0].InnerText;
 
 
-
-
-
-
-
             string json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(producto);
             return json;
         }
@@ -258,6 +253,118 @@ namespace Proyecto1_Tel.Code
             return false;
         }
 
+
+        [WebMethod]
+
+        public static string MostrarModal(string id)
+        {
+            string innerhtml =
+                "<div class=\"modal fade\" id=\"Modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\"> \n" +
+                "<div class=\"modal-dialog\"> \n" +
+                "<div class=\"modal-content\"> \n" +
+                "<div class=\"modal-header\"> \n" +
+                "<button type=\"button\" onclick=\"reloadTable();\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button> \n" +
+                "<div class=\"step-title\"> \n" +
+                "<i>R</i> \n" +
+                "<h5>Administrar Producto</h5> \n" +
+                "<span>Agregar o Editar un Producto </span> \n" +
+                "</div> \n" +
+                "</div>\n"
+                ;
+            //content del modal
+
+            innerhtml +=
+                "<form id=\"formulario\" class=\"form-horizontal row-fluid well\"> \n" +
+                "<div class=\"modal-body\"> \n" +
+                "<table border=\"0\" width=\"100%\" > \n" +
+                "<div> \n" +
+                "<div class=\"control-group\"> \n" +
+                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Abreviatura:</b></label> \n" +
+                "<div class=\"controls\"><input placeholder=\"Abreviatura\" required=\"required\" style=\"font-size: 15px;\" type=\"text\" name=\"abreviatura\" id=\"abreviatura\" runat=\"server\" class=\"span12\" /></div> \n" +
+                "</div> \n" +
+                "<div class=\"control-group\"> \n" +
+                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Descripcion:</b></label> \n" +
+                "<div class=\"controls\"><input  required=\"required\" style=\"font-size: 13px;\" type=\"text\" placeholder=\"Descripcion\" id=\"descripcion\" name=\"descripcion\" runat=\"server\" class=\"span12\"/></div> \n" +
+                "</div> \n" +
+                "<div class=\"control-group\"> \n" +
+                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Producto:</b></label> \n" +
+                "<div class=\"controls\"><select data-placeholder=\"Buscar Producto...\" name=\"producto-select\" tabindex=\"2\" class=\"select\" onChange=\"cambio()\" runat=\"server\" required=\"required\" id=\"tipopro\"></select></div> \n" +
+                "</div> \n" +
+                "<div class=\"control-group\"> \n" +
+                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Marca:</b></label> \n" +
+                "<div class=\"controls\"><input  required=\"required\" style=\"font-size: 13px;\" type=\"text\" placeholder=\"Marca\" id=\"marca\" name=\"marca\" runat=\"server\" class=\"span12\"/></div> \n" +
+                "</div> \n" +
+                "<div class=\"control-group\" id=\"divporc\"> \n" +
+                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Porcentaje:</b></label> \n" +
+                "<div class=\"controls\"><input  required=\"required\" style=\"font-size: 13px;\" type=\"text\" data-mask=\"99%\" id=\"porc\" runat=\"server\" /></div> \n" +
+                "</div> \n" +
+                "<div class=\"control-group\" id=\"divtam\"> \n" +
+                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Tamaño:</b></label> \n" +
+                "<div class=\"controls\"><select id=\"tamano\" runat=\"server\" class=\"select\" tabindex=\"2\"> <option value=\"pequeno\">Pequeño</option> <option value=\"grande\">Grande</option> </select></div> \n" +
+                "</div> \n" +
+                "<tr> \n" +
+                "<td colspan=\"2\"> \n" +
+                "<div id=\"mensaje\"></div> \n" +
+                "<div class=\"alert margin\"> \n" +
+                "<button type=\"button\"  class=\"close\" data-dismiss=\"alert\">×</button> \n" +
+                "Campos Obligatorios (*) \n" +
+                "</div> \n" +
+                "<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" onclick=\"reloadTable();\" id=\"cerrar\">Cerrar</button>\n" +
+                "<button type=\"button\" class=\"btn btn-large btn-success\" onclick=\"AddProduct();\" name=\"reg\" id=\"reg\">Registrar</button>\n" +
+                "<button type=\"button\" class=\"btn btn-large btn-warning\" onclick=\"Edit();\" name=\"edi\" id=\"edi\">Editar</button>\n" +
+                "</td> \n" +
+                "</tr> \n" +
+                "</div> \n" +
+                "</table> \n" +
+                "</div> \n"
+                ;
+
+
+            //footer del modal
+            innerhtml += "</div>\n" +
+                "</div>\n" +
+                "</div>\n"
+            ;
+
+            return innerhtml;
+        }
+
+        [WebMethod]
+
+        public static string Fill()
+        {
+            Conexion con = new Conexion();
+
+            DataSet data = con.Mostrar("Tipo", "Tipo,Descripcion");
+
+            XmlDocument xDoc = new XmlDocument();
+            xDoc.LoadXml(data.GetXml());
+
+            XmlNodeList _Deudas = xDoc.GetElementsByTagName("NewDataSet");
+
+
+            string deuda = "";
+            XmlNodeList lista = ((XmlElement)_Deudas[0]).GetElementsByTagName("Tipo_x002C_Descripcion");
+            int cant = lista.Count;
+            for (int i = 0; i < cant; i++)
+            {
+
+                XmlNodeList key = ((XmlElement)lista[i]).GetElementsByTagName("Tipo");
+                XmlNodeList value = ((XmlElement)lista[i]).GetElementsByTagName("Descripcion");
+
+                deuda += "{ \"key\":\"" + key[0].InnerText + "\",\"value\":\"" + value[0].InnerText + "\"}";
+                if (i != cant - 1)
+                {
+                    deuda += ",";
+                }
+
+            }
+
+            deuda = "[" + deuda + "]";
+            //string json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(deuda);
+
+            return deuda;
+        }
 
 
     }

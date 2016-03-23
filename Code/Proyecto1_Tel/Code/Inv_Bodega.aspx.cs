@@ -51,16 +51,20 @@ namespace Proyecto1_Tel.Code
                                                   "</div>" +
                                             "</div>" + Llenar_Productos();
 
+
+                
+
+            }
+        }
+        /*
                 DataSet ds = conexion.Mostrar("Producto", "Producto,Abreviatura");
 
                 producto.DataSource = ds;
                 producto.DataTextField = "Abreviatura";
                 producto.DataValueField = "Producto";
                 producto.DataBind();
-                
-
-            }
-        }
+         
+         */
 
         protected String Llenar_Productos()
         {
@@ -260,6 +264,119 @@ namespace Proyecto1_Tel.Code
             return false;
         }
 
+        [WebMethod]
+
+        public static string MostrarModal(string id)
+        {
+            string innerhtml =
+                "<div class=\"modal fade\" id=\"Modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\"> \n" +
+                "<div class=\"modal-dialog\"> \n" +
+                "<div class=\"modal-content\"> \n" +
+                "<div class=\"modal-header\"> \n" +
+                "<button type=\"button\" onclick=\"reloadTable();\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button> \n" +
+                "<div class=\"step-title\"> \n" +
+                "<i>R</i> \n" +
+                "<h5>Administrar Producto en Bodega</h5> \n" +
+                "<span>Agregar o Editar Productos en Bodega</span> \n" +
+                "</div> \n" +
+                "</div>\n"
+                ;
+            //content del modal
+
+            innerhtml +=
+                "<form id=\"formulario\" class=\"form-horizontal row-fluid well\"> \n" +
+                "<div class=\"modal-body\"> \n" +
+                "<table border=\"0\" width=\"100%\" > \n" +
+                "<div> \n" +
+                "<div class=\"control-group\"> \n" +
+                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Producto:</b></label> \n" +
+                "<div class=\"controls\"><select data-placeholder=\"Buscar Producto...\" name=\"producto-select\" class=\"select\" onChange=\"cambio();\" runat=\"server\" required=\"required\"  id=\"producto\"></select></div> \n" +
+                "</div> \n" +
+                "<div class=\"control-group\"> \n" +
+                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Descripcion:</b></label> \n" +
+                "<div class=\"controls\"><input readonly=\"readonly\" style=\"font-size: 13px;\" type=\"text\" placeholder=\"Descripcion\" id=\"descripcion\" name=\"descripcion\" runat=\"server\" class=\"span12\"/></div> \n" +
+                "</div> \n" +
+                "<div class=\"control-group\" id=\"divcantidad\"> \n" +
+                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Cantidad Disponible:</b></label> \n" +
+                "<div class=\"controls\"><input  readonly=\"readonly\" required=\"required\" style=\"font-size: 13px;\" type=\"number\"  id=\"cantdisponible\" runat=\"server\" /></div> \n" +
+                "</div> \n" +
+                "<div class=\"control-group\" > \n" +
+                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Cantidad:</b></label> \n" +
+                "<div class=\"controls\"><input  required=\"required\" style=\"font-size: 13px;\" placeholder=\"Cantidad\" type=\"number\"  id=\"cantidad\" runat=\"server\" /></div> \n" +
+                "</div> \n" +
+                "<div id=\"radio\"> \n" +
+                "<label class=\"radio\">\n" +
+                "<input type=\"radio\" name=\"opcion\" id=\"agregar\" class=\"styled\" value=\"1\" checked=\"checked\">\n" +
+                "Agregar\n" +
+                "</label>\n" +
+                "<label class=\"radio\">\n" +
+                "<input type=\"radio\" name=\"opcion\" id=\"quitar\"  class=\"styled\" value=\"2\">\n" +
+                "Quitar\n" +
+                "</label>\n" +
+                "</div>\n" +
+                "<tr> \n" +
+                "<td colspan=\"2\"> \n" +
+                "<div id=\"mensaje\"></div> \n" +
+                "<div class=\"alert margin\"> \n" +
+                "<button type=\"button\"  class=\"close\" data-dismiss=\"alert\">×</button> \n" +
+                "Campos Obligatorios (*) \n" +
+                "</div> \n" +
+                "<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" onclick=\"reloadTable();\" id=\"cerrar\">Cerrar</button>\n" +
+                "<button type=\"button\" class=\"btn btn-large btn-success\" onclick=\"AddProduct();\" name=\"reg\" id=\"reg\">Registrar</button>\n" +
+                "<button type=\"button\" class=\"btn btn-large btn-warning\" onclick=\"Edit();\" name=\"edi\" id=\"edi\">Editar</button>\n" +
+                "</td> \n" +
+                "</tr> \n" +
+                "</div> \n" +
+                "</table> \n" +
+                "</div> \n"
+                ;
+
+
+            //footer del modal
+            innerhtml += "</div>\n" +
+                "</div>\n" +
+                "</div>\n"
+            ;
+
+            return innerhtml;
+        }
+
+        [WebMethod]
+
+        public static string Fill()
+        {
+            Conexion con = new Conexion();
+
+            DataSet data = con.Mostrar("Producto", "Producto,Abreviatura");
+
+            XmlDocument xDoc = new XmlDocument();
+            xDoc.LoadXml(data.GetXml());
+
+            XmlNodeList _Deudas = xDoc.GetElementsByTagName("NewDataSet");
+
+
+            string deuda = "";
+            XmlNodeList lista = ((XmlElement)_Deudas[0]).GetElementsByTagName("Producto_x002C_Abreviatura");
+            int cant = lista.Count;
+            for (int i = 0; i < cant; i++)
+            {
+
+                XmlNodeList key = ((XmlElement)lista[i]).GetElementsByTagName("Producto");
+                XmlNodeList value = ((XmlElement)lista[i]).GetElementsByTagName("Abreviatura");
+
+                deuda += "{ \"key\":\"" + key[0].InnerText + "\",\"value\":\"" + value[0].InnerText + "\"}";
+                if (i != cant - 1)
+                {
+                    deuda += ",";
+                }
+
+            }
+
+            deuda = "[" + deuda + "]";
+            //string json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(deuda);
+
+            return deuda;
+        }
 
 
 

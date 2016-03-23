@@ -9,6 +9,14 @@
 
 
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+    <input runat="server" type="text" required="required" readonly="readonly" name="codigo" id="codigo"  style="visibility:hidden; height:5px;"/>
+    <div id="divmodal" runat="server">
+            <!-- MODAL PARA CLIENTES-->
+
+    </div>
+
+
 <!--- TODO EL CONTENIDO DE LA PAGINA--->    
     <h5 class="widget-name"><i class="icon-columns"></i>Clientes</h5>
     
@@ -22,82 +30,6 @@
         </div>
         <!-- /some controlы -->
 
-    <!-- MODAL PARA CLIENTES-->
-    <div class="modal fade" id="editar-cliente" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                
-                <div class="step-title">
-                            	<i>C</i>
-					    		<h5>Administrar Cliente</h5>
-					    		<span>Agregar o Editar un cliente</span>
-				</div>
-                        	
-            </div>
-            <form id="formulario-cliente" class="form-horizontal row-fluid well">
-            <div class="modal-body">
-				<table border="0" width="100%" >
-                    <tr>
-                         <td style="visibility:hidden; height:5px;" >ID </td>
-                        <td colspan="2"><input runat="server" type="text" required="required" readonly="readonly" id="codigo" name="codigo"  style="visibility:hidden; height:5px;"/></td>
-
-                    </tr>
-                    
-                        <div>
-	                            <div class="control-group">
-	                                <label class="control-label" style="font-size: 15px;" ><b>*Nombre:</b></label>
-	                                <div class="controls"><input required="required" placeholder="Nombres" style="font-size: 15px;" type="text" name="username" id="nombre" runat="server" class="span12" /></div>
-	                            </div>
-	                            <div class="control-group">
-	                                <label class="control-label" style="font-size: 15px;" ><b>Apellido:</b></label>
-	                                <div class="controls"><input style="font-size: 15px;" placeholder="Apellidos" type="text" class="span12" id="apellido" runat="server" /></div>
-	                            </div>
-	                            <div class="control-group">
-	                                <label class="control-label" style="font-size: 15px;" ><b>Nit:</b></label>
-	                                <div class="controls"><input style="font-size: 15px;" id="nit" placeholder="NIT" runat="server" type="text" class="span12" /></div>
-	                            </div>
-                                <div class="control-group">
-	                                <label class="control-label" style="font-size: 15px;" ><b>Direccion:</b></label>
-	                                <div class="controls"><input placeholder="Direccion" style="font-size: 15px;" id="direccion" runat="server" type="text" class="span12" /></div>
-	                            </div>
-                                <div class="control-group">
-	                                <label class="control-label" style="font-size: 15px;"><b>Telefono:</b></label>
-	                                <div class="controls"><input style="font-size:  15px;" placeholder="Telefono" data-mask="9999-9999" id="telefono" runat="server" type="text" class="span12" /></div>
-	                            </div>
-	                        </div>
-                
-                    <tr>
-                    	<td colspan="2">
-                            <div id="mensaje"></div>
-                            <div class="alert margin">
-                                <button type="button" class="close" data-dismiss="alert">×</button>
-	                                Campos Obligatorios (*)
-
-                            </div>
-                            
-                            
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-            	<input type="submit" value="Registrar" class="btn btn-success" id="reg"/>
-                <input type="submit" value="Editar" class="btn btn-warning"  id="edi"/>
-            </div>
-            </form>
-          </div>
-        </div>
-      </div>
-   
-    <div>
-        <h1 style="font-family: Calibri; font-size: 50px"></h1>
-    </div>
-    <div>
-    </div>
 
 <!---FINALIZA HTML--->
 </asp:Content>
@@ -112,55 +44,110 @@
 
      <script type="text/javascript">
 
+
+         //MUESTRA EL MODAL PARA AGREGAR CLIENTE
+
+         $('#nuevo-cliente').on('click', function () { // nuevo-cliente es el id del boton para agregar al cliente
+             $.ajax({
+                 type: 'POST',
+                 url: 'Cliente.aspx/MostrarModal',
+                 data: JSON.stringify({ id: "" }),
+                 contentType: 'application/json; charset=utf-8',
+                 dataType: 'json',
+                 success: function (response) {
+                     //se escribe el modal
+                     var $modal = $('#ContentPlaceHolder1_divmodal');
+                     $modal.html(response.d);
+                     $('#Modal').on('show.bs.modal', function () {
+                         $('.modal .modal-body').css('overflow-y', 'auto');
+                         $('.modal .modal-body').css('max-height', $(window).height() * 0.7);
+                         $('.modal .modal-body').css('height', $(window).height() * 0.7);
+                     });
+
+                     //Modal
+                     $('#formulario')[0].reset(); //formulario lo inicializa con datos vacios
+                     $('#pro').val('Registro'); //crea nuestra caja de procesos y se agrega el valor del registro
+                     $('#reg').show(); //mostramos el boton de registro
+                     $('#edi').hide();//se esconde el boton de editar
+                     $('#Modal').modal({ //
+                         show: true, //mostramos el modal registra producto
+                         //backdrop: 'static' //hace que no se cierre el modal si le dan clic afuera del mismo.
+                     });
+                 }
+             });
+
+
+        });
+
+
+
+
+
          function Mostrar_cliente(id) {
              document.getElementById("<% = codigo.ClientID%>").value = id;
 
              var identi = document.getElementById("<% = codigo.ClientID%>").value;
 
-             $('#edi').show(); //escondemos el boton de edicion porque es un nuevo registro
-             $('#reg').hide(); //mostramos el boton de registro
-             $('#editar-cliente').modal({ //
-                 show: true, //mostramos el modal registra producto
-                 backdrop: 'static' //hace que no se cierre el modal si le dan clic afuera del mismo.
-             });
-
              $.ajax({
                  type: 'POST',
-                 url: 'Cliente.aspx/BuscarCliente',
-                 data: JSON.stringify({ id: identi }),
+                 url: 'Cliente.aspx/MostrarModal',
+                 data: JSON.stringify({ id: "" }),
                  contentType: 'application/json; charset=utf-8',
                  dataType: 'json',
                  success: function (response) {
-                     
-                     var cliente = JSON.parse(response.d);
-                     var NombreCliente = cliente[0];
-                     var NitCliente = cliente[1];
-                     var ApellCliente = cliente[2];
-                     var DireCliente = cliente[3];
-                     var TeleCliente = cliente[4];
+                     //se escribe el modal
+                     var $modal = $('#ContentPlaceHolder1_divmodal');
+                     $modal.html(response.d);
+                     $('#Modal').on('show.bs.modal', function () {
+                         $('.modal .modal-body').css('overflow-y', 'auto');
+                         $('.modal .modal-body').css('max-height', $(window).height() * 0.7);
+                         $('.modal .modal-body').css('height', $(window).height() * 0.7);
+                     });
+
+                     $('#edi').show(); //escondemos el boton de edicion porque es un nuevo registro
+                     $('#reg').hide(); //mostramos el boton de registro
+                     $('#Modal').modal({ //
+                         show: true, //mostramos el modal registra producto
+                         backdrop: 'static' //hace que no se cierre el modal si le dan clic afuera del mismo.
+                     });
+
+                     $.ajax({
+                         type: 'POST',
+                         url: 'Cliente.aspx/BuscarCliente',
+                         data: JSON.stringify({ id: identi }),
+                         contentType: 'application/json; charset=utf-8',
+                         dataType: 'json',
+                         success: function (response) {
+
+                             var cliente = JSON.parse(response.d);
+                             var NombreCliente = cliente[0];
+                             var NitCliente = cliente[1];
+                             var ApellCliente = cliente[2];
+                             var DireCliente = cliente[3];
+                             var TeleCliente = cliente[4];
 
 
-                     document.getElementById("<% = nombre.ClientID%>").value = NombreCliente;
-                     document.getElementById("<% = nit.ClientID %>").value = NitCliente;
-                     document.getElementById("<% = apellido.ClientID %>").value = ApellCliente;
-                     document.getElementById("<% = direccion.ClientID %>").value = DireCliente;
-                     document.getElementById("<% = telefono.ClientID %>").value = TeleCliente;
-                     
+                             document.getElementById("nombre").value = NombreCliente;
+                             document.getElementById("nit").value = NitCliente;
+                             document.getElementById("apellido").value = ApellCliente;
+                             document.getElementById("direccion").value = DireCliente;
+                             document.getElementById("telefono").value = TeleCliente;
+
+                         }
+
+                     });
                  }
-
-
-
              });
          }
 
-         $('#edi').on('click', function () {
+         function Edit() {
 
-             var Nombre = document.getElementById("<%=nombre.ClientID%>").value;
-             var Id = document.getElementById("<%=codigo.ClientID%>").value;
-             var Nit = document.getElementById("<%=nit.ClientID%>").value;
-             var Apellido = document.getElementById("<% = apellido.ClientID %>").value;
-             var Direccion = document.getElementById("<% = direccion.ClientID %>").value;
-             var Telefono = document.getElementById("<% = telefono.ClientID %>").value;
+             var Nombre = document.getElementById("nombre").value;
+             var Id = document.getElementById("codigo").value;
+             var Nit = document.getElementById("nit").value;
+             var Apellido = document.getElementById("apellido").value;
+             var Direccion = document.getElementById("direccion").value;
+             var Telefono = document.getElementById("telefono").value;
                     
               if (Nombre != "") {
 
@@ -192,7 +179,7 @@
               }
               
              return false;
-         });
+         }
 
         
          
@@ -228,13 +215,13 @@
 
         //AGREGAR CLIENTE
 
-        $('#reg').on('click', function () {
+        function AddClient() {
 
-            var nNombre = document.getElementById("<%=nombre.ClientID%>").value;
-            var nNit = document.getElementById("<%=nit.ClientID%>").value;
-            var nDireccion = document.getElementById("<%=direccion.ClientID%>").value;
-            var nTelefono = document.getElementById("<%=telefono.ClientID%>").value;
-            var nApellido = document.getElementById("<%=apellido.ClientID%>").value;
+            var nNombre = document.getElementById("nombre").value;
+            var nNit = document.getElementById("nit").value;
+            var nDireccion = document.getElementById("direccion").value;
+            var nTelefono = document.getElementById("telefono").value;
+            var nApellido = document.getElementById("apellido").value;
            
 
 
@@ -269,7 +256,7 @@
             return false;
 
 
-        });
+        }
 
 
         

@@ -13,15 +13,6 @@ namespace Proyecto1_Tel.Code {
     public partial class Inv_Bodega {
         
         /// <summary>
-        /// Control tab_bodega.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tab_bodega;
-        
-        /// <summary>
         /// Control codigo.
         /// </summary>
         /// <remarks>
@@ -31,39 +22,21 @@ namespace Proyecto1_Tel.Code {
         protected global::System.Web.UI.HtmlControls.HtmlInputText codigo;
         
         /// <summary>
-        /// Control producto.
+        /// Control divmodal.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect producto;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divmodal;
         
         /// <summary>
-        /// Control descripcion.
+        /// Control tab_bodega.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText descripcion;
-        
-        /// <summary>
-        /// Control cantdisponible.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl cantdisponible;
-        
-        /// <summary>
-        /// Control cantidad.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl cantidad;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tab_bodega;
     }
 }
