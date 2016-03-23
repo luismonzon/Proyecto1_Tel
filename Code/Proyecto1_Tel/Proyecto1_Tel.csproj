@@ -127,7 +127,9 @@
     <Compile Include="Code\ClientesDeuda.aspx.designer.cs">
       <DependentUpon>ClientesDeuda.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Code\Conexion.cs" />
+    <Compile Include="Code\Conexion.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Code\Inicio.aspx.cs">
       <DependentUpon>Inicio.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -177,6 +179,7 @@
     <Compile Include="Code\Rol.aspx.designer.cs">
       <DependentUpon>Rol.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Code\Sesion.cs" />
     <Compile Include="Code\User.aspx.cs">
       <DependentUpon>User.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -184,6 +187,7 @@
     <Compile Include="Code\User.aspx.designer.cs">
       <DependentUpon>User.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Code\Validacion.cs" />
     <Compile Include="Code\Venta.aspx.cs">
       <DependentUpon>Venta.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
