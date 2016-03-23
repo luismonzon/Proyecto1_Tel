@@ -22,11 +22,24 @@ namespace Proyecto1_Tel.Code
 
             if (!IsPostBack)
             {
+                if (Session["Usuario"] != null)
+                {
+                    if (!Validacion.validar_sesion((Sesion)Session["Usuario"], "Inv_Bodega"))
+                    {
+                        Response.Redirect("~/Index.aspx");
+                    }
+                }
+                else
+                {
+                    Response.Redirect("~/Index.aspx");
+                }
+
+               
 
                 conexion = new Conexion();
 
                 tab_bodega.InnerHtml = "    <div class=\"navbar\"> " + "<div class=\"navbar-inner\">" +
-                                                     "<h6>Productos</h6>" +
+                                                     "<h6>Productos en Bodega</h6>" +
                                                         "  <div class=\"nav pull-right\">" +
                                                             "<a href=\"#\" class=\"dropdown-toggle just-icon\" data-toggle=\"dropdown\"><i class=\"font-cog\"></i></a>" +
                                                                 "<ul class=\"dropdown-menu pull-right\">" +
@@ -54,22 +67,41 @@ namespace Proyecto1_Tel.Code
             DataSet productos = conexion.Mostrar("Producto P, Tipo T , Bodega B Where P.Producto = B.Producto  and T.Tipo = P.Tipo ", " P.PRODUCTO, P.ABREVIATURA, P.DESCRIPCION, P.PORCENTAJE," +
              "P.ANCHO, P.MARCA, T.DESCRIPCION NOMBRETIPO, B.CANTIDAD CANTIDAD, B.BODEGA");
             String data = "";
+            string rol = (string)Session["Rol"];
             if (productos.Tables[0].Rows.Count > 0)
             {
+                if (rol == "1")
+                {
+                    data = "<div class=\"table-overflow\"> " +
+                                       "<table class=\"table table-striped table-bordered\" id=\"data-table\">" +
+                                           "<thead>" +
+                                               "<tr>" +
+                                                   "<th  align =\"center\">Abreviatura</th>" +
+                                                  " <th  align =\"center\">Descripcion</th>" +
+                                                  " <th  align =\"center\">Tipo</th>" +
+                                                   " <th  align =\"center\">Marca</th>" +
+                                                   "<th align =\"center\">Cantidad Disponible</th>" +
+                                                   "<th align =\"center\">Acciones</th>" +
+                                               "</tr>" +
+                                           "</thead>" + "<tbody>";
+                }
+                else
+                {
+                    data = "<div class=\"table-overflow\"> " +
+                   "<table class=\"table table-striped table-bordered\" id=\"data-table\">" +
+                       "<thead>" +
+                           "<tr>" +
+                               "<th  align =\"center\">Abreviatura</th>" +
+                              " <th  align =\"center\">Descripcion</th>" +
+                              " <th  align =\"center\">Tipo</th>" +
+                               " <th  align =\"center\">Marca</th>" +
+                             "<th align =\"center\">Cantidad Disponible</th>" +
+                             //  "<th align =\"center\">Acciones</th>" +
+                           "</tr>" +
+                       "</thead>" + "<tbody>";
 
-                data = "<div class=\"table-overflow\"> " +
-                    "<table class=\"table table-striped table-bordered\" id=\"data-table\">" +
-                        "<thead>" +
-                            "<tr>" +
-                                "<th  align =\"center\">Abreviatura</th>" +
-                               " <th  align =\"center\">Descripcion</th>" +
-                               " <th  align =\"center\">Tipo</th>" +
-                                " <th  align =\"center\">Marca</th>" +
-                                "<th align =\"center\">Cantidad Disponible</th>" +
-                                "<th align =\"center\">Acciones</th>" +
-                            "</tr>" +
-                        "</thead>" + "<tbody>";
-
+                }
+               
                 foreach (DataRow item in productos.Tables[0].Rows)
                 {
                     data += "<tr>" +
@@ -78,11 +110,18 @@ namespace Proyecto1_Tel.Code
                         "<td id=\"nombretipo\" runat=\"server\" align =\"Center\">" + item["NOMBRETIPO"].ToString() + "</td>" +
                         "<td id=\"marc\" runat=\"server\" align =\"Center\">" + item["MARCA"].ToString() + "</td>" +
                         "<td id=\"cant\" runat=\"server\" align =\"Center\">" + item["CANTIDAD"].ToString() + "</td> ";
-                    data += " <td>" +
+
+
+                    if (rol == "1")
+                    {
+                        data += " <td>" +
                                         "<ul class=\"table-controls\">" +
                                           " <li><a href=\"javascript:Editar_Bodega(" + item["PRODUCTO"].ToString() + ")\" id=\"edit\" class=\"tip\" CssClass=\"Edit\" title=\"Editar\"><i class=\"fam-pencil\"></i></a> </li>" +
                                           " <li><a href=\"javascript:Eliminar_Bodega(" + item["PRODUCTO"].ToString() + ")\" id=\"edit\" class=\"tip\" CssClass=\"Edit\" title=\"Eliminar\"><i class=\"fam-cross\"></i></a> </li>" +
                                     "</td>";
+                    }
+                    
+                    
                     data += "</tr>";
                 }
 

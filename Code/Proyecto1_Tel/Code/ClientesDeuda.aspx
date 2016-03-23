@@ -19,7 +19,7 @@
         
         </div>
     
-    <h5 class="widget-name"><i class="icon-columns"></i>Clientes</h5>
+    <h5 class="widget-name"><i class="icon-columns"></i>Clientes Deudores</h5>
         <!-- Some controlы -->
         <div class="widget" id="tab_roles" runat="server">
         </div>

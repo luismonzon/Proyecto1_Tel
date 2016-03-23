@@ -20,8 +20,27 @@ namespace Proyecto1_Tel.Code
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            conexion = new Conexion();
-            Load();
+            if (!IsPostBack)
+            {
+
+
+                    if (Session["Usuario"] != null)
+                    {
+                        if (!Validacion.validar_sesion((Sesion)Session["Usuario"], "Roles"))
+                        {
+                            Response.Redirect("~/Index.aspx");
+                        }
+                    }
+                    else
+                    {
+                        Response.Redirect("~/Index.aspx");
+                    }
+
+                    conexion = new Conexion();
+                    Load();
+
+            }
+
         }
 
         public void Load(){
@@ -48,22 +67,28 @@ namespace Proyecto1_Tel.Code
             String data = "No hay Roles Disponibles";
             if (roles.Tables.Count>0)
             {
+               
 
-                data = "<div class=\"table-overflow\"> " +
-                    "<table class=\"table table-striped table-bordered\" id=\"data-table\">" +
-                        "<thead>" +
-                            "<tr>" +
-                               " <th  align =\"center\">Codigo</th>" +
-                                "<th align =\"center\">Nombre</th>" +
-                            "</tr>" +
-                        "</thead>" + "<tbody>";
+                    data = "<div class=\"table-overflow\"> " +
+                                        "<table class=\"table table-striped table-bordered\" id=\"data-table\">" +
+                                            "<thead>" +
+                                                "<tr>" +
+                                                   " <th  align =\"center\">Codigo</th>" +
+                                                    "<th align =\"center\">Nombre</th>" +
+                                                   /* "<th align =\"center\">Acciones</th>" +*/
+                                                "</tr>" +
+                                            "</thead>" + "<tbody>";
 
+                    
+                
                 foreach (DataRow item in roles.Tables[0].Rows)
                 {
                     data += "<tr><td id=\"codigo\" runat=\"server\" align =\"Center\">" + item["Rol"].ToString() +
                         "</td><td>" + item["Nombre"].ToString() + "</td>";
-
+                    
+                       
                     data += "</tr>";
+                    
                 }
 
 
@@ -76,7 +101,7 @@ namespace Proyecto1_Tel.Code
             return data;
         }
 
-/*
+
 
         [WebMethod]
         public static bool InsertRol(string name)
@@ -149,6 +174,5 @@ namespace Proyecto1_Tel.Code
 
             return respuesta;
         }
-*/    
     }
 }

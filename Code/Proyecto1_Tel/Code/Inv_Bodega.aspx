@@ -8,7 +8,7 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     
-	    <h4 class="widget-name"><i class="icon-columns"></i>Bodega</h4>
+	    <h4 class="widget-name"><i class="icon-columns"></i>Inventario Bodega</h4>
     <div>
         <div><a style="font-size: 13px" id="nuevo-bodega" onclick="cambio();" class="btn btn-success"> Agregar Producto a Bodega <i class="icon-plus-sign" >&nbsp;</i></a></div>
     </div>

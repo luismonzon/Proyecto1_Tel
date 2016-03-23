@@ -13,9 +13,27 @@ namespace Proyecto1_Tel.Code
     {
         Conexion conn;
         protected void Page_Load(object sender, EventArgs e)
+
         {
-            conn = new Conexion();
-            Load();
+            if (!IsPostBack)
+            {
+                if (Session["Usuario"] != null)
+                {
+                    if (!Validacion.validar_sesion((Sesion)Session["Usuario"], "ProductosInventario"))
+                    {
+                        Response.Redirect("~/Index.aspx");
+                    }
+                }
+                else
+                {
+                    Response.Redirect("~/Index.aspx");
+                }
+
+               
+
+                conn = new Conexion();
+                Load();
+            }
         }
 
         protected void Load() {

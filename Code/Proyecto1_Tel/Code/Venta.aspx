@@ -3,7 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
     
-        <li><a href="Rol.aspx">Roles</a></li>    
+        <li><a href="Venta.aspx">Ventas</a></li>    
 
 
 </asp:Content>

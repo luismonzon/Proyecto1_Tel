@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="Proyecto1_Tel.Code.Site11" %>
+
+<!DOCTYPE html>
+
 <html lang="en">
 	<!-- Espacio para HEAD -->
     
@@ -65,7 +68,7 @@
     
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
-
+    
 
 
 </head>
@@ -74,19 +77,20 @@
 	<!-- Fixed top -->
 	<div id="top">
 		<div class="fixed">
-			<a href="index.html" title="" class="logo"></a>
-			<ul class="top-menu">
+            <form runat="server">
+			<a href="Inicio.aspx" title="" class="logo"><img src="/img/Loguito.png" width=140/></a>
+			    <ul class="top-menu">
 				<li><a class="fullview"></a></li>
-				<li class="dropdown">
-					<a class="user-menu" data-toggle="dropdown"><span>  Administrador   <b class="caret"></b></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="#" title=""><i class="icon-user"></i>Profile</a></li>
-						<li><a href="#" title=""><i class="icon-inbox"></i>Messages<span class="badge badge-info">9</span></a></li>
-						<li><a href="#" title=""><i class="icon-cog"></i>Settings</a></li>
-						<li><a href="#" title=""><i class="icon-remove"></i>Logout</a></li>
-					</ul>
+				
+                    <li class="dropdown">
+				         	<a class="user-menu"  data-toggle="dropdown"><span> Bienvenido: <asp:Label ID="Label1" runat="server" ></asp:Label>  <b class="caret"></b></span></a>
+                    <ul class="dropdown-menu">
+                        <i class="icon-remove"></i>
+                        <asp:LinkButton ID="lnkbtnlogout"  OnClick="lnkbtnlogout_Click" runat="server">Cerrar Sesion</asp:LinkButton>
+					</ul>   
 				</li>
 			</ul>
+            </form>
 		</div>
 	</div>
 	<!-- /fixed top -->
@@ -104,59 +108,9 @@
 		            <li><a href="#stuff" title=""><i class="icon-cogs"></i></a></li>
 		        </ul>
 
-		        <div id="general">
+		        <div id="general" runat="server">
+                <!--- AQUI ESTA EL MENU PARA CADA UNO DE LOS ROLES --->
 
-			      
-
-			        
-				    <!-- Main navigation -->
-			        <ul class="navigation widget">
-			            <li class="active"><a href="../index.aspx" title=""><i class="icon-home"></i>Inicio</a></li>
-			            <li><a href="#" title="" class="expand"><i class="icon-reorder"></i>Administrar<strong>4</strong></a>
-			                <ul>
-			                    <li><a href="Rol.aspx" title="Roles">Roles</a></li>
-			                    <li><a href="User.aspx" title="Usuarios">Usuarios</a></li>
-                                <li><a href="Cliente.aspx" title="Clientes">Clientes</a></li>
-			                    <li><a href="Producto.aspx" title="Productos">Productos</a></li>
-                                 <li><a  title="Inventario" class="expand">Inventario</a>
-					                <ul>
-					                    <li><a href="Inv_tienda.aspx" title="Tienda">Tienda</a></li>
-					                    <li><a href="Inv_Bodega.aspx" title="Bodega">Bodega</a></li>
-					                </ul>
-			                    </li>
-			                </ul>
-			            </li>
-			            <li><a href="#" title="" class="expand"><i class="icon-tasks"></i>Reportes<strong>3</strong></a>
-			                <ul>
-			                    <li>
-                                    <a href="components.html" title="" class="expand">Ventas</a>
-                                    <ul>
-					                    <li><a href="VentaDiaria.aspx" title="">Diaria</a></li>
-					                    <li><a href="#" title="">Semanal</a></li>
-					                    <li><a href="#" title="">Mensual</a></li>
-					                    <li><a href="#" title="">Anual</a></li>
-					                </ul>
-			                    </li>
-			                    <li>
-                                    <a href="content_grid.html" title="" class="expand">Clientes</a>
-                                    <ul>
-					                    <li><a href="ClientesDeuda.aspx" title="">Clientes con Credito</a></li>
-					                    <li><a href="ClienteMasGasta.aspx" title="">Que Mas Compran</a></li>
-					                </ul>
-			                    </li>
-			                    <li>
-                                    <a href="blank.html" title="" class="expand">Productos</a>
-                                    <ul>
-					                    <li><a href="ProductosInventario.aspx" title="">Inventario</a></li>
-					                    <li><a href="ProductosMasVenden.aspx" title="">Mas Vendido</a></li>
-					                </ul>
-			                    </li>
-			                </ul>
-			            </li>
-			            <li><a href="charts.html" title=""><i class="icon-signal"></i>Charts &amp; graphs</a></li>
-			            
-			        </ul>
-			        <!-- /main navigation -->
 
 		        </div>
 
@@ -193,7 +147,7 @@
                  <!-- Breadcrumbs line -->
 			    <div class="crumbs">
 		            <ul id="breadcrumbs" class="breadcrumb"> 
-		                <li><a href="../index.aspx">Inicio</a></li>
+		                <li><a href="Inicio.aspx" >Inicio</a></li>
                         <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
                             </asp:ContentPlaceHolder>
 		            
@@ -213,24 +167,13 @@
 			    	<div class="page-title">
 				    	<h5 style="font-size: 22px;">Proteccion Solar</h5>
 				    	<span style="font-size: 13px;">LA TORRE</span>
-			    	</div>
-
-			    	<ul class="page-stats">
-			    		<li>
-			    			<div class="showcase">
-			    				<span>Ventas Semanales</span>
-			    				<h2>2,504</h2>
-			    			</div>
-			    			<div id="total-visits" class="chart">10,14,20,45,23,41,22,31,19,12, 28, 21, 24, 20</div>
-			    		</li>
-			    		<li>
-			    			<div class="showcase">
-			    				<span>Ganancias Diarias</span>
-			    				<h2>Q. 16,290</h2>
-			    			</div>
-			    			<div id="balance" class="chart">10,14,8,45,23,41,22,31,19,12, 28, 21, 24, 20</div>
-			    		</li>
-			    	</ul>
+			    	    
+                    </div>
+                    <ul class="page-stats">
+			    	    <img src="/img/Logo.png" width="500" />
+                    </ul>
+			    	
+			    	
 			    </div>
 			    <!-- /page header -->
                     
@@ -254,7 +197,10 @@
 		
 	</div>
 	<!-- /footer -->
-    
-    	<asp:ContentPlaceHolder ID="foot" runat="server"></asp:ContentPlaceHolder>
+   
+    	<asp:ContentPlaceHolder ID="foot" runat="server">
+
+
+    	</asp:ContentPlaceHolder>
 </body>
 </html>

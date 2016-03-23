@@ -20,9 +20,27 @@ namespace Proyecto1_Tel.Code
         Conexion conexion;
         protected void Page_Load(object sender, EventArgs e)
         {
-            conexion = new Conexion();
 
-            tab_clientes.InnerHtml = "    <div class=\"navbar\"> " + "<div class=\"navbar-inner\">" +
+        
+            
+            if (!IsPostBack)
+            {
+
+
+                    if (Session["Usuario"] != null)
+                    {
+                        if (!Validacion.validar_sesion((Sesion)Session["Usuario"], "Cliente"))
+                        {
+                            Response.Redirect("~/Index.aspx");
+                        }
+                    }
+                    else
+                    {
+                        Response.Redirect("~/Index.aspx");
+                    }
+
+                    conexion = new Conexion();
+                     tab_clientes.InnerHtml = "    <div class=\"navbar\"> " + "<div class=\"navbar-inner\">" +
                                                  "<h6>Clientes</h6>" +
                                                     "  <div class=\"nav pull-right\">" +
                                                         "<a href=\"#\" class=\"dropdown-toggle just-icon\" data-toggle=\"dropdown\"><i class=\"font-cog\"></i></a>" +
@@ -35,18 +53,24 @@ namespace Proyecto1_Tel.Code
                                               "</div>" +
                                         "</div>" + Llenar_Clientes();
 
+            }
 
         }
+
+        
 
         protected String Llenar_Clientes()
         {
 
             DataSet clientes = conexion.Mostrar("Cliente ", " * ");
             String data = "No hay Clientes Disponibles";
+            String rol = (String)Session["Rol"];
+
             if (clientes.Tables.Count>0)
             {
-
-                data = "<div class=\"table-overflow\"> " +
+                if (rol == "1")
+                {
+                    data = "<div class=\"table-overflow\"> " +
                     "<table class=\"table table-striped table-bordered\" id=\"data-table\">" +
                         "<thead>" +
                             "<tr>" +
@@ -59,18 +83,41 @@ namespace Proyecto1_Tel.Code
                                 "<th align =\"center\">Acciones</th>" +
                             "</tr>" +
                         "</thead>" + "<tbody>";
+                }
+                else
+                {
+                    data = "<div class=\"table-overflow\"> " +
+                   "<table class=\"table table-striped table-bordered\" id=\"data-table\">" +
+                       "<thead>" +
+                           "<tr>" +
+                               "<th  align =\"center\">Codigo Cliente</th>" +
+                              " <th  align =\"center\">Nombre</th>" +
+                              " <th  align =\"center\">Apellido</th>" +
+                               "<th align =\"center\">N.I.T.</th>" +
+                               " <th  align =\"center\">Direccion</th>" +
+                               " <th  align =\"center\">Telefono</th>" +
+                              // "<th align =\"center\">Acciones</th>" + SE ELIMINA LA COLUMNA ACCIONES
+                           "</tr>" +
+                       "</thead>" + "<tbody>";
 
+                }
+                
                 foreach (DataRow item in clientes.Tables[0].Rows)
                 {
                     data += "<tr><td id=\"codigo\" runat=\"server\" align =\"Center\">" + item["Cliente"].ToString() +
                         "</td><td id=\"nombre\" runat=\"server\" align =\"Center\" >" + item["Nombre"].ToString() + "</td><td id=\"apellido\" runat=\"server\" align =\"Center\">" + item["Apellido"].ToString() +
                     "</td><td id=\"nit\" runat=\"server\" align =\"Center\" >" + item["Nit"].ToString() + "</td><td id=\"direccion\" runat=\"server\" align =\"Center\">" + item["Direccion"].ToString() +
                     "<td id=\"telefono\" runat=\"server\" align =\"Center\">" + item["Telefono"].ToString() + "</td>";
+
+                    if (rol == "1")
+                    {
                         data += " <td>" +
                                         "<ul class=\"table-controls\">" +
                                           " <li><a href=\"javascript:Mostrar_cliente(" + item["Cliente"].ToString() + ")\" id=\"edit\" class=\"tip\" CssClass=\"Edit\" title=\"Editar\"><i class=\"fam-pencil\"></i></a> </li>" +
                                           "<li><a  href=\"javascript:Eliminar_Cliente(" + item["Cliente"].ToString() + ")\" class=\"tip\" CssClass=\"Elim\" title=\"Eliminar\"><i class=\"fam-cross\"></i></a> </li>" +
                                     "</td>";
+
+                    }
                     data += "</tr>";
                 }
 

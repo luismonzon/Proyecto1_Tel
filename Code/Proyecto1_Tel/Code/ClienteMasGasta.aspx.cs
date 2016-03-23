@@ -15,14 +15,34 @@ namespace Proyecto1_Tel.Code
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            conn = new Conexion();
-            Cargar();
+            if (!IsPostBack)
+            {
+                if (Session["Usuario"] != null)
+                {
+                    if (!Validacion.validar_sesion((Sesion)Session["Usuario"], "ClienteMasGasta"))
+                    {
+                        Response.Redirect("~/Index.aspx");
+                    }
+                }
+                else
+                {
+                    Response.Redirect("~/Index.aspx");
+                }
+
+                conn = new Conexion();
+                Cargar();
+            }
+
+         
         }
 
         private void Cargar()
         {
+
+
+
             tab_roles.InnerHtml = "    <div class=\"navbar\"> " + "<div class=\"navbar-inner\">" +
-                                "<h6>Clientes</h6>" +
+                                "<h6>Mejores Clientes</h6>" +
                                 "  <div class=\"nav pull-right\">" +
                                     "<a href=\"#\" class=\"dropdown-toggle just-icon\" data-toggle=\"dropdown\"><i class=\"font-cog\"></i></a>" +
                                         "<ul class=\"dropdown-menu pull-right\">" +

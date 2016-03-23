@@ -20,10 +20,23 @@ namespace Proyecto1_Tel.Code
             if (!IsPostBack)
             {
 
+                if (Session["Usuario"] != null)
+                {
+                    if (!Validacion.validar_sesion((Sesion)Session["Usuario"], "Inv_tienda"))
+                    {
+                        Response.Redirect("~/Index.aspx");
+                    }
+                }
+                else
+                {
+                    Response.Redirect("~/Index.aspx");
+                }
+
+               
                 conexion = new Conexion();
 
                 tab_tienda.InnerHtml = "    <div class=\"navbar\"> " + "<div class=\"navbar-inner\">" +
-                                                     "<h6>Productos</h6>" +
+                                                     "<h6>Productos en Tienda</h6>" +
                                                         "  <div class=\"nav pull-right\">" +
                                                             "<a href=\"#\" class=\"dropdown-toggle just-icon\" data-toggle=\"dropdown\"><i class=\"font-cog\"></i></a>" +
                                                                 "<ul class=\"dropdown-menu pull-right\">" +
@@ -54,10 +67,12 @@ namespace Proyecto1_Tel.Code
             DataSet productos = conexion.Mostrar("Producto P, Inventario I, TIPO T Where P.Producto = I.Producto AND P.Tipo = T.Tipo ", " P.PRODUCTO, P.ABREVIATURA, P.DESCRIPCION, P.PORCENTAJE," +
              "P.ANCHO, P.MARCA, T.DESCRIPCION NOMBRETIPO, I.SUCURSAL SUCURSAL, I.PRECIO PRECIO, I.CANTIDAD CANTIDAD, I.METROS_CUADRADOS METROS");
             String data = "No hay Productos Disponibles";
+            string rol = (string)Session["Rol"];
             if (productos.Tables[0].Rows.Count > 0 )
             {
-
-                data = "<div class=\"table-overflow\"> " +
+                if (rol == "1")
+                {
+                    data = "<div class=\"table-overflow\"> " +
                     "<table class=\"table table-striped table-bordered\" id=\"data-table\">" +
                         "<thead>" +
                             "<tr>" +
@@ -72,6 +87,25 @@ namespace Proyecto1_Tel.Code
                             "</tr>" +
                         "</thead>" + "<tbody>";
 
+                }
+                else
+                {
+                    data = "<div class=\"table-overflow\"> " +
+                    "<table class=\"table table-striped table-bordered\" id=\"data-table\">" +
+                        "<thead>" +
+                            "<tr>" +
+                                "<th  align =\"center\">Abreviatura</th>" +
+                               " <th  align =\"center\">Descripcion</th>" +
+                               " <th  align =\"center\">Tipo</th>" +
+                                " <th  align =\"center\">Marca</th>" +
+                                "<th align =\"center\">Cantidad Inventario</th>" +
+                                "<th align =\"center\">Metros Disponibles</th>" +
+                                "<th align =\"center\">Precio Q.: Unidad / Metro Cuadrado</th>" +
+                            "</tr>" +
+                        "</thead>" + "<tbody>";
+
+                }
+                
                 foreach (DataRow item in productos.Tables[0].Rows)
                 {
                     data += "<tr>" +
@@ -82,11 +116,16 @@ namespace Proyecto1_Tel.Code
                         "<td id=\"marc\" runat=\"server\" align =\"Center\">" + item["CANTIDAD"].ToString() + "</td>" +
                         "<td id=\"marc\" runat=\"server\" align =\"Center\">" + item["METROS"].ToString() + "</td>" +
                         "<td id=\"cant\" runat=\"server\" align =\"Center\">" + item["PRECIO"].ToString() + "</td> ";
-                    data += " <td>" +
-                                        "<ul class=\"table-controls\">" +
+
+                    if (rol == "1")
+                    {
+                        data += " <td>" +
+                                    "<ul class=\"table-controls\">" +
                                           " <li><a href=\"javascript:Editar_Tienda(" + item["PRODUCTO"].ToString() + ")\" id=\"edit\" class=\"tip\" CssClass=\"Edit\" title=\"Editar\"><i class=\"fam-pencil\"></i></a> </li>" +
                                           " <li><a href=\"javascript:Eliminar_Tienda(" + item["PRODUCTO"].ToString() + ")\" id=\"edit\" class=\"tip\" CssClass=\"Edit\" title=\"Eliminar\"><i class=\"fam-cross\"></i></a> </li>" +
                                     "</td>";
+                    }
+                    
                     data += "</tr>";
                 }
 

@@ -4,11 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Data;
 using System.Data.SqlClient;
+using System.Xml;
 
 
 namespace Proyecto1_Tel.Code
 {
-    public class Conexion
+    public class Conexion : System.Web.UI.Page
     {
         SqlConnection conexion = new SqlConnection();
 
@@ -281,7 +282,7 @@ namespace Proyecto1_Tel.Code
                     System.Data.SqlClient.SqlCommand cmd;
                     cmd = new System.Data.SqlClient.SqlCommand();
                     cmd.Connection = conexion;
-                    cmd.CommandText = "Select count(Usuario) as val From Usuario Where Nombre = @User and Contrasenia=@pass";
+                    cmd.CommandText = "Select count(Usuario) as val From Usuario Where NickName = @User and Contrasenia=@pass";
 
                     System.Data.SqlClient.SqlParameter param;
                     param = new System.Data.SqlClient.SqlParameter();
@@ -306,9 +307,29 @@ namespace Proyecto1_Tel.Code
                     while (reader.Read())
                     {
                         int var = reader.GetInt32(0);
-                            if (var > 0)
+                        if (var > 0)
+                        {
+
+                        
+                                Conexion conn = new Conexion();
+                                DataSet Usuario_ = conn.Buscar_Mostrar("Usuario", "NickName" + "= '" + user + "'");
+                                XmlDocument xDoc = new XmlDocument();
+                                xDoc.LoadXml(Usuario_.GetXml());
+                                XmlNodeList _Usuario = xDoc.GetElementsByTagName("NewDataSet");
+                                XmlNodeList rol = ((XmlElement)_Usuario[0]).GetElementsByTagName("Rol");
+                                XmlNodeList usuario = ((XmlElement)_Usuario[0]).GetElementsByTagName("Usuario");
+                                XmlNodeList nick = ((XmlElement)_Usuario[0]).GetElementsByTagName("NickName");
+                                
+                                
+
+                                Session["Usuario"] = new Sesion(user, rol[0].InnerText);
+                                Session["Rol"] = rol[0].InnerText;
+                                Session["IdUser"] = usuario[0].InnerText;
+                                Session["NickName"] = nick[0].InnerText;
+                           
                                 val = true;
                            
+                        }
                     }
                 }
             }
@@ -327,12 +348,6 @@ namespace Proyecto1_Tel.Code
 
 
         
-
+        }
     }
 
-
-
-
-
-
-}

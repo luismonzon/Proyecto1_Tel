@@ -13,23 +13,39 @@ namespace Proyecto1_Tel.Code
         Conexion conexion;
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            conexion = new Conexion();
-            DataSet Productos = conexion.Mostrar("Producto", "producto, abreviatura");
-            String html = "<select data-placeholder=\"Agregar producto\" class=\"select\" tabindex=\"2\">";
-            html+="<option value=\"\"></option> ";
-
-            foreach (DataRow item in Productos.Tables[0].Rows)
+            if (!IsPostBack)
             {
-                html += "<option value=\""+item["producto"]+"\">"+item["Abreviatura"]+"</option> ";
-              
+                if (Session["Usuario"] != null)
+                {
+                    if (!Validacion.validar_sesion((Sesion)Session["Usuario"], "Venta"))
+                    {
+                        Response.Redirect("~/Index.aspx");
+                    }
+                }
+                else
+                {
+                    Response.Redirect("~/Index.aspx");
+                }
+
+
+
+
+                conexion = new Conexion();
+                DataSet Productos = conexion.Mostrar("Producto", "producto, abreviatura");
+                String html = "<select data-placeholder=\"Agregar producto\" class=\"select\" tabindex=\"2\">";
+                html += "<option value=\"\"></option> ";
+
+                foreach (DataRow item in Productos.Tables[0].Rows)
+                {
+                    html += "<option value=\"" + item["producto"] + "\">" + item["Abreviatura"] + "</option> ";
+
+                }
+
+                html += "</select>";
+
+
+                this.productos.InnerHtml = html;
             }
-
-            html += "</select>";
-            
-          
-           this.productos.InnerHtml = html;
-
         }
 
 

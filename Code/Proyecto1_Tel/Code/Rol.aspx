@@ -14,24 +14,20 @@
 		
 
 	<h5 class="widget-name"><i class="icon-columns"></i>Roles</h5>
-<!--    
-    <div>
-        <div><a style="font-size: 13px" id="nuevo-rol" class="btn btn-success"> Agregar Rol <i class="icon-plus-sign" >&nbsp;</i></a></div>
-    </div>
--->    
+    
         <!-- Some controlы -->
         <div class="widget" id="tab_roles" runat="server">
         </div>
         <!-- /some controlы -->
-<!--
+
     <div>
         <h1 style="font-family: Calibri; font-size: 50px"></h1>
     </div>
     <div>
     </div>
--->
+
     <!-- MODAL PARA EL REGISTRO DE ROLES-->
-<!--    <div class="modal fade" id="registra-rol" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="registra-rol" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -83,11 +79,11 @@
     
 
 </div>    
--->
+    
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="foot" runat="server">
 
-<!--
+
         <script type="text/javascript">
 
             $('#reg').on('click', function () {
@@ -227,5 +223,5 @@
 
 
     </script>
--->
+
 </asp:Content>

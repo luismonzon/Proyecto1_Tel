@@ -18,6 +18,19 @@ namespace Proyecto1_Tel.Code
          {
              if (!IsPostBack)
              {
+                 if (Session["Usuario"] != null)
+                 {
+                     if (!Validacion.validar_sesion((Sesion)Session["Usuario"], "Producto"))
+                     {
+                         Response.Redirect("~/Index.aspx");
+                     }
+                 }
+                 else
+                 {
+                     Response.Redirect("~/Index.aspx");
+                 }
+
+               
 
                  conexion = new Conexion();
 
