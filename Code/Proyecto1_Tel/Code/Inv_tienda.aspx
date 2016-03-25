@@ -13,8 +13,10 @@
     </div>
     
 	    <h4 class="widget-name"><i class="icon-columns"></i>Inventario Tienda</h4>
+
+    <input runat="server" type="text" required="required" readonly="readonly" name="codigo" id="Text1"  style="visibility:hidden; height:5px;"/>
     <div>
-        <div><a style="font-size: 13px" id="nuevo-tienda" onclick="NuevoTienda();" class="btn btn-success"> Agregar producto a tienda <i class="icon-plus-sign" >&nbsp;</i></a></div>
+        <div><a style="font-size: 13px" id="nuevo-tienda" onclick="NuevoTienda();" class="btn btn-success"> Agregar Producto a Tienda <i class="icon-plus-sign" >&nbsp;</i></a></div>
     </div>
     
         <!-- Some controlы  -->
@@ -74,6 +76,9 @@
 
                     $('#formulario')[0].reset(); //formulario lo inicializa con datos vacios
                     $('#edi').hide(); //escondemos el boton de edicion porque es un nuevo registro
+                    
+                    $('#in_producto').hide();
+
                     $('#divnmetros').hide();
                     $('#div_disponible').hide();
                     $('#radio').hide();
@@ -210,8 +215,6 @@
                         $('.modal .modal-body').css('max-height', $(window).height() * 0.7);
                         $('.modal .modal-body').css('height', $(window).height() * 0.7);
                     });
-                    FillCombo();
-
                     $('#edi').show(); //escondemos el boton de edicion porque es un nuevo registro
                     $('#reg').hide(); //mostramos el boton de registro
                     $('#Modal').modal({ //
@@ -232,6 +235,7 @@
                             var Tipo_Descrip = produc[2];
                             var Precio = produc[3];
                             var Metros = produc[4];
+                            var Abreviatura = produc[5];
 
 
 
@@ -240,6 +244,10 @@
                             document.getElementById("cantdisponible").value = Cantidad;
                             document.getElementById("precio").value = Precio;
                             document.getElementById("metrosdisponibles").value = Metros;
+                            document.getElementById("abre_producto").value = Abreviatura;
+                            document.getElementById("<% = codigo.ClientID%>").value = id;
+
+                            $('#cmbproducto').hide();
 
 
                             document.getElementById("tipo2").value = Tipo_Descrip;
@@ -269,18 +277,17 @@
         //Editar Productos en tienda
 
         function Edit() {
-            var idproducto = document.getElementById("producto").value;
+            var idproducto = document.getElementById("<% = codigo.ClientID%>").value;
             var cantidad = document.getElementById("cantidad").value;
             var precio = document.getElementById("precio").value;
             var metros = document.getElementById("metros").value;
-
             var formulario = document.forms[0];
+            var opcion = document.getElementsByName("opcion");
             
-            for (var i = 0; i < formulario.opcion.length; i++) {
-                if (formulario.opcion[i].checked) {
+            for (var i = 0; i <opcion.length; i++) {
+                if (opcion[i].checked) {
                     
-                    if (formulario.opcion[i].value == '1') {
-                       
+                    if (opcion[i].value == '1') {
                         $.ajax({
                             type: 'POST',
                             url: 'Inv_tienda.aspx/Agregar',

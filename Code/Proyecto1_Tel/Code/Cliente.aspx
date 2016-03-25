@@ -20,7 +20,7 @@
 <!--- TODO EL CONTENIDO DE LA PAGINA--->    
     <h5 class="widget-name"><i class="icon-columns"></i>Clientes</h5>
     
-    
+    <input runat="server" type="text" required="required" readonly="readonly" name="codigo" id="Text1"  style="visibility:hidden; height:5px;"/>
     <div>
         <div><a title="Agregar Cliente" style="font-size: 13px" id="nuevo-cliente" class="btn btn-success"> Agregar Cliente <i class="icon-plus-sign" >&nbsp;</i></a></div>
     </div>
@@ -132,6 +132,7 @@
                              document.getElementById("apellido").value = ApellCliente;
                              document.getElementById("direccion").value = DireCliente;
                              document.getElementById("telefono").value = TeleCliente;
+                             document.getElementById("<% = codigo.ClientID%>").value = id;
 
                          }
 
@@ -143,7 +144,7 @@
          function Edit() {
 
              var Nombre = document.getElementById("nombre").value;
-             var Id = document.getElementById("codigo").value;
+             var Id = document.getElementById("<% = codigo.ClientID%>").value;
              var Nit = document.getElementById("nit").value;
              var Apellido = document.getElementById("apellido").value;
              var Direccion = document.getElementById("direccion").value;
@@ -201,6 +202,7 @@
                     dataType: "json",
                     success: function (response) {
                         if (response.d == true) {
+                            reloadTable();
                             alert("Cliente Eliminado Exitosamente");
                         } else {
                             alert("Cliente No Se Pudo Eliminar");

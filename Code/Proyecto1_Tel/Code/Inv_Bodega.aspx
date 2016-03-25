@@ -186,8 +186,8 @@
                             var Descripcion = produc[0];
                             var Cantidad = produc[1];
                             document.getElementById("descripcion").value = Descripcion;
-                            document.getElementById("producto").value = id;
                             document.getElementById("cantdisponible").value = Cantidad;
+                            document.getElementById("<% = codigo.ClientID%>").value = id;
 
                         }
                     });
@@ -196,14 +196,14 @@
         }
 
         function Edit() {
-            var idproducto = document.getElementById("producto").value;
+            var idproducto = document.getElementById("<% = codigo.ClientID%>").value;
             var cantidad = document.getElementById("cantidad").value;
-            var formulario = document.forms[0];
+            //var formulario = document.forms[0];
+            var opcion = document.getElementsByName("opcion");
             
-            for (var i = 0; i < formulario.opcion.length; i++) {
-                if (formulario.opcion[i].checked) {
-
-                    if (formulario.opcion[i].value == '1') {
+            for (var i = 0; i <opcion.length; i++) {
+                if (opcion[i].checked) {
+                    if (opcion[i].value == '1') {
                         $.ajax({
 
                             type: 'POST',

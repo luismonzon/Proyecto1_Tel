@@ -239,7 +239,7 @@ namespace Proyecto1_Tel.Code
                 "<div class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Nombre:</b></label> \n" +
                 "<div class=\"controls\"><input  required=\"required\" style=\"font-size: 13px;\" type=\"text\" placeholder=\"Nombre\" id=\"nombre\" runat=\"server\" /></div> \n" +
-                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Apellid:</b></label> \n" +
+                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Apellido:</b></label> \n" +
                 "<div class=\"controls\"><input  required=\"required\" style=\"font-size: 13px;\" type=\"text\" placeholder=\"Apellido\" id=\"apellido\" runat=\"server\" /></div> \n" +
                 "</div> \n" +
                 "<div class=\"control-group\"> \n" +
@@ -248,9 +248,9 @@ namespace Proyecto1_Tel.Code
                 "</div> \n" +
                 "<div class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Contraseña:</b></label> \n" +
-                "<div class=\"controls\"><input  required=\"required\" style=\"font-size: 13px;\" type=\"text\" placeholder=\"Contraseña\" id=\"password\" runat=\"server\" /></div> \n" +
+                "<div class=\"controls\"><input  required=\"required\" style=\"font-size: 13px;\" type=\"password\" placeholder=\"Contraseña\" id=\"password\" runat=\"server\" /></div> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Repetir Contraseña:</b></label> \n" +
-                "<div class=\"controls\"><input  required=\"required\" style=\"font-size: 13px;\" type=\"text\" placeholder=\"Repetir Contraseña\" id=\"password1\" runat=\"server\" /></div> \n" +
+                "<div class=\"controls\"><input  required=\"required\" style=\"font-size: 13px;\" type=\"password\" placeholder=\"Repetir Contraseña\" id=\"password1\" runat=\"server\" /></div> \n" +
                 "</div> \n" +
                 "<div class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Rol:</b></label> \n" +

@@ -229,7 +229,6 @@
                  var nContrasena = document.getElementById("password").value;
                  var nContrasena1 = document.getElementById("password1").value;
                  var nRol = document.getElementById("Rol").value;
-                 alert(".");
                  if (nContrasena == nContrasena1) {
                      if (nNick != "" && nNombre != "" && nApellido != "" && nRol != "") {
 

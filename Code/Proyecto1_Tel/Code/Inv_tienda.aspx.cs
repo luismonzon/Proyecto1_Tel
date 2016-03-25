@@ -345,6 +345,7 @@ namespace Proyecto1_Tel.Code
 
 
             XmlNodeList nDescripcion = ((XmlElement)lista_producto[0]).GetElementsByTagName("Descripcion");
+            XmlNodeList nAbreviatura = ((XmlElement)lista_producto[0]).GetElementsByTagName("Abreviatura");
             XmlNodeList nTipo = ((XmlElement)lista_producto[0]).GetElementsByTagName("Tipo");
 
 
@@ -368,7 +369,7 @@ namespace Proyecto1_Tel.Code
 
             
 
-            string[] producto = new string[5];
+            string[] producto = new string[6];
 
             try
             {
@@ -377,6 +378,7 @@ namespace Proyecto1_Tel.Code
                 producto[2] = nDescripcionTipo[0].InnerText;
                 producto[3] = nPrecio[0].InnerText;
                 producto[4] = nMetros[0].InnerText;
+                producto[5] = nAbreviatura[0].InnerText;
 
             }
             catch (Exception ex)
@@ -536,10 +538,16 @@ namespace Proyecto1_Tel.Code
                 "<div class=\"modal-body\"> \n" +
                 "<table border=\"0\" width=\"100%\" > \n" +
                 "<div> \n" +
-                "<div class=\"control-group\"> \n" +
+                "<div id=\"cmbproducto\" class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Producto:</b></label> \n" +
                 "<div class=\"controls\"><select data-placeholder=\"Buscar Producto...\" name=\"producto-select\" class=\"select\" onChange=\"cambio();\" runat=\"server\" required=\"required\"  id=\"producto\"></select></div> \n" +
                 "</div> \n" +
+                //
+                "<div id=\"in_producto\" class=\"control-group\"> \n" +
+                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Producto:</b></label> \n" +
+                "<div class=\"controls\"><input readonly=\"readonly\" style=\"font-size: 13px;\" type=\"text\" placeholder=\"Producto\" id=\"abre_producto\" name=\"abre_producto\" runat=\"server\" class=\"span12\"/></div> \n" +
+                "</div> \n" +
+                //
                 "<div class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Descripcion:</b></label> \n" +
                 "<div class=\"controls\"><input readonly=\"readonly\" style=\"font-size: 13px;\" type=\"text\" placeholder=\"Descripcion\" id=\"descripcion\" name=\"descripcion\" runat=\"server\" class=\"span12\"/></div> \n" +
@@ -566,7 +574,7 @@ namespace Proyecto1_Tel.Code
                 "</div> \n" +
                 "<div class=\"control-group\" id=\"divmetros\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Metros:</b></label> \n" +
-                "<div class=\"controls\"><input  readonly=\"readonly\" style=\"font-size: 13px;\" placeholder=\"Metros\" type=\"number\" value=\"\"  step=\"any\"  id=\"metros\" runat=\"server\" /></div> \n" +
+                "<div class=\"controls\"><input  style=\"font-size: 13px;\" placeholder=\"Metros\" type=\"number\" value=\"\"  step=\"any\"  id=\"metros\" runat=\"server\" /></div> \n" +
                 "</div> \n" +
                 "<div id=\"radio\"> \n"+
                 "<label class=\"radio\">\n"+
