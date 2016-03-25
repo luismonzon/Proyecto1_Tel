@@ -105,9 +105,9 @@ namespace Proyecto1_Tel.Code
                                     "<a title=\"Ventas\" class=\"expand\">Ventas</a>" +
                                     "<ul>" +
 					                    "<li><a href=\"VentaDiaria.aspx\" title=\"Venta Diaria\">Diaria</a></li>" +
-					                    "<li><a href=\"#\" title=\"Semanal\">Semanal</a></li>" +
-					                    "<li><a href=\"#\" title=\"Mensual\">Mensual</a></li>" +
-					                    "<li><a href=\"#\" title=\"Anual\">Anual</a></li>" +
+					                    "<li><a href=\"VentaSemanal.aspx\" title=\"Semanal\">Semanal</a></li>" +
+					                    "<li><a href=\"VentaMensual.aspx\" title=\"Mensual\">Mensual</a></li>" +
+					                    "<li><a href=\"VentaAnual.aspx\" title=\"Anual\">Anual</a></li>" +
 					                "</ul>" +
 			                    "</li>" +
 			                    "<li>" +

@@ -29,6 +29,9 @@ namespace Proyecto1_Tel.Code
                         case "Usuarios":
                         case "Venta":
                         case "VentaDiaria":
+                        case "VentaSemanal":
+                        case "VentaMensual":
+                        case "VentaAnual":
                         case "Roles":
                             return true;
                         default:
