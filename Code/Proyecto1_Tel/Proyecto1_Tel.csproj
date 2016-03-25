@@ -74,7 +74,10 @@
     <Content Include="Code\Rol.aspx" />
     <Content Include="Code\User.aspx" />
     <Content Include="Code\Venta.aspx" />
+    <Content Include="Code\VentaAnual.aspx" />
     <Content Include="Code\VentaDiaria.aspx" />
+    <Content Include="Code\VentaMensual.aspx" />
+    <Content Include="Code\VentaSemanal.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -195,12 +198,30 @@
     <Compile Include="Code\Venta.aspx.designer.cs">
       <DependentUpon>Venta.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Code\VentaAnual.aspx.cs">
+      <DependentUpon>VentaAnual.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Code\VentaAnual.aspx.designer.cs">
+      <DependentUpon>VentaAnual.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Code\VentaDiaria.aspx.cs">
       <DependentUpon>VentaDiaria.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Code\VentaDiaria.aspx.designer.cs">
       <DependentUpon>VentaDiaria.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Code\VentaMensual.aspx.cs">
+      <DependentUpon>VentaMensual.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Code\VentaMensual.aspx.designer.cs">
+      <DependentUpon>VentaMensual.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Code\VentaSemanal.aspx.cs">
+      <DependentUpon>VentaSemanal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Code\VentaSemanal.aspx.designer.cs">
+      <DependentUpon>VentaSemanal.aspx</DependentUpon>
     </Compile>
     <Compile Include="Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
