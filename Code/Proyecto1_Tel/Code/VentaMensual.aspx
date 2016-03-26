@@ -40,7 +40,6 @@
         function GenerarFecha() {
 
             var str = $('#myDate').val();
-            alert(str);
 
             
             if (str != "") {

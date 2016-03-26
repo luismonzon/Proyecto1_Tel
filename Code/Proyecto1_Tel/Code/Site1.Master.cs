@@ -84,7 +84,7 @@ namespace Proyecto1_Tel.Code
             //Menu de rol de Administrador
             general.InnerHtml = "<ul class=\"navigation widget\"> " +
 			            "<li class=\"active\"><a href=\"Inicio.aspx\" title=\"Inicio\"><i class=\"icon-home\"></i>Inicio</a></li>" +
-			            "<li><a class=\"expand\"><i class=\"icon-reorder\"></i>Administrar<strong>5</strong></a> " +
+			            "<li><a class=\"expand\"><i class=\"icon-reorder\"></i>Administrar<strong>6</strong></a> " +
 			              "  <ul>"+
                                 "<li><a href=\"Venta.aspx\" title=\"Venta\">Ventas</a></li>" +      
                                 "<li><a href=\"Rol.aspx\" title=\"Roles\">Roles</a></li>"+
@@ -126,14 +126,13 @@ namespace Proyecto1_Tel.Code
 			                    "</li>" +
 			                "</ul>" +
 			            "</li> " +
-			            "<li><a title=\"\"><i class=\"icon-signal\"></i>Reportes Graficos</a></li> " +
 			        "</ul>" ;
 			        
 
         }
 
         [WebMethod()]
-        public static void  salir()
+        public static void  salir(string id)
         {
                 HttpContext.Current.Session.Abandon();
                 HttpContext.Current.Response.Redirect("Index.aspx");

@@ -78,6 +78,8 @@
 	<div id="top">
 		<div class="fixed">
             <form runat="server">
+                     <asp:scriptmanager id="ScriptManager1" runat="server" />
+
 			<a href="Inicio.aspx" title="" class="logo"><img src="/img/Loguito.png" width=140/></a>
 			    <ul class="top-menu">
 				<li><a class="fullview"></a></li>
@@ -95,7 +97,7 @@
 	</div>
 	<!-- /fixed top -->
 
-
+    
 	<!-- Content container -->
 	<div id="container">
 
@@ -202,5 +204,41 @@
 
 
     	</asp:ContentPlaceHolder>
+
+    <script type="text/javascript"> 
+ 
+        //localizar timers
+        var iddleTimeoutWarning = null;
+        var iddleTimeout = null;
+ 
+        //esta funcion automaticamente sera llamada por ASP.NET AJAX cuando la pagina cargue y un postback parcial complete
+        function pageLoad() { 
+ 
+            //borrar antiguos timers de postbacks anteriores
+            if (iddleTimeoutWarning != null)
+                clearTimeout(iddleTimeoutWarning);
+            if (iddleTimeout != null)
+                clearTimeout(iddleTimeout);
+            //leer tiempos desde web.config
+            var millisecTimeOutWarning =" <%=( int.Parse(System.Configuration.ConfigurationManager.AppSettings["SessionTimeoutWarning"]) * 60 * 1000) %> ";
+            var millisecTimeOut =" <%= int.Parse(System.Configuration.ConfigurationManager.AppSettings["SessionTimeout"]) * 60 * 1000 %>  ";
+            //establece tiempo para mostrar advertencia si el usuario ha estado inactivo
+            iddleTimeoutWarning = setTimeout("DisplayIddleWarning()", millisecTimeOutWarning);
+            iddleTimeout = setTimeout("TimeoutPage()", millisecTimeOut);
+    } 
+ 
+    function DisplayIddleWarning() {
+        alert("Tu sesion esta a punto de expirar debido a inactividad.");
+    } 
+ 
+    function TimeoutPage() {
+        //redireccionamos a login y eliminamos variables de sesion
+        window.location.href = "../Index.aspx";
+
+        
+    } 
+ 
+</script>
+
 </body>
 </html>

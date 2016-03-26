@@ -29,6 +29,10 @@ namespace Proyecto1_Tel.Code
 
 
             }
+
+            Response.Cache.SetCacheability(HttpCacheability.ServerAndNoCache);
+            Response.Cache.SetAllowResponseInBrowserHistory(false);
+            Response.Cache.SetNoStore();
         }
 
         /*<div class="datatable-header"><div class="dataTables_filter" id="data-table_filter"><label><span>Filter records:</span> <input type="text" aria-controls="data-table"></label></div><div id="data-table_length" class="dataTables_length"><label><span>Show entries:</span> <div class="selector" id="uniform-undefined"><span>10</span><select size="1" name="data-table_length" aria-controls="data-table" style="opacity: 0;"><option value="10" selected="selected">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select></div></label></div></div>*/

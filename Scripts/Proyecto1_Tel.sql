@@ -1,8 +1,7 @@
 use PROYECT_1
   	
 	--se elimino la columna de largo en la tabla producto
-	INSERT INTO Producto(Abreviatura,Descripcion, Porcentaje,Tipo,Ancho, Marca) VALUES('Eco 35 g','Economico 35 Grande','35%',2,1.52,'Economico');
-	INSERT INTO Inventario(Sucursal, Producto, Cantidad, Precio, Metros_Cuadrados ) VALUES(1,3,1,15,200);
+	
 go
 --Si ya eliminaron las tablas dejen asi
 --si no descomenten lo de drop table
@@ -69,9 +68,10 @@ create table Deuda(
 	Deuda int identity(1,1) not null,
 	Cliente int not null,
 	Cantidad numeric(9,2) not null,
+	
 	Constraint pk_Deuda Primary key (Deuda),
 	Constraint fk_Deuda_Cliente foreign key (Cliente) references Cliente(Cliente) 
-)
+)	
 
 go
 

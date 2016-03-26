@@ -55,6 +55,10 @@ namespace Proyecto1_Tel.Code
                  tipopro.DataBind();*/
                 
              }
+
+             Response.Cache.SetCacheability(HttpCacheability.ServerAndNoCache);
+             Response.Cache.SetAllowResponseInBrowserHistory(false);
+             Response.Cache.SetNoStore();
          }
 
         protected String Llenar_Productos()

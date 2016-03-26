@@ -104,7 +104,9 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Scripts\jquery-1.9.1.min.map" />
     <Content Include="Code\Site1.Master" />
   </ItemGroup>
@@ -200,6 +202,7 @@
     </Compile>
     <Compile Include="Code\VentaAnual.aspx.cs">
       <DependentUpon>VentaAnual.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Code\VentaAnual.aspx.designer.cs">
       <DependentUpon>VentaAnual.aspx</DependentUpon>
@@ -213,12 +216,14 @@
     </Compile>
     <Compile Include="Code\VentaMensual.aspx.cs">
       <DependentUpon>VentaMensual.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Code\VentaMensual.aspx.designer.cs">
       <DependentUpon>VentaMensual.aspx</DependentUpon>
     </Compile>
     <Compile Include="Code\VentaSemanal.aspx.cs">
       <DependentUpon>VentaSemanal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Code\VentaSemanal.aspx.designer.cs">
       <DependentUpon>VentaSemanal.aspx</DependentUpon>

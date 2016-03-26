@@ -34,6 +34,10 @@ namespace Proyecto1_Tel.Code
                 conn = new Conexion();
                 Cargar();
             }
+
+            Response.Cache.SetCacheability(HttpCacheability.ServerAndNoCache);
+            Response.Cache.SetAllowResponseInBrowserHistory(false);
+            Response.Cache.SetNoStore();
         }
 
         private void Cargar()

@@ -71,7 +71,7 @@
                      $('#edi').hide();//se esconde el boton de editar
                      $('#Modal').modal({ //
                          show: true, //mostramos el modal registra producto
-                         //backdrop: 'static' //hace que no se cierre el modal si le dan clic afuera del mismo.
+                         backdrop: 'static' //hace que no se cierre el modal si le dan clic afuera del mismo.
                      });
                  }
              });
@@ -240,7 +240,7 @@
                         if (response.d == true) {
                             $('#mensaje').removeClass();
                             $('#mensaje').addClass('alert alert-success').html('Cliente agregado con exito').show(200).delay(2500).hide(200);
-                            $('#formulario-cliente')[0].reset();
+                            $('#formulario')[0].reset();
                              } else {
                                  $('#mensaje').removeClass();
                                  $('#mensaje').addClass('alert alert-danger').html('Nit ya existe').show(200).delay(2500).hide(200);

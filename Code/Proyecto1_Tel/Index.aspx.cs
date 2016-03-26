@@ -12,7 +12,8 @@ namespace Proyecto1_Tel
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            Session.Abandon();
+            Session.Clear();
         }
         
         [WebMethod]

@@ -55,6 +55,11 @@ namespace Proyecto1_Tel.Code
                 
 
             }
+
+
+            Response.Cache.SetCacheability(HttpCacheability.ServerAndNoCache);
+            Response.Cache.SetAllowResponseInBrowserHistory(false);
+            Response.Cache.SetNoStore();
         }
         /*
                 DataSet ds = conexion.Mostrar("Producto", "Producto,Abreviatura");
@@ -290,7 +295,7 @@ namespace Proyecto1_Tel.Code
                 "<div> \n" +
                 "<div class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Producto:</b></label> \n" +
-                "<div class=\"controls\"><select data-placeholder=\"Buscar Producto...\" name=\"producto-select\" class=\"select\" onChange=\"cambio();\" runat=\"server\" required=\"required\"  id=\"producto\"></select></div> \n" +
+                "<div class=\"controls\"><select tabindex=\"2\" data-placeholder=\"Buscar Producto...\" name=\"producto-select\" class=\"select\" onChange=\"cambio();\" runat=\"server\"  id=\"producto\"></select></div> \n" +
                 "</div> \n" +
                 "<div class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Descripcion:</b></label> \n" +

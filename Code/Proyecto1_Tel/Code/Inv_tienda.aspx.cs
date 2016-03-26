@@ -54,6 +54,11 @@ namespace Proyecto1_Tel.Code
 
             }
 
+
+            Response.Cache.SetCacheability(HttpCacheability.ServerAndNoCache);
+            Response.Cache.SetAllowResponseInBrowserHistory(false);
+            Response.Cache.SetNoStore();
+
         }
         /*             
           *             DataSet ds = conexion.Mostrar("Bodega B, Producto P Where B.producto = P.producto and B.Cantidad > 0", "B.Producto PROD, P.Abreviatura ABRE");
