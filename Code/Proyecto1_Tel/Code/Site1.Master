@@ -225,6 +225,7 @@
             //establece tiempo para mostrar advertencia si el usuario ha estado inactivo
             iddleTimeoutWarning = setTimeout("DisplayIddleWarning()", millisecTimeOutWarning);
             iddleTimeout = setTimeout("TimeoutPage()", millisecTimeOut);
+            
     } 
  
     function DisplayIddleWarning() {
@@ -234,6 +235,7 @@
     function TimeoutPage() {
         //redireccionamos a login y eliminamos variables de sesion
         window.location.href = "../Index.aspx";
+
 
         
     } 

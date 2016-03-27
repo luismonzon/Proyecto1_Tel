@@ -5,7 +5,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Inicio</title>
+    <title>Login</title>
     
     <!-- Bootstrap Core CSS and Custom CSS-->
     <link href="Content/bootstrap.min.css" rel="stylesheet" />

@@ -147,7 +147,6 @@
         //Registro 
         function AddProduct() {
             var idproducto = document.getElementById("producto").value;
-            
             var cantidad = document.getElementById("cantidad").value;
             var metros = document.getElementById("metros").value;
             var precio = document.getElementById("precio").value;
@@ -360,7 +359,7 @@
 
         }
 
-
+       
     </script>
 
 

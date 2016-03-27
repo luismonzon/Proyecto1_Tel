@@ -51,6 +51,7 @@ namespace Proyecto1_Tel.Code
                 case "3":
                     switch (pagina)
                     {
+                            //Venta
                         case "Cliente":
                         case "Inv_tienda":
                         case "Venta":

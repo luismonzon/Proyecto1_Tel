@@ -7,12 +7,10 @@
 
 
 function reloadTable() {
-    $.get('Producto.aspx', function (data) {
 
-        window.location.reload();
-    });
+    window.location.reload();
+
 }
-
 
 
 $(function () {

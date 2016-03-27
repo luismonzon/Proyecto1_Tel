@@ -18,7 +18,12 @@
         <div id="modalpago" runat="server">
         
         </div>
-    
+
+        <div id="modalventa" runat="server">
+        
+        </div>
+
+
     <h5 class="widget-name"><i class="icon-columns"></i>Clientes Deudores</h5>
         <!-- Some controlы -->
         <div class="widget" id="tab_roles" runat="server">
@@ -130,6 +135,29 @@
             return false;
 
         }
+
+
+        function Ver_Venta(id) {
+             $.ajax({
+                 type: 'POST',
+                 url: 'ClientesDeuda.aspx/MostrarVenta',
+                 data: JSON.stringify({ id: id }),
+                 contentType: 'application/json; charset=utf-8',
+                 dataType: 'json',
+                 success: function (response) {
+                     var $modal = $('#ContentPlaceHolder1_modalventa');
+                     $modal.html(response.d);
+                     $('#modal-venta').modal({ //
+                         show: true, //mostramos el modal registra producto
+                         backdrop: 'static' //hace que no se cierre el modal si le dan clic afuera del mismo.
+                     });
+
+                     //$('#modal-pago').modal('hide').data('bs.modal', null);
+                 }
+             });
+         }
+
+
 
     </script>
 

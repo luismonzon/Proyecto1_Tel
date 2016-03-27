@@ -300,20 +300,20 @@ namespace Proyecto1_Tel.Code
                 "<div class=\"controls\"><input placeholder=\"Nombre\" required=\"required\" style=\"font-size: 15px;\" type=\"text\" name=\"nombre\" id=\"nombre\" runat=\"server\" class=\"span12\" /></div> \n" +
                 "</div> \n" +
                 "<div class=\"control-group\"> \n" +
-                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Apellidos:</b></label> \n" +
-                "<div class=\"controls\"><input  required=\"required\" style=\"font-size: 13px;\" type=\"text\" placeholder=\"Apellidos\" id=\"apellido\" runat=\"server\" class=\"span12\"/></div> \n" +
+                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>Apellidos:</b></label> \n" +
+                "<div class=\"controls\"><input  style=\"font-size: 13px;\" type=\"text\" placeholder=\"Apellidos\" id=\"apellido\" runat=\"server\" class=\"span12\"/></div> \n" +
                 "</div> \n" +
                 "<div class=\"control-group\"> \n" +
-                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Nit:</b></label> \n" +
-                "<div class=\"controls\"><input placeholder=\"Nit\" required=\"required\" style=\"font-size: 15px;\" type=\"text\" name=\"nit\" id=\"nit\" runat=\"server\" class=\"span12\" /></div> \n" +
+                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>Nit:</b></label> \n" +
+                "<div class=\"controls\"><input placeholder=\"Nit\"  style=\"font-size: 15px;\" type=\"text\" name=\"nit\" id=\"nit\" runat=\"server\" class=\"span12\" /></div> \n" +
                 "</div> \n" +
                 "<div class=\"control-group\"> \n" +
-                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Direccion:</b></label> \n" +
-                "<div class=\"controls\"><input  required=\"required\" style=\"font-size: 13px;\" type=\"text\" placeholder=\"Direccion\" id=\"direccion\" runat=\"server\" /></div> \n" +
+                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>Direccion:</b></label> \n" +
+                "<div class=\"controls\"><input   style=\"font-size: 13px;\" type=\"text\" placeholder=\"Direccion\" id=\"direccion\" runat=\"server\" /></div> \n" +
                 "</div> \n" +
                 "<div class=\"control-group\"> \n" +
-                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Telefono:</b></label> \n" +
-                "<div class=\"controls\"><input  required=\"required\" style=\"font-size: 13px;\" type=\"text\" placeholder=\"Telefono\" id=\"telefono\" runat=\"server\" data-mask=\"9999-9999\" /></div> \n" +
+                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>Telefono:</b></label> \n" +
+                "<div class=\"controls\"><input  style=\"font-size: 13px;\" type=\"text\" placeholder=\"Telefono\" id=\"telefono\" runat=\"server\" data-mask=\"9999-9999\" /></div> \n" +
                 "</div> \n" +
                 "<tr> \n" +
                 "<td colspan=\"2\"> \n" +

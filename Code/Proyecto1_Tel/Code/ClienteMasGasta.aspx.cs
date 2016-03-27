@@ -68,7 +68,7 @@ namespace Proyecto1_Tel.Code
 "order by Total desc"
             ;
             DataSet roles = conn.Mostrar(condicion, columnas);
-            String data = "No hay Productos Disponibles";
+            String data = "No hay Clientes Disponibles";
             if (roles.Tables.Count > 0)
             {
 
@@ -129,7 +129,7 @@ namespace Proyecto1_Tel.Code
                 ;
             //content del modal
             innerhtml += "    <div class=\"navbar\"> " + "<div class=\"navbar-inner\">" +
-                                "<h6>Produtos</h6>" +
+                                "<h6>Productos</h6>" +
                                 "  <div class=\"nav pull-right\">" +
                                     "<a href=\"#\" class=\"dropdown-toggle just-icon\" data-toggle=\"dropdown\"><i class=\"font-cog\"></i></a>" +
                                         "<ul class=\"dropdown-menu pull-right\">" +

@@ -58,32 +58,48 @@ namespace Proyecto1_Tel.Code
         private void MenuVenta()
         {
             contenido.InnerHtml = "<div class=\"row-fluid\">" +
-                   "<div class=\"span4\">" +
-                       "<div class=\"control-group\" id=\"venta\">" +
-                           "<div class=\"view\">" +
-                               "<a href=\"Venta.aspx\" class=\"button\">" +
-                                   "<img src=\"/img/venta.png\" aria-orientation=\"vertical\" />" +
-                               "</a>" +
-                           "</div>" +
-                           "<div class=\"item-info\">" +
-                               "<a href=\"Venta.aspx\" title=\"\" class=\"item-title\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
-                                "&nbsp;&nbsp;&nbsp;&nbsp;Nueva Venta</a>" +
-                           "</div>" +
-                       "</div>" +
-                   "</div>" +
-                   "<div class=\"span4\">" +
-                       "<div class=\"control-group\" id=\"agrega_usuario\">" +
-                           "<div class=\"view\">" +
-                               "<a href=\"Cliente.aspx\" class=\"button\">" +
-                                   "<img src=\"/img/agregar.png\" aria-orientation=\"vertical\" WIDTH=178 HEIGHT=180  />" +
-                               "</a>" +
-                           "</div>" +
-                           "<div class=\"item-info\">" +
-                               "<a href=\"Cliente.aspx\" title=\"\" class=\"item-title\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
-                               "nbsp;&nbsp;&nbsp;&nbsp;Agregar Cliente</a>" +
-                           "</div>" +
-                       "</div>" +
-                   "</div>";
+                    "<div class=\"span4\">" +
+                        "<div class=\"control-group\" id=\"venta\">" +
+                            "<div class=\"view\">" +
+                                "<a href=\"Venta.aspx\" class=\"button\">" +
+                                    "<img src=\"/img/venta.png\" aria-orientation=\"vertical\" />" +
+                                "</a>" +
+                            "</div>" +
+                            "<div class=\"item-info\">" +
+                                "<a href=\"Venta.aspx\" title=\"\" class=\"item-title\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
+                                 "&nbsp;&nbsp;&nbsp;&nbsp;Nueva Venta</a>" +
+                            "</div>" +
+                        "</div>" +
+                    "</div>" +
+                    "<div class=\"span4\">" +
+                        "<div class=\"control-group\" id=\"agrega_usuario\">" +
+                            "<div class=\"view\">" +
+                                "<a href=\"Cliente.aspx\" class=\"button\">" +
+                                    "<img src=\"/img/agregar.png\" aria-orientation=\"vertical\" WIDTH=178 HEIGHT=180  />" +
+                                "</a>" +
+                            "</div>" +
+                            "<div class=\"item-info\">" +
+                                "<a href=\"Cliente.aspx\" title=\"\" class=\"item-title\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
+                                "&nbsp;&nbsp;&nbsp;&nbsp;Agregar Cliente</a>" +
+                            "</div>" +
+                        "</div>" +
+                    "</div>" +
+
+                    "<div class=\"span4\">" +
+                        "<div class=\"control-group\" id=\"inventario\">" +
+                            "<div class=\"view\">" +
+                                "<a href=\"Inv_tienda.aspx\" class=\"button\">" +
+                                    "<img src=\"/img/inventario.png\" aria-orientation=\"vertical\" WIDTH=178 HEIGHT=180/>" +
+                                "</a>" +
+                            "</div>" +
+                        "<div class=\"item-info\"> " +
+                            "<a href=\"Inv_tienda.aspx\" title=\"\" class=\"item-title\">&nbsp;&nbsp;&nbsp;&nbsp; " +
+                        "Producto en Tienda</a>" +
+                        "</div>" +
+                    "</div>" +
+                "</div>" +
+                 "</div>" +
+                "<!-- /Primera Linea -->";
 
 
    
@@ -173,6 +189,7 @@ namespace Proyecto1_Tel.Code
 					"</div>"+
                 "</div>"+
             "</div>"+
+
             "<div class=\"span4\">"+
                 "<div class=\"control-group\" id=\"inventario\">"+
                     "<div class=\"view\">"+

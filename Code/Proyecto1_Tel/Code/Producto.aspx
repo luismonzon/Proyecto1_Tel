@@ -191,11 +191,7 @@
              
         }
 
-        $('#cerrar').on('click', function () {
-            
-            reloadTable();
-        });
-
+       
        
 
          //REGISTRAR UN PRODUCTO

@@ -1,16 +1,18 @@
 use PROYECT_1
   	
 	--se elimino la columna de largo en la tabla producto
+	--se agrego como llave foranea la venta en la tabla deuda
+	DBCC CHECKIDENT (<Nombre de tabla>, RESEED,0); --SIRVE PARA REINICIAR EL CONTADOR DE LAS TABLAS
 	
 go
 --Si ya eliminaron las tablas dejen asi
 --si no descomenten lo de drop table
 
 drop table DetalleVenta;
-drop table Venta;
-drop table Bodega;
 drop table Pago;
 drop table Deuda;
+drop table Venta;
+drop table Bodega;
 drop table Cliente;
 drop table Inventario;
 drop table Sucursal;
@@ -18,6 +20,7 @@ drop table Producto;
 drop table Tipo;
 drop table Usuario;
 drop table Rol;
+
 go
 
 create table Sucursal(
@@ -60,29 +63,9 @@ create table Cliente (
 	Direccion varchar(50) null,
 	Telefono varchar(50) null,
 	Constraint pk_Cliente Primary key (Cliente)
-)
-
-go
-
-create table Deuda(
-	Deuda int identity(1,1) not null,
-	Cliente int not null,
-	Cantidad numeric(9,2) not null,
-	
-	Constraint pk_Deuda Primary key (Deuda),
-	Constraint fk_Deuda_Cliente foreign key (Cliente) references Cliente(Cliente) 
-)	
-
-go
-
-create table Pago(
-	Pago int identity(1,1) not null,
-	Deuda int not null,
-	Fecha Date not null,
-	Abono numeric(9,2) not null,
-	Constraint fk_Pago_Deuda foreign key (Deuda) references Deuda(Deuda),
-	Constraint pk_Pago Primary Key (Pago,Deuda)
 ) 
+
+
 
 go
 
@@ -130,6 +113,28 @@ Create table DetalleVenta(
 	Constraint fk_producto_detalle foreign key (Producto) references Producto(Producto)
 )
 
+go
+
+create table Deuda(
+	Deuda int identity(1,1) not null,
+	Cliente int not null,
+	Cantidad numeric(9,2) not null,
+	Venta int not null,
+	Constraint fk_Venta foreign key (Venta) references Venta(Venta), 
+	Constraint pk_Deuda Primary key (Deuda),
+	Constraint fk_Deuda_Cliente foreign key (Cliente) references Cliente(Cliente) 
+)	
+
+go
+
+create table Pago(
+	Pago int identity(1,1) not null,
+	Deuda int not null,
+	Fecha Date not null,
+	Abono numeric(9,2) not null,
+	Constraint fk_Pago_Deuda foreign key (Deuda) references Deuda(Deuda),
+	Constraint pk_Pago Primary Key (Pago,Deuda)
+) 
 go
 
 create table Inventario(

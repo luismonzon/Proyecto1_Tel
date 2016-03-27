@@ -47,7 +47,7 @@ namespace Proyecto1_Tel.Code
             //Menu de rol de Administrador
             general.InnerHtml = "<ul class=\"navigation widget\"> " +
                         "<li class=\"active\"><a href=\"Inicio.aspx\" title=\"Inicio\"><i class=\"icon-home\"></i>Inicio</a></li>" +
-                        "<li><a class=\"expand\"><i class=\"icon-reorder\"></i>Administrar<strong>5</strong></a> " +
+                        "<li><a class=\"expand\"><i class=\"icon-reorder\"></i>Administrar<strong>4</strong></a> " +
                           "  <ul>" +
                                 "<li><a href=\"Venta.aspx\" title=\"Venta\">Ventas</a></li>" +
                                 "<li><a href=\"Cliente.aspx\" title=\"Clientes\">Clientes</a></li>" +
@@ -67,7 +67,7 @@ namespace Proyecto1_Tel.Code
         {
             general.InnerHtml = "<ul class=\"navigation widget\"> " +
                         "<li class=\"active\"><a href=\"Inicio.aspx\" title=\"Inicio\"><i class=\"icon-home\"></i>Inicio</a></li>" +
-                        "<li><a class=\"expand\"><i class=\"icon-reorder\"></i>Administrar<strong>5</strong></a> " +
+                        "<li><a class=\"expand\"><i class=\"icon-reorder\"></i>Administrar<strong>1 </strong></a> " +
                           "  <ul>" +
                                 "<li><a  title=\"Inventario\" class=\"expand\">Inventario</a> " +
                                    "<ul>" +
