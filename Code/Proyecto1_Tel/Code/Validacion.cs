@@ -43,6 +43,7 @@ namespace Proyecto1_Tel.Code
                             //Bodega
                         case "Inv_Bodega":
                         case "Inicio":
+                        case "Inv_tienda":
                             return true;
                         default:
                             return false;

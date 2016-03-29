@@ -72,6 +72,7 @@ namespace Proyecto1_Tel.Code
                                 "<li><a  title=\"Inventario\" class=\"expand\">Inventario</a> " +
                                    "<ul>" +
                                         "<li><a href=\"Inv_Bodega.aspx\" title=\"Bodega\">Bodega</a></li>" +
+                                        "<li><a href=\"Inv_tienda.aspx\" title=\"Tienda\">Tienda</a></li>" +
                                     "</ul>" +
                                 "</li>" +
                             "</ul>" +

@@ -225,12 +225,10 @@
                             contentType: 'application/json; charset=utf-8',
                             dataType: 'json',
                             success: function (response) {
-                                alert(response.d);
                                 if (response.d == true) {
                                     $('#mensaje').removeClass();
                                     $('#mensaje').addClass('alert alert-success').html('Producto agregado con exito').show(200).delay(5500).hide(200);
                                     $('#formulario')[0].reset();
-                                    $('#Modal').modal('toggle');
                                 } else {
                                     $('#mensaje').removeClass();
                                     $('#mensaje').addClass('alert alert-danger').html('Abreviatura ya existe').show(200).delay(5500).hide(200);
@@ -315,7 +313,6 @@
                             nAncho = "1.52"
                         }
 
-                        alert(nAncho);
 
                         $.ajax({
                             type: 'POST',

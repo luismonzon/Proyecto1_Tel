@@ -16,6 +16,7 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6oHxOIYM&amp;sensor=false"></script>
+    
 
     <script type="text/javascript" src="js/plugins/charts/excanvas.min.js"></script>
     <script type="text/javascript" src="js/plugins/charts/jquery.flot.js"></script>
@@ -127,13 +128,7 @@
 		            <!-- /datepicker -->
 
                     
-			        <!-- Tags input -->
-					<div class="widget">
-						<h6 class="widget-name"><i class="icon-search"></i>Tags input</h6>
-						<input type="text" id="tags1" class="tags" value="these,are,sample,tags" />
-					</div>
-					<!-- /tags input -->
-
+			       
 		        </div>
 
 		    </div>
