@@ -269,7 +269,7 @@ namespace Proyecto1_Tel.Code
                 "<div class=\"modal-header\"> \n" +
                 "<button type=\"button\" onclick=\"reloadTable();\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button> \n" +
                 "<div class=\"step-title\"> \n" +
-                "<i>R</i> \n" +
+                "<i>T</i> \n" +
                 "<h5>Administrar Producto</h5> \n" +
                 "<span>Agregar o Editar un Producto </span> \n" +
                 "</div> \n" +
@@ -288,15 +288,15 @@ namespace Proyecto1_Tel.Code
                 "</div> \n" +
                 "<div class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Descripcion:</b></label> \n" +
-                "<div class=\"controls\"><input  required=\"required\" style=\"font-size: 13px;\" type=\"text\" placeholder=\"Descripcion\" id=\"descripcion\" name=\"descripcion\" runat=\"server\" class=\"span12\"/></div> \n" +
+                "<div class=\"controls\"><input  required=\"required\" style=\"font-size: 14px;\" type=\"text\" placeholder=\"Descripcion\" id=\"descripcion\" name=\"descripcion\" runat=\"server\" class=\"span12\"/></div> \n" +
                 "</div> \n" +
                 "<div class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Producto:</b></label> \n" +
-                "<div class=\"controls\"><select data-placeholder=\"Buscar Producto...\" name=\"producto-select\" tabindex=\"2\" class=\"select\" onChange=\"cambio()\" runat=\"server\" required=\"required\" id=\"tipopro\"></select></div> \n" +
+                "<div class=\"controls\"><select data-placeholder=\"Buscar Producto...\" style=\"font-size: 15px;\" name=\"producto-select\" tabindex=\"2\" class=\"select\" onChange=\"cambio()\" runat=\"server\" required=\"required\" id=\"tipopro\"></select></div> \n" +
                 "</div> \n" +
                 "<div class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Marca:</b></label> \n" +
-                "<div class=\"controls\"><input  required=\"required\" style=\"font-size: 13px;\" type=\"text\" placeholder=\"Marca\" id=\"marca\" name=\"marca\" runat=\"server\" class=\"span12\"/></div> \n" +
+                "<div class=\"controls\"><input  required=\"required\" style=\"font-size: 14px;\" type=\"text\" placeholder=\"Marca\" id=\"marca\" name=\"marca\" runat=\"server\" class=\"span12\"/></div> \n" +
                 "</div> \n" +
                 "<div class=\"control-group\" id=\"divporc\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Porcentaje:</b></label> \n" +
@@ -304,7 +304,7 @@ namespace Proyecto1_Tel.Code
                 "</div> \n" +
                 "<div class=\"control-group\" id=\"divtam\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Tamaño:</b></label> \n" +
-                "<div class=\"controls\"><select id=\"tamano\" runat=\"server\" class=\"select\" tabindex=\"2\"> <option value=\"pequeno\">Pequeño</option> <option value=\"grande\">Grande</option> </select></div> \n" +
+                "<div class=\"controls\"><select id=\"tamano\" runat=\"server\" style=\"font-size: 15px;\" class=\"select\" tabindex=\"2\"> <option value=\"pequeno\">Pequeño</option> <option value=\"grande\">Grande</option> </select></div> \n" +
                 "</div> \n" +
                 "<tr> \n" +
                 "<td colspan=\"2\"> \n" +

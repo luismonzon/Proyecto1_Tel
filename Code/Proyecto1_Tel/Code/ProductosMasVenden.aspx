@@ -7,7 +7,7 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-        <h5 class="widget-name"><i class="icon-columns"></i>Productos Mas Vendidos</h5>
+        <h4 class="widget-name"><i class="icon-columns"></i>Productos Mas Vendidos</h4>
         <!-- Some controlы -->
         <div class="widget" id="tab_roles" runat="server">
         </div>

@@ -18,7 +18,7 @@
 
     <!--- TODO EL CONTENIDO DE LA PAGINA--->    
 			   
-     <h5 class="widget-name"><i class="icon-columns"></i>Productos</h5>
+     <h4 class="widget-name"><i class="icon-columns"></i>Productos</h4>
        
     <div>
         <div><a style="font-size: 13px" id="nuevo-producto" class="btn btn-success"> Agregar Producto <i class="icon-plus-sign" >&nbsp;</i></a></div>

@@ -18,7 +18,7 @@
 
 
 <!--- TODO EL CONTENIDO DE LA PAGINA--->    
-    <h5 class="widget-name"><i class="icon-columns"></i>Clientes</h5>
+    <h4 class="widget-name"><i class="icon-columns"></i>Clientes</h4>
     
     <input runat="server" type="text" required="required" readonly="readonly" name="codigo" id="Text1"  style="visibility:hidden; height:5px;"/>
     <div>

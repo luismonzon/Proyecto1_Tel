@@ -280,7 +280,7 @@ namespace Proyecto1_Tel.Code
                 "<div class=\"modal-header\"> \n" +
                 "<button type=\"button\" onclick=\"reloadTable();\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button> \n" +
                 "<div class=\"step-title\"> \n" +
-                "<i>R</i> \n" +
+                "<i>B</i> \n" +
                 "<h5>Administrar Producto en Bodega</h5> \n" +
                 "<span>Agregar o Editar Productos en Bodega</span> \n" +
                 "</div> \n" +
@@ -295,15 +295,15 @@ namespace Proyecto1_Tel.Code
                 "<div> \n" +
                 "<div class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Producto:</b></label> \n" +
-                "<div class=\"controls\"><select tabindex=\"2\" data-placeholder=\"Buscar Producto...\" name=\"producto-select\" class=\"select\" onChange=\"cambio();\" runat=\"server\"  id=\"producto\"></select></div> \n" +
+                "<div class=\"controls\"><select tabindex=\"2\" style=\"font-size: 15px;\" data-placeholder=\"Buscar Producto...\" name=\"producto-select\" class=\"select\" onChange=\"cambio();\" runat=\"server\"  id=\"producto\"></select></div> \n" +
                 "</div> \n" +
                 "<div class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Descripcion:</b></label> \n" +
-                "<div class=\"controls\"><input readonly=\"readonly\" style=\"font-size: 13px;\" type=\"text\" placeholder=\"Descripcion\" id=\"descripcion\" name=\"descripcion\" runat=\"server\" class=\"span12\"/></div> \n" +
+                "<div class=\"controls\"><input readonly=\"readonly\" style=\"font-size: 14px;\" type=\"text\" placeholder=\"Descripcion\" id=\"descripcion\" name=\"descripcion\" runat=\"server\" class=\"span12\"/></div> \n" +
                 "</div> \n" +
                 "<div class=\"control-group\" id=\"divcantidad\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Cantidad Disponible:</b></label> \n" +
-                "<div class=\"controls\"><input  readonly=\"readonly\" required=\"required\" style=\"font-size: 13px;\" type=\"number\"  id=\"cantdisponible\" runat=\"server\" /></div> \n" +
+                "<div class=\"controls\"><input  readonly=\"readonly\" required=\"required\" style=\"font-size: 14px;\" type=\"number\"  id=\"cantdisponible\" runat=\"server\" /></div> \n" +
                 "</div> \n" +
                 "<div class=\"control-group\" > \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Cantidad:</b></label> \n" +

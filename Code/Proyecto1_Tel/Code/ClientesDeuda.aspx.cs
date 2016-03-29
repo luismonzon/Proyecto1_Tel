@@ -216,7 +216,7 @@ namespace Proyecto1_Tel.Code
                 "<div class=\"modal-header\"> \n" +
                 "<button type=\"button\" onclick=\"reloadTable();\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button> \n" +
                 "<div class=\"step-title\"> \n" +
-                "<i>P</i> \n" +
+                "<i>AP</i> \n" +
                 "<h5>Abonar Pago</h5> \n" +
                 "<span>Abonar pago a la deuda del cliente </span> \n" +
                 "</div> \n" +

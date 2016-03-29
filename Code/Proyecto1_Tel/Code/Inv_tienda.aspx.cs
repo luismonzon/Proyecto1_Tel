@@ -526,7 +526,7 @@ namespace Proyecto1_Tel.Code
                 "<div class=\"modal-header\"> \n" +
                 "<button type=\"button\" onclick=\"reloadTable();\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button> \n" +
                 "<div class=\"step-title\"> \n" +
-                "<i>R</i> \n" +
+                "<i>T</i> \n" +
                 "<h5>Administrar Producto en Tienda</h5> \n" +
                 "<span>Agregar o Editar Productos en Tienda</span> \n" +
                 "</div> \n" +
@@ -541,17 +541,17 @@ namespace Proyecto1_Tel.Code
                 "<div> \n" +
                 "<div id=\"cmbproducto\" class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Producto:</b></label> \n" +
-                "<div class=\"controls\"><select data-placeholder=\"Buscar Producto...\" name=\"producto-select\" class=\"select\" onChange=\"cambio();\" runat=\"server\" required=\"required\"  id=\"producto\"></select></div> \n" +
+                "<div class=\"controls\"><select style=\"font-size: 15px;\" data-placeholder=\"Buscar Producto...\" name=\"producto-select\" class=\"select\" onChange=\"cambio();\" runat=\"server\" required=\"required\"  id=\"producto\"></select></div> \n" +
                 "</div> \n" +
                 //
                 "<div id=\"in_producto\" class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Producto:</b></label> \n" +
-                "<div class=\"controls\"><input readonly=\"readonly\" style=\"font-size: 13px;\" type=\"text\" placeholder=\"Producto\" id=\"abre_producto\" name=\"abre_producto\" runat=\"server\" class=\"span12\"/></div> \n" +
+                "<div class=\"controls\"><input readonly=\"readonly\" style=\"font-size: 14px;\" type=\"text\" placeholder=\"Producto\" id=\"abre_producto\" name=\"abre_producto\" runat=\"server\" class=\"span12\"/></div> \n" +
                 "</div> \n" +
                 //
                 "<div class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Descripcion:</b></label> \n" +
-                "<div class=\"controls\"><input readonly=\"readonly\" style=\"font-size: 13px;\" type=\"text\" placeholder=\"Descripcion\" id=\"descripcion\" name=\"descripcion\" runat=\"server\" class=\"span12\"/></div> \n" +
+                "<div class=\"controls\"><input readonly=\"readonly\" style=\"font-size: 14px;\" type=\"text\" placeholder=\"Descripcion\" id=\"descripcion\" name=\"descripcion\" runat=\"server\" class=\"span12\"/></div> \n" +
                 "</div> \n" +
                 "<div class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Tipo:</b></label> \n" +

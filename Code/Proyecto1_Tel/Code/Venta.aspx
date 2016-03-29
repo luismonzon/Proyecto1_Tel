@@ -10,7 +10,7 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
 
-	    <h5 class="widget-name"><i class="icon-columns"></i>Ventas</h5>
+	    <h4 class="widget-name"><i class="icon-columns"></i>Ventas</h4>
     
     <div class="row-fluid">
 	            

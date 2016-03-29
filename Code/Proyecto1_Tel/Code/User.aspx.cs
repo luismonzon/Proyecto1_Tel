@@ -224,7 +224,7 @@ namespace Proyecto1_Tel.Code
                 "<div class=\"modal-header\"> \n" +
                 "<button type=\"button\" onclick=\"reloadTable();\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button> \n" +
                 "<div class=\"step-title\"> \n" +
-                "<i>R</i> \n" +
+                "<i>U</i> \n" +
                 "<h5>Administrar Usuario</h5> \n" +
                 "<span>Agregar o Editar un Usuario </span> \n" +
                 "</div> \n" +
@@ -239,33 +239,33 @@ namespace Proyecto1_Tel.Code
                 "<div> \n" +
                 "<div class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Usuario:</b></label> \n" +
-                "<div class=\"controls\"><input placeholder=\"NickName\" required=\"required\" style=\"font-size: 15px;\" type=\"text\" name=\"nickname\" id=\"nickname\" runat=\"server\" class=\"span12\" /></div> \n" +
+                "<div class=\"controls\"><input placeholder=\"NickName\" required=\"required\" style=\"font-size: 14px;\" type=\"text\" name=\"nickname\" id=\"nickname\" runat=\"server\" class=\"span12\" /></div> \n" +
                 "</div> \n" +
                 "<div class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Nombre:</b></label> \n" +
-                "<div class=\"controls\"><input  required=\"required\" style=\"font-size: 13px;\" type=\"text\" placeholder=\"Nombre\" id=\"nombre\" runat=\"server\" /></div> \n" +
+                "<div class=\"controls\"><input  required=\"required\" style=\"font-size: 14px;\" type=\"text\" placeholder=\"Nombre\" id=\"nombre\" runat=\"server\" /></div> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Apellido:</b></label> \n" +
-                "<div class=\"controls\"><input  required=\"required\" style=\"font-size: 13px;\" type=\"text\" placeholder=\"Apellido\" id=\"apellido\" runat=\"server\" /></div> \n" +
+                "<div class=\"controls\"><input  required=\"required\" style=\"font-size: 14px;\" type=\"text\" placeholder=\"Apellido\" id=\"apellido\" runat=\"server\" /></div> \n" +
                 "</div> \n" +
                 "<div class=\"control-group\"> \n" +
-                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*DPI:</b></label> \n" +
-                "<div class=\"controls\"><input placeholder=\"DPI\" required=\"required\" style=\"font-size: 15px;\" type=\"text\" name=\"dpi\" id=\"dpi\" runat=\"server\" class=\"span12\" /></div> \n" +
+                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>DPI:</b></label> \n" +
+                "<div class=\"controls\"><input placeholder=\"DPI\"  style=\"font-size: 14px;\" type=\"text\" name=\"dpi\" id=\"dpi\" runat=\"server\" class=\"span12\" /></div> \n" +
                 "</div> \n" +
                 "<div class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Contraseña:</b></label> \n" +
-                "<div class=\"controls\"><input  required=\"required\" style=\"font-size: 13px;\" type=\"password\" placeholder=\"Contraseña\" id=\"password\" runat=\"server\" /></div> \n" +
+                "<div class=\"controls\"><input  required=\"required\" style=\"font-size: 14px;\" type=\"password\" placeholder=\"Contraseña\" id=\"password\" runat=\"server\" /></div> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Repetir Contraseña:</b></label> \n" +
-                "<div class=\"controls\"><input  required=\"required\" style=\"font-size: 13px;\" type=\"password\" placeholder=\"Repetir Contraseña\" id=\"password1\" runat=\"server\" /></div> \n" +
+                "<div class=\"controls\"><input  required=\"required\" style=\"font-size: 14px;\" type=\"password\" placeholder=\"Repetir Contraseña\" id=\"password1\" runat=\"server\" /></div> \n" +
                 "</div> \n" +
                 "<div class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Rol:</b></label> \n" +
-                "<div class=\"controls\"><select name=\"Rol\" class=\"select\" id=\"Rol\"></select></div> \n" +
+                "<div class=\"controls\"><select style=\"font-size: 15px;\"  name=\"Rol\" class=\"select\" id=\"Rol\"></select></div> \n" +
                 "</div> \n" +
                 "<tr> \n" +
                 "<td colspan=\"2\"> \n" +
                 "<div id=\"mensaje\"></div> \n" +
                 "<div class=\"alert margin\"> \n" +
-                "<button type=\"button\"  class=\"close\" data-dismiss=\"alert\">×</button> \n" +
+                "<button type=\"button\" style=\"font-size: 15px;\"  class=\"close\" data-dismiss=\"alert\">×</button> \n" +
                 "Campos Obligatorios (*) \n" +
                 "</div> \n" +
                 "<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" onclick=\"reloadTable();\" id=\"cerrar\">Cerrar</button>\n" +

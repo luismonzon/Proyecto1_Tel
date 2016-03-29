@@ -282,7 +282,7 @@ namespace Proyecto1_Tel.Code
                 "<div class=\"modal-header\"> \n" +
                 "<button type=\"button\" onclick=\"reloadTable();\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button> \n" +
                 "<div class=\"step-title\"> \n" +
-                "<i>R</i> \n" +
+                "<i>C</i> \n" +
                 "<h5>Administrar Cliente</h5> \n" +
                 "<span>Agregar o Editar un Cliente </span> \n" +
                 "</div> \n" +
@@ -301,7 +301,7 @@ namespace Proyecto1_Tel.Code
                 "</div> \n" +
                 "<div class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>Apellidos:</b></label> \n" +
-                "<div class=\"controls\"><input  style=\"font-size: 13px;\" type=\"text\" placeholder=\"Apellidos\" id=\"apellido\" runat=\"server\" class=\"span12\"/></div> \n" +
+                "<div class=\"controls\"><input  style=\"font-size: 15px;\" type=\"text\" placeholder=\"Apellidos\" id=\"apellido\" runat=\"server\" class=\"span12\"/></div> \n" +
                 "</div> \n" +
                 "<div class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>Nit:</b></label> \n" +
@@ -309,11 +309,11 @@ namespace Proyecto1_Tel.Code
                 "</div> \n" +
                 "<div class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>Direccion:</b></label> \n" +
-                "<div class=\"controls\"><input   style=\"font-size: 13px;\" type=\"text\" placeholder=\"Direccion\" id=\"direccion\" runat=\"server\" /></div> \n" +
+                "<div class=\"controls\"><input   style=\"font-size: 15px;\" type=\"text\" placeholder=\"Direccion\" id=\"direccion\" runat=\"server\" /></div> \n" +
                 "</div> \n" +
                 "<div class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>Telefono:</b></label> \n" +
-                "<div class=\"controls\"><input  style=\"font-size: 13px;\" type=\"text\" placeholder=\"Telefono\" id=\"telefono\" runat=\"server\" data-mask=\"9999-9999\" /></div> \n" +
+                "<div class=\"controls\"><input  style=\"font-size: 15px;\" type=\"text\" placeholder=\"Telefono\" id=\"telefono\" runat=\"server\" /></div> \n" +
                 "</div> \n" +
                 "<tr> \n" +
                 "<td colspan=\"2\"> \n" +

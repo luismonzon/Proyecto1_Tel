@@ -33,7 +33,7 @@ namespace Proyecto1_Tel.Code
 
                 conexion = new Conexion();
                 DataSet Productos = conexion.Mostrar("Producto", "producto, abreviatura");
-                String html = "<select data-placeholder=\"Agregar producto\" class=\"select\" tabindex=\"2\">";
+                String html = "<select style=\"font-size: 15px;\" data-placeholder=\"Agregar producto\" class=\"select\" tabindex=\"2\">";
                 html += "<option value=\"\"></option> ";
 
                 foreach (DataRow item in Productos.Tables[0].Rows)
@@ -86,7 +86,7 @@ namespace Proyecto1_Tel.Code
                 "<div class=\"modal-header\"> \n" +
                 "<button type=\"button\" onclick=\"reloadTable();\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button> \n" +
                 "<div class=\"step-title\"> \n" +
-                "<i>R</i> \n" +
+                "<i>C</i> \n" +
                 "<h5>Agregar Cliente</h5> \n" +
                 "<span>Agregar un Cliente </span> \n" +
                 "</div> \n" +

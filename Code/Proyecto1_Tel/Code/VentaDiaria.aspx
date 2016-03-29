@@ -24,7 +24,7 @@
         </div>
 
 
-	<h5 class="widget-name"><i class="icon-columns"></i>Venta Diaria</h5>
+	<h4 class="widget-name"><i class="icon-columns"></i>Venta Diaria</h4>
 
         <div class="widget">
 	        <div class="navbar">
