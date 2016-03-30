@@ -14,7 +14,82 @@
     
     <div class="row-fluid">
 	            
-	            	<!-- Column -->
+
+	            	
+	                <!-- Column -->
+	                <div class="span12">
+	                	
+	                    <!-- Horizontal form -->
+	                    <div class="form-horizontal">
+	                        <div class="widget">
+	                            <div class="navbar"><div class="navbar-inner"><h6>Cliente</h6>
+	                                <button  type="submit" id="nuevo-cliente" class="btn btn-success pull-right">Agregar Cliente</button></div></div>
+
+	                            <div class="well">
+	                             <div class="control-group">
+	                                    <label class="control-label">Buscar</label>
+	                                    <div class="controls">
+                                            <div class="align-left">
+                                                <input type="text" name="regular" class="span2" id="idcliente" placeholder="Cod. Cliente" />
+	                                         
+                                            <button  id="busca" class="btn btn-primary">Buscar</button>
+                                             </div>
+	                                    </div>
+	                                </div>
+	                                
+	                                 <div class="control-group">    
+                                         
+                                         <div class="span6">
+	                                        <label class="control-label">Codigo</label>
+	                                          <div class=" align-left"> 
+                                                <input type="text" name="regular" disabled="disabled" class="span2" id="codigo_cliente" placeholder="Cod. Cliente" />
+                                                </div>
+	                                    </div>
+	                                
+	                                    <div class="span6">
+	                                        <label class="control-label">Nombre</label>
+	                                          <div class=" align-left"> 
+                                            <input type="text" name="regular"  disabled="disabled" class="span6" id="nombre_cliente" placeholder="Nombre del Cliente" />
+                                            </div>
+	                                    </div>
+                                                               
+	                                 </div>
+	                                <div class="control-group">
+	                                    <div class="span6">
+	                                        <label class="control-label">Nit Cliente</label>
+	                                          <div class=" align-left"> 
+                                                <input type="text" name="regular"  disabled="disabled" class="span6" id="nit_cliente" placeholder="Nit del Cliente" />
+                                            </div>
+	                                    </div>
+	                                
+	                                    <div class="span6">
+	                                        <label class="control-label">Telefono Cliente</label>
+	                                          <div class=" align-left"> 
+                                                <input type="text" name="regular"  disabled="disabled" class="span6" id="tel_cliente" placeholder="Telefono del Cliente" />
+
+                                            </div>
+	                                    </div>
+
+	                                </div>
+	                                
+                                    <div class="control-group">
+	                                        <label class="control-label">Direccion del Cliente</label>
+	                                          <div class=" align-left"> 
+                                                <input type="text" name="regular"  disabled="disabled" class="span8" id="dir_cliente" placeholder="Direccion del Cliente" />
+                                            </div>
+	                                    </div>
+
+	                            </div>
+	                            
+	                        </div>
+	                    </div>
+	                    <!-- /horizontal form -->
+	                	
+	                </div>
+	                <!-- /column --> 
+	            </div>
+
+    	            	<!-- Column -->
 	                <div class="span6">
                         
 	                    <div class="form-horizontal">
@@ -23,20 +98,16 @@
 
 	                            <div class="well">
 	                            
-	                                
-	                                
                                     <div  class="control-group">
                                         <label class="control-label">Agregar Producto</label>
                                         
-                                            <div class="align-center">
+                                            <div class="align-left">
                                                 <div id="productos" class="span6"  runat="server">
                                                 </div>
                                                 <button  id="agregar" class="btn btn-primary ">Agregar</button>
                                              </div>
                                     </div>
 	                              
-	                               
-	                                
 	                                <div class="form-actions align-right">
 	                                    <button type="submit" id="submit" class="btn btn-primary">Aceptar</button>
 	                                    <button type="button" class="btn btn-danger">Cancelar</button>
@@ -51,61 +122,6 @@
 	                    
 	                </div>
 	                <!-- /column -->
-	            	
-	                <!-- Column -->
-	                <div class="span6">
-	                	
-	                    <!-- Horizontal form -->
-	                    <div class="form-horizontal">
-	                        <div class="widget">
-	                            <div class="navbar"><div class="navbar-inner"><h6>Cliente</h6></div></div>
-
-	                            <div class="well">
-	                             <div class="control-group">
-	                                    <label class="control-label">Buscar</label>
-	                                    <div class="controls">
-                                            <div class="align-center">
-                                                <input type="text" name="regular" class="span6" id="idcliente" placeholder="Cod. Cliente" />
-	                                         
-                                            <button  id="busca" class="btn btn-primary">Buscar</button>
-                                             </div>
-	                                    </div>
-	                                </div>
-	                                
-	                                 <div class="control-group">                                  
-	                                    <label class="control-label">Codigo Cliente</label>
-	                                        <div class=" align-center"> 
-                                            <input type="text" name="regular" disabled="disabled" class="span6" id="codigo_cliente" placeholder="Cod. Cliente" />
-                                            </div>
-	                                 </div>
-	                                <div class="control-group">
-	                                    <label class="control-label">Nombre Cliente  </label>
-	                                        <div class=" align-center"> 
-                                            <input type="text" name="regular"  disabled="disabled" class="span6" id="nombre_cliente" placeholder="Nombre Cliente" />
-                                        </div>
-	                                </div>
-	                                
-	                                <div class="control-group">
-	                                    <label class="control-label">Nit Cliente</label>
-	                                      <div class=" align-center"> 
-                                            <input type="text" name="regular"  disabled="disabled" class="span6" id="nit_cliente" placeholder="Nit Cliente" />
-                                        </div>
-	                                </div>
-	                                
-	                                
-	                                <div class="form-actions align-right">
-                                        <button type="submit" id="nuevo-cliente" class="btn btn-success">Agregar Cliente</button>
-	                                </div>
-
-	                            </div>
-	                            
-	                        </div>
-	                    </div>
-	                    <!-- /horizontal form -->
-	                	
-	                </div>
-	                <!-- /column --> 
-	            </div>
 
             <!-- MODAL PARA AGREGAR CLIENTES CLIENTES-->
             <div id="divmodal" runat="server">
@@ -137,6 +153,8 @@
 	                    $("#codigo_cliente").val(datos[3]);
 	                    $("#nit_cliente").val(datos[1]);
 	                    $("#nombre_cliente").val(datos[0] + " " + datos[2]);
+	                    $("#tel_cliente").val(datos[5]);
+	                    $("#dir_cliente").val(datos[4]);
 	                }
 	            }
 	        });
@@ -209,15 +227,15 @@
 
 	                                var cliente = JSON.parse(response.d);
 	                                var idCliente = cliente[0];
-	                             
+
 	                                document.getElementById("codigo").value = idCliente;
 	                                $('#mensaje').removeClass();
 	                                $('#mensaje').addClass('alert alert-success').html('Cliente agregado con exito').show(200).delay(2500).hide(200);
 
-	                             
-                         }
 
-                             });
+	                            }
+
+	                        });
 
 
 
@@ -241,9 +259,30 @@
 
 	    }
 
+	    function closeModal() {
 
 
+	        $('#Modal').modal('toggle');
+	        var $modal = $('#ContentPlaceHolder1_modaldetalle');
+	        $modal.html("");
 
+	    }
+
+	    function cambio() {
+	        var combo = document.getElementById("cmbproductos");
+
+	        var selected = $("#cmbproductos  option:selected").text();
+
+	        if (selected == "Articulo") {
+	            $('#divtam').hide();
+	            $('#divporc').hide();
+	        } else {
+	            $('#divtam').show();
+	            $('#divporc').show();
+	        }
+
+
+	    }
 
 	</script>                    
 	                    <!-- /horizontal form -->

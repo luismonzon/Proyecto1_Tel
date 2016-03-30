@@ -8,7 +8,7 @@
 
              <div class="widget-title">
 		            <h4 class="widget-name"><i class="icon-home"></i>Inicio</h4>
-		        </div>
+		     </div>
 
       
             <div id="contenido" runat="server">

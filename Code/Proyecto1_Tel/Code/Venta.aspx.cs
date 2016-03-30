@@ -33,7 +33,7 @@ namespace Proyecto1_Tel.Code
 
                 conexion = new Conexion();
                 DataSet Productos = conexion.Mostrar("Producto", "producto, abreviatura");
-                String html = "<select style=\"font-size: 15px;\" data-placeholder=\"Agregar producto\" class=\"select\" tabindex=\"2\">";
+                String html = "<select style=\"font-size: 15px;\" data-placeholder=\"Agregar producto\" class=\"select\"  onChange=\"cambio()\"  id=\"cmbproductos\" tabindex=\"2\">";
                 html += "<option value=\"\"></option> ";
 
                 foreach (DataRow item in Productos.Tables[0].Rows)
@@ -61,16 +61,17 @@ namespace Proyecto1_Tel.Code
             Conexion conexion = new Conexion();
             DataSet cliente;
             string respuesta = "";
-            cliente =conexion.Buscar_Mostrar("cliente", "cliente=" + idcliente);
-            if (cliente.Tables[0].Rows.Count > 0) {
+            cliente = conexion.Buscar_Mostrar("cliente", "cliente=" + idcliente);
+            if (cliente.Tables[0].Rows.Count > 0)
+            {
 
                 foreach (DataRow item in cliente.Tables[0].Rows)
                 {
-                    respuesta += item["nombre"].ToString() + "," + item["nit"].ToString() + "," + item["apellido"].ToString() + "," + item["cliente"].ToString();
+                    respuesta += item["nombre"].ToString() + "," + item["nit"].ToString() + "," + item["apellido"].ToString() + "," + item["cliente"].ToString() + "," + item["direccion"].ToString() + "," + item["telefono"].ToString();
                 }
                 return respuesta;
             }
-            
+
 
             return "0";
         }
@@ -84,7 +85,7 @@ namespace Proyecto1_Tel.Code
                 "<div class=\"modal-dialog\"> \n" +
                 "<div class=\"modal-content\"> \n" +
                 "<div class=\"modal-header\"> \n" +
-                "<button type=\"button\" onclick=\"reloadTable();\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button> \n" +
+                "<button type=\"button\" onclick=\"closeModal();\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button> \n" +
                 "<div class=\"step-title\"> \n" +
                 "<i>C</i> \n" +
                 "<h5>Agregar Cliente</h5> \n" +
@@ -132,7 +133,7 @@ namespace Proyecto1_Tel.Code
                 "<button type=\"button\"  class=\"close\" data-dismiss=\"alert\">×</button> \n" +
                 "Campos Obligatorios (*) \n" +
                 "</div> \n" +
-                "<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" onclick=\"reloadTable();\" id=\"cerrar\">Cerrar</button>\n" +
+                "<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" onclick=\"closeModal();\" id=\"cerrar\">Cerrar</button>\n" +
                 "<button type=\"button\" class=\"btn btn-large btn-success\" onclick=\"AddClient();\" name=\"reg\" id=\"reg\">Registrar</button>\n" +
                 "<button type=\"button\" class=\"btn btn-large btn-warning\" onclick=\"Edit();\" name=\"edi\" id=\"edi\">Editar</button>\n" +
                 "</td> \n" +
