@@ -185,6 +185,30 @@ namespace Proyecto1_Tel.Code
             return respuesta;
         }
 
+        public DataSet Consulta(string query)
+        {
+            DataSet respuesta = new DataSet();
+            try
+            {
+                //SELECT cod_depto, nombre_depto FROM DEPARTAMENTO;
+                SqlDataAdapter adaptador = new SqlDataAdapter(query, conexion);
+
+                if (ConectarServer())
+                {
+                    adaptador.Fill(respuesta);
+                }
+            }
+            catch (Exception ex)
+            {
+                MostrarError = "Mensaje de la exepción: " + ex.Message.ToString();
+            }
+            finally
+            {
+                conexion.Close();
+            }
+
+            return respuesta;
+        }
 
         public DataSet Mostrar(string tabla, string campos)
         {

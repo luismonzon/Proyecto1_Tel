@@ -104,14 +104,21 @@
                                             <div class="align-left">
                                                 <div id="productos" class="span6"  runat="server">
                                                 </div>
-                                                <button  id="agregar" class="btn btn-primary ">Agregar</button>
                                              </div>
+                                             <label class="control-label">Cantidad</label>
+                                            
+                                             <input type="text" name="regular"  class="span8" id="txtcantidad" placeholder="Cantidad Producto" />
+                                            
+                                                <button  id="agregar" class="btn btn-primary ">Agregar</button>
+                                    </div>
+                                    <div class="control-group" id="detalleproductos">
+
+
                                     </div>
 	                              
 	                                <div class="form-actions align-right">
-	                                    <button type="submit" id="submit" class="btn btn-primary">Aceptar</button>
-	                                    <button type="button" class="btn btn-danger">Cancelar</button>
-	                                    <button type="reset" class="btn">Limpiar</button>
+	                                    <button type="submit" id="comprar" class="btn btn-primary">Aceptar</button>
+	                                    <button type="reset" id="cleancarrito" class="btn">Limpiar</button>
 	                                </div>
 
 	                            </div>
@@ -127,11 +134,130 @@
             <div id="divmodal" runat="server">
     
             </div>
+            
+            <div id="divpago" runat="server">
+    
+            </div>
 
 
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="foot" runat="server">
-       
+    <script type="text/javascript">
+        $('#comprar').on('click', function () { // modal pago
+            var client = $("#codigo_cliente").val();
+            $.ajax({
+                type: 'POST',
+                url: 'Venta.aspx/MostrarModalPago',
+                data: JSON.stringify({ cliente: client }),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (response) {
+                    //se escribe el modal
+                    var $modal = $('#ContentPlaceHolder1_divpago');
+                    $modal.html(response.d);
+                    $('#ModalPago').on('show.bs.modal', function () {
+                        $('.modal .modal-body').css('overflow-y', 'auto');
+                        $('.modal .modal-body').css('max-height', $(window).height() * 0.7);
+                        $('.modal .modal-body').css('height', $(window).height() * 0.7);
+                    });
+
+                    //Modal
+                    $('#formulario_modal')[0].reset(); //formulario lo inicializa con datos vacios
+                    $('#pro_modal').val('Registro'); //crea nuestra caja de procesos y se agrega el valor del registro
+                    $('#reg_modal').show(); //mostramos el boton de registro
+                    $('#edi_modal').hide();//se esconde el boton de editar
+                    $('#ModalPago').modal({ //
+                        show: true, //mostramos el modal registra producto
+                        //backdrop: 'static' //hace que no se cierre el modal si le dan clic afuera del mismo.
+                    });
+                }
+            });
+
+
+        });
+
+
+
+        function removecarrito(val) {
+            $.ajax({
+                type: 'POST',
+                url: 'Venta.aspx/removecarrito',
+                data: JSON.stringify({ codigo: val }),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (msg) {
+
+                    $("#detalleproductos").html(msg.d);
+                }
+            });
+        }
+
+    </script>
+   
+    <script type="text/javascript">
+        $('#agrega').on('click', function () {
+            $.ajax({
+                type: 'POST',
+                url: 'Venta.aspx/Busca',
+                data: JSON.stringify({ idcliente: id_cliente }),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (msg) {
+                    // Notice that msg.d is used to retrieve the result object
+                    if (msg.d == "0") {
+                        alert("Cliente no existe");
+                    }
+                    else {
+                        var datos = msg.d.split(",");
+                        $("#codigo_cliente").val(datos[3]);
+                        $("#nit_cliente").val(datos[1]);
+                        $("#nombre_cliente").val(datos[0] + " " + datos[2]);
+                        $("#tel_cliente").val(datos[5]);
+                        $("#dir_cliente").val(datos[4]);
+                    }
+                }
+            });
+        });
+
+
+
+
+        $('#agregar').on('click', function () {
+           
+            var cod = $("#cmbproductos").val();
+            var nombre = $("#cmbproductos").text();
+            var cant = $("#txtcantidad").val();
+
+            $.ajax({
+                type: 'POST',
+                url: 'Venta.aspx/AddProducto',
+                data: JSON.stringify({ producto: nombre, cantidad: cant, codigo:cod }),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (msg) {
+                    
+                    $("#detalleproductos").html(msg.d);
+                }
+            });
+        });
+
+
+        $('#cleancarrito').on('click', function () {
+
+
+            $.ajax({
+                type: 'POST',
+                url: 'Venta.aspx/CleanCarrito',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (msg) {
+
+                    $("#detalleproductos").html(msg.d);
+                }
+            });
+        });
+
+    </script>
       <!-- Horizontal form -->
 	<script type="text/javascript">
 	    $('#busca').on('click', function () {
@@ -194,6 +320,47 @@
 
 
 	    //AGREGAR CLIENTE
+
+        
+	    function AddPago() {
+
+
+	        var tot = document.getElementById("totalpago").value;
+	        var client = document.getElementById("codclientepago").value;
+	        var tipo = $("#cmbpago").val();
+
+
+	        if (nNombre != "") {
+
+
+	            $.ajax({
+	                type: 'POST',
+	                url: 'Venta.aspx/AddPago',
+	                data: JSON.stringify({ total: tot,cliente:client,tipopago: tipo}),
+	                contentType: 'application/json; charset=utf-8',
+	                dataType: 'json',
+	                success: function (response) {
+	                    if (response.d == true) {
+	                        alert("exito");
+	                        window.location = "/Code/Venta.aspx";
+	                    } else {
+	                        $('#mensaje').removeClass();
+	                        $('#mensaje').addClass('alert alert-danger').html('Error al insertar').show(200).delay(2500).hide(200);
+
+	                    }
+
+	                }
+	            });
+
+	        } else {
+	            $('#mensaje').removeClass();
+	            $('#mensaje').addClass('alert alert-danger').html('Revise los campos obligatorios marcados con (*)').show(200).delay(2500).hide(200);
+
+	        }
+	        return false;
+
+
+	    }
 
 	    function AddClient() {
 
@@ -263,6 +430,14 @@
 
 
 	        $('#Modal').modal('toggle');
+	        var $modal = $('#ContentPlaceHolder1_modaldetalle');
+	        $modal.html("");
+
+	    }
+	    function closeModalPago() {
+
+
+	        $('#ModalPago').modal('toggle');
 	        var $modal = $('#ContentPlaceHolder1_modaldetalle');
 	        $modal.html("");
 
