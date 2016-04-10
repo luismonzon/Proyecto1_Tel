@@ -99,7 +99,7 @@
                     $('#mensaje').removeClass();
                     $('#mensaje').addClass('alert alert-danger').html('La cantidad no debe ser mayor que la deuda').show(200).delay(2500).hide(200);
                 } else {
-                    alert(id + " " + cantidad);
+                  
                     $.ajax({
                         type: 'POST',
                         url: 'ClientesDeuda.aspx/Add',

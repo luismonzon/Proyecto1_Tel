@@ -12,6 +12,14 @@ and i.Producto = p.Producto
 and v.Cliente = 500 
 group by p.Abreviatura, p.Descripcion;
 
+--VENTA ANUAL
+
+SELECT SUM(Total) Total 
+ FROM  Venta v, Cliente c, Usuario u 
+where v.Cliente = c.Cliente 
+and v.Usuario = u.Usuario 
+and Fecha = '20160409' 
+;
 
 
 go

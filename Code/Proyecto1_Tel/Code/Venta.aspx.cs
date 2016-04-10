@@ -14,7 +14,7 @@ namespace Proyecto1_Tel.Code
         public String codigo;
         public String nombre;
         public string precio;
-        public Product(String cant, String cod, String nombre,string precio){
+        public Product(String cant, String cod, String abreviatura, String nombre,string precio){
             this.precio = precio;
         cantidad=cant;
         codigo=cod;
@@ -53,7 +53,7 @@ namespace Proyecto1_Tel.Code
 
                 conexion = new Conexion();
                 DataSet Productos = conexion.Consulta("select * from Producto where Producto in(select Producto from Inventario)");
-                String html = "<select style=\"font-size: 15px;\" data-placeholder=\"Agregar producto\" class=\"select\"  onChange=\"cambio()\"  id=\"cmbproductos\" tabindex=\"2\">";
+                String html = "<select  runat=\"server\" style=\"font-size: 15px;\" data-placeholder=\"Agregar producto\" class=\"select\"  onChange=\"cambios()\"  id=\"cmbproductos\" tabindex=\"2\">";
                 html += "<option value=\"\"></option> ";
 
                 foreach (DataRow item in Productos.Tables[0].Rows)
@@ -256,20 +256,20 @@ namespace Proyecto1_Tel.Code
         public static bool AddPago(string total,string cliente, string tipopago)
         {
             Conexion nueva = new Conexion();
-
-            nueva.Crear("Venta", "Cliente, Usuario, Fecha, Total", cliente + "," + usuario + ",GETDATE()," + Convert.ToString(total).Replace(",", "."));
+            bool respuesta;
+              respuesta = nueva.Crear("Venta", "Cliente, Usuario, Fecha, Total", cliente + "," + usuario + ",GETDATE()," + Convert.ToString(total).Replace(",", "."));
               foreach (var item in carrito)
 	            {
-		             nueva.Crear("DetalleVenta", "Venta, producto, cantidad","(select max(Venta) from venta),"+item.codigo+","+item.cantidad);
+		           respuesta = nueva.Crear("DetalleVenta", "Venta, producto, cantidad","(select max(Venta) from venta),"+item.codigo+","+item.cantidad);
                     
                 }
 
             if(tipopago.Equals("2")){
 
-                nueva.Crear("Deuda", "Cliente, cantidad, venta", cliente + "," + Convert.ToString(total).Replace(",", ".") + ",(select max(Venta) from venta)");
+               respuesta = nueva.Crear("Deuda", "Cliente, cantidad, venta", cliente + "," + Convert.ToString(total).Replace(",", ".") + ",(select max(Venta) from venta)");
             }
             
-            return true;
+            return respuesta;
         }
 
 
@@ -343,7 +343,7 @@ namespace Proyecto1_Tel.Code
                     Conexion nueva = new Conexion();
                     DataSet datos = nueva.Consulta("select precio from inventario where producto=" + codigo);
                     DataSet abreviatura = nueva.Consulta("select Abreviatura from Producto where producto=" + codigo);
-                    carrito.Add(new Product(cantidad, abreviatura.Tables[0].Rows[0][0] + "", producto, datos.Tables[0].Rows[0][0] + ""));
+                    carrito.Add(new Product(cantidad,codigo, abreviatura.Tables[0].Rows[0][0] + "", producto, datos.Tables[0].Rows[0][0] + ""));
             
                 }
                 catch (Exception e)
@@ -386,7 +386,7 @@ namespace Proyecto1_Tel.Code
                 try
                 {
                     str += "            <tr>" +
-                                    "                <td>" + carrito[i].codigo + "</td>" +
+                                    "                <td>" + carrito[i].nombre + "</td>" +
                                     "                <td>" +
                                                         carrito[i].cantidad +
                                     "                </td>" +
@@ -443,7 +443,74 @@ namespace Proyecto1_Tel.Code
         }
 
 
+        [WebMethod]
+        public static string Busca_Datos(string id)
+        {
+            Conexion conn = new Conexion();
 
+            DataSet Producto_ = conn.Buscar_Mostrar("Producto", "Producto" + "= " + id);
+            XmlDocument xDoc = new XmlDocument();
+            xDoc.LoadXml(Producto_.GetXml());
+            XmlNodeList _Producto = xDoc.GetElementsByTagName("NewDataSet");
+            XmlNodeList lista_producto = ((XmlElement)_Producto[0]).GetElementsByTagName("Producto_x003D__x0020_" + id);
+
+
+
+            DataSet Bodega_ = conn.Buscar_Mostrar("Bodega", "Producto" + "= " + id);
+            XmlDocument xBod = new XmlDocument();
+            xBod.LoadXml(Bodega_.GetXml());
+            XmlNodeList _Bodega = xBod.GetElementsByTagName("NewDataSet");
+            XmlNodeList Cantidad = ((XmlElement)_Bodega[0]).GetElementsByTagName("Cantidad");
+
+
+
+            XmlNodeList nDescripcion = ((XmlElement)lista_producto[0]).GetElementsByTagName("Descripcion");
+            XmlNodeList nTipo = ((XmlElement)lista_producto[0]).GetElementsByTagName("Tipo");
+
+
+            DataSet Tipo_ = conn.Buscar_Mostrar("Tipo", "Tipo" + "= " + nTipo[0].InnerText);
+            XmlDocument xTipo = new XmlDocument();
+            xTipo.LoadXml(Tipo_.GetXml());
+            XmlNodeList _Tipo = xTipo.GetElementsByTagName("NewDataSet");
+            XmlNodeList Tipo_Descripcion = ((XmlElement)_Tipo[0]).GetElementsByTagName("Descripcion");
+
+            DataSet Inventario = conn.Buscar_Mostrar("Inventario", "Producto" + "= " + id);
+            XmlDocument xInventario = new XmlDocument();
+            xInventario.LoadXml(Inventario.GetXml());
+            string verifica = Inventario.GetXml();
+            string precio;
+
+            if (Inventario.Tables[0].Rows.Count > 0)
+            {
+                precio = "1";
+            }
+            else
+            {
+                precio = "0";
+            }
+
+            string[] producto = new string[4];
+            try
+            {
+                producto[0] = nDescripcion[0].InnerText;
+                producto[1] = Cantidad[0].InnerText;
+                producto[2] = Tipo_Descripcion[0].InnerText;
+                producto[3] = precio;
+
+            }
+            catch (Exception ex)
+            {
+
+                string MostrarError = "Mensaje de la excepcion: " + ex.Message.ToString();
+            }
+
+
+            string json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(producto);
+            return json;
+
+
+
+        }
 
     }
 }

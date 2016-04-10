@@ -58,7 +58,7 @@ namespace Proyecto1_Tel.Code
 
         private string LLenar_Tabla()
         {
-            string columnas = " p.Abreviatura, p.Descripcion, SUM(d.Cantidad) Cantidad, SUM(d.Cantidad*I.Precio) Total \n ";
+            string columnas = " p.Abreviatura, p.Descripcion,Convert(Decimal(15,0),   SUM(d.Cantidad) , 2) Cantidad, Convert(Decimal(15,2), SUM(d.Cantidad*I.Precio), 2)  Total \n ";
             string condicion =
                 " DetalleVenta d, Producto p, Inventario i \n"+
                 "where p.Producto = d.Producto \n"+
@@ -77,8 +77,8 @@ namespace Proyecto1_Tel.Code
                             "<tr>" +
                                " <th  align =\"center\">Abreviatura</th>" +
                                 "<th align =\"center\">Descripcion</th>" +
-                                "<th align =\"center\">Cantidad</th>" +
-                                "<th align =\"center\">Total</th>" +
+                                "<th align =\"center\">Unidades Vendidas</th>" +
+                                "<th align =\"center\">Total Vendido</th>" +
                             "</tr>" +
                         "</thead>" + "<tbody>";
 
@@ -88,7 +88,7 @@ namespace Proyecto1_Tel.Code
                         "<td id=\"codigo\" runat=\"server\" align =\"Center\">" + item["Abreviatura"].ToString() + "</td>" +
                         "<td>" + item["Descripcion"].ToString() + "</td>" +
                         "<td>" + item["Cantidad"].ToString() + "</td>" +
-                        "<td>" + item["Total"].ToString() + "</td>";
+                        "<td>Q." + item["Total"].ToString() + "</td>";
                 }
 
 

@@ -123,7 +123,7 @@
                                         </div>
                                        
                                      <div class="control-group">
-                                         <div class="span6">
+                                         <div id="metros" class="span6">
                                                      <label class="control-label" style="font-size: 15px;"><b>Metros</b></label>
                                                      <div class=" align-left"> 
                                                          <input type="text" style="font-size: 13px;" name="regular"  class="span5" id="txtmetros" placeholder="Metros" />
@@ -178,7 +178,51 @@
 
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="foot" runat="server">
+
+
+
+
+
     <script type="text/javascript">
+
+        function cambios() {
+     
+            var id = document.getElementById('cmbproductos').value;
+            var selected = $("#cmbproductos  option:selected").text();
+     
+            $.ajax({
+                type: 'POST',
+                url: 'Venta.aspx/Busca_Datos',
+                data: JSON.stringify({ id: id }),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (response) {
+             
+                    var produc = JSON.parse(response.d);
+                    var Descripcion = produc[0];
+                    var Cantidad_Dispo = produc[1];
+                    var Tipo = produc[2];
+                    var Precio = produc[3];
+             
+                
+                    if (Tipo == "ARTICULO" || Tipo == "Articulo") {
+
+                        $('#metros').hide();
+                    
+                    } else {
+                        
+                        $('#metros').show();
+                
+                    }
+                   
+
+                }
+            });
+
+        }
+
+
+
         $('#comprar').on('click', function () { // modal pago
             var client = $("#codigo_cliente").val();
             $.ajax({
@@ -377,7 +421,7 @@
 	                dataType: 'json',
 	                success: function (response) {
 	                    if (response.d == true) {
-	                        alert("exito");
+	                        alert("Venta Realizada Con Exito");
 	                        window.location = "/Code/Venta.aspx";
 	                    } else {
 	                        $('#mensaje').removeClass();

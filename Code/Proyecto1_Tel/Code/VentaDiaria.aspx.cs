@@ -51,19 +51,26 @@ namespace Proyecto1_Tel.Code
                                 "and v.Usuario = u.Usuario \n" +
                                 "and Fecha = '" + fecha + "' \n";
             DataSet clientes = conexion.Mostrar(Condicion, Columnas);
+            string Row = " SUM (Total) \n " ;
+            string Cond = " Venta v, Cliente c, Usuario u \n" +
+                                "where v.Cliente = c.Cliente \n" +
+                                "and v.Usuario = u.Usuario \n" +
+                                "and Fecha = '" + fecha + "' \n";
+
+            DataSet total = conexion.Mostrar(Cond,Row) ;
             String data = "No hay Ventas Disponibles";
             if (clientes.Tables.Count > 0)
             {
 
-                data =
+                data = "<div class=\"alert alert-success\" style=\"font-size: 18px;\" > Ganancia Diaria: Q." + total.Tables[0].Rows[0][0] + "</div>" +
                     "<div class=\"table-overflow\"> " +
                     "<table class=\"table table-striped table-bordered\" id=\"data-table\">" +
                         "<thead>" +
                             "<tr>" +
-                                "<th  align =\"center\">Nombre</th>" +
-                                "<th  align =\"center\">Apellido</th>" +
+                                "<th  align =\"center\">Nombre Cliente</th>" +
+                                "<th  align =\"center\">Apellido Cliente</th>" +
                                " <th  align =\"center\">Vendedor</th>" +
-                               " <th  align =\"center\">Total</th>" +
+                               " <th  align =\"center\">Total Venta</th>" +
                                " <th  align =\"center\">Ver Detalle</th>" +
                                "</tr>" +
                         "</thead>" + "<tbody>";
@@ -74,7 +81,7 @@ namespace Proyecto1_Tel.Code
                         "<td id=\"codigo\" runat=\"server\" align =\"Center\">" + item["Nombre"].ToString() + "</td>" +
                         "<td id=\"codigo\" runat=\"server\">" + item["Apellido"].ToString() + "</td>" +
                         "<td id=\"codigo\" runat=\"server\">" + item["Vendedor"].ToString() + "</td>" +
-                        "<td id=\"codigo\" runat=\"server\">" + item["Total"].ToString() + "</td> ";
+                        "<td id=\"codigo\" runat=\"server\"> Q." + item["Total"].ToString() + "</td> ";
                     data += " <td align =\"Center\">" +
                     "<ul class=\"table-controls\">" +
                       " <li><a href=\"javascript:VerDetalle(" + item["Venta"].ToString() + ")\" id=\"view\" class=\"tip\" CssClass=\"Edit\" title=\"Ver Detalle\"><i class=\"fam-eye\"></i></a> </li>" +
@@ -125,7 +132,7 @@ namespace Proyecto1_Tel.Code
                             "</div>" +
                     "</div>";
 
-            string columnas = " p.Abreviatura, p.Descripcion, sum(d.Cantidad) Cantidad, SUM(d.Cantidad*i.Precio) Total \n";
+            string columnas = " p.Abreviatura, p.Descripcion,Convert(Decimal(15,0),  SUM(d.Cantidad) , 2) Cantidad,Convert(Decimal(15,2), SUM(d.Cantidad*i.Precio), 2) Total\n";
             string condicion =
                 "Producto p, Venta v, DetalleVenta d, Inventario i \n" +
                 "where d.Venta = v.Venta \n" +
@@ -157,7 +164,7 @@ namespace Proyecto1_Tel.Code
                         "<td id=\"codigo\" runat=\"server\" align =\"Center\">" + item["Abreviatura"].ToString() + "</td>" +
                         "<td>" + item["Descripcion"].ToString() + "</td>" +
                         "<td>" + item["Cantidad"].ToString() + "</td>" +
-                        "<td>" + item["Total"].ToString() + "</td>"
+                        "<td> Q." + item["Total"].ToString() + "</td>"
                         ;
                     data += "</tr>";
                 }

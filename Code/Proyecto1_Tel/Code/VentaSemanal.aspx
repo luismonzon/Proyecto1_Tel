@@ -47,7 +47,6 @@
                 var anio = sp[2];
 
                 var fecha = anio + mes + dia;
-
                 var d = new Date();
                 d.setFullYear(anio, mes - 1, dia);
 
@@ -55,7 +54,6 @@
                 var diff = d - start;
                 var oneDay = 1000 * 60 * 60 * 24;
                 var day = Math.ceil(diff / oneDay);
-                
 
                 var startdate = dateFromDay(d.getFullYear(), day - d.getDay());
                 var enddate = dateFromDay(d.getFullYear(), day + (6 - d.getDay()));
@@ -67,13 +65,13 @@
                 var anio1 = startdate.getFullYear().toString();
                 
                 if (mes1.length == 1) { mes1 = "0" + mes1; }
-
+                if (dia1.length == 1) { dia1 = "0" + dia1; }
                 var inicio = anio1 + mes1 + dia1;
-
                 var dia2 = enddate.getDate().toString();
                 var m2 = enddate.getMonth() + 1;
                 var mes2 = m2.toString();
                 if (mes2.length == 1) { mes2 = "0" + mes2; }
+                if (dia2.length == 1) { dia2 = "0" + dia2; }
                 var anio2 = enddate.getFullYear().toString();
 
 

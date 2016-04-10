@@ -300,7 +300,7 @@ namespace Proyecto1_Tel.Code
                             "</div>" +
                     "</div>";
 
-            string columnas = " p.Abreviatura, p.Marca, dv.Cantidad, v.Fecha, v.Total";
+            string columnas = " p.Abreviatura, p.Marca, dv.Cantidad, LEFT(v.Fecha,10) as Fecha, v.Total";
             string condicion =
                 "Venta v, DetalleVenta dv, Producto p \n" +
                 "WHERE v.Venta =" + id + "\n"+
