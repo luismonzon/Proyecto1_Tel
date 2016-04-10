@@ -4,6 +4,16 @@ use PROYECT_1
 	--se agrego como llave foranea la venta en la tabla deuda
 	DBCC CHECKIDENT (<Nombre de tabla>, RESEED,0); --SIRVE PARA REINICIAR EL CONTADOR DE LAS TABLAS
 	
+	SELECT  p.Abreviatura, p.Descripcion, Convert(Decimal(15,0), sum(d.Cantidad), 0)  Cantidad, Convert(Decimal(15,2), SUM(d.Cantidad*i.Precio), 2) Total 
+ FROM Producto p, Venta v, DetalleVenta d, Inventario i 
+where d.Venta = v.Venta 
+and p.Producto = d.Producto 
+and i.Producto = p.Producto 
+and v.Cliente = 500 
+group by p.Abreviatura, p.Descripcion;
+
+
+
 go
 --Si ya eliminaron las tablas dejen asi
 --si no descomenten lo de drop table

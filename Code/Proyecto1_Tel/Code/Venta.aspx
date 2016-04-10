@@ -23,59 +23,61 @@
 	                    <div class="form-horizontal">
 	                        <div class="widget">
 	                            <div class="navbar"><div class="navbar-inner"><h6>Cliente</h6>
-	                                <button  type="submit" id="nuevo-cliente" class="btn btn-success pull-right">Agregar Cliente</button></div></div>
+	                                <button  type="submit" id="nuevo-cliente" class="btn btn-success pull-right"><b>Agregar Cliente</b></button></div></div>
 
 	                            <div class="well">
 	                             <div class="control-group">
-	                                    <label class="control-label">Buscar</label>
-	                                    <div class="controls">
-                                            <div class="align-left">
-                                                <input type="text" name="regular" class="span2" id="idcliente" placeholder="Cod. Cliente" />
+	                                    
+	                                    <div class="span6">
+                                                <label style="font-size: 15px;" class="control-label"><b>Buscar</b> </label>
+                                                
+                                                <input type="text" name="regular" class="span3" style="font-size: 14px;" id="idcliente" placeholder="Cod. Cliente" />
 	                                         
                                             <button  id="busca" class="btn btn-primary">Buscar</button>
-                                             </div>
+                                             
 	                                    </div>
+                                        <div class="span6">
+	                                        <label class="control-label" style="font-size: 15px;">Codigo</label>
+	                                          <div class=" align-left"> 
+                                                <input type="text" name="regular" style="font-size: 14px;" disabled="disabled" class="span4" id="codigo_cliente" placeholder="Cod. Cliente" />
+                                                </div>
+	                                    </div>
+	                                
 	                                </div>
 	                                
 	                                 <div class="control-group">    
                                          
-                                         <div class="span6">
-	                                        <label class="control-label">Codigo</label>
+                                      
+	                                    <div class="span5">
+	                                        <label class="control-label" style="font-size: 15px;"> <b>Nombre:</b></label>
 	                                          <div class=" align-left"> 
-                                                <input type="text" name="regular" disabled="disabled" class="span2" id="codigo_cliente" placeholder="Cod. Cliente" />
-                                                </div>
-	                                    </div>
-	                                
-	                                    <div class="span6">
-	                                        <label class="control-label">Nombre</label>
-	                                          <div class=" align-left"> 
-                                            <input type="text" name="regular"  disabled="disabled" class="span6" id="nombre_cliente" placeholder="Nombre del Cliente" />
+                                            <input type="text" name="regular" style="font-size: 14px;"  disabled="disabled" class="span8" id="nombre_cliente" placeholder="Nombre del Cliente" />
                                             </div>
 	                                    </div>
+                                         <div class="span3">
+	                                        <label class="control-label" style="font-size: 15px;"> <b>Nit:</b></label>
+	                                          <div class=" align-left"> 
+                                                <input type="text" name="regular" style="font-size: 14px;" disabled="disabled" class="span8" id="nit_cliente" placeholder="Nit del Cliente" />
+                                            </div>
+	                                    </div>
+	                                
+	                                    <div class="span4">
+	                                        <label class="control-label" style="font-size: 13px;"><b>Telefono:</b></label>
+	                                          <div class=" align-left"> 
+                                                <input type="text" name="regular" style="font-size: 14px;" disabled="disabled" class="span6" id="tel_cliente" placeholder="Telefono del Cliente" />
+
+                                            </div>
+	                                    </div>
+
+	                                    
                                                                
 	                                 </div>
-	                                <div class="control-group">
-	                                    <div class="span6">
-	                                        <label class="control-label">Nit Cliente</label>
-	                                          <div class=" align-left"> 
-                                                <input type="text" name="regular"  disabled="disabled" class="span6" id="nit_cliente" placeholder="Nit del Cliente" />
-                                            </div>
-	                                    </div>
 	                                
-	                                    <div class="span6">
-	                                        <label class="control-label">Telefono Cliente</label>
-	                                          <div class=" align-left"> 
-                                                <input type="text" name="regular"  disabled="disabled" class="span6" id="tel_cliente" placeholder="Telefono del Cliente" />
-
-                                            </div>
-	                                    </div>
-
-	                                </div>
 	                                
                                     <div class="control-group">
-	                                        <label class="control-label">Direccion del Cliente</label>
+	                                        <label class="control-label" style="font-size: 15px;"><b>Direccion del Cliente</b></label>
 	                                          <div class=" align-left"> 
-                                                <input type="text" name="regular"  disabled="disabled" class="span8" id="dir_cliente" placeholder="Direccion del Cliente" />
+                                                <input type="text" name="regular" style="font-size: 15px;" disabled="disabled" class="span8" id="dir_cliente" placeholder="Direccion del Cliente" />
                                             </div>
 	                                    </div>
 
@@ -87,10 +89,12 @@
 	                	
 	                </div>
 	                <!-- /column --> 
-	            </div>
+                     
 
-    	            	<!-- Column -->
-	                <div class="span6">
+	            </div>
+    <div class="row-fluid">
+          	<!-- Column -->
+	                <div class="span12">
                         
 	                    <div class="form-horizontal">
 	                                <div class="widget">
@@ -99,18 +103,44 @@
 	                            <div class="well">
 	                            
                                     <div  class="control-group">
-                                        <label class="control-label">Agregar Producto</label>
-                                        
+                                        <div class="span1">
+                                            <label class="control-label" style="font-size: 15px;"><b>Producto</b></label>
+                                        </div>
+                                        <div class="span2">
+                                            
                                             <div class="align-left">
                                                 <div id="productos" class="span6"  runat="server">
                                                 </div>
                                              </div>
-                                             <label class="control-label">Cantidad</label>
-                                            
-                                             <input type="text" name="regular"  class="span8" id="txtcantidad" placeholder="Cantidad Producto" />
-                                            
-                                                <button  id="agregar" class="btn btn-primary ">Agregar</button>
+                                            </div>
+                                        <div class="span6">
+                                                    <label class="control-label" style="font-size: 15px;"><b>Unidades</b></label>
+                                                     <div class="align-left">
+                                                         <input type="number" style="font-size: 13px;" name="regular"  class="span3" id="txtcantidad" placeholder="Cantidad" />
+                                                     </div>                                                   
+                                         </div>
+                                        
+                                        </div>
+                                       
+                                     <div class="control-group">
+                                         <div class="span6">
+                                                     <label class="control-label" style="font-size: 15px;"><b>Metros</b></label>
+                                                     <div class=" align-left"> 
+                                                         <input type="text" style="font-size: 13px;" name="regular"  class="span5" id="txtmetros" placeholder="Metros" />
+                                                        
+                                                     </div>
+                                                      
+                                         </div>
+                                        
+                                         <div ></div>
+                                         <button  id="agregar" style="font-size: 15px;" class="btn btn-success align-right">Agregar Producto</button>
+                                           
                                     </div>
+                                    
+                                   
+                                                
+                                            
+                                                
                                     <div class="control-group" id="detalleproductos">
 
 
@@ -128,6 +158,12 @@
 
 	                    
 	                </div>
+        </div>
+   
+
+
+
+    	         
 	                <!-- /column -->
 
             <!-- MODAL PARA AGREGAR CLIENTES CLIENTES-->
@@ -330,7 +366,7 @@
 	        var tipo = $("#cmbpago").val();
 
 
-	        if (nNombre != "") {
+	        if (client != "") {
 
 
 	            $.ajax({

@@ -33,7 +33,6 @@ namespace Proyecto1_Tel.Code
         {
             if (!IsPostBack)
 
-                usuario = Session["Usuario"].ToString();
             {   carrito= new List<Product>();   
                 if (Session["Usuario"] != null)
                 {
@@ -41,6 +40,8 @@ namespace Proyecto1_Tel.Code
                     {
                         Response.Redirect("~/Index.aspx");
                     }
+
+                    usuario = Session["IdUser"].ToString(); //id de usuario
                 }
                 else
                 {
@@ -181,10 +182,10 @@ namespace Proyecto1_Tel.Code
         public static string MostrarModalPago(string cliente)
         {
             Conexion nueva = new Conexion();
-            int total = 0;
+            Double total = 0;
             foreach (var item in carrito)
             {
-                total+=Int32.Parse((Double.Parse(item.cantidad)*Double.Parse(item.precio))+"");
+                total+=Double.Parse((Double.Parse(item.cantidad)*Double.Parse(item.precio))+"");
             }
 
             string innerhtml =
@@ -255,17 +256,17 @@ namespace Proyecto1_Tel.Code
         public static bool AddPago(string total,string cliente, string tipopago)
         {
             Conexion nueva = new Conexion();
-            
-            nueva.Crear("Venta", "Cliente, Usuario, Fecha, Total",cliente + "," + usuario+",GETDATE(),"+total);
+
+            nueva.Crear("Venta", "Cliente, Usuario, Fecha, Total", cliente + "," + usuario + ",GETDATE()," + Convert.ToString(total).Replace(",", "."));
               foreach (var item in carrito)
 	            {
 		             nueva.Crear("DetalleVenta", "Venta, producto, cantidad","(select max(Venta) from venta),"+item.codigo+","+item.cantidad);
                     
                 }
 
-            if(tipopago.Equals("2"){
-                
-                 nueva.Crear("Deuda", "Cliente, cantidad, venta",cliente+","+total+",(select max(Venta) from venta)");
+            if(tipopago.Equals("2")){
+
+                nueva.Crear("Deuda", "Cliente, cantidad, venta", cliente + "," + Convert.ToString(total).Replace(",", ".") + ",(select max(Venta) from venta)");
             }
             
             return true;
@@ -337,9 +338,19 @@ namespace Proyecto1_Tel.Code
 
             if (band)
             {
-                Conexion nueva = new Conexion();
-                DataSet datos = nueva.Consulta("select precio from inventario where producto=" + codigo);
-                carrito.Add(new Product( cantidad,codigo,producto,datos.Tables[0].Rows[0][0]+""));
+                try
+                {
+                    Conexion nueva = new Conexion();
+                    DataSet datos = nueva.Consulta("select precio from inventario where producto=" + codigo);
+                    DataSet abreviatura = nueva.Consulta("select Abreviatura from Producto where producto=" + codigo);
+                    carrito.Add(new Product(cantidad, abreviatura.Tables[0].Rows[0][0] + "", producto, datos.Tables[0].Rows[0][0] + ""));
+            
+                }
+                catch (Exception e)
+                {
+
+                }
+                
             }
             return Graficar();
         }        
@@ -372,21 +383,28 @@ namespace Proyecto1_Tel.Code
             for (int i = 0; i < carrito.Count; i++)
             {
 
+                try
+                {
+                    str += "            <tr>" +
+                                    "                <td>" + carrito[i].codigo + "</td>" +
+                                    "                <td>" +
+                                                        carrito[i].cantidad +
+                                    "                </td>" +
+                                    "               <td>" + carrito[i].precio + "</td>" +
+                                    "               <td>" + Double.Parse((Double.Parse(carrito[i].precio) * Double.Parse(carrito[i].cantidad)) + "") + "</td>" +
 
-                str += "            <tr>" +
-                "                <td>" + carrito[i].codigo + "</td>" +
-                "                <td>" +
-                                    carrito[i].cantidad +
-                "                </td>" +
-                "               <td>"+carrito[i].precio+"</td>"  + 
-                "               <td>"+Int32.Parse((Double.Parse(carrito[i].precio)*Double.Parse(carrito[i].cantidad))+"")+"</td>"   +
+                                                    "<td>" +
+                                                        "   <ul class=\"table-controls\">" +
+                                                  "          <li><a href=\"javascript:removecarrito('" + carrito[i].codigo + "')\"class=\"tip\" title=\"Remover\"><i class=\"fam-cross\"></i></a> </li>" +
+                                                 "       </ul>" +
+                                                "    </td>" +
+                                                " </tr>";
+                }
+                catch(Exception e)
+                {
 
-                                "<td>" +
-                                    "   <ul class=\"table-controls\">" +
-                              "          <li><a href=\"javascript:removecarrito('" + carrito[i].codigo + "')\"class=\"tip\" title=\"Remover\"><i class=\"fam-cross\"></i></a> </li>" +
-                             "       </ul>" +
-                            "    </td>" +
-                            " </tr>";
+                }
+                
 
             }
 

@@ -30,11 +30,12 @@ namespace Proyecto1_Tel.Code
 
             
             }
-
             Response.Cache.SetCacheability(HttpCacheability.ServerAndNoCache);
             Response.Cache.SetAllowResponseInBrowserHistory(false);
             Response.Cache.SetNoStore();
         }
+
+     
 
         [WebMethod]
 
@@ -55,6 +56,7 @@ namespace Proyecto1_Tel.Code
             {
 
                 data =
+                    "<div class=\"table-overflow\"> " +
                     "<table class=\"table table-striped table-bordered\" id=\"data-table\">" +
                         "<thead>" +
                             "<tr>" +

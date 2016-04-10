@@ -61,11 +61,11 @@ namespace Proyecto1_Tel.Code
             string columnas = "d.Venta, c.Cliente, c.Nombre, c.Apellido, sum(d.Cantidad) Credito , sc.Abono Abonado, SUM(d.Cantidad) - sc.Abono Deuda \n ";
             string condicion =
                 " Deuda d join Cliente c on c.Cliente = d.Cliente left join ( \n" +
-	            "   select d2.Cliente, SUM(p2.Abono) Abono \n"+
+	            "   select d2.Deuda, SUM(p2.Abono) Abono \n"+
 	            "   from Pago p2, Deuda d2 \n "+
 	            "   where p2.Deuda = d2.Deuda \n "+
-	            "   group by d2.Cliente \n"+
-                ") sc on sc.Cliente = d.Cliente \n "+
+	            "   group by d2.Deuda \n"+
+                ") sc on sc.Deuda = d.Deuda \n "+
                 "group by d.Venta, c.Cliente,c.Nombre,c.Apellido, sc.Abono \n"+
                 "having SUM(d.Cantidad) > sc.Abono or sc.Abono is Null \n"+
                 "order by SUM(d.Cantidad) desc \n"

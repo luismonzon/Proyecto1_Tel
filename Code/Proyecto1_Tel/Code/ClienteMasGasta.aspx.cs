@@ -78,8 +78,8 @@ namespace Proyecto1_Tel.Code
                             "<tr>" +
                                " <th  align =\"center\">Nombre</th>" +
                                 "<th align =\"center\">Apellido</th>" +
-                                "<th align =\"center\">Cantidad</th>" +
-                                "<th align =\"center\">Total</th>" +
+                                "<th align =\"center\">Numero de Ventas</th>" +
+                                "<th align =\"center\">Total (Quetzales)</th>" +
                                 "<th align =\"center\">Ver Productos Comprados</th>" +
                             "</tr>" +
                         "</thead>" + "<tbody>";
@@ -141,7 +141,7 @@ namespace Proyecto1_Tel.Code
                             "</div>" +
                     "</div>";
 
-            string columnas = " p.Abreviatura, p.Descripcion, sum(d.Cantidad) Cantidad, SUM(d.Cantidad*i.Precio) Total \n";
+            string columnas = " p.Abreviatura, p.Descripcion, Convert(Decimal(15,0), sum(d.Cantidad), 0) Cantidad, Convert(Decimal(15,2), SUM(d.Cantidad*i.Precio), 2) Total \n";
             string condicion =
                 "Producto p, Venta v, DetalleVenta d, Inventario i \n" +
 "where d.Venta = v.Venta \n" +
@@ -162,8 +162,8 @@ namespace Proyecto1_Tel.Code
                             "<tr>" +
                                " <th  align =\"center\">Abreviatura</th>" +
                                 "<th align =\"center\">Descripcion</th>" +
-                                "<th align =\"center\">Cantidad</th>" +
-                                "<th align =\"center\">Total</th>" +
+                                "<th align =\"center\">Cantidad de Productos</th>" +
+                                "<th align =\"center\">Total (Quetzales)</th>" +
                             "</tr>" +
                         "</thead>" + "<tbody>";
 
