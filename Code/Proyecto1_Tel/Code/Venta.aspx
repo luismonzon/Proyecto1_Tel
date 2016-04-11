@@ -305,9 +305,9 @@
         $('#agregar').on('click', function () {
            
             var cod = $("#cmbproductos").val();
-            var nombre = $("#cmbproductos").text();
+            var nombre = $("#cmbproductos  option:selected").text();
             var cant = $("#txtcantidad").val();
-
+           
             $.ajax({
                 type: 'POST',
                 url: 'Venta.aspx/AddProducto',
