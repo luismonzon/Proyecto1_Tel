@@ -235,7 +235,7 @@
                                 }
                             },
                             error: function (xhr, textStatus, errorThrown) {
-                                alert('request failed');
+                              //  alert('request failed');
                             }
                         });
 
@@ -260,7 +260,7 @@
                         contentType: 'application/json; charset=utf-8',
                         dataType: 'json',
                         success: function (response) {
-                            alert(response.d);
+                           
                             if (response.d == true) {
                                 $('#mensaje').removeClass();
                                 $('#mensaje').addClass('alert alert-success').html('Producto agregado con exito').show(200).delay(5500).hide(200);
@@ -273,7 +273,7 @@
 
                         },
                         error: function (xhr, textStatus, errorThrown) {
-                            alert(errorThrown);
+                           // alert(errorThrown);
                         }
                     });
 

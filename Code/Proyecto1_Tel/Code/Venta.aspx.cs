@@ -28,7 +28,7 @@ namespace Proyecto1_Tel.Code
 
             Double Cantidad = Convert.ToDouble(cantidad, CultureInfo.InvariantCulture);
 
-            Double Precio = Convert.ToDouble(precio, CultureInfo.InvariantCulture);
+            Double Precio = Convert.ToDouble(precio);
 
 
             Double Total = 0.0;
@@ -289,7 +289,7 @@ namespace Proyecto1_Tel.Code
 		           respuesta = nueva.Crear("DetalleVenta", "Venta, producto, cantidad","(select max(Venta) from venta),"+item.codigo+","+item.cantidad);
                    if (item.ancho.Equals(""))
                    {
-                       respuesta = nueva.Modificar(" Inventario ", " Cantidad = Cantidad - " + item.largo+" ", " Producto = " + item.codigo+" ");
+                       respuesta = nueva.Modificar(" Inventario ", " Cantidad = Cantidad - " + item.cantidad+" ", " Producto = " + item.codigo+" ");
                    }
                    else 
                    {
