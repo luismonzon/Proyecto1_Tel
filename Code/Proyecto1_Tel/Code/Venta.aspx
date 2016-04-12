@@ -225,33 +225,38 @@
 
         $('#comprar').on('click', function () { // modal pago
             var client = $("#codigo_cliente").val();
-            $.ajax({
-                type: 'POST',
-                url: 'Venta.aspx/MostrarModalPago',
-                data: JSON.stringify({ cliente: client }),
-                contentType: 'application/json; charset=utf-8',
-                dataType: 'json',
-                success: function (response) {
-                    //se escribe el modal
-                    var $modal = $('#ContentPlaceHolder1_divpago');
-                    $modal.html(response.d);
-                    $('#ModalPago').on('show.bs.modal', function () {
-                        $('.modal .modal-body').css('overflow-y', 'auto');
-                        $('.modal .modal-body').css('max-height', $(window).height() * 0.7);
-                        $('.modal .modal-body').css('height', $(window).height() * 0.7);
-                    });
+            if (client != "") {
 
-                    //Modal
-                    $('#formulario_modal')[0].reset(); //formulario lo inicializa con datos vacios
-                    $('#pro_modal').val('Registro'); //crea nuestra caja de procesos y se agrega el valor del registro
-                    $('#reg_modal').show(); //mostramos el boton de registro
-                    $('#edi_modal').hide();//se esconde el boton de editar
-                    $('#ModalPago').modal({ //
-                        show: true, //mostramos el modal registra producto
-                        //backdrop: 'static' //hace que no se cierre el modal si le dan clic afuera del mismo.
-                    });
-                }
-            });
+                $.ajax({
+                    type: 'POST',
+                    url: 'Venta.aspx/MostrarModalPago',
+                    data: JSON.stringify({ cliente: client }),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function (response) {
+                        //se escribe el modal
+                        var $modal = $('#ContentPlaceHolder1_divpago');
+                        $modal.html(response.d);
+                        $('#ModalPago').on('show.bs.modal', function () {
+                            $('.modal .modal-body').css('overflow-y', 'auto');
+                            $('.modal .modal-body').css('max-height', $(window).height() * 0.7);
+                            $('.modal .modal-body').css('height', $(window).height() * 0.7);
+                        });
+
+                        //Modal
+                        $('#formulario_modal')[0].reset(); //formulario lo inicializa con datos vacios
+                        $('#pro_modal').val('Registro'); //crea nuestra caja de procesos y se agrega el valor del registro
+                        $('#reg_modal').show(); //mostramos el boton de registro
+                        $('#edi_modal').hide();//se esconde el boton de editar
+                        $('#ModalPago').modal({ //
+                            show: true, //mostramos el modal registra producto
+                            //backdrop: 'static' //hace que no se cierre el modal si le dan clic afuera del mismo.
+                        });
+                    }
+                });
+            } else {
+                alert("Debe elegir un cliente primero!!");
+            }
 
 
         });
@@ -307,15 +312,17 @@
             var cod = $("#cmbproductos").val();
             var nombre = $("#cmbproductos  option:selected").text();
             var cant = $("#txtcantidad").val();
+            var largo = $("#txtmetros").val();
            
             $.ajax({
                 type: 'POST',
                 url: 'Venta.aspx/AddProducto',
-                data: JSON.stringify({ producto: nombre, cantidad: cant, codigo:cod }),
+                data: JSON.stringify({ producto: nombre, cantidad: cant, codigo:cod, largo: largo }),
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
                 success: function (msg) {
-                    
+                    $("#txtcantidad").val("");
+                    $("#txtmetros").val("");
                     $("#detalleproductos").html(msg.d);
                 }
             });
@@ -410,7 +417,7 @@
 	        var tipo = $("#cmbpago").val();
 
 
-	        if (client != "") {
+	        if (client != "" && tot !="0") {
 
 
 	            $.ajax({

@@ -7,18 +7,44 @@ using System.Web.UI.WebControls;
 using System.Web.Services;
 using System.Data;
 using System.Xml;
+using System.Globalization;
 namespace Proyecto1_Tel.Code
 {
     public class Product{
         public String cantidad;
+        public String ancho;
+        public String largo;
         public String codigo;
         public String nombre;
+        public Double subTotal;
         public string precio;
-        public Product(String cant, String cod, String abreviatura, String nombre,string precio){
+        public Product(String cant,String largo,String ancho, String cod, String abreviatura, String nombre,string precio){
             this.precio = precio;
-        cantidad=cant;
-        codigo=cod;
-        this.nombre = nombre;
+            cantidad=cant;
+            codigo=cod;
+            this.largo = largo;
+            this.nombre = nombre;
+            this.ancho = ancho;
+
+            Double Cantidad = Convert.ToDouble(cantidad, CultureInfo.InvariantCulture);
+
+            Double Precio = Convert.ToDouble(precio, CultureInfo.InvariantCulture);
+
+
+            Double Total = 0.0;
+            if (ancho.Equals(""))
+            {
+                Total = Cantidad * Precio;
+            }
+            else
+            {
+                Double Largo = Convert.ToDouble(largo, CultureInfo.InvariantCulture);
+                Double Ancho = Convert.ToDouble(ancho, CultureInfo.InvariantCulture);
+                Total = Cantidad * Ancho * Largo * Precio; 
+            }
+
+            this.subTotal = Math.Ceiling(Total * 2) / 2.0;
+
         }
 
 
@@ -185,7 +211,7 @@ namespace Proyecto1_Tel.Code
             Double total = 0;
             foreach (var item in carrito)
             {
-                total+=Double.Parse((Double.Parse(item.cantidad)*Double.Parse(item.precio))+"");
+                total+=item.subTotal;
             }
 
             string innerhtml =
@@ -261,7 +287,18 @@ namespace Proyecto1_Tel.Code
               foreach (var item in carrito)
 	            {
 		           respuesta = nueva.Crear("DetalleVenta", "Venta, producto, cantidad","(select max(Venta) from venta),"+item.codigo+","+item.cantidad);
-                    
+                   if (item.ancho.Equals(""))
+                   {
+                       respuesta = nueva.Modificar(" Inventario ", " Cantidad = Cantidad - " + item.largo+" ", " Producto = " + item.codigo+" ");
+                   }
+                   else 
+                   {
+
+                       Double Largo = Convert.ToDouble(item.largo, CultureInfo.InvariantCulture);
+                       Double Cantidad = Convert.ToDouble(item.cantidad, CultureInfo.InvariantCulture);
+                       Double Total = Largo * Cantidad;
+                       respuesta = nueva.Modificar(" Inventario ", " Metros_Cuadrados = Metros_Cuadrados - " + Total+" ", " Producto = " + item.codigo+" ");
+                   }
                 }
 
             if(tipopago.Equals("2")){
@@ -324,7 +361,7 @@ namespace Proyecto1_Tel.Code
             return Graficar();
         }
         [WebMethod]
-        public static string AddProducto(String producto,String cantidad, String codigo)
+        public static string AddProducto(String producto,String cantidad, String codigo, String largo)
         {
             Boolean band = true;
             
@@ -340,10 +377,40 @@ namespace Proyecto1_Tel.Code
             {
                 try
                 {
+                    Conexion conn = new Conexion();
+
+                    DataSet Producto_ = conn.Buscar_Mostrar("Producto", "Producto" + "= " + codigo);
+                    XmlDocument xDoc = new XmlDocument();
+                    xDoc.LoadXml(Producto_.GetXml());
+                    XmlNodeList _Producto = xDoc.GetElementsByTagName("NewDataSet");
+                    XmlNodeList lista_producto = ((XmlElement)_Producto[0]).GetElementsByTagName("Producto_x003D__x0020_" + codigo);
+
+
+                    XmlNodeList nDescripcion = ((XmlElement)lista_producto[0]).GetElementsByTagName("Ancho");
+                    XmlNodeList nTipo = ((XmlElement)lista_producto[0]).GetElementsByTagName("Tipo");
+
+                    DataSet Tipo_ = conn.Buscar_Mostrar("Tipo", "Tipo" + "= " + nTipo[0].InnerText);
+                    XmlDocument xTipo = new XmlDocument();
+                    xTipo.LoadXml(Tipo_.GetXml());
+                    XmlNodeList _Tipo = xTipo.GetElementsByTagName("NewDataSet");
+                    XmlNodeList Tipo_Descripcion = ((XmlElement)_Tipo[0]).GetElementsByTagName("Descripcion");
+
+                    string tipo = Tipo_Descripcion[0].InnerText;
+                    string ancho = "";
+                    if (tipo.Equals("ARTICULO") || tipo.Equals("Articulo"))
+                    {
+                        ancho = "";
+                    }
+                    else
+                    {
+                        ancho = nDescripcion[0].InnerText;
+                    }
+                        
+
                     Conexion nueva = new Conexion();
                     DataSet datos = nueva.Consulta("select precio from inventario where producto=" + codigo);
                     DataSet abreviatura = nueva.Consulta("select Abreviatura from Producto where producto=" + codigo);
-                    carrito.Add(new Product(cantidad,codigo, abreviatura.Tables[0].Rows[0][0] + "", producto, datos.Tables[0].Rows[0][0] + ""));
+                    carrito.Add(new Product(cantidad,largo,ancho,codigo, abreviatura.Tables[0].Rows[0][0] + "", producto, datos.Tables[0].Rows[0][0] + ""));
             
                 }
                 catch (Exception e)
@@ -385,13 +452,18 @@ namespace Proyecto1_Tel.Code
 
                 try
                 {
+                    string cant = carrito[i].cantidad;
+                    if (!carrito[i].ancho.Equals(""))
+                    {
+                        cant += "x" + carrito[i].largo;
+                    }
                     str += "            <tr>" +
                                     "                <td>" + carrito[i].nombre + "</td>" +
                                     "                <td>" +
-                                                        carrito[i].cantidad +
+                                                        cant +
                                     "                </td>" +
                                     "               <td>" + carrito[i].precio + "</td>" +
-                                    "               <td>" + Double.Parse((Double.Parse(carrito[i].precio) * Double.Parse(carrito[i].cantidad)) + "") + "</td>" +
+                                    "               <td>" + carrito[i].subTotal + "</td>" +
 
                                                     "<td>" +
                                                         "   <ul class=\"table-controls\">" +
