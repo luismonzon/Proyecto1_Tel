@@ -14,6 +14,7 @@ namespace Proyecto1_Tel.Code
     {
 
         Conexion conn;
+        static String usuario;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -24,6 +25,7 @@ namespace Proyecto1_Tel.Code
                     {
                         Response.Redirect("~/Index.aspx");
                     }
+                    usuario = Session["IdUser"].ToString(); //id de usuario
                 }
                 else
                 {
@@ -201,7 +203,7 @@ namespace Proyecto1_Tel.Code
 
             Conexion con = new Conexion();
 
-            return con.Crear(" Pago ", " Abono , Deuda , Fecha ", " " + Cantidad + " , " + id + " , CONVERT (date, GETDATE()) ");
+            return con.Crear(" Pago ", " Abono , Deuda , Fecha, Usuario ", " " + Convert.ToString(Cantidad).Replace(",", ".") + " , " + id + " , CONVERT (date, GETDATE()) , " + usuario + " ");
 
         }
 

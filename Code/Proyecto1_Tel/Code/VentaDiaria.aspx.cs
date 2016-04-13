@@ -45,7 +45,7 @@ namespace Proyecto1_Tel.Code
 
 
             Conexion conexion = new Conexion();
-            string Columnas = " v.Venta, c.Nombre Nombre, c.Apellido Apellido, u.NickName Vendedor, Total \n";
+            string Columnas = " v.Venta, c.Nombre Nombre, c.Apellido Apellido, u.NickName Vendedor, Tipo_Pago, Total \n";
             string Condicion = " Venta v, Cliente c, Usuario u \n" +
                                 "where v.Cliente = c.Cliente \n" +
                                 "and v.Usuario = u.Usuario \n" +
@@ -70,6 +70,7 @@ namespace Proyecto1_Tel.Code
                                 "<th  align =\"center\">Nombre Cliente</th>" +
                                 "<th  align =\"center\">Apellido Cliente</th>" +
                                " <th  align =\"center\">Vendedor</th>" +
+                               " <th  align =\"center\">Tipo de Pago</th>" +
                                " <th  align =\"center\">Total Venta</th>" +
                                " <th  align =\"center\">Ver Detalle</th>" +
                                "</tr>" +
@@ -81,6 +82,7 @@ namespace Proyecto1_Tel.Code
                         "<td id=\"codigo\" runat=\"server\" align =\"Center\">" + item["Nombre"].ToString() + "</td>" +
                         "<td id=\"codigo\" runat=\"server\">" + item["Apellido"].ToString() + "</td>" +
                         "<td id=\"codigo\" runat=\"server\">" + item["Vendedor"].ToString() + "</td>" +
+                        "<td id=\"codigo\" runat=\"server\">" + item["Tipo_Pago"].ToString() + "</td>" +
                         "<td id=\"codigo\" runat=\"server\"> Q." + item["Total"].ToString() + "</td> ";
                     data += " <td align =\"Center\">" +
                     "<ul class=\"table-controls\">" +

@@ -247,7 +247,7 @@ namespace Proyecto1_Tel.Code
                 "</div> \n" +
                 "<div class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>Tipo Pago</b></label> \n" +
-                "<div class=\"controls\"><select style=\"font-size: 15px;\" data-placeholder=\"Agregar producto\" class=\"select\"  onChange=\"cambio()\"  id=\"cmbpago\" tabindex=\"2\"><option value=\"\">Elegir Tipo</option><option value=\"1\">Efectivo</option><option value=\"2\">Deuda</option> </select></div> \n" +
+                "<div class=\"controls\"><select style=\"font-size: 15px;\" data-placeholder=\"Agregar producto\" class=\"select\"  onChange=\"cambio()\"  id=\"cmbpago\" tabindex=\"2\"><option value=\"\">Elegir Tipo</option><option value=\"1\">Efectivo</option><option value=\"2\">Deuda</option> <option value=\"3\">Deposito</option> </select></div> \n" +
                 "</div> \n" +
 
                 "<tr> \n" +
@@ -281,29 +281,46 @@ namespace Proyecto1_Tel.Code
         [WebMethod]
         public static bool AddPago(string total,string cliente, string tipopago)
         {
+            string tipo_pago = "";
+            switch (tipopago)
+            {
+                case "1":
+                    tipo_pago = "Efectivo";
+                    break;
+                case "2":
+                    tipo_pago = "Deuda";
+                    break;
+                case "3":
+                    tipo_pago = "Deposito";
+                    break;
+            }
             Conexion nueva = new Conexion();
             bool respuesta;
-              respuesta = nueva.Crear("Venta", "Cliente, Usuario, Fecha, Total", cliente + "," + usuario + ",GETDATE()," + Convert.ToString(total).Replace(",", "."));
-              foreach (var item in carrito)
-	            {
-		           respuesta = nueva.Crear("DetalleVenta", "Venta, producto, cantidad","(select max(Venta) from venta),"+item.codigo+","+item.cantidad);
-                   if (item.ancho.Equals(""))
-                   {
-                       respuesta = nueva.Modificar(" Inventario ", " Cantidad = Cantidad - " + item.cantidad+" ", " Producto = " + item.codigo+" ");
-                   }
-                   else 
-                   {
+            respuesta = nueva.Crear("Venta", "Cliente, Usuario, Fecha, Total, Tipo_Pago", cliente + "," + usuario + ",GETDATE()," + Convert.ToString(total).Replace(",", ".")+", "+"'"+ tipo_pago + "'");
+            if (respuesta == true)
+            {
+                foreach (var item in carrito)
+                {
+                    respuesta = nueva.Crear("DetalleVenta", "Venta, producto, cantidad", "(select max(Venta) from venta)," + item.codigo + "," + item.cantidad);
+                    if (item.ancho.Equals(""))
+                    {
+                        respuesta = nueva.Modificar(" Inventario ", " Cantidad = Cantidad - " + item.cantidad + " ", " Producto = " + item.codigo + " ");
+                    }
+                    else
+                    {
 
-                       Double Largo = Convert.ToDouble(item.largo, CultureInfo.InvariantCulture);
-                       Double Cantidad = Convert.ToDouble(item.cantidad, CultureInfo.InvariantCulture);
-                       Double Total = Largo * Cantidad;
-                       respuesta = nueva.Modificar(" Inventario ", " Metros_Cuadrados = Metros_Cuadrados - " + Total+" ", " Producto = " + item.codigo+" ");
-                   }
+                        Double Largo = Convert.ToDouble(item.largo, CultureInfo.InvariantCulture);
+                        Double Cantidad = Convert.ToDouble(item.cantidad, CultureInfo.InvariantCulture);
+                        Double Total = Largo * Cantidad;
+                        respuesta = nueva.Modificar(" Inventario ", " Metros_Cuadrados = Metros_Cuadrados - " + Total + " ", " Producto = " + item.codigo + " ");
+                    }
                 }
 
-            if(tipopago.Equals("2")){
+                if (tipopago.Equals("2"))
+                {
 
-               respuesta = nueva.Crear("Deuda", "Cliente, cantidad, venta", cliente + "," + Convert.ToString(total).Replace(",", ".") + ",(select max(Venta) from venta)");
+                    respuesta = nueva.Crear("Deuda", "Cliente, cantidad, venta", cliente + "," + Convert.ToString(total).Replace(",", ".") + ",(select max(Venta) from venta)");
+                }
             }
             
             return respuesta;

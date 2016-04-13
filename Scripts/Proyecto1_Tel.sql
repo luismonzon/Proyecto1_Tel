@@ -93,6 +93,7 @@ Create table Venta (
 	Usuario int not null,
 	Fecha date not null,
 	Total numeric(9,2) not null,
+	Tipo_Pago varchar(50) not null,
 	Constraint pk_venta Primary Key (Venta),
 	Constraint fk_venta_cliente Foreign Key (Cliente) references Cliente(Cliente), 
 	Constraint fk_venta_usuario Foreign Key (Usuario) references Usuario(Usuario) 
@@ -150,7 +151,9 @@ create table Pago(
 	Deuda int not null,
 	Fecha Date not null,
 	Abono numeric(9,2) not null,
+	Usuario int not null,
 	Constraint fk_Pago_Deuda foreign key (Deuda) references Deuda(Deuda),
+	Constraint fk_Pago_Usuario foreign key (Usuario) references Usuario(Usuario),
 	Constraint pk_Pago Primary Key (Pago,Deuda)
 ) 
 go
