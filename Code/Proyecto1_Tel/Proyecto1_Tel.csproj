@@ -66,6 +66,11 @@
     <Content Include="Code\ClientesDeuda.aspx" />
     <Content Include="Code\css\login.css" />
     <Content Include="Code\Inicio.aspx" />
+    <Content Include="Code\js\Fuente.js" />
+    <Content Include="Code\js\jquery-1.8.2.min.js" />
+    <Content Include="Code\js\jquery-ui.min.js" />
+    <Content Include="Code\js\mapsgoogle.js" />
+    <Content Include="Code\js\myjava.js" />
     <Content Include="Code\ProductosInventario.aspx" />
     <Content Include="Code\ProductosMasVenden.aspx" />
     <Content Include="Code\Inv_Bodega.aspx" />

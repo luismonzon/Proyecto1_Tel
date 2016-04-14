@@ -2,23 +2,51 @@ use PROYECT_1
   	
 	--se elimino la columna de largo en la tabla producto
 	--se agrego como llave foranea la venta en la tabla deuda
-	DBCC CHECKIDENT (<Nombre de tabla>, RESEED,0); --SIRVE PARA REINICIAR EL CONTADOR DE LAS TABLAS
+	--DBCC CHECKIDENT (<Nombre de tabla>, RESEED,0); --SIRVE PARA REINICIAR EL CONTADOR DE LAS TABLAS
 	
-	SELECT  p.Abreviatura, p.Descripcion, Convert(Decimal(15,0), sum(d.Cantidad), 0)  Cantidad, Convert(Decimal(15,2), SUM(d.Cantidad*i.Precio), 2) Total 
- FROM Producto p, Venta v, DetalleVenta d, Inventario i 
-where d.Venta = v.Venta 
-and p.Producto = d.Producto 
-and i.Producto = p.Producto 
-and v.Cliente = 500 
-group by p.Abreviatura, p.Descripcion;
+--	SELECT  p.Abreviatura, p.Descripcion, Convert(Decimal(15,0), sum(d.Cantidad), 0)  Cantidad, Convert(Decimal(15,2), SUM(d.Cantidad*i.Precio), 2) Total 
+-- FROM Producto p, Venta v, DetalleVenta d, Inventario i 
+--where d.Venta = v.Venta 
+--and p.Producto = d.Producto 
+--and i.Producto = p.Producto 
+--and v.Cliente = 500 
+--group by p.Abreviatura, p.Descripcion;
+
+SELECT Ps.Pago, d.Venta, c.Cliente, c.Nombre, c.Apellido, sum(d.Cantidad) Credito , sc.Abono Abonado, SUM(d.Cantidad) - sc.Abono Deuda 
+  FROM Pago ps, Venta v, Deuda d join Cliente c on c.Cliente = d.Cliente left join ( 
+   select d2.Deuda, SUM(p2.Abono) Abono 
+   from Pago p2, Deuda d2 
+    where p2.Deuda = d2.Deuda 
+    group by d2.Deuda 
+) sc on sc.Deuda = d.Deuda WHERE sc.Deuda = ps.Deuda 
+ group by ps.Pago, d.Venta, c.Cliente,c.Nombre,c.Apellido, sc.Abono 
+having SUM(d.Cantidad) > sc.Abono or sc.Abono is Null 
+order by SUM(d.Cantidad) desc 
+;
+SELECT  D.Deuda, v.Venta, c.Cliente, c.Nombre, c.Apellido, sum(d.Cantidad) Credito , sc.Abono Abonado, SUM(d.Cantidad) - sc.Abono Deuda 
+FROM Pago ps, Venta v, Deuda d, Cliente c,(select d2.Deuda, SUM(p2.Abono) Abono 
+   from Pago p2, Deuda d2 
+    where p2.Deuda = d2.Deuda 
+    group by d2.Deuda 
+) sc 
+WHERE v.Venta = d.Venta
+AND sc.Deuda = ps.Deuda
+group by D.Deuda, v.Venta, c.Cliente,c.Nombre,c.Apellido, sc.Abono 
+having SUM(d.Cantidad) > sc.Abono or sc.Abono is Null 
+order by SUM(d.Cantidad) desc 
+;
+
+
+
+UPDATE  Inventario  SET  Metros_Cuadrados = Metros_Cuadrados - 16.8  WHERE  Producto = 1 ;
 
 --VENTA ANUAL
 
-SELECT SUM(Total) Total 
- FROM  Venta v, Cliente c, Usuario u 
-where v.Cliente = c.Cliente 
-and v.Usuario = u.Usuario 
-and Fecha = '20160409' 
+--SELECT SUM(Total) Total 
+-- FROM  Venta v, Cliente c, Usuario u 
+--where v.Cliente = c.Cliente 
+--and v.Usuario = u.Usuario 
+--and Fecha = '20160409' 
 ;
 
 

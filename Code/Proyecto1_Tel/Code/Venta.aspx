@@ -120,6 +120,8 @@
                                                      </div>                                                   
                                          </div>
                                         
+                                        
+                                        
                                         </div>
                                        
                                      <div class="control-group">
@@ -127,18 +129,27 @@
                                                      <label class="control-label" style="font-size: 15px;"><b>Metros</b></label>
                                                      <div class=" align-left"> 
                                                          <input type="text" style="font-size: 13px;" name="regular"  class="span5" id="txtmetros" placeholder="Metros" />
-                                                        
+                                                       
                                                      </div>
                                                       
                                          </div>
                                         
-                                         <div ></div>
+                                         
+                                         <div class="span6">
+                                                    <label class="control-label" style="font-size: 15px;"><b>Cantidad Disponible</b></label>
+                                                     <div class="align-left">
+                                                         <input type="text" style="font-size: 13px;" name="regular" readonly="readonly" class="span3" id="disponible"  />
+                                                     </div>                                                   
+                                         </div>
+                                         
                                          <button  id="agregar" style="font-size: 15px;" class="btn btn-success align-right">Agregar Producto</button>
                                            
                                     </div>
-                                    
+
+                                      <input  type="text" style="visibility:hidden; height:5px;" name="regular" readonly="readonly" class="span1" id="idventa" hidden="hidden"/>
                                    
-                                                
+                                    
+                                               
                                             
                                                 
                                     <div class="control-group" id="detalleproductos">
@@ -203,16 +214,19 @@
                     var Cantidad_Dispo = produc[1];
                     var Tipo = produc[2];
                     var Precio = produc[3];
+                    var Metros = produc[4];
+                    
              
-                
+                    
                     if (Tipo == "ARTICULO" || Tipo == "Articulo") {
 
                         $('#metros').hide();
-                    
+                        document.getElementById("disponible").value = Cantidad_Dispo;
                     } else {
                         
                         $('#metros').show();
-                
+                        document.getElementById("disponible").value = Metros;
+                            
                     }
                    
 
@@ -266,15 +280,35 @@
         function removecarrito(val) {
             $.ajax({
                 type: 'POST',
-                url: 'Venta.aspx/removecarrito',
+                url: 'Venta.aspx/quitarcantidad',
                 data: JSON.stringify({ codigo: val }),
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
-                success: function (msg) {
+                success: function (data) {
+                   
+                    var eliminado = parseFloat(data.d);
+                    var anterior = parseFloat( $("#disponible").val());
+                    
+                    var dispon = anterior + eliminado;
+                    
+                    document.getElementById("disponible").value = dispon;
+              
+                    $.ajax({
+                        type: 'POST',
+                        url: 'Venta.aspx/removecarrito',
+                        data: JSON.stringify({ codigo: val }),
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json',
+                        success: function (msg) {
+                          
+                            $("#detalleproductos").html(msg.d);
+                        }
+                    });
 
-                    $("#detalleproductos").html(msg.d);
+
                 }
             });
+           
         }
 
     </script>
@@ -313,19 +347,41 @@
             var nombre = $("#cmbproductos  option:selected").text();
             var cant = $("#txtcantidad").val();
             var largo = $("#txtmetros").val();
+            var cantidad = cant * largo;
+            var disp = $("#disponible").val();
+            
+            var idventa = parseFloat(1);
+            var venta = $("#idventa").val();
+          
+            if (venta == "") {
+                document.getElementById("idventa").value = idventa;
+
+            } else {
+                document.getElementById("idventa").value = parseFloat(venta)+ parseFloat(1);
+            }
            
-            $.ajax({
-                type: 'POST',
-                url: 'Venta.aspx/AddProducto',
-                data: JSON.stringify({ producto: nombre, cantidad: cant, codigo:cod, largo: largo }),
-                contentType: 'application/json; charset=utf-8',
-                dataType: 'json',
-                success: function (msg) {
-                    $("#txtcantidad").val("");
-                    $("#txtmetros").val("");
-                    $("#detalleproductos").html(msg.d);
-                }
-            });
+            if (cantidad < disp) {
+                var disponible = $("#disponible").val() - cantidad;
+                document.getElementById("disponible").value = disponible;
+
+                var iventa = $("#idventa").val();
+                $.ajax({
+                    type: 'POST',
+                    url: 'Venta.aspx/AddProducto',
+                    data: JSON.stringify({ idventa: iventa, producto: nombre, cantidad: cant, codigo: cod, largo: largo }),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function (msg) {
+                        $("#txtcantidad").val("");
+                        $("#txtmetros").val("");
+                        $("#detalleproductos").html(msg.d);
+                    }
+                });
+
+            } else {
+                alert("La cantidad que desea vender excede a la disponible");
+            }
+        
         });
 
 
@@ -415,7 +471,6 @@
 	        var tot = document.getElementById("totalpago").value;
 	        var client = document.getElementById("codclientepago").value;
 	        var tipo = $("#cmbpago").val();
-
 
 	        if (client != "" && tot !="0") {
 

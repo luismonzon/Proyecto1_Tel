@@ -148,6 +148,10 @@ namespace Proyecto1_Tel.Code
         {
             Conexion conn = new Conexion();
 
+            string[] producto = new string[4];
+            try
+            {
+            
             DataSet Producto_ = conn.Buscar_Mostrar("Producto", "Producto" + "= " + id);
             XmlDocument xDoc = new XmlDocument();
             xDoc.LoadXml(Producto_.GetXml());
@@ -163,7 +167,7 @@ namespace Proyecto1_Tel.Code
             XmlNodeList Cantidad = ((XmlElement)_Bodega[0]).GetElementsByTagName("Cantidad");
 
 
-
+            
             XmlNodeList nDescripcion = ((XmlElement)lista_producto[0]).GetElementsByTagName("Descripcion");
             XmlNodeList nTipo = ((XmlElement)lista_producto[0]).GetElementsByTagName("Tipo");
 
@@ -189,9 +193,7 @@ namespace Proyecto1_Tel.Code
                 precio = "0";
             }
 
-            string[] producto = new string[4];
-            try
-            {
+            
                 producto[0] = nDescripcion[0].InnerText;
                 producto[1] = Cantidad[0].InnerText;
                 producto[2] = Tipo_Descripcion[0].InnerText;

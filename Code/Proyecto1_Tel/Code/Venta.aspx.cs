@@ -11,6 +11,7 @@ using System.Globalization;
 namespace Proyecto1_Tel.Code
 {
     public class Product{
+        public String idventa;
         public String cantidad;
         public String ancho;
         public String largo;
@@ -18,13 +19,15 @@ namespace Proyecto1_Tel.Code
         public String nombre;
         public Double subTotal;
         public string precio;
-        public Product(String cant,String largo,String ancho, String cod, String abreviatura, String nombre,string precio){
+        public Product(String idventa, String cant, String largo, String ancho, String cod, String abreviatura, String nombre, string precio)
+        {
             this.precio = precio;
             cantidad=cant;
             codigo=cod;
             this.largo = largo;
             this.nombre = nombre;
             this.ancho = ancho;
+            this.idventa = idventa;
 
             Double Cantidad = Convert.ToDouble(cantidad, CultureInfo.InvariantCulture);
 
@@ -84,7 +87,31 @@ namespace Proyecto1_Tel.Code
 
                 foreach (DataRow item in Productos.Tables[0].Rows)
                 {
-                    html += "<option value=\"" + item["producto"] + "\">" + item["Abreviatura"] + "</option> ";
+                    DataSet Tipo = conexion.Consulta("select Tipo from Producto where producto = " + item["producto"]);
+                    String Tipopro = Convert.ToString(Tipo.Tables[0].Rows[0][0]);
+                    DataSet DescripcionTipo = conexion.Consulta("select Descripcion from Tipo where Tipo = " + Tipopro);
+                    String Descripcion = Convert.ToString(DescripcionTipo.Tables[0].Rows[0][0]);
+                    DataSet Metros = conexion.Consulta("select Metros_Cuadrados from Inventario where producto = " + item["producto"]);
+                    DataSet Cantidad = conexion.Consulta("select Cantidad from Inventario where producto = " + item["producto"]);
+                    int metros = Convert.ToInt16(Metros.Tables[0].Rows[0][0]);
+                    int cantidad = Convert.ToInt16(Cantidad.Tables[0].Rows[0][0]);
+
+                    if (Descripcion == "Polarizado")
+                    {
+                        if (metros > 0)
+                        {
+                            html += "<option value=\"" + item["producto"] + "\">" + item["Abreviatura"] + "</option> ";     
+                        }
+                    }
+                    else
+                    {
+                        if (cantidad > 0)
+                        {
+                            html += "<option value=\"" + item["producto"] + "\">" + item["Abreviatura"] + "</option> ";
+                        }
+                    }
+
+                    
 
                 }
 
@@ -247,7 +274,7 @@ namespace Proyecto1_Tel.Code
                 "</div> \n" +
                 "<div class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>Tipo Pago</b></label> \n" +
-                "<div class=\"controls\"><select style=\"font-size: 15px;\" data-placeholder=\"Agregar producto\" class=\"select\"  onChange=\"cambio()\"  id=\"cmbpago\" tabindex=\"2\"><option value=\"\">Elegir Tipo</option><option value=\"1\">Efectivo</option><option value=\"2\">Deuda</option> <option value=\"3\">Deposito</option> </select></div> \n" +
+                "<div class=\"controls\"><select style=\"font-size: 15px;\" data-placeholder=\"Agregar producto\" class=\"select\"  onChange=\"cambio()\"  id=\"cmbpago\" tabindex=\"2\"><option value=\"\">Elegir Tipo</option><option value=\"1\">Efectivo</option><option value=\"2\">Credito</option> <option value=\"3\">Deposito</option> </select></div> \n" +
                 "</div> \n" +
 
                 "<tr> \n" +
@@ -296,6 +323,8 @@ namespace Proyecto1_Tel.Code
             }
             Conexion nueva = new Conexion();
             bool respuesta;
+         
+            
             respuesta = nueva.Crear("Venta", "Cliente, Usuario, Fecha, Total, Tipo_Pago", cliente + "," + usuario + ",GETDATE()," + Convert.ToString(total).Replace(",", ".")+", "+"'"+ tipo_pago + "'");
             if (respuesta == true)
             {
@@ -304,6 +333,8 @@ namespace Proyecto1_Tel.Code
                     respuesta = nueva.Crear("DetalleVenta", "Venta, producto, cantidad", "(select max(Venta) from venta)," + item.codigo + "," + item.cantidad);
                     if (item.ancho.Equals(""))
                     {
+                       
+
                         respuesta = nueva.Modificar(" Inventario ", " Cantidad = Cantidad - " + item.cantidad + " ", " Producto = " + item.codigo + " ");
                     }
                     else
@@ -312,7 +343,8 @@ namespace Proyecto1_Tel.Code
                         Double Largo = Convert.ToDouble(item.largo, CultureInfo.InvariantCulture);
                         Double Cantidad = Convert.ToDouble(item.cantidad, CultureInfo.InvariantCulture);
                         Double Total = Largo * Cantidad;
-                        respuesta = nueva.Modificar(" Inventario ", " Metros_Cuadrados = Metros_Cuadrados - " + Total + " ", " Producto = " + item.codigo + " ");
+
+                        respuesta = nueva.Modificar(" Inventario ", " Metros_Cuadrados = Metros_Cuadrados - " + Convert.ToString(Total).Replace(",", ".") + " ", " Producto = " + item.codigo + " ");
                     }
                 }
 
@@ -367,30 +399,52 @@ namespace Proyecto1_Tel.Code
         [WebMethod]
         public static string removecarrito(String codigo)
         {
+            string cantidad;
             for (int i = 0; i < carrito.Count; i++)
             {
-                if (carrito[i].codigo.Equals(codigo)) {
+                cantidad = carrito[i].cantidad;
+                if (carrito[i].idventa.Equals(codigo)) {
                     carrito.RemoveAt(i);
+                  
+                  
+                  
+                }
+               
+            }
+            return Graficar();
+        }
+
+
+        [WebMethod]
+        public static Double quitarcantidad(String codigo)
+        {
+            string cantidad;
+            string largo;
+            Double total=0;
+            for (int i = 0; i < carrito.Count; i++)
+            {
+                
+                if (carrito[i].idventa.Equals(codigo))
+                {
+
+                    cantidad = carrito[i].cantidad;
+                    largo = carrito[i].largo;
+                    total = Convert.ToDouble(largo, CultureInfo.InvariantCulture) * Convert.ToDouble(cantidad, CultureInfo.InvariantCulture);
                     break;
                 }
 
             }
-            return Graficar();
+             return total;
         }
+
+
+
         [WebMethod]
-        public static string AddProducto(String producto,String cantidad, String codigo, String largo)
+        public static string AddProducto(String idventa, String producto,String cantidad, String codigo, String largo)
         {
-            Boolean band = true;
-            
-            foreach (var item in carrito)
-            {
-                if(item.codigo==codigo){
+          
 
-                    band = false;
-                }
-            }
-
-            if (band)
+            if (true)
             {
                 try
                 {
@@ -427,7 +481,7 @@ namespace Proyecto1_Tel.Code
                     Conexion nueva = new Conexion();
                     DataSet datos = nueva.Consulta("select precio from inventario where producto=" + codigo);
                     DataSet abreviatura = nueva.Consulta("select Abreviatura from Producto where producto=" + codigo);
-                    carrito.Add(new Product(cantidad,largo,ancho,codigo, abreviatura.Tables[0].Rows[0][0] + "", producto, datos.Tables[0].Rows[0][0] + ""));
+                    carrito.Add(new Product(idventa, cantidad,largo,ancho,codigo, abreviatura.Tables[0].Rows[0][0] + "", producto, datos.Tables[0].Rows[0][0] + ""));
             
                 }
                 catch (Exception e)
@@ -455,6 +509,7 @@ namespace Proyecto1_Tel.Code
                     "    <table class=\"table table-striped table-bordered align-center\">" +
                     "        <thead>" +
                     "           <tr>" +
+                                     "<th>Id</th>" +
                     "                <th>Nombre</th>" +
                     "                <th>Cantidad</th>" +
                     "                <th>Precio Unitario</th>" +
@@ -475,6 +530,7 @@ namespace Proyecto1_Tel.Code
                         cant += "x" + carrito[i].largo;
                     }
                     str += "            <tr>" +
+                                    "                <td>" + carrito[i].idventa + "</td>" +
                                     "                <td>" + carrito[i].nombre + "</td>" +
                                     "                <td>" +
                                                         cant +
@@ -484,7 +540,7 @@ namespace Proyecto1_Tel.Code
 
                                                     "<td>" +
                                                         "   <ul class=\"table-controls\">" +
-                                                  "          <li><a href=\"javascript:removecarrito('" + carrito[i].codigo + "')\"class=\"tip\" title=\"Remover\"><i class=\"fam-cross\"></i></a> </li>" +
+                                                  "          <li><a href=\"javascript:removecarrito('" + carrito[i].idventa + "')\"class=\"tip\" title=\"Remover\"><i class=\"fam-cross\"></i></a> </li>" +
                                                  "       </ul>" +
                                                 "    </td>" +
                                                 " </tr>";
@@ -545,12 +601,15 @@ namespace Proyecto1_Tel.Code
 
 
 
-            DataSet Bodega_ = conn.Buscar_Mostrar("Bodega", "Producto" + "= " + id);
+            DataSet Bodega_ = conn.Buscar_Mostrar("Inventario", "Producto" + "= " + id);
             XmlDocument xBod = new XmlDocument();
             xBod.LoadXml(Bodega_.GetXml());
             XmlNodeList _Bodega = xBod.GetElementsByTagName("NewDataSet");
             XmlNodeList Cantidad = ((XmlElement)_Bodega[0]).GetElementsByTagName("Cantidad");
+            XmlNodeList Metros = ((XmlElement)_Bodega[0]).GetElementsByTagName("Metros_Cuadrados");
 
+
+           
 
 
             XmlNodeList nDescripcion = ((XmlElement)lista_producto[0]).GetElementsByTagName("Descripcion");
@@ -578,14 +637,14 @@ namespace Proyecto1_Tel.Code
                 precio = "0";
             }
 
-            string[] producto = new string[4];
+            string[] producto = new string[5];
             try
             {
                 producto[0] = nDescripcion[0].InnerText;
                 producto[1] = Cantidad[0].InnerText;
                 producto[2] = Tipo_Descripcion[0].InnerText;
                 producto[3] = precio;
-
+                producto[4] = Metros[0].InnerText;
             }
             catch (Exception ex)
             {
