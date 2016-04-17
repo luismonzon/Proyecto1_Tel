@@ -72,7 +72,7 @@ namespace Proyecto1_Tel.Code
                     {
                         Response.Redirect("~/Index.aspx");
                     }
-                    nick=(string)Session["NickName"];
+                    nick=(String)Session["NickName"];
                     usuario = Session["IdUser"].ToString(); //id de usuario
                 }
                 else
@@ -138,21 +138,27 @@ namespace Proyecto1_Tel.Code
         [WebMethod]
         public static string Busca(string idcliente)
         {
-
-            Conexion conexion = new Conexion();
-            DataSet cliente;
-            string respuesta = "";
-            cliente = conexion.Buscar_Mostrar("cliente", "cliente=" + idcliente);
-            if (cliente.Tables[0].Rows.Count > 0)
+            try
             {
-
-                foreach (DataRow item in cliente.Tables[0].Rows)
+                Conexion conexion = new Conexion();
+                DataSet cliente;
+                string respuesta = "";
+                cliente = conexion.Buscar_Mostrar("cliente", "cliente=" + idcliente);
+                if (cliente.Tables[0].Rows.Count > 0)
                 {
-                    respuesta += item["nombre"].ToString() + "," + item["nit"].ToString() + "," + item["apellido"].ToString() + "," + item["cliente"].ToString() + "," + item["direccion"].ToString() + "," + item["telefono"].ToString();
-                }
-                return respuesta;
-            }
 
+                    foreach (DataRow item in cliente.Tables[0].Rows)
+                    {
+                        respuesta += item["nombre"].ToString() + "," + item["nit"].ToString() + "," + item["apellido"].ToString() + "," + item["cliente"].ToString() + "," + item["direccion"].ToString() + "," + item["telefono"].ToString();
+                    }
+                    return respuesta;
+                }
+
+            }
+            catch (Exception e)
+            {
+                return "0";
+            }
 
             return "0";
         }
@@ -357,6 +363,7 @@ namespace Proyecto1_Tel.Code
                     respuesta = nueva.Crear("Deuda", "Cliente, cantidad, venta", cliente + "," + Convert.ToString(total).Replace(",", ".") + ",(select max(Venta) from venta)");
                 }
 
+             
 
                 var factory = new ConnectionFactory() { HostName = "localhost" };
                 using (var connection = factory.CreateConnection())
@@ -371,7 +378,7 @@ namespace Proyecto1_Tel.Code
                     string message = "";
                     foreach (var item in carrito)
                     {
-                        message += item.codigo + ";" + item.nombre + ";" + item.cantidad + ";" + item.ancho + ";" + item.largo + ";" + nick+",";
+                        message += nick + ";" + item.nombre + ";              " + item.cantidad + ";          " + item.largo + ";        " + item.ancho + ",";
                     }
 
                     var body = Encoding.UTF8.GetBytes(message);
