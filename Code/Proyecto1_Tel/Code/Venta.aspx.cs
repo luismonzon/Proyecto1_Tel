@@ -8,6 +8,8 @@ using System.Web.Services;
 using System.Data;
 using System.Xml;
 using System.Globalization;
+using RabbitMQ.Client;
+using System.Text;
 namespace Proyecto1_Tel.Code
 {
     public class Product{
@@ -57,7 +59,8 @@ namespace Proyecto1_Tel.Code
     {
         public static List<Product> carrito; 
         Conexion conexion;
-        static String usuario;
+        static String usuario,nick;
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -69,7 +72,7 @@ namespace Proyecto1_Tel.Code
                     {
                         Response.Redirect("~/Index.aspx");
                     }
-
+                    nick=(string)Session["NickName"];
                     usuario = Session["IdUser"].ToString(); //id de usuario
                 }
                 else
@@ -352,6 +355,31 @@ namespace Proyecto1_Tel.Code
                 {
 
                     respuesta = nueva.Crear("Deuda", "Cliente, cantidad, venta", cliente + "," + Convert.ToString(total).Replace(",", ".") + ",(select max(Venta) from venta)");
+                }
+
+
+                var factory = new ConnectionFactory() { HostName = "localhost" };
+                using (var connection = factory.CreateConnection())
+                using (var channel = connection.CreateModel())
+                {
+                    channel.QueueDeclare(queue: "hello",
+                                         durable: false,
+                                         exclusive: false,
+                                         autoDelete: false,
+                                         arguments: null);
+
+                    string message = "";
+                    foreach (var item in carrito)
+                    {
+                        message += item.codigo + ";" + item.nombre + ";" + item.cantidad + ";" + item.ancho + ";" + item.largo + ";" + nick+",";
+                    }
+
+                    var body = Encoding.UTF8.GetBytes(message);
+
+                    channel.BasicPublish(exchange: "",
+                                         routingKey: "hello",
+                                         basicProperties: null,
+                                         body: body);
                 }
             }
             

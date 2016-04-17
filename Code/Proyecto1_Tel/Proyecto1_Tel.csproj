@@ -42,6 +42,9 @@
       <HintPath>..\packages\AjaxControlToolkit.15.1.4.0\lib\net40\AjaxControlToolkit.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="RabbitMQ.Client">
+      <HintPath>..\..\..\..\Documents\Visual Studio 2013\Projects\receive\receive\bin\Debug\RabbitMQ.Client.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
