@@ -211,7 +211,7 @@ namespace Proyecto1_Tel.Code
                 "</div> \n" +
                 "<div class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>Telefono:</b></label> \n" +
-                "<div class=\"controls\"><input style=\"font-size: 15px;\" type=\"text\" placeholder=\"Telefono\" id=\"telefono\" runat=\"server\" data-mask=\"9999-9999\" /></div> \n" +
+                "<div class=\"controls\"><input style=\"font-size: 15px;\" type=\"text\" placeholder=\"Telefono\" id=\"telefono\" runat=\"server\" /></div> \n" +
                 "</div> \n" +
                 "<tr> \n" +
                 "<td colspan=\"2\"> \n" +
@@ -288,7 +288,7 @@ namespace Proyecto1_Tel.Code
 
                 "<tr> \n" +
                 "<td colspan=\"2\"> \n" +
-                "<div id=\"mensaje_modal\"></div> \n" +
+                "<div id=\"mensaje\"></div> \n" +
                 "<div class=\"alert margin\"> \n" +
                 "<button type=\"button\"  class=\"close\" data-dismiss=\"alert\">×</button> \n" +
                 "Campos Obligatorios (*) \n" +
@@ -363,9 +363,9 @@ namespace Proyecto1_Tel.Code
                     respuesta = nueva.Crear("Deuda", "Cliente, cantidad, venta", cliente + "," + Convert.ToString(total).Replace(",", ".") + ",(select max(Venta) from venta)");
                 }
 
-             
 
-                var factory = new ConnectionFactory() { HostName = "localhost" };
+
+                var factory = new ConnectionFactory() { HostName = "192.168.1.6" };
                 using (var connection = factory.CreateConnection())
                 using (var channel = connection.CreateModel())
                 {
@@ -376,9 +376,12 @@ namespace Proyecto1_Tel.Code
                                          arguments: null);
 
                     string message = "";
+                    DataSet venta = nueva.Consulta("(select max(Venta) from venta)");
+
+
                     foreach (var item in carrito)
                     {
-                        message += nick + ";" + item.nombre + ";              " + item.cantidad + ";          " + item.largo + ";        " + item.ancho + ",";
+                        message += venta.Tables[0].Rows[0][0] + ";" + cliente + ";" + nick + ";" + item.nombre + ";       "   + item.cantidad + ";    " + item.largo +  ",";
                     }
 
                     var body = Encoding.UTF8.GetBytes(message);
@@ -694,6 +697,21 @@ namespace Proyecto1_Tel.Code
 
 
         }
+
+        [WebMethod]
+        public static string GetVenta() {
+
+            string venta;
+            Conexion nueva = new Conexion();
+            DataSet ConVenta = nueva.Consulta("(select max(Venta) from venta)");
+            venta = Convert.ToString(ConVenta.Tables[0].Rows[0][0]);
+
+            return venta;
+        
+        }
+       
+
+        
 
     }
 }
