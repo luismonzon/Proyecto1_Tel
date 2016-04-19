@@ -10,7 +10,7 @@ using System.Xml;
 using System.Globalization;
 using RabbitMQ.Client;
 using System.Text;
-namespace Proyecto1_Tel.Code
+namespace Proyecto1_Tel.Code 
 {
     public class Product{
         public String idventa;
@@ -21,7 +21,8 @@ namespace Proyecto1_Tel.Code
         public String nombre;
         public Double subTotal;
         public string precio;
-        public Product(String idventa, String cant, String largo, String ancho, String cod, String abreviatura, String nombre, string precio)
+        public string usuario;
+        public Product(String idventa, String cant, String largo, String ancho, String cod, String abreviatura, String nombre, string precio, string usuario)
         {
             this.precio = precio;
             cantidad=cant;
@@ -30,6 +31,7 @@ namespace Proyecto1_Tel.Code
             this.nombre = nombre;
             this.ancho = ancho;
             this.idventa = idventa;
+            this.usuario = usuario;
 
             Double Cantidad = Convert.ToDouble(cantidad, CultureInfo.InvariantCulture);
 
@@ -59,8 +61,7 @@ namespace Proyecto1_Tel.Code
     {
         public static List<Product> carrito; 
         Conexion conexion;
-        static String usuario,nick;
-        
+        String usuario,nick;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -245,9 +246,13 @@ namespace Proyecto1_Tel.Code
         {
             Conexion nueva = new Conexion();
             Double total = 0;
+            string user = HttpContext.Current.Session["IdUser"].ToString();
             foreach (var item in carrito)
             {
-                total+=item.subTotal;
+                if (item.usuario.Equals(user))
+                {
+                    total += item.subTotal;
+                }
             }
 
             string innerhtml =
@@ -332,29 +337,35 @@ namespace Proyecto1_Tel.Code
             }
             Conexion nueva = new Conexion();
             bool respuesta;
-         
+
+            string user = HttpContext.Current.Session["IdUser"].ToString();
+            string nickname = HttpContext.Current.Session["NickName"].ToString();
             
-            respuesta = nueva.Crear("Venta", "Cliente, Usuario, Fecha, Total, Tipo_Pago", cliente + "," + usuario + ",GETDATE()," + Convert.ToString(total).Replace(",", ".")+", "+"'"+ tipo_pago + "'");
+            respuesta = nueva.Crear("Venta", "Cliente, Usuario, Fecha, Total, Tipo_Pago", cliente + "," + user + ",GETDATE()," + Convert.ToString(total).Replace(",", ".")+", "+"'"+ tipo_pago + "'");
             if (respuesta == true)
             {
                 foreach (var item in carrito)
                 {
-                    respuesta = nueva.Crear("DetalleVenta", "Venta, producto, cantidad", "(select max(Venta) from venta)," + item.codigo + "," + item.cantidad);
-                    if (item.ancho.Equals(""))
+                    if (item.usuario.Equals(user)) 
                     {
-                       
+                        respuesta = nueva.Crear("DetalleVenta", "Venta, producto, cantidad", "(select max(Venta) from venta)," + item.codigo + "," + item.cantidad);
+                        if (item.ancho.Equals(""))
+                        {
 
-                        respuesta = nueva.Modificar(" Inventario ", " Cantidad = Cantidad - " + item.cantidad + " ", " Producto = " + item.codigo + " ");
+
+                            respuesta = nueva.Modificar(" Inventario ", " Cantidad = Cantidad - " + item.cantidad + " ", " Producto = " + item.codigo + " ");
+                        }
+                        else
+                        {
+
+                            Double Largo = Convert.ToDouble(item.largo, CultureInfo.InvariantCulture);
+                            Double Cantidad = Convert.ToDouble(item.cantidad, CultureInfo.InvariantCulture);
+                            Double Total = Largo * Cantidad;
+
+                            respuesta = nueva.Modificar(" Inventario ", " Metros_Cuadrados = Metros_Cuadrados - " + Convert.ToString(Total).Replace(",", ".") + " ", " Producto = " + item.codigo + " ");
+                        }
                     }
-                    else
-                    {
-
-                        Double Largo = Convert.ToDouble(item.largo, CultureInfo.InvariantCulture);
-                        Double Cantidad = Convert.ToDouble(item.cantidad, CultureInfo.InvariantCulture);
-                        Double Total = Largo * Cantidad;
-
-                        respuesta = nueva.Modificar(" Inventario ", " Metros_Cuadrados = Metros_Cuadrados - " + Convert.ToString(Total).Replace(",", ".") + " ", " Producto = " + item.codigo + " ");
-                    }
+                    
                 }
 
                 if (tipopago.Equals("2"))
@@ -365,7 +376,7 @@ namespace Proyecto1_Tel.Code
 
 
 
-                var factory = new ConnectionFactory() { HostName = "192.168.1.6" };
+                var factory = new ConnectionFactory() { HostName = "localhost" };
                 using (var connection = factory.CreateConnection())
                 using (var channel = connection.CreateModel())
                 {
@@ -381,7 +392,7 @@ namespace Proyecto1_Tel.Code
 
                     foreach (var item in carrito)
                     {
-                        message += venta.Tables[0].Rows[0][0] + ";" + cliente + ";" + nick + ";" + item.nombre + ";       "   + item.cantidad + ";    " + item.largo +  ",";
+                        message += venta.Tables[0].Rows[0][0] + ";" + cliente + ";" + nickname + ";" + item.nombre + ";       "   + item.cantidad + ";    " + item.largo +  ",";
                     }
 
                     var body = Encoding.UTF8.GetBytes(message);
@@ -514,12 +525,13 @@ namespace Proyecto1_Tel.Code
                     {
                         ancho = nDescripcion[0].InnerText;
                     }
-                        
 
+
+                    string user = HttpContext.Current.Session["IdUser"].ToString();
                     Conexion nueva = new Conexion();
                     DataSet datos = nueva.Consulta("select precio from inventario where producto=" + codigo);
                     DataSet abreviatura = nueva.Consulta("select Abreviatura from Producto where producto=" + codigo);
-                    carrito.Add(new Product(idventa, cantidad,largo,ancho,codigo, abreviatura.Tables[0].Rows[0][0] + "", producto, datos.Tables[0].Rows[0][0] + ""));
+                    carrito.Add(new Product(idventa, cantidad,largo,ancho,codigo, abreviatura.Tables[0].Rows[0][0] + "", producto, datos.Tables[0].Rows[0][0] + "",user));
             
                 }
                 catch (Exception e)
@@ -557,31 +569,36 @@ namespace Proyecto1_Tel.Code
                     "        </thead>" +
                     "        <tbody>";
 
+            string user = HttpContext.Current.Session["IdUser"].ToString();
+
             for (int i = 0; i < carrito.Count; i++)
             {
 
                 try
                 {
-                    string cant = carrito[i].cantidad;
-                    if (!carrito[i].ancho.Equals(""))
-                    {
-                        cant += "x" + carrito[i].largo;
-                    }
-                    str += "            <tr>" +
-                                    "                <td>" + carrito[i].idventa + "</td>" +
-                                    "                <td>" + carrito[i].nombre + "</td>" +
-                                    "                <td>" +
-                                                        cant +
-                                    "                </td>" +
-                                    "               <td>" + carrito[i].precio + "</td>" +
-                                    "               <td>" + carrito[i].subTotal + "</td>" +
+                    if (carrito[i].usuario.Equals(user)) {
+                        string cant = carrito[i].cantidad;
+                        if (!carrito[i].ancho.Equals(""))
+                        {
+                            cant += "x" + carrito[i].largo;
+                        }
+                        str += "            <tr>" +
+                                        "                <td>" + carrito[i].idventa + "</td>" +
+                                        "                <td>" + carrito[i].nombre + "</td>" +
+                                        "                <td>" +
+                                                            cant +
+                                        "                </td>" +
+                                        "               <td>" + carrito[i].precio + "</td>" +
+                                        "               <td>" + carrito[i].subTotal + "</td>" +
 
-                                                    "<td>" +
-                                                        "   <ul class=\"table-controls\">" +
-                                                  "          <li><a href=\"javascript:removecarrito('" + carrito[i].idventa + "')\"class=\"tip\" title=\"Remover\"><i class=\"fam-cross\"></i></a> </li>" +
-                                                 "       </ul>" +
-                                                "    </td>" +
-                                                " </tr>";
+                                                        "<td>" +
+                                                            "   <ul class=\"table-controls\">" +
+                                                      "          <li><a href=\"javascript:removecarrito('" + carrito[i].idventa + "')\"class=\"tip\" title=\"Remover\"><i class=\"fam-cross\"></i></a> </li>" +
+                                                     "       </ul>" +
+                                                    "    </td>" +
+                                                    " </tr>";
+                    }
+
                 }
                 catch(Exception e)
                 {

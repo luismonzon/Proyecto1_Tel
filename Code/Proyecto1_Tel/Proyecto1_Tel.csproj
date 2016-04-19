@@ -97,6 +97,7 @@
     <Content Include="img\cancelar-icono-9428-32.png" />
     <Content Include="img\editar-usuario-icono-9786-32.png" />
     <Content Include="img\eliminar-un-grupo-icono-6756-32.png" />
+    <Content Include="img\on-off1.png" />
     <Content Include="Index.aspx" />
     <Content Include="packages.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -108,6 +109,7 @@
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <None Include="Properties\PublishProfiles\Proyecto_Solar.pubxml" />
+    <None Include="Properties\PublishProfiles\ps.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

@@ -66,7 +66,7 @@
                 success: function (msg) {
                     // Notice that msg.d is used to retrieve the result object
                     if (msg.d == "1") {
-                        window.location.href = "/Code/Inicio.aspx";
+                        window.location.href = "Code/Inicio.aspx";
 
                     }
                     else {

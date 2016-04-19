@@ -44,6 +44,7 @@ namespace Proyecto1_Tel.Code
                         case "Inv_Bodega":
                         case "Inicio":
                         case "Inv_tienda":
+                        case "Producto":
                             return true;
                         default:
                             return false;
@@ -58,6 +59,7 @@ namespace Proyecto1_Tel.Code
                         case "Venta":
                         case "ClienteDeuda":
                         case "Inicio":
+                        case "Producto":
                             return true;
                         default:
                             return false;

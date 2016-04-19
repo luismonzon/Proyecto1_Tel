@@ -494,8 +494,8 @@
 	                                var CodVenta = response.d;
 	                                $('#mensaje').removeClass();
 	                                $('#mensaje').addClass('alert alert-success').html('Codigo de Venta: ' + CodVenta).show(200).delay(2500);
-	                                alert("Codigo de Venta: " + CodVenta);
-	                                window.location = "/Code/Venta.aspx";
+	                                alert('El codigo de Venta es: ' + CodVenta );
+	                                reloadTable();
 	                               
 	                            }
 	                        });

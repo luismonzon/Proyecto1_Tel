@@ -62,7 +62,7 @@ namespace Proyecto1_Tel.Code
                         "<div class=\"control-group\" id=\"venta\">" +
                             "<div class=\"view\">" +
                                 "<a href=\"Venta.aspx\" class=\"button\">" +
-                                    "<img src=\"/img/venta.png\" aria-orientation=\"vertical\" />" +
+                                    "<img src=\"../img/venta.png\" aria-orientation=\"vertical\" />" +
                                 "</a>" +
                             "</div>" +
                             "<div class=\"item-info\">" +
@@ -75,7 +75,7 @@ namespace Proyecto1_Tel.Code
                         "<div class=\"control-group\" id=\"agrega_usuario\">" +
                             "<div class=\"view\">" +
                                 "<a href=\"Cliente.aspx\" class=\"button\">" +
-                                    "<img src=\"/img/agregar.png\" aria-orientation=\"vertical\" WIDTH=178 HEIGHT=180  />" +
+                                    "<img src=\"../img/agregar.png\" aria-orientation=\"vertical\" WIDTH=178 HEIGHT=180  />" +
                                 "</a>" +
                             "</div>" +
                             "<div class=\"item-info\">" +
@@ -89,7 +89,7 @@ namespace Proyecto1_Tel.Code
                         "<div class=\"control-group\" id=\"inventario\">" +
                             "<div class=\"view\">" +
                                 "<a href=\"Inv_tienda.aspx\" class=\"button\">" +
-                                    "<img src=\"/img/inventario.png\" aria-orientation=\"vertical\" WIDTH=178 HEIGHT=180/>" +
+                                    "<img src=\"../img/inventario.png\" aria-orientation=\"vertical\" WIDTH=178 HEIGHT=180/>" +
                                 "</a>" +
                             "</div>" +
                         "<div class=\"item-info\"> " +
@@ -113,7 +113,7 @@ namespace Proyecto1_Tel.Code
                 "<div class=\"control-group\" id=\"bodega\">" +
                     "<div class=\"view\">" +
                         "<a href=\"Inv_Bodega.aspx\" class=\"button\">" +
-                            "<img src=\"/img/Bodega.png\" aria-orientation=\"vertical\" WIDTH=178 HEIGHT=180/>" +
+                            "<img src=\"../img/Bodega.png\" aria-orientation=\"vertical\" WIDTH=178 HEIGHT=180/>" +
                         "</a>" +
                     "</div>" +
                     "<div class=\"item-info\">" +
@@ -127,7 +127,7 @@ namespace Proyecto1_Tel.Code
                         "<div class=\"control-group\" id=\"inventario\">" +
                             "<div class=\"view\">" +
                                 "<a href=\"Inv_tienda.aspx\" class=\"button\">" +
-                                    "<img src=\"/img/inventario.png\" aria-orientation=\"vertical\" WIDTH=178 HEIGHT=180/>" +
+                                    "<img src=\"../img/inventario.png\" aria-orientation=\"vertical\" WIDTH=178 HEIGHT=180/>" +
                                 "</a>" +
                             "</div>" +
                         "<div class=\"item-info\"> " +
@@ -152,7 +152,7 @@ namespace Proyecto1_Tel.Code
 				        "<div class=\"control-group\" id=\"venta\">"+
                             "<div class=\"view\">"+
                                 "<a href=\"Venta.aspx\" class=\"button\">"+
-                                    "<img src=\"/img/venta.png\" aria-orientation=\"vertical\" />"+
+                                    "<img src=\"../img/venta.png\" aria-orientation=\"vertical\" />" +
                                 "</a>"+
                             "</div>"+
                             "<div class=\"item-info\">"+
@@ -165,7 +165,7 @@ namespace Proyecto1_Tel.Code
                         "<div class=\"control-group\" id=\"agrega_usuario\">"+
                             "<div class=\"view\">"+
                         		"<a href=\"Cliente.aspx\" class=\"button\">"+
-						            "<img src=\"/img/agregar.png\" aria-orientation=\"vertical\" WIDTH=178 HEIGHT=180  />"+
+                                    "<img src=\"../img/agregar.png\" aria-orientation=\"vertical\" WIDTH=178 HEIGHT=180  />" +
                                 "</a>"+
                             "</div>"+
                             "<div class=\"item-info\">"+
@@ -179,7 +179,7 @@ namespace Proyecto1_Tel.Code
                         "<div class=\"control-group\" id=\"reportes\">"+
                             "<div class=\"view\">"+
 							    "<a href=\"ProductosMasVenden.aspx\" class=\"button\">"+
-                                    "<img src=\"/img/report.png\" aria-orientation=\"vertical\" WIDTH=178 HEIGHT=180/>"+
+                                    "<img src=\"../img/report.png\" aria-orientation=\"vertical\" WIDTH=178 HEIGHT=180/>" +
                                 "</a>"+
                             "</div>"+
                             "<div class=\"item-info\">"+
@@ -198,7 +198,7 @@ namespace Proyecto1_Tel.Code
                 "<div class=\"control-group\" id=\"bodega\">"+
                     "<div class=\"view\">"+
 					    "<a href=\"Inv_Bodega.aspx\" class=\"button\">"+
-                            "<img src=\"/img/Bodega.png\" aria-orientation=\"vertical\" WIDTH=178 HEIGHT=180/>"+
+                            "<img src=\"../img/Bodega.png\" aria-orientation=\"vertical\" WIDTH=178 HEIGHT=180/>" +
                         "</a>"+
 					"</div>"+
                     "<div class=\"item-info\">"+
@@ -212,7 +212,7 @@ namespace Proyecto1_Tel.Code
                 "<div class=\"control-group\" id=\"inventario\">"+
                     "<div class=\"view\">"+
 					    "<a href=\"Inv_tienda.aspx\" class=\"button\">"+
-						    "<img src=\"/img/inventario.png\" aria-orientation=\"vertical\" WIDTH=178 HEIGHT=180/>"+
+                            "<img src=\"../img/inventario.png\" aria-orientation=\"vertical\" WIDTH=178 HEIGHT=180/>" +
                         "</a>"+
                     "</div>" +
                      "<div class=\"item-info\"> " +

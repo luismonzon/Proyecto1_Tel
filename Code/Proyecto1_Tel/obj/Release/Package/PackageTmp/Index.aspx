@@ -10,22 +10,7 @@
     <!-- Bootstrap Core CSS and Custom CSS-->
     <link href="Content/bootstrap.min.css" rel="stylesheet" />
     <link href="Code/css/login.css" rel="stylesheet" />
-    <script type="text/javascript">
-        window.onload = function () {
-            Objeto = document.getElementsByTagName("a");
-            for (a = 0; a < Objeto.length; a++) {
-                Objeto[a].onclick = function () {
-                    location.replace("Index.aspx");
-                    return false;
-                }
-            }
-        }
-
-        if (history.foward()) {
-            location.replace(history.foward());
-        }
-
-</script>
+   
 
 
 </head>
@@ -81,7 +66,7 @@
                 success: function (msg) {
                     // Notice that msg.d is used to retrieve the result object
                     if (msg.d == "1") {
-                        window.location.href = "/Code/Inicio.aspx";
+                        window.location.href = "Code/Inicio.aspx";
 
                     }
                     else {

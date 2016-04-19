@@ -47,10 +47,11 @@ namespace Proyecto1_Tel.Code
             //Menu de rol de Administrador
             general.InnerHtml = "<ul class=\"navigation widget\"> " +
                         "<li class=\"active\"><a href=\"Inicio.aspx\" title=\"Inicio\"><i class=\"icon-home\"></i>Inicio</a></li>" +
-                        "<li><a class=\"expand\"><i class=\"icon-reorder\"></i>Administrar<strong>4</strong></a> " +
+                        "<li><a class=\"expand\"><i class=\"icon-reorder\"></i>Administrar<strong>5</strong></a> " +
                           "  <ul>" +
                                 "<li><a href=\"Venta.aspx\" title=\"Venta\">Ventas</a></li>" +
                                 "<li><a href=\"Cliente.aspx\" title=\"Clientes\">Clientes</a></li>" +
+                                "<li><a href=\"Producto.aspx\" title=\"Productos\">Productos</a></li> " +
                                 "<li><a href=\"ClientesDeuda.aspx\" title=\"Clientes con Credito\">Clientes con Credito</a></li>" +
                                 "<li><a  title=\"Inventario\" class=\"expand\">Inventario</a> " +
                                    "<ul>" +
@@ -67,8 +68,9 @@ namespace Proyecto1_Tel.Code
         {
             general.InnerHtml = "<ul class=\"navigation widget\"> " +
                         "<li class=\"active\"><a href=\"Inicio.aspx\" title=\"Inicio\"><i class=\"icon-home\"></i>Inicio</a></li>" +
-                        "<li><a class=\"expand\"><i class=\"icon-reorder\"></i>Administrar<strong>1 </strong></a> " +
+                        "<li><a class=\"expand\"><i class=\"icon-reorder\"></i>Administrar<strong>2</strong></a> " +
                           "  <ul>" +
+                                "<li><a href=\"Producto.aspx\" title=\"Productos\">Productos</a></li> " +
                                 "<li><a  title=\"Inventario\" class=\"expand\">Inventario</a> " +
                                    "<ul>" +
                                         "<li><a href=\"Inv_Bodega.aspx\" title=\"Bodega\">Bodega</a></li>" +

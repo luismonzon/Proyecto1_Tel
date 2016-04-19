@@ -88,12 +88,12 @@
             <form runat="server">
                      <asp:scriptmanager id="ScriptManager1" runat="server" />
 
-			<a href="Inicio.aspx" title="" class="logo"><img src="/img/Loguito.png" width=140/></a>
+			<a href="Inicio.aspx" title="" class="logo"><img src="../img/Loguito.png" width=140/></a>
 			    <ul class="top-menu">
 				<li><a class="fullview"></a></li>
 				
                     <li class="dropdown">
-				         	<a class="user-menu"  data-toggle="dropdown"><span> Bienvenido: <asp:Label ID="Label1" runat="server" ></asp:Label>  <b class="caret"></b></span></a>
+				         	<a class="user-menu"  data-toggle="dropdown"><img src="../img/on-off1.png" /><span> Bienvenido: <asp:Label ID="Label1" runat="server" ></asp:Label>  <b class="caret"></b></span></a>
                     <ul class="dropdown-menu">
                         <i class="icon-remove"></i>
                         <asp:LinkButton ID="lnkbtnlogout"  OnClick="lnkbtnlogout_Click" runat="server">Cerrar Sesion</asp:LinkButton>
@@ -174,7 +174,7 @@
 			    	    
                     </div>
                     <ul class="page-stats">
-			    	    <img src="/img/Logo.png" width="500" />
+			    	    <img src="../img/Logo.png" width="500" />
                     </ul>
 			    	
 			    	

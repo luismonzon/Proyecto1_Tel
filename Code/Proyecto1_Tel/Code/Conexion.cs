@@ -5,6 +5,7 @@ using System.Web;
 using System.Data;
 using System.Data.SqlClient;
 using System.Xml;
+using System.Web.Configuration;
 
 
 namespace Proyecto1_Tel.Code
@@ -26,7 +27,8 @@ namespace Proyecto1_Tel.Code
         {
             bool respuesta = false;
             //JARVIS\SQLEXPRESS
-            string cadenaConexion = @"Data Source=(local);Initial Catalog=PROYECT_1;Integrated Security=True";
+            string cadenaConexion = WebConfigurationManager.ConnectionStrings["conn"].ConnectionString;
+            //string cadenaConexion = @"Data Source=192.168.1.6;Initial Catalog=PROYECT_1;User ID=sa;Password=Proteccionsolar123";
             try
             {
 

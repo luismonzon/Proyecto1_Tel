@@ -461,7 +461,7 @@ namespace Proyecto1_Tel.Code
             {
                 cantidad = "0";
             }
-            else if (metros == "")
+            if (metros == "")
             {
                 metros = "0";
             }
@@ -486,7 +486,7 @@ namespace Proyecto1_Tel.Code
                 decimal metros2 = Convert.ToDecimal(metros, CultureInfo.CreateSpecificCulture("en-US"));
 
                 decimal metrostotales = metros1 + metros2;
-                return  conn.Modificar("Inventario", "Cantidad =" + (Convert.ToInt64(cantid) + Convert.ToInt64(cantidad)) + ", Metros_Cuadrados=" + Convert.ToString(metrostotales).Replace(",", "."), "Producto=" + producto);
+                return  conn.Modificar("Inventario", "Cantidad =" + (Convert.ToInt64(cantid) + Convert.ToInt64(cantidad)) + ", Metros_Cuadrados=" + Convert.ToString(metrostotales).Replace(",", ".") + ", Precio = " + precio, "Producto=" + producto);
                 
 
             }
