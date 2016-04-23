@@ -71,7 +71,7 @@ namespace Proyecto1_Tel.Code
 
             if (clientes.Tables.Count>0)
             {
-                if (rol == "1")
+                if (rol == "1" || rol == "3")
                 {
                     data = "<div class=\"table-overflow\"> " +
                     "<table class=\"table table-striped table-bordered\" id=\"data-table\">" +
@@ -79,7 +79,7 @@ namespace Proyecto1_Tel.Code
                             "<tr>" +
                                 "<th  align =\"center\">Codigo Cliente</th>" +
                                " <th  align =\"center\">Nombre</th>" +
-                               " <th  align =\"center\">Apellido</th>" +
+                               " <th  align =\"center\">Comercio</th>" +
                                 "<th align =\"center\">N.I.T.</th>" +
                                 " <th  align =\"center\">Direccion</th>" +
                                 " <th  align =\"center\">Telefono</th>" +
@@ -95,11 +95,11 @@ namespace Proyecto1_Tel.Code
                            "<tr>" +
                                "<th  align =\"center\">Codigo Cliente</th>" +
                               " <th  align =\"center\">Nombre</th>" +
-                              " <th  align =\"center\">Apellido</th>" +
+                              " <th  align =\"center\">Comercio</th>" +
                                "<th align =\"center\">N.I.T.</th>" +
                                " <th  align =\"center\">Direccion</th>" +
                                " <th  align =\"center\">Telefono</th>" +
-                              // "<th align =\"center\">Acciones</th>" + SE ELIMINA LA COLUMNA ACCIONES
+                              // "<th align =\"center\">Acciones</th>" + //SE ELIMINA LA COLUMNA ACCIONES
                            "</tr>" +
                        "</thead>" + "<tbody>";
 
@@ -121,6 +121,17 @@ namespace Proyecto1_Tel.Code
                                     "</td>";
 
                     }
+                    else if (rol == "3")
+                    {
+                        data += " <td>" +
+                                     "<ul class=\"table-controls\">" +
+                                       " <li><a href=\"javascript:Mostrar_cliente(" + item["Cliente"].ToString() + ")\" id=\"edit\" class=\"tip\" CssClass=\"Edit\" title=\"Editar\"><i class=\"fam-pencil\"></i></a> </li>" +
+                                 "</td>";
+
+                    }
+
+
+
                     data += "</tr>";
                 }
 
@@ -228,13 +239,21 @@ namespace Proyecto1_Tel.Code
 
             if (ds != 0)
             {
-                int cantnit = conn.Count("Select count(nit) from [Cliente] where nit=\'" + nit + "\'  And Cliente!= " + id + ";");
-
-                if (cantnit == 0)
+                if (nit != "")
                 {
-                    conn.Modificar("Cliente", "Nombre" + "=" + "\'" + nombre + "\' " + "," + " Nit " + " = " + "\'" + nit + "\' " + "," + " Apellido " + " = " + "\'" + apellido + "\' " + "," + " Direccion " + " = " + "\'" + direccion + "\' " + "," + " Telefono " + " = " + "\'" + telefono + "\' ", "Cliente" + "= " + id);
-                    return true;
+                    int cantnit = conn.Count("Select count(nit) from [Cliente] where nit=\'" + nit + "\'  And Cliente!= " + id + ";");
+
+                    if (cantnit == 0)
+                    {
+                       return conn.Modificar("Cliente", "Nombre" + "=" + "\'" + nombre + "\' " + "," + " Nit " + " = " + "\'" + nit + "\' " + "," + " Apellido " + " = " + "\'" + apellido + "\' " + "," + " Direccion " + " = " + "\'" + direccion + "\' " + "," + " Telefono " + " = " + "\'" + telefono + "\' ", "Cliente" + "= " + id);
+                        
+                    }
                 }
+                else
+                {
+                    return conn.Modificar("Cliente", "Nombre" + "=" + "\'" + nombre + "\' " + "," + " Nit " + " = " + "\'" + nit + "\' " + "," + " Apellido " + " = " + "\'" + apellido + "\' " + "," + " Direccion " + " = " + "\'" + direccion + "\' " + "," + " Telefono " + " = " + "\'" + telefono + "\' ", "Cliente" + "= " + id);
+                }
+                
                 
             }
 
@@ -300,8 +319,8 @@ namespace Proyecto1_Tel.Code
                 "<div class=\"controls\"><input placeholder=\"Nombre\" required=\"required\" style=\"font-size: 15px;\" type=\"text\" name=\"nombre\" id=\"nombre\" runat=\"server\" class=\"span12\" /></div> \n" +
                 "</div> \n" +
                 "<div class=\"control-group\"> \n" +
-                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>Apellidos:</b></label> \n" +
-                "<div class=\"controls\"><input  style=\"font-size: 15px;\" type=\"text\" placeholder=\"Apellidos\" id=\"apellido\" runat=\"server\" class=\"span12\"/></div> \n" +
+                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>Comercio:</b></label> \n" +
+                "<div class=\"controls\"><input  style=\"font-size: 15px;\" type=\"text\" placeholder=\"Nombre Comercio\" id=\"apellido\" runat=\"server\" class=\"span12\"/></div> \n" +
                 "</div> \n" +
                 "<div class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>Nit:</b></label> \n" +
@@ -309,7 +328,7 @@ namespace Proyecto1_Tel.Code
                 "</div> \n" +
                 "<div class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>Direccion:</b></label> \n" +
-                "<div class=\"controls\"><input   style=\"font-size: 15px;\" type=\"text\" placeholder=\"Direccion\" id=\"direccion\" runat=\"server\" /></div> \n" +
+                "<div class=\"controls\"><input   style=\"font-size: 15px;\" type=\"text\" placeholder=\"Direccion\" id=\"direccion\" class=\"span12\" runat=\"server\" /></div> \n" +
                 "</div> \n" +
                 "<div class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>Telefono:</b></label> \n" +

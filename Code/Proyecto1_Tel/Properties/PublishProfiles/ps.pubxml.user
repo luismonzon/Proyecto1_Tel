@@ -6,14 +6,17 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>C:\inetpub\wwwroot\proteccionsolar</_PublishTargetUrl>
+    <_PublishTargetUrl>C:\inetpub\wwwroot\ProteccionSolar</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/AjaxControlToolkit.dll">
       <publishTime>04/18/2016 21:55:48</publishTime>
     </File>
     <File Include="bin/Proyecto1_Tel.dll">
-      <publishTime>04/19/2016 17:08:43</publishTime>
+      <publishTime>04/21/2016 23:30:18</publishTime>
+    </File>
+    <File Include="bin/Proyecto1_Tel.dll.config">
+      <publishTime>04/18/2016 22:25:47</publishTime>
     </File>
     <File Include="bin/RabbitMQ.Client.dll">
       <publishTime>04/18/2016 21:58:13</publishTime>
@@ -727,7 +730,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>04/18/2016 21:58:13</publishTime>
     </File>
     <File Include="Code/Venta.aspx">
-      <publishTime>04/19/2016 11:14:43</publishTime>
+      <publishTime>04/21/2016 22:56:57</publishTime>
     </File>
     <File Include="Code/VentaAnual.aspx">
       <publishTime>04/18/2016 21:58:13</publishTime>

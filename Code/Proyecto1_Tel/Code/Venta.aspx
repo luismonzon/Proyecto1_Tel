@@ -48,31 +48,37 @@
 	                                 <div class="control-group">    
                                          
                                       
-	                                    <div class="span5">
+	                                    <div class="span6">
 	                                        <label class="control-label" style="font-size: 15px;"> <b>Nombre:</b></label>
 	                                          <div class=" align-left"> 
                                             <input type="text" name="regular" style="font-size: 14px;"  disabled="disabled" class="span8" id="nombre_cliente" placeholder="Nombre del Cliente" />
                                             </div>
 	                                    </div>
-                                         <div class="span3">
+                                         <div class="span6">
 	                                        <label class="control-label" style="font-size: 15px;"> <b>Nit:</b></label>
 	                                          <div class=" align-left"> 
                                                 <input type="text" name="regular" style="font-size: 14px;" disabled="disabled" class="span8" id="nit_cliente" placeholder="Nit del Cliente" />
                                             </div>
 	                                    </div>
-	                                
-	                                    <div class="span4">
-	                                        <label class="control-label" style="font-size: 13px;"><b>Telefono:</b></label>
+	                                                    
+	                                 </div>
+	                                <div class="control-group">
+                                         <div class="span6">
+	                                        <label class="control-label" style="font-size: 15px;"><b>Telefono:</b></label>
 	                                          <div class=" align-left"> 
-                                                <input type="text" name="regular" style="font-size: 14px;" disabled="disabled" class="span6" id="tel_cliente" placeholder="Telefono del Cliente" />
+                                                <input type="text" name="regular" style="font-size: 14px;" disabled="disabled" class="span8" id="tel_cliente" placeholder="Telefono del Cliente" />
+
+                                            </div>
+	                                    </div>
+                                        <div class="span6">
+	                                        <label class="control-label" style="font-size: 15px;"><b>Comercio:</b></label>
+	                                          <div class=" align-left"> 
+                                                <input type="text" name="regular" style="font-size: 14px;" disabled="disabled" class="span8" id="comercio" placeholder="Nombre Comercio" />
 
                                             </div>
 	                                    </div>
 
-	                                    
-                                                               
-	                                 </div>
-	                                
+	                                </div>
 	                                
                                     <div class="control-group">
 	                                        <label class="control-label" style="font-size: 15px;"><b>Direccion del Cliente</b></label>
@@ -327,10 +333,12 @@
                         alert("Cliente no existe");
                     }
                     else {
-                        var datos = msg.d.split(",");
+                        var str = msg.d + "";
+                        var datos = str.split(';');
                         $("#codigo_cliente").val(datos[3]);
                         $("#nit_cliente").val(datos[1]);
-                        $("#nombre_cliente").val(datos[0] + " " + datos[2]);
+                        $("#nombre_cliente").val(datos[0]);
+                        $("#comercio").val(datos[2]);
                         $("#tel_cliente").val(datos[5]);
                         $("#dir_cliente").val(datos[4]);
                     }
@@ -418,10 +426,11 @@
 	                    alert("Cliente no existe");
 	                }
 	                else {
-	                    var datos = msg.d.split(",");
+	                    var datos = JSON.parse(msg.d);
 	                    $("#codigo_cliente").val(datos[3]);
 	                    $("#nit_cliente").val(datos[1]);
-	                    $("#nombre_cliente").val(datos[0] + " " + datos[2]);
+	                    $("#nombre_cliente").val(datos[0]);
+	                    $("#comercio").val(datos[2]);
 	                    $("#tel_cliente").val(datos[5]);
 	                    $("#dir_cliente").val(datos[4]);
 	                }
@@ -490,11 +499,25 @@
 	                            contentType: 'application/json; charset=utf-8',
 	                            dataType: 'json',
 	                            success: function (response) {
+	                                var abono = document.getElementById("totalabonado").value;
+	                                var total = document.getElementById("totalpago").value;
 	                                
 	                                var CodVenta = response.d;
 	                                $('#mensaje').removeClass();
 	                                $('#mensaje').addClass('alert alert-success').html('Codigo de Venta: ' + CodVenta).show(200).delay(2500);
-	                                alert('El codigo de Venta es: ' + CodVenta );
+	                                alert('El codigo de Venta es: ' + CodVenta);
+	                                var c = 0;
+	                                if (abono != "") {
+	                                    var aaa = total.replace(",", ".");
+	                                    var a = parseFloat(abono);
+	                                    var b = parseFloat(aaa);
+	                                    if (a > 0 && a > b) {
+	                                        c = parseFloat(a - b);
+	                                        $('#vuelto').removeClass();
+	                                        $('#vuelto').addClass('alert alert-success').html('Vuelto: ' + c).show(200).delay(2500);
+	                                        alert('Su Vuelto es: ' + parseFloat(c));
+	                                    }
+	                                }
 	                                reloadTable();
 	                               
 	                            }

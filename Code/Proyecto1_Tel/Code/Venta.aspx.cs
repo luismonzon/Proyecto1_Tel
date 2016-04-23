@@ -10,6 +10,7 @@ using System.Xml;
 using System.Globalization;
 using RabbitMQ.Client;
 using System.Text;
+using System.Web.Script.Serialization;
 namespace Proyecto1_Tel.Code 
 {
     public class Product{
@@ -150,7 +151,16 @@ namespace Proyecto1_Tel.Code
 
                     foreach (DataRow item in cliente.Tables[0].Rows)
                     {
-                        respuesta += item["nombre"].ToString() + "," + item["nit"].ToString() + "," + item["apellido"].ToString() + "," + item["cliente"].ToString() + "," + item["direccion"].ToString() + "," + item["telefono"].ToString();
+                        JavaScriptSerializer jj = new JavaScriptSerializer();
+                        List<string> l = new List<string>();
+                        l.Add(item["nombre"].ToString());
+                        l.Add(item["nit"].ToString());
+                        l.Add(item["apellido"].ToString());
+                        l.Add(item["cliente"].ToString());
+                        l.Add(item["direccion"].ToString());
+                        l.Add(item["telefono"].ToString());
+
+                        respuesta += jj.Serialize(l);
                     }
                     return respuesta;
                 }
@@ -199,8 +209,8 @@ namespace Proyecto1_Tel.Code
                 "<div class=\"controls\"><input placeholder=\"Nombre\" required=\"required\" style=\"font-size: 15px;\" type=\"text\" name=\"nombre\" id=\"nombre\" runat=\"server\" class=\"span12\" /></div> \n" +
                 "</div> \n" +
                 "<div class=\"control-group\"> \n" +
-                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>Apellidos:</b></label> \n" +
-                "<div class=\"controls\"><input  style=\"font-size: 15px;\" type=\"text\" placeholder=\"Apellidos\" id=\"apellido\" runat=\"server\" class=\"span12\"/></div> \n" +
+                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>Comercio:</b></label> \n" +
+                "<div class=\"controls\"><input  style=\"font-size: 15px;\" type=\"text\" placeholder=\"Nombre Comercio\" id=\"apellido\" runat=\"server\" class=\"span12\"/></div> \n" +
                 "</div> \n" +
                 "<div class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>Nit:</b></label> \n" +
@@ -208,7 +218,7 @@ namespace Proyecto1_Tel.Code
                 "</div> \n" +
                 "<div class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>Direccion:</b></label> \n" +
-                "<div class=\"controls\"><input  style=\"font-size: 15px;\" type=\"text\" placeholder=\"Direccion\" id=\"direccion\" runat=\"server\" /></div> \n" +
+                "<div class=\"controls\"><input  style=\"font-size: 15px;\" type=\"text\" placeholder=\"Direccion\" id=\"direccion\" runat=\"server\" class=\"span12\" /></div> \n" +
                 "</div> \n" +
                 "<div class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>Telefono:</b></label> \n" +
@@ -276,16 +286,24 @@ namespace Proyecto1_Tel.Code
                 "<table border=\"0\" width=\"100%\" > \n" +
                 "<div> \n" +
                 //ID DEL CLIENTE
+                 "<div class=\"control-group\"> \n" +
+                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>Codigo Cliente</b></label> \n" +
+                "<div class=\"controls\"><input  style=\"font-size: 15px disabled =\"disabled\" readonly=\"readonly\"  type=\"text\" value=\"" + cliente + "\" id=\"codclientepago\" runat=\"server\" class=\"span12\"/></div> \n" +
+                "</div> \n" +
+               
+
                 "<div class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>Total:</b></label> \n" +
                 "<div class=\"controls\"><input placeholder=\"Total\" disabled =\"disabled\" readonly=\"readonly\" style=\"font-size: 15px;\" value=\""+total+"\"type=\"text\" name=\"total\" id=\"totalpago\" runat=\"server\" class=\"span8\" /></div> \n" +
                 "</div> \n" +
                 //
-              
+
+                //ID DEL CLIENTE
                 "<div class=\"control-group\"> \n" +
-                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>Codigo Cliente</b></label> \n" +
-                "<div class=\"controls\"><input  style=\"font-size: 15px disabled =\"disabled\" readonly=\"readonly\"  type=\"text\" value=\"" + cliente + "\" id=\"codclientepago\" runat=\"server\" class=\"span12\"/></div> \n" +
+                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>Pago (Q.): </b></label> \n" +
+                "<div class=\"controls\"><input placeholder=\"Cantidad\" style=\"font-size: 15px;\" type=\"text\" name=\"total\" id=\"totalabonado\" runat=\"server\" class=\"span8\" /></div> \n" +
                 "</div> \n" +
+
                 "<div class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>Tipo Pago</b></label> \n" +
                 "<div class=\"controls\"><select style=\"font-size: 15px;\" data-placeholder=\"Agregar producto\" class=\"select\"  onChange=\"cambio()\"  id=\"cmbpago\" tabindex=\"2\"><option value=\"\">Elegir Tipo</option><option value=\"1\">Efectivo</option><option value=\"2\">Credito</option> <option value=\"3\">Deposito</option> </select></div> \n" +
@@ -294,6 +312,7 @@ namespace Proyecto1_Tel.Code
                 "<tr> \n" +
                 "<td colspan=\"2\"> \n" +
                 "<div id=\"mensaje\"></div> \n" +
+                "<div id=\"vuelto\"></div> \n" +
                 "<div class=\"alert margin\"> \n" +
                 "<button type=\"button\"  class=\"close\" data-dismiss=\"alert\">×</button> \n" +
                 "Campos Obligatorios (*) \n" +

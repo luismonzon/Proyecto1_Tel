@@ -68,7 +68,7 @@ namespace Proyecto1_Tel.Code
                         "<thead>" +
                             "<tr>" +
                                 "<th  align =\"center\">Nombre Cliente</th>" +
-                                "<th  align =\"center\">Apellido Cliente</th>" +
+                                "<th  align =\"center\">Comercio Cliente</th>" +
                                " <th  align =\"center\">Vendedor</th>" +
                                " <th  align =\"center\">Tipo de Pago</th>" +
                                " <th  align =\"center\">Total Venta</th>" +

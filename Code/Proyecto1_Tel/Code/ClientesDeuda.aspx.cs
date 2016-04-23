@@ -82,7 +82,7 @@ namespace Proyecto1_Tel.Code
                         "<thead>" +
                             "<tr>" +
                                " <th  align =\"center\">Nombre</th>" +
-                                "<th align =\"center\">Apellido</th>" +
+                                "<th align =\"center\">Comercio</th>" +
                                 "<th align =\"center\">Credito</th>" +
                                 "<th align =\"center\">Abonado</th>" +
                                 "<th align =\"center\">Deuda</th>" +

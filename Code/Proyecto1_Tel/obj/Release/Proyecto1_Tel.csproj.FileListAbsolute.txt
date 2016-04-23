@@ -9,7 +9,6 @@ C:\Users\Wilder\Documents\GitHub\Proyecto1_Tel\Code\Proyecto1_Tel\obj\Release\Pr
 C:\Users\Administrador\Documents\GitHub\Proyecto1_Tel\Code\Proyecto1_Tel\bin\Proyecto1_Tel.dll.config
 C:\Users\Administrador\Documents\GitHub\Proyecto1_Tel\Code\Proyecto1_Tel\bin\Proyecto1_Tel.dll
 C:\Users\Administrador\Documents\GitHub\Proyecto1_Tel\Code\Proyecto1_Tel\bin\Proyecto1_Tel.pdb
-C:\Users\Administrador\Documents\GitHub\Proyecto1_Tel\Code\Proyecto1_Tel\bin\AjaxControlToolkit.dll
 C:\Users\Administrador\Documents\GitHub\Proyecto1_Tel\Code\Proyecto1_Tel\obj\Release\Proyecto1_Tel.csprojResolveAssemblyReference.cache
 C:\Users\Administrador\Documents\GitHub\Proyecto1_Tel\Code\Proyecto1_Tel\obj\Release\Proyecto1_Tel.dll
 C:\Users\Administrador\Documents\GitHub\Proyecto1_Tel\Code\Proyecto1_Tel\obj\Release\Proyecto1_Tel.pdb
