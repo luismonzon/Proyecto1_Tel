@@ -129,6 +129,7 @@
                         if (response.d == true) {
                             $('#mensaje').removeClass();
                             $('#mensaje').addClass('alert alert-success').html('Producto agregado con exito').show(200).delay(2500).hide(200);
+                            document.getElementById("cantidad").value = "";
 
                         } else {
                             $('#mensaje').removeClass();
@@ -216,7 +217,7 @@
                                 if (response.d == true) {
                                     $('#mensaje').removeClass();
                                     $('#mensaje').addClass('alert alert-success').html('Producto agregado con exito').show(200).delay(2500).hide(200);
-
+                                    document.getElementById("cantidad").value = "";
                                 } else {
                                     $('#mensaje').removeClass();
                                     $('#mensaje').addClass('alert alert-danger').html('Producto no se pudo agregar').show(200).delay(2500).hide(200);
@@ -239,7 +240,7 @@
                                 if (response.d == true) {
                                     $('#mensaje').removeClass();
                                     $('#mensaje').addClass('alert alert-success').html('Producto restado con exito').show(200).delay(2500).hide(200);
-
+                                    document.getElementById("cantidad").value = "";
                                 } else {
                                     $('#mensaje').removeClass();
                                     $('#mensaje').addClass('alert alert-danger').html('Producto no se pudo restar').show(200).delay(2500).hide(200);

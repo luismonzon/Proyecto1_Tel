@@ -306,7 +306,7 @@ namespace Proyecto1_Tel.Code
 
                 "<div class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>Tipo Pago</b></label> \n" +
-                "<div class=\"controls\"><select style=\"font-size: 15px;\" data-placeholder=\"Agregar producto\" class=\"select\"  onChange=\"cambio()\"  id=\"cmbpago\" tabindex=\"2\"><option value=\"\">Elegir Tipo</option><option value=\"1\">Efectivo</option><option value=\"2\">Credito</option> <option value=\"3\">Deposito</option> </select></div> \n" +
+                "<div class=\"controls\"><select style=\"font-size: 15px;\" data-placeholder=\"Agregar producto\" class=\"select\"  onChange=\"cambio()\"  id=\"cmbpago\" tabindex=\"2\"><option value=\"1\">Efectivo</option><option value=\"2\">Credito</option> <option value=\"3\">Deposito</option> </select></div> \n" +
                 "</div> \n" +
 
                 "<tr> \n" +
