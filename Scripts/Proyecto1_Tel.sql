@@ -11,6 +11,10 @@ use PROYECT_1
 --and i.Producto = p.Producto 
 --and v.Cliente = 500 
 --group by p.Abreviatura, p.Descripcion;
+TRUNCATE TABLE DETALLEVenta;
+truncate table pago;
+delete from Deuda;
+delete from  VENTA;
 
 SELECT Ps.Pago, d.Venta, c.Cliente, c.Nombre, c.Apellido, sum(d.Cantidad) Credito , sc.Abono Abonado, SUM(d.Cantidad) - sc.Abono Deuda 
   FROM Pago ps, Venta v, Deuda d join Cliente c on c.Cliente = d.Cliente left join ( 
@@ -208,3 +212,4 @@ create table Bodega(
 )
 
 go
+

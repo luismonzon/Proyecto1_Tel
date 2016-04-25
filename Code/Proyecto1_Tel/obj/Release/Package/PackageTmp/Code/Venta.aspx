@@ -505,7 +505,7 @@
 	                                var CodVenta = response.d;
 	                                $('#mensaje').removeClass();
 	                                $('#mensaje').addClass('alert alert-success').html('Codigo de Venta: ' + CodVenta).show(200).delay(2500);
-	                                alert('El codigo de Venta es: ' + CodVenta);
+	                                
 	                                var c = 0;
 	                                if (abono != "") {
 	                                    var aaa = total.replace(",", ".");

@@ -359,28 +359,30 @@ namespace Proyecto1_Tel.Code
 
             string user = HttpContext.Current.Session["IdUser"].ToString();
             string nickname = HttpContext.Current.Session["NickName"].ToString();
-            
-            respuesta = nueva.Crear("Venta", "Cliente, Usuario, Fecha, Total, Tipo_Pago", cliente + "," + user + ",GETDATE()," + Convert.ToString(total).Replace(",", ".")+", "+"'"+ tipo_pago + "'");
+
+            respuesta = nueva.Crear("Venta", "Cliente, Usuario, Fecha, Total, Tipo_Pago, Hora", cliente + "," + user + ",GETDATE()," + Convert.ToString(total).Replace(",", ".") + ", " + "'" + tipo_pago + "'" + " , CONVERT(time, GETDATE())");
             if (respuesta == true)
             {
                 foreach (var item in carrito)
                 {
                     if (item.usuario.Equals(user)) 
                     {
-                        respuesta = nueva.Crear("DetalleVenta", "Venta, producto, cantidad", "(select max(Venta) from venta)," + item.codigo + "," + item.cantidad);
                         if (item.ancho.Equals(""))
                         {
-
+                            respuesta = nueva.Crear("DetalleVenta", "Venta, producto, cantidad, subtotal", "(select max(Venta) from venta)," + item.codigo + "," + item.cantidad + " , " + item.subTotal);
+                        
 
                             respuesta = nueva.Modificar(" Inventario ", " Cantidad = Cantidad - " + item.cantidad + " ", " Producto = " + item.codigo + " ");
                         }
                         else
                         {
 
+
                             Double Largo = Convert.ToDouble(item.largo, CultureInfo.InvariantCulture);
                             Double Cantidad = Convert.ToDouble(item.cantidad, CultureInfo.InvariantCulture);
                             Double Total = Largo * Cantidad;
-
+                            respuesta = nueva.Crear("DetalleVenta", "Venta, producto, cantidad, metros, subtotal ", "(select max(Venta) from venta)," + item.codigo + "," + item.cantidad + "," + item.largo + "," + item.subTotal);
+                        
                             respuesta = nueva.Modificar(" Inventario ", " Metros_Cuadrados = Metros_Cuadrados - " + Convert.ToString(Total).Replace(",", ".") + " ", " Producto = " + item.codigo + " ");
                         }
                     }
