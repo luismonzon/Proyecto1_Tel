@@ -47,7 +47,7 @@
                     for (var i = 0; i < data.length; i++) {
                         options += '<option value="' + data[i].key;
                         if (i == 0) { options += '" selected="selected"' } else { options += '"'; }
-                        options += '>'+data[i].value + '</option>';
+                        options += '>' + data[i].value + '</option>';
                     }
                     $select.html(options);
                     cambio();
@@ -55,8 +55,7 @@
             });
         }
 
-        function NuevoTienda()
-        {
+        function NuevoTienda() {
             $.ajax({
                 type: 'POST',
                 url: 'Inv_tienda.aspx/MostrarModal',
@@ -76,7 +75,7 @@
 
                     $('#formulario')[0].reset(); //formulario lo inicializa con datos vacios
                     $('#edi').hide(); //escondemos el boton de edicion porque es un nuevo registro
-                    
+
                     $('#in_producto').hide();
 
                     $('#divnmetros').hide();
@@ -92,51 +91,51 @@
 
                 }
             });
-            
+
         }
 
         $('#nuevo-tienda').on('click', function () {
-            
+
         });
 
         function cambio() {
 
             var id = document.getElementById('producto').value;
             var selected = $("#producto  option:selected").text();
-             $.ajax({
-                 type: 'POST',
-                 url: 'Inv_tienda.aspx/Busca_Datos',
-                 data: JSON.stringify({ id: id }),
-                 contentType: 'application/json; charset=utf-8',
-                 dataType: 'json',
-                 success: function (response) {
+            $.ajax({
+                type: 'POST',
+                url: 'Inv_tienda.aspx/Busca_Datos',
+                data: JSON.stringify({ id: id }),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (response) {
 
-                     var produc = JSON.parse(response.d);
-                     var Descripcion = produc[0];
-                     var Cantidad_Dispo = produc[1];
-                     var Tipo = produc[2];
-                     var Precio = produc[3];
+                    var produc = JSON.parse(response.d);
+                    var Descripcion = produc[0];
+                    var Cantidad_Dispo = produc[1];
+                    var Tipo = produc[2];
+                    var Precio = produc[3];
 
-                     document.getElementById("descripcion").value = Descripcion;
+                    document.getElementById("descripcion").value = Descripcion;
 
-                     document.getElementById("cantidad_bodega").value = Cantidad_Dispo;
+                    document.getElementById("cantidad_bodega").value = Cantidad_Dispo;
 
-                     document.getElementById("tipo2").value = Tipo;
+                    document.getElementById("tipo2").value = Tipo;
 
-                     if (Tipo == "ARTICULO" || Tipo == "Articulo") {
-                         $('#divmetros').hide();
-                         $('#divcantidad').show();
-                         
+                    if (Tipo == "ARTICULO" || Tipo == "Articulo") {
+                        $('#divmetros').hide();
+                        $('#divcantidad').show();
 
-                     } else {
-                         $('#divmetros').show();
-                         $('#divcantidad').hide();
-                     }
-                     if (Precio == "1") {
-                         $('#divprecio').hide();
-                     } else {
-                         $('#divprecio').show();
-                     }
+
+                    } else {
+                        $('#divmetros').show();
+                        $('#divcantidad').hide();
+                    }
+                    if (Precio == "1") {
+                        $('#divprecio').hide();
+                    } else {
+                        $('#divprecio').show();
+                    }
 
                 }
             });
@@ -151,7 +150,7 @@
             var metros = document.getElementById("metros").value;
             var precio = document.getElementById("precio").value;
             var articulo = document.getElementById("tipo2").value;
-            
+
             if (articulo == "ARTICULO" || articulo == "Articulo") {
                 metros = "0";
 
@@ -159,44 +158,44 @@
                 cantidad = "1";
             }
 
-              if (metros != "" || cantidad != "") {
+            if (metros != "" || cantidad != "") {
 
-                  $.ajax({
+                $.ajax({
 
-                      type: 'POST',
-                      url: 'Inv_tienda.aspx/Add',
-                      data: JSON.stringify({ producto: idproducto, cantidad: cantidad , precio: precio, metros: metros}),
-                      contentType: 'application/json; charset=utf-8',
-                      dataType: 'json',
-                      success: function (response) {
-                          if (response.d == true) {
-                              $('#mensaje').removeClass();
-                              $('#mensaje').addClass('alert alert-success').html('Producto agregado con exito').show(200).delay(2500).hide(200);
-                              document.getElementById("cantidad").value = "";
-                              document.getElementById("precio").value = "";
-                              document.getElementById("metros").value = "";
+                    type: 'POST',
+                    url: 'Inv_tienda.aspx/Add',
+                    data: JSON.stringify({ producto: idproducto, cantidad: cantidad, precio: precio, metros: metros }),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.d == true) {
+                            $('#mensaje').removeClass();
+                            $('#mensaje').addClass('alert alert-success').html('Producto agregado con exito').show(200).delay(2500).hide(200);
+                            document.getElementById("cantidad").value = "";
+                            document.getElementById("precio").value = "";
+                            document.getElementById("metros").value = "";
 
 
-                          } else {
-                              $('#mensaje').removeClass();
-                              $('#mensaje').addClass('alert alert-danger').html('Producto no se pudo agregar').show(200).delay(2500).hide(200);
+                        } else {
+                            $('#mensaje').removeClass();
+                            $('#mensaje').addClass('alert alert-danger').html('Producto no se pudo agregar').show(200).delay(2500).hide(200);
 
-                          }
+                        }
 
-                      }
-                  });
+                    }
+                });
 
-              } else {
+            } else {
 
-                  document.getElementById("metros").focus();
-                  document.getElementById("cantidad").focus();
-                  $('#mensaje').removeClass();
-                  $('#mensaje').addClass('alert alert-danger').html('Revise los campos obligatorios marcados con (*)').show(200).delay(2500).hide(200);
+                document.getElementById("metros").focus();
+                document.getElementById("cantidad").focus();
+                $('#mensaje').removeClass();
+                $('#mensaje').addClass('alert alert-danger').html('Revise los campos obligatorios marcados con (*)').show(200).delay(2500).hide(200);
 
-              }
+            }
 
-              return false;
-          }
+            return false;
+        }
 
 
 
@@ -286,10 +285,10 @@
             var metros = document.getElementById("metros").value;
             var formulario = document.forms[0];
             var opcion = document.getElementsByName("opcion");
-            
-            for (var i = 0; i <opcion.length; i++) {
+
+            for (var i = 0; i < opcion.length; i++) {
                 if (opcion[i].checked) {
-                    
+
                     if (opcion[i].value == '1') {
                         $.ajax({
                             type: 'POST',
@@ -371,7 +370,7 @@
 
         }
 
-       
+
     </script>
 
 

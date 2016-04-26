@@ -53,6 +53,7 @@ namespace Proyecto1_Tel.Code
                                 "<li><a href=\"Cliente.aspx\" title=\"Clientes\">Clientes</a></li>" +
                                 "<li><a href=\"Producto.aspx\" title=\"Productos\">Productos</a></li> " +
                                 "<li><a href=\"ClientesDeuda.aspx\" title=\"Clientes con Credito\">Clientes con Credito</a></li>" +
+                                "<li><a href=\"VentaDiaria.aspx\" title=\"Venta Diaria\">Reporte Venta</a></li>" +
                                 "<li><a  title=\"Inventario\" class=\"expand\">Inventario</a> " +
                                    "<ul>" +
                                         "<li><a href=\"Inv_tienda.aspx\" title=\"Tienda\">Tienda</a></li>" +

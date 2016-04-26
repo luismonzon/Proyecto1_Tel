@@ -32,7 +32,7 @@ namespace Proyecto1_Tel.Code
                     Response.Redirect("~/Index.aspx");
                 }
 
-               
+
                 conexion = new Conexion();
 
                 tab_tienda.InnerHtml = "    <div class=\"navbar\"> " + "<div class=\"navbar-inner\">" +
@@ -54,7 +54,7 @@ namespace Proyecto1_Tel.Code
             }
 
 
-         
+
         }
         /*             
           *             DataSet ds = conexion.Mostrar("Bodega B, Producto P Where B.producto = P.producto and B.Cantidad > 0", "B.Producto PROD, P.Abreviatura ABRE");
@@ -70,7 +70,7 @@ namespace Proyecto1_Tel.Code
              "P.ANCHO, P.MARCA, T.DESCRIPCION NOMBRETIPO, I.SUCURSAL SUCURSAL, I.PRECIO PRECIO, I.CANTIDAD CANTIDAD, I.METROS_CUADRADOS METROS");
             String data = "No hay Productos Disponibles";
             string rol = (string)Session["Rol"];
-            if (productos.Tables[0].Rows.Count > 0 )
+            if (productos.Tables[0].Rows.Count > 0)
             {
                 if (rol == "1")
                 {
@@ -107,7 +107,7 @@ namespace Proyecto1_Tel.Code
                         "</thead>" + "<tbody>";
 
                 }
-                
+
                 foreach (DataRow item in productos.Tables[0].Rows)
                 {
                     data += "<tr>" +
@@ -127,7 +127,7 @@ namespace Proyecto1_Tel.Code
                                           " <li><a href=\"javascript:Eliminar_Tienda(" + item["PRODUCTO"].ToString() + ")\" id=\"edit\" class=\"tip\" CssClass=\"Edit\" title=\"Eliminar\"><i class=\"fam-cross\"></i></a> </li>" +
                                     "</td>";
                     }
-                    
+
                     data += "</tr>";
                 }
 
@@ -151,56 +151,56 @@ namespace Proyecto1_Tel.Code
             string[] producto = new string[4];
             try
             {
-            
-            DataSet Producto_ = conn.Buscar_Mostrar("Producto", "Producto" + "= " + id);
-            XmlDocument xDoc = new XmlDocument();
-            xDoc.LoadXml(Producto_.GetXml());
-            XmlNodeList _Producto = xDoc.GetElementsByTagName("NewDataSet");
-            XmlNodeList lista_producto = ((XmlElement)_Producto[0]).GetElementsByTagName("Producto_x003D__x0020_" + id);
+
+                DataSet Producto_ = conn.Buscar_Mostrar("Producto", "Producto" + "= " + id);
+                XmlDocument xDoc = new XmlDocument();
+                xDoc.LoadXml(Producto_.GetXml());
+                XmlNodeList _Producto = xDoc.GetElementsByTagName("NewDataSet");
+                XmlNodeList lista_producto = ((XmlElement)_Producto[0]).GetElementsByTagName("Producto_x003D__x0020_" + id);
 
 
 
-            DataSet Bodega_ = conn.Buscar_Mostrar("Bodega", "Producto" + "= " + id);
-            XmlDocument xBod = new XmlDocument();
-            xBod.LoadXml(Bodega_.GetXml());
-            XmlNodeList _Bodega = xBod.GetElementsByTagName("NewDataSet");
-            XmlNodeList Cantidad = ((XmlElement)_Bodega[0]).GetElementsByTagName("Cantidad");
+                DataSet Bodega_ = conn.Buscar_Mostrar("Bodega", "Producto" + "= " + id);
+                XmlDocument xBod = new XmlDocument();
+                xBod.LoadXml(Bodega_.GetXml());
+                XmlNodeList _Bodega = xBod.GetElementsByTagName("NewDataSet");
+                XmlNodeList Cantidad = ((XmlElement)_Bodega[0]).GetElementsByTagName("Cantidad");
 
 
-            
-            XmlNodeList nDescripcion = ((XmlElement)lista_producto[0]).GetElementsByTagName("Descripcion");
-            XmlNodeList nTipo = ((XmlElement)lista_producto[0]).GetElementsByTagName("Tipo");
+
+                XmlNodeList nDescripcion = ((XmlElement)lista_producto[0]).GetElementsByTagName("Descripcion");
+                XmlNodeList nTipo = ((XmlElement)lista_producto[0]).GetElementsByTagName("Tipo");
 
 
-            DataSet Tipo_ = conn.Buscar_Mostrar("Tipo", "Tipo" + "= " + nTipo[0].InnerText);
-            XmlDocument xTipo = new XmlDocument();
-            xTipo.LoadXml(Tipo_.GetXml());
-            XmlNodeList _Tipo = xTipo.GetElementsByTagName("NewDataSet");
-            XmlNodeList Tipo_Descripcion = ((XmlElement)_Tipo[0]).GetElementsByTagName("Descripcion");
+                DataSet Tipo_ = conn.Buscar_Mostrar("Tipo", "Tipo" + "= " + nTipo[0].InnerText);
+                XmlDocument xTipo = new XmlDocument();
+                xTipo.LoadXml(Tipo_.GetXml());
+                XmlNodeList _Tipo = xTipo.GetElementsByTagName("NewDataSet");
+                XmlNodeList Tipo_Descripcion = ((XmlElement)_Tipo[0]).GetElementsByTagName("Descripcion");
 
-            DataSet Inventario = conn.Buscar_Mostrar("Inventario", "Producto" + "= " + id);
-            XmlDocument xInventario = new XmlDocument();
-            xInventario.LoadXml(Inventario.GetXml());
-            string verifica = Inventario.GetXml();
-            string precio;
+                DataSet Inventario = conn.Buscar_Mostrar("Inventario", "Producto" + "= " + id);
+                XmlDocument xInventario = new XmlDocument();
+                xInventario.LoadXml(Inventario.GetXml());
+                string verifica = Inventario.GetXml();
+                string precio;
 
-            if (Inventario.Tables[0].Rows.Count > 0)
-            {
-                precio = "1";
-            }
-            else
-            {
-                precio = "0";
-            }
+                if (Inventario.Tables[0].Rows.Count > 0)
+                {
+                    precio = "1";
+                }
+                else
+                {
+                    precio = "0";
+                }
 
-            
+
                 producto[0] = nDescripcion[0].InnerText;
                 producto[1] = Cantidad[0].InnerText;
                 producto[2] = Tipo_Descripcion[0].InnerText;
                 producto[3] = precio;
-                
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
                 string MostrarError = "Mensaje de la excepcion: " + ex.Message.ToString();
@@ -211,7 +211,7 @@ namespace Proyecto1_Tel.Code
             return json;
 
 
-          
+
         }
 
 
@@ -228,8 +228,8 @@ namespace Proyecto1_Tel.Code
             {
                 try
                 {
-                    
-                    respuesta =  conn.Crear("Inventario", "Sucursal, Producto, Cantidad, Precio, Metros_Cuadrados ", "1 ," + producto + "," + cantidad + "," + precio + "," + metros);
+
+                    respuesta = conn.Crear("Inventario", "Sucursal, Producto, Cantidad, Precio, Metros_Cuadrados ", "1 ," + producto + "," + cantidad + "," + precio + "," + metros);
 
                     if (respuesta)
                     {
@@ -245,14 +245,14 @@ namespace Proyecto1_Tel.Code
                 {
                     return false;
                 }
-                
+
             }
             else
             {
 
-                
 
-                
+
+
                 DataSet Producto_ = conn.Buscar_Mostrar("Inventario", "Producto" + "= " + producto);
 
                 XmlDocument xDoc = new XmlDocument();
@@ -282,18 +282,18 @@ namespace Proyecto1_Tel.Code
                         return false;
                     }
 
-                
+
                 }
                 catch (Exception ex)
                 {
-                   string mensaje = "Mensaje excepcion" + ex.Message.ToString();
-                   return false;
+                    string mensaje = "Mensaje excepcion" + ex.Message.ToString();
+                    return false;
                 }
 
 
 
-             
-                
+
+
 
             }
 
@@ -304,30 +304,31 @@ namespace Proyecto1_Tel.Code
 
 
 
-        public static bool Inv_Bodega(string producto, string cantidad){
+        public static bool Inv_Bodega(string producto, string cantidad)
+        {
 
-                
-                
-                Conexion conn = new Conexion();
-                DataSet Producto_ = conn.Buscar_Mostrar("Bodega", "Producto" + "= " + producto);
 
-                XmlDocument xDoc = new XmlDocument();
-                xDoc.LoadXml(Producto_.GetXml());
 
-                XmlNodeList _Producto = xDoc.GetElementsByTagName("NewDataSet");
-                XmlNodeList cant = ((XmlElement)_Producto[0]).GetElementsByTagName("Cantidad");
+            Conexion conn = new Conexion();
+            DataSet Producto_ = conn.Buscar_Mostrar("Bodega", "Producto" + "= " + producto);
 
-                string cantid = cant[0].InnerText;
+            XmlDocument xDoc = new XmlDocument();
+            xDoc.LoadXml(Producto_.GetXml());
 
-                if (Convert.ToInt64(cantid) > Convert.ToInt64(cantidad))
-                {
+            XmlNodeList _Producto = xDoc.GetElementsByTagName("NewDataSet");
+            XmlNodeList cant = ((XmlElement)_Producto[0]).GetElementsByTagName("Cantidad");
 
-                    return conn.Modificar("Bodega", "Cantidad =" + (Convert.ToInt64(cantid) - Convert.ToInt64(cantidad)), "Producto=" + producto);
-                }
-                else
-                {
-                    return false;
-                }
+            string cantid = cant[0].InnerText;
+
+            if (Convert.ToInt64(cantid) > Convert.ToInt64(cantidad))
+            {
+
+                return conn.Modificar("Bodega", "Cantidad =" + (Convert.ToInt64(cantid) - Convert.ToInt64(cantidad)), "Producto=" + producto);
+            }
+            else
+            {
+                return false;
+            }
 
 
         }
@@ -367,10 +368,10 @@ namespace Proyecto1_Tel.Code
             XmlNodeList lista_tipo = ((XmlElement)Tipopro[0]).GetElementsByTagName("Tipo_x003D__x0020_" + nTipo[0].InnerText);
             XmlNodeList nDescripcionTipo = ((XmlElement)lista_tipo[0]).GetElementsByTagName("Descripcion");
 
-           
 
 
-            
+
+
 
             string[] producto = new string[6];
 
@@ -434,7 +435,7 @@ namespace Proyecto1_Tel.Code
             decimal metros1 = Convert.ToDecimal(metros_cuadrados, CultureInfo.CreateSpecificCulture("en-US"));
             decimal metros2 = Convert.ToDecimal(metros, CultureInfo.CreateSpecificCulture("en-US"));
 
-            
+
             if (Convert.ToInt64(cantidad) > Convert.ToInt64(cantid) || metros2 > metros1)
             {
                 return false;
@@ -442,10 +443,10 @@ namespace Proyecto1_Tel.Code
             else
             {
                 decimal metrostotales = metros1 - metros2;
-                return conn.Modificar("Inventario", "Cantidad =" + (Convert.ToInt64(cantid) - Convert.ToInt64(cantidad)) + ", Precio = " + precio + ", Metros_Cuadrados = " + Convert.ToString( metrostotales).Replace(",","."), "Producto=" + producto);
-            }   
+                return conn.Modificar("Inventario", "Cantidad =" + (Convert.ToInt64(cantid) - Convert.ToInt64(cantidad)) + ", Precio = " + precio + ", Metros_Cuadrados = " + Convert.ToString(metrostotales).Replace(",", "."), "Producto=" + producto);
+            }
 
-           
+
 
         }
 
@@ -486,8 +487,8 @@ namespace Proyecto1_Tel.Code
                 decimal metros2 = Convert.ToDecimal(metros, CultureInfo.CreateSpecificCulture("en-US"));
 
                 decimal metrostotales = metros1 + metros2;
-                return  conn.Modificar("Inventario", "Cantidad =" + (Convert.ToInt64(cantid) + Convert.ToInt64(cantidad)) + ", Metros_Cuadrados=" + Convert.ToString(metrostotales).Replace(",", ".") + ", Precio = " + precio, "Producto=" + producto);
-                
+                return conn.Modificar("Inventario", "Cantidad =" + (Convert.ToInt64(cantid) + Convert.ToInt64(cantidad)) + ", Metros_Cuadrados=" + Convert.ToString(metrostotales).Replace(",", ".") + ", Precio = " + precio, "Producto=" + producto);
+
 
             }
             catch (Exception ex)
@@ -495,8 +496,8 @@ namespace Proyecto1_Tel.Code
                 string mensaje = "Mensaje excepcion" + ex.Message.ToString();
                 return false;
             }
-            
-        
+
+
 
         }
 
@@ -579,20 +580,20 @@ namespace Proyecto1_Tel.Code
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Metros:</b></label> \n" +
                 "<div class=\"controls\"><input  style=\"font-size: 13px;\" placeholder=\"Metros\" type=\"number\" value=\"\"  step=\"any\"  id=\"metros\" runat=\"server\" /></div> \n" +
                 "</div> \n" +
-                "<div id=\"radio\"> \n"+
-                "<label class=\"radio\">\n"+
-                "<input type=\"radio\" name=\"opcion\" id=\"agregar\" class=\"styled\" value=\"1\" checked=\"checked\">\n"+
-                "Agregar\n"+
-                "</label>\n"+
-                "<label class=\"radio\">\n"+
-                "<input type=\"radio\" name=\"opcion\" id=\"quitar\"  class=\"styled\" value=\"2\">\n"+
-                "Quitar\n"+
-                "</label>\n"+
-                "</div>\n"+                  
-                "<div id=\"divprecio\"  class=\"control-group\">\n"+
-                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Precio:</b></label>\n"+
-                "<div class=\"controls\"><input  required=\"required\" style=\"font-size: 13px;\" placeholder=\"Precio\" type=\"number\" value=\"\"  step=\"any\"  id=\"precio\" runat=\"server\" /></div>\n"+
-                "</div>\n"+
+                "<div id=\"radio\"> \n" +
+                "<label class=\"radio\">\n" +
+                "<input type=\"radio\" name=\"opcion\" id=\"agregar\" class=\"styled\" value=\"1\" checked=\"checked\">\n" +
+                "Agregar\n" +
+                "</label>\n" +
+                "<label class=\"radio\">\n" +
+                "<input type=\"radio\" name=\"opcion\" id=\"quitar\"  class=\"styled\" value=\"2\">\n" +
+                "Quitar\n" +
+                "</label>\n" +
+                "</div>\n" +
+                "<div id=\"divprecio\"  class=\"control-group\">\n" +
+                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Precio:</b></label>\n" +
+                "<div class=\"controls\"><input  required=\"required\" style=\"font-size: 13px;\" placeholder=\"Precio\" type=\"number\" value=\"\"  step=\"any\"  id=\"precio\" runat=\"server\" /></div>\n" +
+                "</div>\n" +
                 "<tr> \n" +
                 "<td colspan=\"2\"> \n" +
                 "<div id=\"mensaje\"></div> \n" +

@@ -11,9 +11,10 @@ using System.Globalization;
 using RabbitMQ.Client;
 using System.Text;
 using System.Web.Script.Serialization;
-namespace Proyecto1_Tel.Code 
+namespace Proyecto1_Tel.Code
 {
-    public class Product{
+    public class Product
+    {
         public String idventa;
         public String cantidad;
         public String ancho;
@@ -26,8 +27,8 @@ namespace Proyecto1_Tel.Code
         public Product(String idventa, String cant, String largo, String ancho, String cod, String abreviatura, String nombre, string precio, string usuario)
         {
             this.precio = precio;
-            cantidad=cant;
-            codigo=cod;
+            cantidad = cant;
+            codigo = cod;
             this.largo = largo;
             this.nombre = nombre;
             this.ancho = ancho;
@@ -48,7 +49,7 @@ namespace Proyecto1_Tel.Code
             {
                 Double Largo = Convert.ToDouble(largo, CultureInfo.InvariantCulture);
                 Double Ancho = Convert.ToDouble(ancho, CultureInfo.InvariantCulture);
-                Total = Cantidad * Ancho * Largo * Precio; 
+                Total = Cantidad * Ancho * Largo * Precio;
             }
 
             this.subTotal = Math.Ceiling(Total * 2) / 2.0;
@@ -60,21 +61,21 @@ namespace Proyecto1_Tel.Code
 
     public partial class Venta : System.Web.UI.Page
     {
-        public static List<Product> carrito; 
+        public static List<Product> carrito;
         Conexion conexion;
-        String usuario,nick;
+        String usuario, nick;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-
-            {   carrito= new List<Product>();   
+            {
+                carrito = new List<Product>();
                 if (Session["Usuario"] != null)
                 {
                     if (!Validacion.validar_sesion((Sesion)Session["Usuario"], "Venta"))
                     {
                         Response.Redirect("~/Index.aspx");
                     }
-                    nick=(String)Session["NickName"];
+                    nick = (String)Session["NickName"];
                     usuario = Session["IdUser"].ToString(); //id de usuario
                 }
                 else
@@ -105,7 +106,7 @@ namespace Proyecto1_Tel.Code
                     {
                         if (metros > 0)
                         {
-                            html += "<option value=\"" + item["producto"] + "\">" + item["Abreviatura"] + "</option> ";     
+                            html += "<option value=\"" + item["producto"] + "\">" + item["Abreviatura"] + "</option> ";
                         }
                     }
                     else
@@ -116,7 +117,7 @@ namespace Proyecto1_Tel.Code
                         }
                     }
 
-                    
+
 
                 }
 
@@ -257,6 +258,10 @@ namespace Proyecto1_Tel.Code
             Conexion nueva = new Conexion();
             Double total = 0;
             string user = HttpContext.Current.Session["IdUser"].ToString();
+            if (carrito.Count == 0)
+            {
+                return "0";
+            }
             foreach (var item in carrito)
             {
                 if (item.usuario.Equals(user))
@@ -290,11 +295,11 @@ namespace Proyecto1_Tel.Code
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>Codigo Cliente</b></label> \n" +
                 "<div class=\"controls\"><input  style=\"font-size: 15px disabled =\"disabled\" readonly=\"readonly\"  type=\"text\" value=\"" + cliente + "\" id=\"codclientepago\" runat=\"server\" class=\"span12\"/></div> \n" +
                 "</div> \n" +
-               
+
 
                 "<div class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>Total:</b></label> \n" +
-                "<div class=\"controls\"><input placeholder=\"Total\" disabled =\"disabled\" readonly=\"readonly\" style=\"font-size: 15px;\" value=\""+total+"\"type=\"text\" name=\"total\" id=\"totalpago\" runat=\"server\" class=\"span8\" /></div> \n" +
+                "<div class=\"controls\"><input placeholder=\"Total\" disabled =\"disabled\" readonly=\"readonly\" style=\"font-size: 15px;\" value=\"" + total + "\"type=\"text\" name=\"total\" id=\"totalpago\" runat=\"server\" class=\"span8\" /></div> \n" +
                 "</div> \n" +
                 //
 
@@ -311,8 +316,9 @@ namespace Proyecto1_Tel.Code
 
                 "<tr> \n" +
                 "<td colspan=\"2\"> \n" +
-                "<div id=\"mensaje\"></div> \n" +
-                "<div id=\"vuelto\"></div> \n" +
+                "<div style=\"font-size: 15px;\" id=\"mensaje\"></div> \n" +
+                "<div style=\"font-size: 20px;\" id=\"vuelto\"></div> \n" +
+                "<div style=\"font-size: 25px;\" id=\"venta\"></div> \n" +
                 "<div class=\"alert margin\"> \n" +
                 "<button type=\"button\"  class=\"close\" data-dismiss=\"alert\">×</button> \n" +
                 "Campos Obligatorios (*) \n" +
@@ -338,8 +344,9 @@ namespace Proyecto1_Tel.Code
 
         //AGREGAR CLIENTE
 
+
         [WebMethod]
-        public static bool AddPago(string total,string cliente, string tipopago)
+        public static bool AddPago(string total, string cliente, string tipopago)
         {
             string tipo_pago = "";
             switch (tipopago)
@@ -365,12 +372,12 @@ namespace Proyecto1_Tel.Code
             {
                 foreach (var item in carrito)
                 {
-                    if (item.usuario.Equals(user)) 
+                    if (item.usuario.Equals(user))
                     {
                         if (item.ancho.Equals(""))
                         {
-                            respuesta = nueva.Crear("DetalleVenta", "Venta, producto, cantidad, subtotal", "(select max(Venta) from venta)," + item.codigo + "," + item.cantidad + " , " + item.subTotal);
-                        
+                            respuesta = nueva.Crear("DetalleVenta", "Venta, producto, cantidad, subtotal", "(select max(Venta) from venta)," + item.codigo + "," + item.cantidad + " , " + Convert.ToString(item.subTotal).Replace(",", "."));
+
 
                             respuesta = nueva.Modificar(" Inventario ", " Cantidad = Cantidad - " + item.cantidad + " ", " Producto = " + item.codigo + " ");
                         }
@@ -381,12 +388,12 @@ namespace Proyecto1_Tel.Code
                             Double Largo = Convert.ToDouble(item.largo, CultureInfo.InvariantCulture);
                             Double Cantidad = Convert.ToDouble(item.cantidad, CultureInfo.InvariantCulture);
                             Double Total = Largo * Cantidad;
-                            respuesta = nueva.Crear("DetalleVenta", "Venta, producto, cantidad, metros, subtotal ", "(select max(Venta) from venta)," + item.codigo + "," + item.cantidad + "," + item.largo + "," + item.subTotal);
-                        
+                            respuesta = nueva.Crear("DetalleVenta", "Venta, producto, cantidad, metros, subtotal ", "(select max(Venta) from venta)," + item.codigo + "," + item.cantidad + "," + item.largo + "," + Convert.ToString(item.subTotal).Replace(",", "."));
+
                             respuesta = nueva.Modificar(" Inventario ", " Metros_Cuadrados = Metros_Cuadrados - " + Convert.ToString(Total).Replace(",", ".") + " ", " Producto = " + item.codigo + " ");
                         }
                     }
-                    
+
                 }
 
                 if (tipopago.Equals("2"))
@@ -413,7 +420,7 @@ namespace Proyecto1_Tel.Code
 
                     foreach (var item in carrito)
                     {
-                        message += venta.Tables[0].Rows[0][0] + ";" + cliente + ";" + nickname + ";" + item.nombre + ";       "   + item.cantidad + ";    " + item.largo +  ",";
+                        message += venta.Tables[0].Rows[0][0] + ";" + cliente + ";" + nickname + ";" + item.nombre + ";       " + item.cantidad + ";    " + item.largo + ",";
                     }
 
                     var body = Encoding.UTF8.GetBytes(message);
@@ -424,7 +431,7 @@ namespace Proyecto1_Tel.Code
                                          body: body);
                 }
             }
-            
+
             return respuesta;
         }
 
@@ -473,13 +480,14 @@ namespace Proyecto1_Tel.Code
             for (int i = 0; i < carrito.Count; i++)
             {
                 cantidad = carrito[i].cantidad;
-                if (carrito[i].idventa.Equals(codigo)) {
+                if (carrito[i].idventa.Equals(codigo))
+                {
                     carrito.RemoveAt(i);
-                  
-                  
-                  
+
+
+
                 }
-               
+
             }
             return Graficar();
         }
@@ -490,10 +498,10 @@ namespace Proyecto1_Tel.Code
         {
             string cantidad;
             string largo;
-            Double total=0;
+            Double total = 0;
             for (int i = 0; i < carrito.Count; i++)
             {
-                
+
                 if (carrito[i].idventa.Equals(codigo))
                 {
 
@@ -504,15 +512,15 @@ namespace Proyecto1_Tel.Code
                 }
 
             }
-             return total;
+            return total;
         }
 
 
 
         [WebMethod]
-        public static string AddProducto(String idventa, String producto,String cantidad, String codigo, String largo)
+        public static string AddProducto(String idventa, String producto, String cantidad, String codigo, String largo)
         {
-          
+
 
             if (true)
             {
@@ -552,21 +560,22 @@ namespace Proyecto1_Tel.Code
                     Conexion nueva = new Conexion();
                     DataSet datos = nueva.Consulta("select precio from inventario where producto=" + codigo);
                     DataSet abreviatura = nueva.Consulta("select Abreviatura from Producto where producto=" + codigo);
-                    carrito.Add(new Product(idventa, cantidad,largo,ancho,codigo, abreviatura.Tables[0].Rows[0][0] + "", producto, datos.Tables[0].Rows[0][0] + "",user));
-            
+                    carrito.Add(new Product(idventa, cantidad, largo, ancho, codigo, abreviatura.Tables[0].Rows[0][0] + "", producto, datos.Tables[0].Rows[0][0] + "", user));
+
                 }
                 catch (Exception e)
                 {
 
                 }
-                
+
             }
             return Graficar();
-        }        
+        }
 
 
 
-        public  static string Graficar(){
+        public static string Graficar()
+        {
 
             string str = "<div class=\"widget\">" +
                     "<div class=\"navbar\">" +
@@ -584,7 +593,7 @@ namespace Proyecto1_Tel.Code
                     "                <th>Nombre</th>" +
                     "                <th>Cantidad</th>" +
                     "                <th>Precio Unitario</th>" +
-                    "                <th>Precio Total</th>" + 
+                    "                <th>Precio Total</th>" +
                     "                <th>Acciones</th>" +
                     "            </tr>" +
                     "        </thead>" +
@@ -597,7 +606,8 @@ namespace Proyecto1_Tel.Code
 
                 try
                 {
-                    if (carrito[i].usuario.Equals(user)) {
+                    if (carrito[i].usuario.Equals(user))
+                    {
                         string cant = carrito[i].cantidad;
                         if (!carrito[i].ancho.Equals(""))
                         {
@@ -621,11 +631,11 @@ namespace Proyecto1_Tel.Code
                     }
 
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
 
                 }
-                
+
 
             }
 
@@ -634,7 +644,7 @@ namespace Proyecto1_Tel.Code
     " </div>" +
  "</div>";
             return str;
-        
+
         }
 
         //BUSCA ID DEL CLIENTE
@@ -685,7 +695,7 @@ namespace Proyecto1_Tel.Code
             XmlNodeList Metros = ((XmlElement)_Bodega[0]).GetElementsByTagName("Metros_Cuadrados");
 
 
-           
+
 
 
             XmlNodeList nDescripcion = ((XmlElement)lista_producto[0]).GetElementsByTagName("Descripcion");
@@ -737,7 +747,8 @@ namespace Proyecto1_Tel.Code
         }
 
         [WebMethod]
-        public static string GetVenta() {
+        public static string GetVenta()
+        {
 
             string venta;
             Conexion nueva = new Conexion();
@@ -745,11 +756,11 @@ namespace Proyecto1_Tel.Code
             venta = Convert.ToString(ConVenta.Tables[0].Rows[0][0]);
 
             return venta;
-        
-        }
-       
 
-        
+        }
+
+
+
 
     }
 }

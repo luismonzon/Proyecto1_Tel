@@ -41,8 +41,9 @@ namespace Proyecto1_Tel.Code
             Response.Cache.SetNoStore();
         }
 
-        protected void Cargar() {
-            tab_roles.InnerHtml = "<div class=\"navbar\"> " + 
+        protected void Cargar()
+        {
+            tab_roles.InnerHtml = "<div class=\"navbar\"> " +
                                         "<div class=\"navbar-inner\">" +
                                                     "<h6>Clientes con deuda</h6>" +
                                                     "<div class=\"nav pull-right\">" +
@@ -63,13 +64,13 @@ namespace Proyecto1_Tel.Code
             string columnas = "d.Venta, c.Cliente, c.Nombre, c.Apellido, sum(d.Cantidad) Credito , sc.Abono Abonado, SUM(d.Cantidad) - sc.Abono Deuda \n ";
             string condicion =
                 " Deuda d join Cliente c on c.Cliente = d.Cliente left join ( \n" +
-	            "   select d2.Deuda, SUM(p2.Abono) Abono \n"+
-	            "   from Pago p2, Deuda d2 \n "+
-	            "   where p2.Deuda = d2.Deuda \n "+
-	            "   group by d2.Deuda \n"+
-                ") sc on sc.Deuda = d.Deuda \n "+
-                "group by d.Venta, c.Cliente,c.Nombre,c.Apellido, sc.Abono \n"+
-                "having SUM(d.Cantidad) > sc.Abono or sc.Abono is Null \n"+
+                "   select d2.Deuda, SUM(p2.Abono) Abono \n" +
+                "   from Pago p2, Deuda d2 \n " +
+                "   where p2.Deuda = d2.Deuda \n " +
+                "   group by d2.Deuda \n" +
+                ") sc on sc.Deuda = d.Deuda \n " +
+                "group by d.Venta, c.Cliente,c.Nombre,c.Apellido, sc.Abono \n" +
+                "having SUM(d.Cantidad) > sc.Abono or sc.Abono is Null \n" +
                 "order by SUM(d.Cantidad) desc \n"
             ;
             DataSet roles = conn.Mostrar(condicion, columnas);
@@ -101,25 +102,25 @@ namespace Proyecto1_Tel.Code
                     if (item["Abonado"].ToString().Equals(""))
                     {
                         data += "<td> 0,00 </td>" +
-                            "<td>" + item["Credito"].ToString() + "</td>" 
+                            "<td>" + item["Credito"].ToString() + "</td>"
                             ;
                     }
-                    else 
+                    else
                     {
                         data += "<td>" + item["Abonado"].ToString() + "</td>" +
-                            "<td>" + item["Deuda"].ToString() + "</td>" 
+                            "<td>" + item["Deuda"].ToString() + "</td>"
                             ;
                     }
                     data += " <td>" +
                     "<ul class=\"table-controls\">" +
                       " <li><a href=\"javascript:Ver_Venta(" + item["Venta"].ToString() + ")\" id=\"add\" class=\"tip\" CssClass=\"Edit\" title=\"Ver Venta\"><i class=\"fam-eye\"></i></a> </li>" +
                     "</td>";
-                    
-                    
-                    
+
+
+
                     data += " <td>" +
                     "<ul class=\"table-controls\">" +
-                      " <li><a href=\"javascript:AbonarPago("+ item["Cliente"].ToString() +")\" id=\"add\" class=\"tip\" CssClass=\"Edit\" title=\"Abonar\"><i class=\"fam-add\"></i></a> </li>" +
+                      " <li><a href=\"javascript:AbonarPago(" + item["Cliente"].ToString() + ")\" id=\"add\" class=\"tip\" CssClass=\"Edit\" title=\"Abonar\"><i class=\"fam-add\"></i></a> </li>" +
                     "</td>";
                     data += "</tr>";
 
@@ -155,50 +156,51 @@ namespace Proyecto1_Tel.Code
              */
 
             string columnas = " d.Deuda, d.Cantidad - sc.Abono  Debe \n";
-            string condicion = 
-                " Deuda d join ( \n"+
-	                "select d2.Deuda, case when sum(p2.Abono) is null then 0 else SUM(p2.Abono) end Abono \n"+
-	                "from Pago p2 right join Deuda d2 on p2.Deuda = d2.Deuda \n"+
-	                "where d2.Cliente = "+id+" \n"+
-	                "group by d2.Deuda \n"+
-                ") sc on sc.Deuda = d.Deuda \n"+
-                "and (d.Cantidad - sc.Abono) > 0  \n"+
-                "and d.Cliente = "+id+" \n"
+            string condicion =
+                " Deuda d join ( \n" +
+                    "select d2.Deuda, case when sum(p2.Abono) is null then 0 else SUM(p2.Abono) end Abono \n" +
+                    "from Pago p2 right join Deuda d2 on p2.Deuda = d2.Deuda \n" +
+                    "where d2.Cliente = " + id + " \n" +
+                    "group by d2.Deuda \n" +
+                ") sc on sc.Deuda = d.Deuda \n" +
+                "and (d.Cantidad - sc.Abono) > 0  \n" +
+                "and d.Cliente = " + id + " \n"
             ;
 
-            DataSet data = con.Mostrar(condicion,columnas);
+            DataSet data = con.Mostrar(condicion, columnas);
 
             XmlDocument xDoc = new XmlDocument();
             xDoc.LoadXml(data.GetXml());
 
             XmlNodeList _Deudas = xDoc.GetElementsByTagName("NewDataSet");
 
-            
+
             string deuda = "";
             XmlNodeList lista = ((XmlElement)_Deudas[0]).GetElementsByTagName("_x0020_d.Deuda_x002C__x0020_d.Cantidad_x0020_-_x0020_sc.Abono_x0020__x0020_Debe_x0020__x000A_");
             int cant = lista.Count;
-            for (int i = 0; i < cant; i++) 
+            for (int i = 0; i < cant; i++)
             {
-                
+
                 XmlNodeList nDeuda = ((XmlElement)lista[i]).GetElementsByTagName("Deuda");
                 XmlNodeList nDebe = ((XmlElement)lista[i]).GetElementsByTagName("Debe");
 
-                deuda += "{ \"key\":\"" + nDeuda[0].InnerText+"\",\"value\":\""+nDebe[0].InnerText+"\"}";
-                if (i != cant - 1) {
+                deuda += "{ \"key\":\"" + nDeuda[0].InnerText + "\",\"value\":\"" + nDebe[0].InnerText + "\"}";
+                if (i != cant - 1)
+                {
                     deuda += ",";
                 }
-            
+
             }
 
             deuda = "[" + deuda + "]";
             //string json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(deuda);
-                        
+
             return deuda;
         }
 
         [WebMethod]
 
-        public static bool Add(int id, float Cantidad) 
+        public static bool Add(int id, float Cantidad)
         {
 
             Conexion con = new Conexion();
@@ -226,7 +228,7 @@ namespace Proyecto1_Tel.Code
                 ;
             //content del modal
 
-            innerhtml += "<form id=\"formulario-pago\" class=\"form-horizontal row-fluid well\"> \n"+
+            innerhtml += "<form id=\"formulario-pago\" class=\"form-horizontal row-fluid well\"> \n" +
                 "<div class=\"modal-body\"> \n" +
                 "<table border=\"0\" width=\"100%\" > \n" +
                 "<tr> \n" +
@@ -243,7 +245,8 @@ namespace Proyecto1_Tel.Code
                 "</div> \n" +
                 "<tr> \n" +
                 "<td colspan=\"2\"> \n" +
-                "<div id=\"mensaje\"></div> \n" +
+                "<div style=\"font-size: 15px;\" id=\"mensaje\"></div> \n" +
+                "<div style=\"font-size: 20px;\" id=\"vuelto\"></div> \n" +
                 "<div class=\"alert margin\"> \n" +
                 "<button type=\"button\"  class=\"close\" data-dismiss=\"alert\">×</button> \n" +
                 "Campos Obligatorios (*) \n" +
@@ -260,7 +263,7 @@ namespace Proyecto1_Tel.Code
             innerhtml += "</div>\n" +
             "<div class=\"modal-footer\">\n" +
                 "<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" onclick=\"reloadTable();\" id=\"cerrar\">Cerrar</button>\n" +
-                "<button type=\"button\" class=\"btn btn-success\" onclick=\"RealizarAbono();\" id=\"abonar\">Abonar</button>\n"+
+                "<button type=\"button\" class=\"btn btn-success\" onclick=\"RealizarAbono();\" id=\"abonar\">Abonar</button>\n" +
             "</div>\n" +
             "</div>\n" +
             "</div>\n"
@@ -305,12 +308,12 @@ namespace Proyecto1_Tel.Code
             string columnas = " p.Abreviatura, p.Marca, dv.Cantidad, LEFT(v.Fecha,10) as Fecha, v.Total";
             string condicion =
                 "Venta v, DetalleVenta dv, Producto p \n" +
-                "WHERE v.Venta =" + id + "\n"+
+                "WHERE v.Venta =" + id + "\n" +
                 "AND v.Venta = dv.Venta \n" +
-                "AND dv.Producto = p.Producto \n" ;            
+                "AND dv.Producto = p.Producto \n";
 
 
-;
+            ;
             Conexion con = new Conexion();
             DataSet roles = con.Mostrar(condicion, columnas);
             String data = "No hay Ventas Disponibles";
@@ -335,7 +338,7 @@ namespace Proyecto1_Tel.Code
                         "<td id=\"codigo\" runat=\"server\" align =\"Center\">" + item["Abreviatura"].ToString() + "</td>" +
                         "<td>" + item["Marca"].ToString() + "</td>" +
                         "<td>" + item["Cantidad"].ToString() + "</td>" +
-                        "<td>" + item["Fecha"].ToString() + "</td>"+
+                        "<td>" + item["Fecha"].ToString() + "</td>" +
                         "<td>" + item["Total"].ToString() + "</td>"
                         ;
                     data += "</tr>";

@@ -43,9 +43,10 @@ namespace Proyecto1_Tel.Code
         {
             string innerhtml = "";
 
+            string rol = HttpContext.Current.Session["Rol"].ToString();
 
             Conexion conexion = new Conexion();
-            string Columnas = " v.Venta, c.Nombre Nombre, c.Apellido Apellido, u.NickName Vendedor, Tipo_Pago, Total \n";
+            string Columnas = " v.Venta Venta, CONVERT(VARCHAR(8),v.Hora,108) Hora, c.Cliente Cliente, c.Nombre Nombre, c.Apellido Apellido, c.Direccion Direccion, u.NickName Vendedor, Tipo_Pago, Total \n";
             string Condicion = " Venta v, Cliente c, Usuario u \n" +
                                 "where v.Cliente = c.Cliente \n" +
                                 "and v.Usuario = u.Usuario \n" +
@@ -61,14 +62,21 @@ namespace Proyecto1_Tel.Code
             String data = "No hay Ventas Disponibles";
             if (clientes.Tables.Count > 0)
             {
+                if (rol == "1")
+                {
 
-                data = "<div class=\"alert alert-success\" style=\"font-size: 18px;\" > Ganancia Diaria: Q." + total.Tables[0].Rows[0][0] + "</div>" +
+                    data = "<div class=\"alert alert-success\" style=\"font-size: 18px;\" > Ganancia Diaria: Q." + total.Tables[0].Rows[0][0] + "</div>" +
                     "<div class=\"table-overflow\"> " +
                     "<table class=\"table table-striped table-bordered\" id=\"data-table\">" +
                         "<thead>" +
                             "<tr>" +
+
+                                "<th  align =\"center\">No. Venta</th>" +
+                                "<th  align =\"center\">Hora Venta</th>" +
+                                "<th  align =\"center\">Codigo Cliente</th>" +
                                 "<th  align =\"center\">Nombre Cliente</th>" +
-                                "<th  align =\"center\">Comercio Cliente</th>" +
+                                "<th  align =\"center\">Comercio</th>" +
+                                "<th  align =\"center\">Direccion</th>" +
                                " <th  align =\"center\">Vendedor</th>" +
                                " <th  align =\"center\">Tipo de Pago</th>" +
                                " <th  align =\"center\">Total Venta</th>" +
@@ -76,14 +84,42 @@ namespace Proyecto1_Tel.Code
                                "</tr>" +
                         "</thead>" + "<tbody>";
 
+                }
+                else
+                {
+                    data = "<div class=\"table-overflow\"> " +
+                    "<table class=\"table table-striped table-bordered\" id=\"data-table\">" +
+                        "<thead>" +
+                            "<tr>" +
+
+                                "<th  align =\"center\">No. Venta</th>" +
+                                "<th  align =\"center\">Hora Venta</th>" +
+                                "<th  align =\"center\">Codigo Cliente</th>" +
+                                "<th  align =\"center\">Nombre Cliente</th>" +
+                                "<th  align =\"center\">Comercio</th>" +
+                                "<th  align =\"center\">Direccion</th>" +
+                               " <th  align =\"center\">Vendedor</th>" +
+                               " <th  align =\"center\">Tipo de Pago</th>" +
+                               " <th  align =\"center\">Total Venta</th>" +
+                               " <th  align =\"center\">Ver Detalle</th>" +
+                               "</tr>" +
+                        "</thead>" + "<tbody>";
+
+                }
+                   
                 foreach (DataRow item in clientes.Tables[0].Rows)
                 {
                     data += "<tr>" +
-                        "<td id=\"codigo\" runat=\"server\" align =\"Center\">" + item["Nombre"].ToString() + "</td>" +
-                        "<td id=\"codigo\" runat=\"server\">" + item["Apellido"].ToString() + "</td>" +
-                        "<td id=\"codigo\" runat=\"server\">" + item["Vendedor"].ToString() + "</td>" +
-                        "<td id=\"codigo\" runat=\"server\">" + item["Tipo_Pago"].ToString() + "</td>" +
-                        "<td id=\"codigo\" runat=\"server\"> Q." + item["Total"].ToString() + "</td> ";
+
+                        "<td id=\"codigoventa\" runat=\"server\" align =\"Center\">" + item["Venta"].ToString() + "</td>" +
+                        "<td id=\"codigoventa\" runat=\"server\" align =\"Center\">" + item["Hora"].ToString() + "</td>" +
+                        "<td id=\"codigocliente\" runat=\"server\" align =\"Center\">" + item["Cliente"].ToString() + "</td>" +
+                        "<td runat=\"server\" align =\"Center\">" + item["Nombre"].ToString() + "</td>" +
+                        "<td runat=\"server\">" + item["Apellido"].ToString() + "</td>" +
+                        "<td runat=\"server\">" + item["Direccion"].ToString() + "</td>" +
+                        "<td runat=\"server\">" + item["Vendedor"].ToString() + "</td>" +
+                        "<td runat=\"server\">" + item["Tipo_Pago"].ToString() + "</td>" +
+                        "<td runat=\"server\"> Q." + item["Total"].ToString() + "</td> ";
                     data += " <td align =\"Center\">" +
                     "<ul class=\"table-controls\">" +
                       " <li><a href=\"javascript:VerDetalle(" + item["Venta"].ToString() + ")\" id=\"view\" class=\"tip\" CssClass=\"Edit\" title=\"Ver Detalle\"><i class=\"fam-eye\"></i></a> </li>" +
@@ -134,15 +170,12 @@ namespace Proyecto1_Tel.Code
                             "</div>" +
                     "</div>";
 
-            string columnas = " p.Abreviatura, p.Descripcion,Convert(Decimal(15,0),  SUM(d.Cantidad) , 2) Cantidad,Convert(Decimal(15,2), SUM(d.Cantidad*i.Precio), 2) Total\n";
+            string columnas = "p.Abreviatura, p.Descripcion, d.Cantidad, d.Metros, d.SubTotal SubTotal";
             string condicion =
-                "Producto p, Venta v, DetalleVenta d, Inventario i \n" +
+                "Producto p, Venta v, DetalleVenta d \n" +
                 "where d.Venta = v.Venta \n" +
                 "and p.Producto = d.Producto \n" +
-                "and i.Producto = p.Producto \n" +
-                "and v.Venta = " + id + " \n" +
-                "group by p.Abreviatura, p.Descripcion"
-            ;
+                "and v.Venta = " + id + " \n";
             Conexion con = new Conexion();
             DataSet roles = con.Mostrar(condicion, columnas);
             String data = "No hay Productos Disponibles";
@@ -156,7 +189,8 @@ namespace Proyecto1_Tel.Code
                                " <th  align =\"center\">Abreviatura</th>" +
                                 "<th align =\"center\">Descripcion</th>" +
                                 "<th align =\"center\">Cantidad</th>" +
-                                "<th align =\"center\">Total</th>" +
+                                "<th align =\"center\">Metros</th>" +
+                                "<th align =\"center\">Sub Total</th>" +
                             "</tr>" +
                         "</thead>" + "<tbody>";
 
@@ -166,7 +200,8 @@ namespace Proyecto1_Tel.Code
                         "<td id=\"codigo\" runat=\"server\" align =\"Center\">" + item["Abreviatura"].ToString() + "</td>" +
                         "<td>" + item["Descripcion"].ToString() + "</td>" +
                         "<td>" + item["Cantidad"].ToString() + "</td>" +
-                        "<td> Q." + item["Total"].ToString() + "</td>"
+                        "<td>" + item["Metros"].ToString() + "</td>" +
+                        "<td> Q." + item["SubTotal"].ToString() + "</td>"
                         ;
                     data += "</tr>";
                 }

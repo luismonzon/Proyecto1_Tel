@@ -34,7 +34,7 @@ namespace Proyecto1_Tel.Code
                     Response.Redirect("~/Index.aspx");
                 }
 
-               
+
 
                 conexion = new Conexion();
 
@@ -52,7 +52,7 @@ namespace Proyecto1_Tel.Code
                                             "</div>" + Llenar_Productos();
 
 
-                
+
 
             }
 
@@ -105,12 +105,12 @@ namespace Proyecto1_Tel.Code
                               " <th  align =\"center\">Tipo</th>" +
                                " <th  align =\"center\">Marca</th>" +
                              "<th align =\"center\">Cantidad Disponible</th>" +
-                             //  "<th align =\"center\">Acciones</th>" +
+                        //  "<th align =\"center\">Acciones</th>" +
                            "</tr>" +
                        "</thead>" + "<tbody>";
 
                 }
-               
+
                 foreach (DataRow item in productos.Tables[0].Rows)
                 {
                     data += "<tr>" +
@@ -129,8 +129,8 @@ namespace Proyecto1_Tel.Code
                                           " <li><a href=\"javascript:Eliminar_Bodega(" + item["PRODUCTO"].ToString() + ")\" id=\"edit\" class=\"tip\" CssClass=\"Edit\" title=\"Eliminar\"><i class=\"fam-cross\"></i></a> </li>" +
                                     "</td>";
                     }
-                    
-                    
+
+
                     data += "</tr>";
                 }
 
@@ -157,7 +157,7 @@ namespace Proyecto1_Tel.Code
 
             if (ds == 0)
             {
-                return conn.Crear("Bodega", "Producto, Cantidad ", "\'" + producto + "\'," + cantidad );
+                return conn.Crear("Bodega", "Producto, Cantidad ", "\'" + producto + "\'," + cantidad);
 
             }
             else
@@ -170,10 +170,10 @@ namespace Proyecto1_Tel.Code
                 XmlNodeList _Producto = xDoc.GetElementsByTagName("NewDataSet");
                 XmlNodeList cant = ((XmlElement)_Producto[0]).GetElementsByTagName("Cantidad");
                 string cantid = cant[0].InnerText;
-                
-                return conn.Modificar("Bodega","Cantidad =" + (Convert.ToInt64(cantid) + Convert.ToInt64(cantidad)), "Producto=" + producto);            
+
+                return conn.Modificar("Bodega", "Cantidad =" + (Convert.ToInt64(cantid) + Convert.ToInt64(cantidad)), "Producto=" + producto);
             }
-           
+
 
         }
 
@@ -185,27 +185,27 @@ namespace Proyecto1_Tel.Code
 
             Conexion conn = new Conexion();
 
-           
-                DataSet Producto_ = conn.Buscar_Mostrar("Bodega", "Producto" + "= " + producto);
 
-                XmlDocument xDoc = new XmlDocument();
-                xDoc.LoadXml(Producto_.GetXml());
+            DataSet Producto_ = conn.Buscar_Mostrar("Bodega", "Producto" + "= " + producto);
 
-                XmlNodeList _Producto = xDoc.GetElementsByTagName("NewDataSet");
-                XmlNodeList cant = ((XmlElement)_Producto[0]).GetElementsByTagName("Cantidad");
-                string cantid = cant[0].InnerText;
+            XmlDocument xDoc = new XmlDocument();
+            xDoc.LoadXml(Producto_.GetXml());
 
-                if (Convert.ToInt64(cantidad) > Convert.ToInt64(cantid))
-                {
-                    return false;
-                }
-                else
-                {
-                    return conn.Modificar("Bodega", "Cantidad =" + (Convert.ToInt64(cantid) - Convert.ToInt64(cantidad)), "Producto=" + producto);
-                }   
+            XmlNodeList _Producto = xDoc.GetElementsByTagName("NewDataSet");
+            XmlNodeList cant = ((XmlElement)_Producto[0]).GetElementsByTagName("Cantidad");
+            string cantid = cant[0].InnerText;
 
-                
-            
+            if (Convert.ToInt64(cantidad) > Convert.ToInt64(cantid))
+            {
+                return false;
+            }
+            else
+            {
+                return conn.Modificar("Bodega", "Cantidad =" + (Convert.ToInt64(cantid) - Convert.ToInt64(cantidad)), "Producto=" + producto);
+            }
+
+
+
 
 
         }
@@ -233,7 +233,7 @@ namespace Proyecto1_Tel.Code
 
 
             XmlNodeList nDescripcion = ((XmlElement)lista_producto[0]).GetElementsByTagName("Descripcion");
-            
+
 
             string[] producto = new string[2];
             producto[0] = nDescripcion[0].InnerText;
@@ -246,7 +246,7 @@ namespace Proyecto1_Tel.Code
             }
             catch (Exception ex)
             {
-               string MostrarError = "Mensaje de la excepcion: " + ex.Message.ToString();
+                string MostrarError = "Mensaje de la excepcion: " + ex.Message.ToString();
             }
 
             string json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(producto);

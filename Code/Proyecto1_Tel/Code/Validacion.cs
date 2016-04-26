@@ -60,6 +60,7 @@ namespace Proyecto1_Tel.Code
                         case "ClienteDeuda":
                         case "Inicio":
                         case "Producto":
+                        case "VentaDiaria":
                             return true;
                         default:
                             return false;

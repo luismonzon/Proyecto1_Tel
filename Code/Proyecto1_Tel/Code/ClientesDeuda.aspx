@@ -88,12 +88,14 @@
         }
         
 
+
         function RealizarAbono() {
             var idDeuda = document.getElementById('cDeuda').value;
             var Deuda = $("#cDeuda  option:selected").text();
             var deuda = parseFloat(Deuda);
             var id = parseInt(idDeuda);
             var cantidad = document.getElementById('cantidad').value;
+
             if (deuda > 0 && cantidad > 0) {
                 if (cantidad > deuda) {
                     $('#mensaje').removeClass();
@@ -115,7 +117,6 @@
                                 $('#formulario-pago')[0].reset();
                                 document.getElementById("<% = codigo.ClientID%>").value = identi;
                                 Deudas(identi);
-                                 $("#ContentPlaceHolder1_cDeuda").text() = "";
                             } else {
                                 $('#mensaje').removeClass();
                                 $('#mensaje').addClass('alert alert-danger').html('No se pudo abonar a la deuda').show(200).delay(2500).hide(200);
@@ -125,16 +126,8 @@
                         }
                     });
                 }
-            } else
-            {
-                $('#mensaje').removeClass();
-                $('#mensaje').addClass('alert alert-danger').html('Revise los campos obligatorios marcados con (*)').show(200).delay(2500).hide(200);
-            }
-            
 
-            return false;
 
-        }
 
 
         function Ver_Venta(id) {

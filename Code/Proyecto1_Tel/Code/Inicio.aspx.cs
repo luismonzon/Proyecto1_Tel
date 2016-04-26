@@ -100,7 +100,23 @@ namespace Proyecto1_Tel.Code
                 "</div>" +
              
                 "</div>" +
-                "<!-- /Primera Linea -->";
+                "<!-- /Primera Linea -->"+
+
+            "<div class=\"span4\">" +
+                "<div class=\"control-group\" id=\"reportes\">" +
+                    "<div class=\"view\">" +
+                        "<a href=\"VentaDiaria.aspx\" class=\"button\">" +
+                            "<img src=\"../img/report.png\" aria-orientation=\"vertical\" WIDTH=178 HEIGHT=180/>" +
+                        "</a>" +
+                    "</div>" +
+                    "<div class=\"item-info\">" +
+                        "<a href=\"VentaDiaria.aspx\" title=\"\" class=\"item-title\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
+                        "&nbsp;&nbsp;&nbsp;&nbsp;Reportes</a>" +
+                    "</div>" +
+                "</div>" +
+            "</div>" +
+         "</div>";
+
 
 
    
@@ -178,12 +194,12 @@ namespace Proyecto1_Tel.Code
                     "<div class=\"span4\">"+       	
                         "<div class=\"control-group\" id=\"reportes\">"+
                             "<div class=\"view\">"+
-							    "<a href=\"ProductosMasVenden.aspx\" class=\"button\">"+
+                                "<a href=\"VentaDiaria.aspx\" class=\"button\">" +
                                     "<img src=\"../img/report.png\" aria-orientation=\"vertical\" WIDTH=178 HEIGHT=180/>" +
                                 "</a>"+
                             "</div>"+
                             "<div class=\"item-info\">"+
-                                "<a href=\"ProductosMasVenden.aspx\" title=\"\" class=\"item-title\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+
+                                "<a href=\"VentaDiaria.aspx\" title=\"\" class=\"item-title\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
                                 "&nbsp;&nbsp;&nbsp;&nbsp;Reportes</a>"+
                             "</div>"+
                         "</div>"+

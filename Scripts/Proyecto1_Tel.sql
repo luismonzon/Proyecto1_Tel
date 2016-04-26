@@ -11,10 +11,41 @@ use PROYECT_1
 --and i.Producto = p.Producto 
 --and v.Cliente = 500 
 --group by p.Abreviatura, p.Descripcion;
-TRUNCATE TABLE DETALLEVenta;
-truncate table pago;
-delete from Deuda;
-delete from  VENTA;
+ALTER TABLE Cliente
+ALTER COLUMN Direccion VARCHAR(200) NULL;
+
+
+ALTER TABLE DetalleVenta
+ALTER COLUMN SubTotal numeric(18,2) NULL;
+
+
+SELECT p.Abreviatura, p.Descripcion, d.Cantidad, d.Metros, d.SubTotal, v.Cliente, c.Direccion
+ FROM Producto p, Venta v, DetalleVenta d, Cliente c
+where d.Venta = v.Venta 
+and c.Cliente = v.Cliente
+and p.Producto = d.Producto 
+and v.Venta = 171;
+
+
+select c.Direccion , p.Abreviatura, p.Descripcion, d.cantidad, d.metros, d.subtotal
+from Cliente c, Venta v, Producto p, DetalleVenta d
+where c.Cliente = v.Cliente
+and p.Producto = d.Producto
+and d.Venta = v.Venta
+and v.Venta = 171
+group by c.Direccion, v.Hora, p.Abreviatura, p.Descripcion, d.cantidad, d.metros, d.subtotal;
+
+SELECT  v.Venta Venta,CONVERT(VARCHAR(8),v.Hora,108) Hora, c.Cliente Cliente, c.Nombre Nombre, c.Apellido Apellido, c.Direccion Direccion, u.NickName Vendedor, Tipo_Pago, Total 
+ FROM  Venta v, Cliente c, Usuario u 
+where v.Cliente = c.Cliente 
+and v.Usuario = u.Usuario 
+and Fecha = '20160425' 
+;
+
+
+
+SELECT * FROM Venta;
+select * from DetalleVenta ;
 
 SELECT Ps.Pago, d.Venta, c.Cliente, c.Nombre, c.Apellido, sum(d.Cantidad) Credito , sc.Abono Abonado, SUM(d.Cantidad) - sc.Abono Deuda 
   FROM Pago ps, Venta v, Deuda d join Cliente c on c.Cliente = d.Cliente left join ( 
@@ -212,4 +243,3 @@ create table Bodega(
 )
 
 go
-

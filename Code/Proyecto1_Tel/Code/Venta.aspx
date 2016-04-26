@@ -203,10 +203,10 @@
     <script type="text/javascript">
 
         function cambios() {
-     
+
             var id = document.getElementById('cmbproductos').value;
             var selected = $("#cmbproductos  option:selected").text();
-     
+
             $.ajax({
                 type: 'POST',
                 url: 'Venta.aspx/Busca_Datos',
@@ -214,27 +214,27 @@
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
                 success: function (response) {
-             
+
                     var produc = JSON.parse(response.d);
                     var Descripcion = produc[0];
                     var Cantidad_Dispo = produc[1];
                     var Tipo = produc[2];
                     var Precio = produc[3];
                     var Metros = produc[4];
-                    
-             
-                    
+
+
+
                     if (Tipo == "ARTICULO" || Tipo == "Articulo") {
 
                         $('#metros').hide();
                         document.getElementById("disponible").value = Cantidad_Dispo;
                     } else {
-                        
+
                         $('#metros').show();
                         document.getElementById("disponible").value = Metros;
-                            
+
                     }
-                   
+
 
                 }
             });
@@ -244,6 +244,7 @@
 
 
         $('#comprar').on('click', function () { // modal pago
+
             var client = $("#codigo_cliente").val();
             if (client != "") {
 
@@ -254,24 +255,30 @@
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'json',
                     success: function (response) {
-                        //se escribe el modal
-                        var $modal = $('#ContentPlaceHolder1_divpago');
-                        $modal.html(response.d);
-                        $('#ModalPago').on('show.bs.modal', function () {
-                            $('.modal .modal-body').css('overflow-y', 'auto');
-                            $('.modal .modal-body').css('max-height', $(window).height() * 0.7);
-                            $('.modal .modal-body').css('height', $(window).height() * 0.7);
-                        });
+                        if (response.d == '0') {
+                            alert('Carrito Vacio');
+                        } else {
 
-                        //Modal
-                        $('#formulario_modal')[0].reset(); //formulario lo inicializa con datos vacios
-                        $('#pro_modal').val('Registro'); //crea nuestra caja de procesos y se agrega el valor del registro
-                        $('#reg_modal').show(); //mostramos el boton de registro
-                        $('#edi_modal').hide();//se esconde el boton de editar
-                        $('#ModalPago').modal({ //
-                            show: true, //mostramos el modal registra producto
-                            //backdrop: 'static' //hace que no se cierre el modal si le dan clic afuera del mismo.
-                        });
+
+                            //se escribe el modal
+                            var $modal = $('#ContentPlaceHolder1_divpago');
+                            $modal.html(response.d);
+                            $('#ModalPago').on('show.bs.modal', function () {
+                                $('.modal .modal-body').css('overflow-y', 'auto');
+                                $('.modal .modal-body').css('max-height', $(window).height() * 0.7);
+                                $('.modal .modal-body').css('height', $(window).height() * 0.7);
+                            });
+
+                            //Modal
+                            $('#formulario_modal')[0].reset(); //formulario lo inicializa con datos vacios
+                            $('#pro_modal').val('Registro'); //crea nuestra caja de procesos y se agrega el valor del registro
+                            $('#reg_modal').show(); //mostramos el boton de registro
+                            $('#edi_modal').hide();//se esconde el boton de editar
+                            $('#ModalPago').modal({ //
+                                show: true, //mostramos el modal registra producto
+                                //backdrop: 'static' //hace que no se cierre el modal si le dan clic afuera del mismo.
+                            });
+                        }
                     }
                 });
             } else {
@@ -291,14 +298,14 @@
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
                 success: function (data) {
-                   
+
                     var eliminado = parseFloat(data.d);
-                    var anterior = parseFloat( $("#disponible").val());
-                    
+                    var anterior = parseFloat($("#disponible").val());
+
                     var dispon = anterior + eliminado;
-                    
+
                     document.getElementById("disponible").value = dispon;
-              
+
                     $.ajax({
                         type: 'POST',
                         url: 'Venta.aspx/removecarrito',
@@ -306,7 +313,7 @@
                         contentType: 'application/json; charset=utf-8',
                         dataType: 'json',
                         success: function (msg) {
-                          
+
                             $("#detalleproductos").html(msg.d);
                         }
                     });
@@ -314,7 +321,7 @@
 
                 }
             });
-           
+
         }
 
     </script>
@@ -350,24 +357,28 @@
 
 
         $('#agregar').on('click', function () {
-           
+
             var cod = $("#cmbproductos").val();
             var nombre = $("#cmbproductos  option:selected").text();
             var cant = $("#txtcantidad").val();
             var largo = $("#txtmetros").val();
+            if (largo == "") {
+                largo = 1;
+            }
             var cantidad = cant * largo;
+            alert(cantidad);
             var disp = $("#disponible").val();
-            
+
             var idventa = parseFloat(1);
             var venta = $("#idventa").val();
-          
+
             if (venta == "") {
                 document.getElementById("idventa").value = idventa;
 
             } else {
-                document.getElementById("idventa").value = parseFloat(venta)+ parseFloat(1);
+                document.getElementById("idventa").value = parseFloat(venta) + parseFloat(1);
             }
-           
+
             if (cantidad < disp) {
                 var disponible = $("#disponible").val() - cantidad;
                 document.getElementById("disponible").value = disponible;
@@ -389,7 +400,7 @@
             } else {
                 alert("La cantidad que desea vender excede a la disponible");
             }
-        
+
         });
 
 
@@ -473,70 +484,89 @@
 
 	    //AGREGAR CLIENTE
 
-        
+
 	    function AddPago() {
 
 
 	        var tot = document.getElementById("totalpago").value;
 	        var client = document.getElementById("codclientepago").value;
 	        var tipo = $("#cmbpago").val();
+	        var pago = document.getElementById("totalabonado").value;
 
-	        if (client != "" && tot !="0") {
+
+	        var totalventa = parseFloat(tot.replace(",", "."));
+
+	        var pagototal = parseFloat(pago.replace(",", "."));
+
+	        if (pagototal > totalventa || pagototal == totalventa) {
+	            if (client != "" && tot != "0") {
 
 
-	            $.ajax({
-	                type: 'POST',
-	                url: 'Venta.aspx/AddPago',
-	                data: JSON.stringify({ total: tot,cliente:client,tipopago: tipo}),
-	                contentType: 'application/json; charset=utf-8',
-	                dataType: 'json',
-	                success: function (response) {
-	                    if (response.d == true) {
-	                        $.ajax({
-	                            type: 'POST',
-	                            url: 'Venta.aspx/GetVenta',
-	                            data: JSON.stringify({}),
-	                            contentType: 'application/json; charset=utf-8',
-	                            dataType: 'json',
-	                            success: function (response) {
-	                                var abono = document.getElementById("totalabonado").value;
-	                                var total = document.getElementById("totalpago").value;
-	                                
-	                                var CodVenta = response.d;
-	                                $('#mensaje').removeClass();
-	                                $('#mensaje').addClass('alert alert-success').html('Codigo de Venta: ' + CodVenta).show(200).delay(2500);
-	                                
-	                                var c = 0;
-	                                if (abono != "") {
-	                                    var aaa = total.replace(",", ".");
-	                                    var a = parseFloat(abono);
-	                                    var b = parseFloat(aaa);
-	                                    if (a > 0 && a > b) {
-	                                        c = parseFloat(a - b);
-	                                        $('#vuelto').removeClass();
-	                                        $('#vuelto').addClass('alert alert-success').html('Vuelto: ' + c).show(200).delay(2500);
-	                                        alert('Su Vuelto es: ' + parseFloat(c));
+	                $.ajax({
+	                    type: 'POST',
+	                    url: 'Venta.aspx/AddPago',
+	                    data: JSON.stringify({ total: tot, cliente: client, tipopago: tipo }),
+	                    contentType: 'application/json; charset=utf-8',
+	                    dataType: 'json',
+	                    success: function (response) {
+	                        if (response.d == true) {
+	                            $.ajax({
+	                                type: 'POST',
+	                                url: 'Venta.aspx/GetVenta',
+	                                data: JSON.stringify({}),
+	                                contentType: 'application/json; charset=utf-8',
+	                                dataType: 'json',
+	                                success: function (response) {
+	                                    var abono = document.getElementById("totalabonado").value;
+	                                    var total = document.getElementById("totalpago").value;
+
+	                                    var CodVenta = response.d;
+	                                    $('#venta').removeClass();
+	                                    $('#venta').addClass('alert alert-success').html('Codigo de Venta: ' + CodVenta).show(200).delay(2500);
+
+	                                    var c = 0;
+	                                    if (abono != "") {
+	                                        var aaa = total.replace(",", ".");
+	                                        var a = parseFloat(abono);
+	                                        var b = parseFloat(aaa);
+	                                        if (a > 0 && a > b || a > 0 && a == b) {
+	                                            c = parseFloat(a - b);
+	                                            $('#vuelto').removeClass();
+	                                            $('#vuelto').addClass('label label-success').html('Vuelto:  Q.' + c).show(200).delay(2500);
+	                                            alert('Su Vuelto es: ' + parseFloat(c));
+	                                        }
 	                                    }
-	                                }
-	                                reloadTable();
-	                               
-	                            }
-	                        });
+	                                    reloadTable();
 
-	                    } else {
-	                        $('#mensaje').removeClass();
-	                        $('#mensaje').addClass('alert alert-danger').html('Error al insertar').show(200).delay(2500).hide(200);
+	                                }
+	                            });
+
+	                        } else {
+	                            $('#mensaje').removeClass();
+	                            $('#mensaje').addClass('alert alert-danger').html('Error al insertar').show(200).delay(2500).hide(200);
+
+	                        }
 
 	                    }
+	                });
 
-	                }
-	            });
+	            } else {
+	                $('#mensaje').removeClass();
+	                $('#mensaje').addClass('alert alert-danger').html('Revise los campos obligatorios marcados con (*)').show(200).delay(2500).hide(200);
+
+	            }
+
 
 	        } else {
+
 	            $('#mensaje').removeClass();
-	            $('#mensaje').addClass('alert alert-danger').html('Revise los campos obligatorios marcados con (*)').show(200).delay(2500).hide(200);
+	            $('#mensaje').addClass('alert alert-danger').html('El pago es menor que el total').show(200).delay(2500).hide(200);
 
 	        }
+
+
+
+
 	        return false;
 
 
