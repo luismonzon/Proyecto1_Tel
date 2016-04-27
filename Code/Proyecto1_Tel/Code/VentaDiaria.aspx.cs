@@ -123,6 +123,7 @@ namespace Proyecto1_Tel.Code
                     data += " <td align =\"Center\">" +
                     "<ul class=\"table-controls\">" +
                       " <li><a href=\"javascript:VerDetalle(" + item["Venta"].ToString() + ")\" id=\"view\" class=\"tip\" CssClass=\"Edit\" title=\"Ver Detalle\"><i class=\"fam-eye\"></i></a> </li>" +
+                      " <li><a href=\"javascript:Delete(" + item["Venta"].ToString() + ")\" id=\"delete\" class=\"tip\" CssClass=\"Delete\" title=\"Eliminar Venta\"><i class=\"fam-cross\"></i></a> </li>" +
                     "</td>";
                     data += "</tr>";
                 }
@@ -226,6 +227,21 @@ namespace Proyecto1_Tel.Code
             ;
 
             return innerhtml;
+        }
+
+        [WebMethod]
+
+        public static bool Delete(string id) 
+        {
+            Conexion conn = new Conexion();
+
+            int ds = conn.Count("Select count(Venta) from [Venta] where Venta=" + id + ";");
+
+            if (ds != 0)
+            {
+                return conn.Eliminar("Venta", "Venta = " + id);
+            }
+            return false;
         }
 
     }
