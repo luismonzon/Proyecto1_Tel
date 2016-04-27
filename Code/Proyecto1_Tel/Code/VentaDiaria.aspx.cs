@@ -149,6 +149,7 @@ namespace Proyecto1_Tel.Code
                 "<div class=\"modal-dialog\"> \n" +
                 "<div class=\"modal-content\"> \n" +
                 "<div class=\"modal-header\"> \n" +
+                "<button type=\"button\" onclick=\"closeModalPago();\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button> \n" +
                 "<div class=\"step-title\"> \n" +
                 "<i>P</i> \n" +
                 "<h5>Productos</h5> \n" +

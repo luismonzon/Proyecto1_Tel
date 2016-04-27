@@ -19,13 +19,17 @@ ALTER TABLE DetalleVenta
 ALTER COLUMN SubTotal numeric(18,2) NULL;
 
 
-SELECT p.Abreviatura, p.Descripcion, d.Cantidad, d.Metros, d.SubTotal, v.Cliente, c.Direccion
- FROM Producto p, Venta v, DetalleVenta d, Cliente c
+SELECT p.Abreviatura, p.Descripcion, d.Cantidad, d.Metros, d.SubTotal
+FROM Producto p, Venta v, DetalleVenta d
 where d.Venta = v.Venta 
-and c.Cliente = v.Cliente
 and p.Producto = d.Producto 
 and v.Venta = 171;
 
+SELECT p.Abreviatura, p.Descripcion, d.Cantidad, d.Metros, d.SubTotal SubTotal FROM Producto p, Venta v, DetalleVenta d 
+where d.Venta = v.Venta 
+and p.Producto = d.Producto 
+and v.Venta = 131 
+;
 
 select c.Direccion , p.Abreviatura, p.Descripcion, d.cantidad, d.metros, d.subtotal
 from Cliente c, Venta v, Producto p, DetalleVenta d

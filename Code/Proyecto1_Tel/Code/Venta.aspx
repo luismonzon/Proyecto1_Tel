@@ -366,7 +366,6 @@
                 largo = 1;
             }
             var cantidad = cant * largo;
-            alert(cantidad);
             var disp = $("#disponible").val();
 
             var idventa = parseFloat(1);

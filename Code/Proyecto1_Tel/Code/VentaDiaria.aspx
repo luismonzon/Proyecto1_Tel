@@ -19,7 +19,7 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
         <input runat="server" type="text" required="required" readonly="readonly" id="codigo" name="codigo"  style="visibility:hidden; height:5px;"/>
-        <div id="modaldetalle" runat="server">
+        <div id="modaldetalle" runat="server" >
         
         </div>
 
@@ -95,6 +95,15 @@
                 success: function (response) {
                     var $modal = $('#ContentPlaceHolder1_modaldetalle');
                     $modal.html(response.d);
+                    $('#modal-detalle').on('show.bs.modal', function () {
+                        $('.modal .modal-body').css('overflow-y', 'auto');
+                        $('.modal .modal-body').css('max-height', $(window).height() * 0.7);
+                        $('.modal .modal-body').css('height', $(window).height() * 0.7);
+                        $('.modal .modal-content').css('height', '500px');
+                        $('.modal .modal-content').css('overflow', 'auto');
+                    });
+
+
                     $('#modal-detalle').modal({ //
                         show: true, //mostramos el modal registra producto
                         backdrop: 'static' //hace que no se cierre el modal si le dan clic afuera del mismo.
