@@ -88,34 +88,42 @@
         }
         
 
+
         function RealizarAbono() {
             var idDeuda = document.getElementById('cDeuda').value;
             var Deuda = $("#cDeuda  option:selected").text();
             var deuda = parseFloat(Deuda);
             var id = parseInt(idDeuda);
             var cantidad = document.getElementById('cantidad').value;
-            if (deuda > 0 && cantidad > 0) {
-                if (cantidad > deuda) {
-                    $('#mensaje').removeClass();
-                    $('#mensaje').addClass('alert alert-danger').html('La cantidad no debe ser mayor que la deuda').show(200).delay(2500).hide(200);
-                } else {
-                  
-                    $.ajax({
-                        type: 'POST',
-                        url: 'ClientesDeuda.aspx/Add',
-                        data: JSON.stringify({ id: id, Cantidad: cantidad }),
-                        contentType: 'application/json; charset=utf-8',
-                        dataType: 'json',
-                        success: function (response) {
 
-                            if (response.d == true) {
-                                $('#mensaje').removeClass();
-                                $('#mensaje').addClass('alert alert-success').html('Abono Realizado con exito').show(200).delay(2500).hide(200);
-                                var identi = document.getElementById("<% = codigo.ClientID%>").value;
+            if (deuda > 0 && cantidad > 0) {
+                var cantidad2 = cantidad;
+                if (cantidad > deuda || cantidad == deuda) {
+                    cantidad2 = deuda;
+                    var vuelto = cantidad - deuda;
+                    $('#vuelto').removeClass();
+                    $('#vuelto').addClass('alert alert-success').html('Vuelto Q.' + vuelto).show(200).delay(7000).hide(200);
+
+                } else {
+                    cantidad2 = cantidad;
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'ClientesDeuda.aspx/Add',
+                    data: JSON.stringify({ id: id, Cantidad: cantidad2 }),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function (response) {
+
+                        if (response.d == true) {
+                            $('#mensaje').removeClass();
+                            $('#mensaje').addClass('alert alert-success').html('Abono Realizado con exito').show(200).delay(7000).hide(200);
+                            var identi = document.getElementById("<% = codigo.ClientID%>").value;
                                 $('#formulario-pago')[0].reset();
                                 document.getElementById("<% = codigo.ClientID%>").value = identi;
                                 Deudas(identi);
-                                 $("#ContentPlaceHolder1_cDeuda").text() = "";
+                                // $("#ContentPlaceHolder1_cDeuda").text() = "";
                             } else {
                                 $('#mensaje').removeClass();
                                 $('#mensaje').addClass('alert alert-danger').html('No se pudo abonar a la deuda').show(200).delay(2500).hide(200);
@@ -124,18 +132,16 @@
 
                         }
                     });
+
+                } else {
+                    $('#mensaje').removeClass();
+                    $('#mensaje').addClass('alert alert-danger').html('Revise los campos obligatorios marcados con (*)').show(200).delay(2500).hide(200);
                 }
-            } else
-            {
-                $('#mensaje').removeClass();
-                $('#mensaje').addClass('alert alert-danger').html('Revise los campos obligatorios marcados con (*)').show(200).delay(2500).hide(200);
+
+
+                return false;
+
             }
-            
-
-            return false;
-
-        }
-
 
         function Ver_Venta(id) {
              $.ajax({

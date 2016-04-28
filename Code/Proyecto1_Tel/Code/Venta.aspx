@@ -122,7 +122,7 @@
                                         <div class="span6">
                                                     <label class="control-label" style="font-size: 15px;"><b>Unidades</b></label>
                                                      <div class="align-left">
-                                                         <input type="number" style="font-size: 13px;" name="regular"  class="span3" id="txtcantidad" placeholder="Cantidad" />
+                                                         <input type="number" style="font-size: 11px;" name="regular"  class="span3" id="txtcantidad" placeholder="Cantidad" />
                                                      </div>                                                   
                                          </div>
                                         
@@ -378,7 +378,7 @@
                 document.getElementById("idventa").value = parseFloat(venta) + parseFloat(1);
             }
 
-            if (cantidad < disp) {
+            if (cantidad <= disp) {
                 var disponible = $("#disponible").val() - cantidad;
                 document.getElementById("disponible").value = disponible;
 

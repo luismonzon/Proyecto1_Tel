@@ -90,12 +90,12 @@
 
             var id = document.getElementById('producto').value;
             var selected = $("#producto  option:selected").text();
-            
+
 
             $.ajax({
                 type: 'POST',
                 url: 'Inv_Bodega.aspx/Busca_Descripcion',
-                data: JSON.stringify({ id: id}),
+                data: JSON.stringify({ id: id }),
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
                 success: function (response) {
@@ -103,15 +103,15 @@
                     var Descripcion = produc[0];
                     document.getElementById("descripcion").value = Descripcion;
 
-                   
-                 }
+
+                }
             });
 
         }
 
 
 
-         function AddProduct() {
+        function AddProduct() {
 
             var idproducto = document.getElementById("producto").value;
             var cantidad = document.getElementById("cantidad").value;
@@ -201,8 +201,8 @@
             var cantidad = document.getElementById("cantidad").value;
             //var formulario = document.forms[0];
             var opcion = document.getElementsByName("opcion");
-            
-            for (var i = 0; i <opcion.length; i++) {
+
+            for (var i = 0; i < opcion.length; i++) {
                 if (opcion[i].checked) {
                     if (opcion[i].value == '1') {
                         $.ajax({
@@ -213,7 +213,7 @@
                             contentType: 'application/json; charset=utf-8',
                             dataType: 'json',
                             success: function (response) {
-                              
+
                                 if (response.d == true) {
                                     $('#mensaje').removeClass();
                                     $('#mensaje').addClass('alert alert-success').html('Producto agregado con exito').show(200).delay(2500).hide(200);

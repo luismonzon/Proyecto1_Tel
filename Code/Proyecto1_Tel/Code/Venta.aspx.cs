@@ -258,10 +258,7 @@ namespace Proyecto1_Tel.Code
             Conexion nueva = new Conexion();
             Double total = 0;
             string user = HttpContext.Current.Session["IdUser"].ToString();
-            if (carrito.Count == 0)
-            {
-                return "0";
-            }
+
             foreach (var item in carrito)
             {
                 if (item.usuario.Equals(user))
@@ -269,6 +266,8 @@ namespace Proyecto1_Tel.Code
                     total += item.subTotal;
                 }
             }
+
+            if (total == 0) { return "0"; }
 
             string innerhtml =
                 "<div class=\"modal fade\" id=\"ModalPago\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\"> \n" +
@@ -420,7 +419,11 @@ namespace Proyecto1_Tel.Code
 
                     foreach (var item in carrito)
                     {
-                        message += venta.Tables[0].Rows[0][0] + ";" + cliente + ";" + nickname + ";" + item.nombre + ";       " + item.cantidad + ";    " + item.largo + ",";
+                        if (item.usuario.Equals(user))
+                        {
+                            message += venta.Tables[0].Rows[0][0] + ";" + cliente + ";" + nickname + ";" + item.nombre + ";       " + item.cantidad + ";    " + item.largo + ",";
+                        }
+                        
                     }
 
                     var body = Encoding.UTF8.GetBytes(message);
@@ -468,7 +471,16 @@ namespace Proyecto1_Tel.Code
         [WebMethod]
         public static string CleanCarrito()
         {
-            carrito.Clear();
+
+            string user = HttpContext.Current.Session["IdUser"].ToString();
+            for (int i = 0; i < carrito.Count; i++)
+            {
+                if (carrito[i].usuario.Equals(user))
+                {
+                    carrito.RemoveAt(i);
+                }
+
+            }
 
             return Graficar();
 

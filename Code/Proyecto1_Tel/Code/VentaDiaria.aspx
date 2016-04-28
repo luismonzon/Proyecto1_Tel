@@ -74,6 +74,7 @@
                     dataType: 'json',
                     success: function (response) {
                         var $modal = $('#tabla-productos');
+                        alert(response.d);
                         $modal.html(response.d);
                     }
                 });

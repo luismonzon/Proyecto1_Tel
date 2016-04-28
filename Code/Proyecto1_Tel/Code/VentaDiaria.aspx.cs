@@ -39,9 +39,9 @@ namespace Proyecto1_Tel.Code
 
         [WebMethod]
 
-        public static string GenerarTabla(string fecha)
+        public static String GenerarTabla(string fecha)
         {
-            string innerhtml = "";
+            String innerhtml = "";
 
             string rol = HttpContext.Current.Session["Rol"].ToString();
 
