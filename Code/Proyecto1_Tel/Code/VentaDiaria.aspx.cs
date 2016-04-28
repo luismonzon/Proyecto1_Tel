@@ -260,7 +260,6 @@ namespace Proyecto1_Tel.Code
                             con.Modificar(" Inventario ", " Cantidad = Cantidad + " + item["Cantidad"].ToString().Replace(",",".") + " ", " Producto = " + item["Producto"].ToString() + " ");
                         }
                     }
-                    conn.Eliminar("DetalleVenta", "Venta = " + id);
                     return conn.Eliminar("Venta", "Venta = " + id);
                 }
 
