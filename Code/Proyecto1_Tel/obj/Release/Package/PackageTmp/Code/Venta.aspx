@@ -109,6 +109,13 @@
 	                            <div class="well">
 	                            
                                     <div  class="control-group">
+                                        <div id="metros" class="span6">
+                                            <label class="control-label" style="font-size: 15px;"><b>Metros</b></label>
+                                            <div class=" align-left"> 
+                                                <input type="text" style="font-size: 13px;" name="regular"  class="span5" id="txtmetros" placeholder="Metros" />
+                                                       
+                                            </div>
+                                         </div>
                                         <div class="span1">
                                             <label class="control-label" style="font-size: 15px;"><b>Producto</b></label>
                                         </div>
@@ -118,28 +125,19 @@
                                                 <div id="productos" class="span6"  runat="server">
                                                 </div>
                                              </div>
-                                            </div>
-                                        <div class="span6">
-                                                    <label class="control-label" style="font-size: 15px;"><b>Unidades</b></label>
-                                                     <div class="align-left">
-                                                         <input type="number" style="font-size: 11px;" name="regular"  class="span3" id="txtcantidad" placeholder="Cantidad" />
-                                                     </div>                                                   
-                                         </div>
-                                        
-                                        
-                                        
                                         </div>
+                                        
+                                    </div>
                                        
                                      <div class="control-group">
-                                         <div id="metros" class="span6">
-                                                     <label class="control-label" style="font-size: 15px;"><b>Metros</b></label>
-                                                     <div class=" align-left"> 
-                                                         <input type="text" style="font-size: 13px;" name="regular"  class="span5" id="txtmetros" placeholder="Metros" />
-                                                       
-                                                     </div>
-                                                      
-                                         </div>
+                                         
                                         
+                                        <div class="span6">
+                                            <label class="control-label" style="font-size: 15px;"><b>Unidades</b></label>
+                                            <div class="align-left">
+                                                <input type="number" style="font-size: 11px;" name="regular"  class="span3" id="txtcantidad" placeholder="Cantidad" />
+                                            </div>                                                   
+                                         </div>
                                          
                                          <div class="span6">
                                                     <label class="control-label" style="font-size: 15px;"><b>Cantidad Disponible</b></label>

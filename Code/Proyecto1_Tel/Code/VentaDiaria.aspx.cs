@@ -121,9 +121,13 @@ namespace Proyecto1_Tel.Code
                         "<td runat=\"server\">" + item["Tipo_Pago"].ToString() + "</td>" +
                         "<td runat=\"server\"> Q." + item["Total"].ToString() + "</td> ";
                     data += " <td align =\"Center\">" +
-                    "<ul class=\"table-controls\">" +
-                      " <li><a href=\"javascript:VerDetalle(" + item["Venta"].ToString() + ")\" id=\"view\" class=\"tip\" CssClass=\"Edit\" title=\"Ver Detalle\"><i class=\"fam-eye\"></i></a> </li>" +
-                    "</td>";
+                    "<ul class=\"table-controls\">";
+                    data += " <li><a href=\"javascript:VerDetalle(" + item["Venta"].ToString() + ")\" id=\"view\" class=\"tip\" CssClass=\"Edit\" title=\"Ver Detalle\"><i class=\"fam-eye\"></i></a> </li>";
+                    if (rol == "1") 
+                    {
+                        data += " <li><a href=\"javascript:Delete(" + item["Venta"].ToString() + ")\" id=\"view\" class=\"tip\" CssClass=\"Delete\" title=\"Eliminar Venta\"><i class=\"fam-cross\"></i></a> </li>";
+                    }
+                    data +="</td>";
                     data += "</tr>";
                 }
 
@@ -226,6 +230,41 @@ namespace Proyecto1_Tel.Code
             ;
 
             return innerhtml;
+        }
+
+        [WebMethod]
+        public static bool Delete(string id) 
+        {
+            Conexion conn = new Conexion();
+
+            int ds = conn.Count("Select count(Venta) from [Venta] where Venta=\'" + id + "\';");
+
+            if (ds != 0)
+            {
+
+                string columnas = " p.Producto, p.Tipo, d.Cantidad, d.Metros ";
+                string condicion =
+                    "DetalleVenta d, Producto p  \n" +
+                    "where p.Producto = d.Producto \n" +
+                    "and d.Venta = " + id + " \n";
+                Conexion con = new Conexion();
+                DataSet roles = con.Mostrar(condicion, columnas);
+                if (roles.Tables.Count > 0) {
+                    foreach (DataRow item in roles.Tables[0].Rows) 
+                    {
+                        if(item["Tipo"].ToString().Equals("1"))
+                        {
+                            con.Modificar(" Inventario ", " Metros_Cuadrados = Metros_Cuadrados + " + Convert.ToString(item["Cantidad"].ToString()).Replace(",", ".") + " * " + Convert.ToString(item["Metros"].ToString()).Replace(",", ".") + "  ", " Producto = " + item["Producto"].ToString() + " ");
+                        }else
+                        {
+                            con.Modificar(" Inventario ", " Cantidad = Cantidad + " + item["Cantidad"].ToString() + " ", " Producto = " + item["Producto"].ToString() + " ");
+                        }
+                    }
+                    return conn.Eliminar("Venta", "Venta = " + id);
+                }
+
+            }
+            return false;
         }
 
     }

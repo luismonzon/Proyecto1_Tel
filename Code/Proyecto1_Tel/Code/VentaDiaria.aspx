@@ -4,12 +4,10 @@
     
     <script type="text/javascript">
 
-        $(document).ready(function () {
+ 
 
-            $('.datepicker').datepicker({
-                dateFormat: 'dd-mm-yy'
-            });
-        });
+
+
     </script>
 
     </asp:Content>
@@ -74,7 +72,6 @@
                     dataType: 'json',
                     success: function (response) {
                         var $modal = $('#tabla-productos');
-                        alert(response.d);
                         $modal.html(response.d);
                     }
                 });
@@ -113,6 +110,52 @@
                 }
             });
         }
+
+        function Delete(id)
+        {
+            if (confirm("Esta seguro que desea eliminar la Venta?")) {
+                $.ajax({
+                    type: "POST",
+                    url: "VentaDiaria.aspx/Delete",
+                    data: JSON.stringify({ id: id }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+
+                        var str = $('#myDate').val();
+
+                        if (response.d == true) {
+                            alert("La Venta Ha Sido Eliminada Exitosamente");
+                            reloadTable();
+                        } else {
+                            alert("La Venta No Pudo Ser Eliminada");
+                        }
+                        
+                    }
+                });
+            }
+        }
+
+        window.onload = function () {
+
+
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1; //January is 0!
+            var yyyy = today.getFullYear();
+
+            if (dd < 10) {
+                dd = '0' + dd
+            }
+
+            if (mm < 10) {
+                mm = '0' + mm
+            }
+
+            today = dd + '-' + mm + '-' + yyyy;
+            $("#myDate").val(today);
+        }
+
     </script>
 
 </asp:Content>
