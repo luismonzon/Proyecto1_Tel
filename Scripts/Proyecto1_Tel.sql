@@ -36,7 +36,7 @@ from Cliente c, Venta v, Producto p, DetalleVenta d
 where c.Cliente = v.Cliente
 and p.Producto = d.Producto
 and d.Venta = v.Venta
-and v.Venta = 171
+and v.Venta = 526
 group by c.Direccion, v.Hora, p.Abreviatura, p.Descripcion, d.cantidad, d.metros, d.subtotal;
 
 SELECT  v.Venta Venta,CONVERT(VARCHAR(8),v.Hora,108) Hora, c.Cliente Cliente, c.Nombre Nombre, c.Apellido Apellido, c.Direccion Direccion, u.NickName Vendedor, Tipo_Pago, Total 
@@ -49,7 +49,7 @@ and Fecha = '20160425'
 
 
 SELECT * FROM Venta;
-select * from DetalleVenta ;
+select * from DetalleVentA;
 
 SELECT Ps.Pago, d.Venta, c.Cliente, c.Nombre, c.Apellido, sum(d.Cantidad) Credito , sc.Abono Abonado, SUM(d.Cantidad) - sc.Abono Deuda 
   FROM Pago ps, Venta v, Deuda d join Cliente c on c.Cliente = d.Cliente left join ( 
