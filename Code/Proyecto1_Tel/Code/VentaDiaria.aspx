@@ -112,30 +112,6 @@
                 }
             });
         }
-
-        function Delete(id)
-        {
-
-            if (confirm("Esta seguro que desea eliminar esta Venta?")) {
-                $.ajax({
-                    type: "POST",
-                    url: "VentaDiaria.aspx/Delete",
-                    data: JSON.stringify({ id: id }),
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                        if (response.d == true) {
-                            reloadTable();
-                            alert("Venta Eliminada Exitosamente");
-                        } else {
-                            alert("La Venta No Pudo Ser Eliminada");
-                        }
-                    }
-                });
-            }
-
-
-        }
     </script>
 
 </asp:Content>
