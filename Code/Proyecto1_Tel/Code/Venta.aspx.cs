@@ -365,6 +365,17 @@ namespace Proyecto1_Tel.Code
 
             string user = HttpContext.Current.Session["IdUser"].ToString();
             string nickname = HttpContext.Current.Session["NickName"].ToString();
+            Double totalventa = 0;
+            
+            foreach (var item in carrito)
+            {
+                if (item.usuario.Equals(user))
+                {
+                    totalventa += item.subTotal;
+                }
+            }
+
+            if (totalventa == 0) { return false; }
 
             respuesta = nueva.Crear("Venta", "Cliente, Usuario, Fecha, Total, Tipo_Pago, Hora", cliente + "," + user + ",GETDATE()," + Convert.ToString(total).Replace(",", ".") + ", " + "'" + tipo_pago + "'" + " , CONVERT(time, GETDATE())");
             if (respuesta == true)
@@ -434,7 +445,6 @@ namespace Proyecto1_Tel.Code
                                          body: body);
                 }
             }
-
             return respuesta;
         }
 
@@ -488,17 +498,18 @@ namespace Proyecto1_Tel.Code
         [WebMethod]
         public static string removecarrito(String codigo)
         {
-            string cantidad;
+            string user = HttpContext.Current.Session["IdUser"].ToString();
             for (int i = 0; i < carrito.Count; i++)
             {
-                cantidad = carrito[i].cantidad;
-                if (carrito[i].idventa.Equals(codigo))
-                {
-                    carrito.RemoveAt(i);
+                
 
-
-
+                if (carrito[i].usuario.Equals(user)) {
+                    if (carrito[i].idventa.Equals(codigo))
+                    {
+                        carrito.RemoveAt(i);
+                    }
                 }
+                
 
             }
             return Graficar();
@@ -511,17 +522,22 @@ namespace Proyecto1_Tel.Code
             string cantidad;
             string largo;
             Double total = 0;
+            string user = HttpContext.Current.Session["IdUser"].ToString();
             for (int i = 0; i < carrito.Count; i++)
             {
 
-                if (carrito[i].idventa.Equals(codigo))
-                {
+                if (carrito[i].usuario.Equals(user)) {
+                    if (carrito[i].idventa.Equals(codigo))
+                    {
 
-                    cantidad = carrito[i].cantidad;
-                    largo = carrito[i].largo;
-                    total = Convert.ToDouble(largo, CultureInfo.InvariantCulture) * Convert.ToDouble(cantidad, CultureInfo.InvariantCulture);
-                    break;
+                        cantidad = carrito[i].cantidad;
+                        largo = carrito[i].largo;
+                        total = Convert.ToDouble(largo, CultureInfo.InvariantCulture) * Convert.ToDouble(cantidad, CultureInfo.InvariantCulture);
+                        break;
+                    }
+                
                 }
+                
 
             }
             return total;

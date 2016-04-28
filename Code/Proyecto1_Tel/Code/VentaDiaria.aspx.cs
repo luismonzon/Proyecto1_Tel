@@ -257,9 +257,10 @@ namespace Proyecto1_Tel.Code
                             con.Modificar(" Inventario ", " Metros_Cuadrados = Metros_Cuadrados + " + Convert.ToString(item["Cantidad"].ToString()).Replace(",", ".") + " * " + Convert.ToString(item["Metros"].ToString()).Replace(",", ".") + "  ", " Producto = " + item["Producto"].ToString() + " ");
                         }else
                         {
-                            con.Modificar(" Inventario ", " Cantidad = Cantidad + " + item["Cantidad"].ToString() + " ", " Producto = " + item["Producto"].ToString() + " ");
+                            con.Modificar(" Inventario ", " Cantidad = Cantidad + " + item["Cantidad"].ToString().Replace(",",".") + " ", " Producto = " + item["Producto"].ToString() + " ");
                         }
                     }
+                    conn.Eliminar("DetalleVenta", "Venta = " + id);
                     return conn.Eliminar("Venta", "Venta = " + id);
                 }
 
