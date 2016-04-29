@@ -13,10 +13,10 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>04/18/2016 21:55:48</publishTime>
     </File>
     <File Include="bin/Proyecto1_Tel.dll">
-      <publishTime>04/28/2016 12:02:25</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="bin/Proyecto1_Tel.dll.config">
-      <publishTime>04/28/2016 12:01:45</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="bin/RabbitMQ.Client.dll">
       <publishTime>04/18/2016 21:58:13</publishTime>
@@ -730,7 +730,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>04/18/2016 21:58:13</publishTime>
     </File>
     <File Include="Code/Venta.aspx">
-      <publishTime>04/28/2016 01:18:34</publishTime>
+      <publishTime>04/28/2016 20:58:11</publishTime>
     </File>
     <File Include="Code/VentaAnual.aspx">
       <publishTime>04/18/2016 21:58:13</publishTime>

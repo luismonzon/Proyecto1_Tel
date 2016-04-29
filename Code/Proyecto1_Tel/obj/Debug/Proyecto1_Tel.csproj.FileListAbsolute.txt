@@ -58,4 +58,3 @@ C:\Users\Administrador\Documents\GitHub\Proyecto1_Tel\Code\Proyecto1_Tel\bin\Pro
 C:\Users\Administrador\Documents\GitHub\Proyecto1_Tel\Code\Proyecto1_Tel\bin\Proyecto1_Tel.pdb
 C:\Users\Administrador\Documents\GitHub\Proyecto1_Tel\Code\Proyecto1_Tel\obj\Debug\Proyecto1_Tel.dll
 C:\Users\Administrador\Documents\GitHub\Proyecto1_Tel\Code\Proyecto1_Tel\obj\Debug\Proyecto1_Tel.pdb
-C:\Users\Administrador\Documents\GitHub\Proyecto1_Tel\Code\Proyecto1_Tel\obj\Debug\Proyecto1_Tel.csprojResolveAssemblyReference.cache

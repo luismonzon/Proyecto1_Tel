@@ -390,6 +390,7 @@
                     success: function (msg) {
                         $("#txtcantidad").val("");
                         $("#txtmetros").val("");
+                        $("#txtmetros").focus();
                         $("#detalleproductos").html(msg.d);
                     }
                 });
