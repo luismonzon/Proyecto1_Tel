@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Xml;
 using System.Web.Configuration;
+using System.Collections;
 
 
 namespace Proyecto1_Tel.Code
@@ -352,6 +353,7 @@ namespace Proyecto1_Tel.Code
                                 Session["Rol"] = rol[0].InnerText;
                                 Session["IdUser"] = usuario[0].InnerText;
                                 Session["NickName"] = nick[0].InnerText;
+                                Session["Carrito"] = new List<Product>();
                            
                                 val = true;
                            

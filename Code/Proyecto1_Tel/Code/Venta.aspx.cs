@@ -61,14 +61,34 @@ namespace Proyecto1_Tel.Code
 
     public partial class Venta : System.Web.UI.Page
     {
-        public static List<Product> carrito;
+        //private List<Product> carrito;
+
+        private List<string> _countryItems;
+        public List<string> CountryItems
+        {
+            get
+            {
+                if (_countryItems == null)
+                {
+                    _countryItems = (List<string>)Session["CountryItems"];
+                    if (_countryItems == null)
+                    {
+                        _countryItems = new List<string>();
+                        Session["CountryItems"] = _countryItems;
+                    }
+                }
+                return _countryItems;
+            }
+            set { _countryItems = value; }
+        }
+
+
         Conexion conexion;
         String usuario, nick;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                carrito = new List<Product>();
                 if (Session["Usuario"] != null)
                 {
                     if (!Validacion.validar_sesion((Sesion)Session["Usuario"], "Venta"))
@@ -77,6 +97,7 @@ namespace Proyecto1_Tel.Code
                     }
                     nick = (String)Session["NickName"];
                     usuario = Session["IdUser"].ToString(); //id de usuario
+                    //carrito = new List<Product>();
                 }
                 else
                 {
@@ -259,6 +280,8 @@ namespace Proyecto1_Tel.Code
             Double total = 0;
             string user = HttpContext.Current.Session["IdUser"].ToString();
 
+            List<Product> carrito = (HttpContext.Current.Session["Carrito"] != null) ? (List<Product>)HttpContext.Current.Session["Carrito"] : null;
+
             foreach (var item in carrito)
             {
                 if (item.usuario.Equals(user))
@@ -366,7 +389,10 @@ namespace Proyecto1_Tel.Code
             string user = HttpContext.Current.Session["IdUser"].ToString();
             string nickname = HttpContext.Current.Session["NickName"].ToString();
             Double totalventa = 0;
-            
+
+            List<Product> carrito = (HttpContext.Current.Session["Carrito"] != null) ? (List<Product>)HttpContext.Current.Session["Carrito"] : null;
+
+
             foreach (var item in carrito)
             {
                 if (item.usuario.Equals(user))
@@ -445,6 +471,11 @@ namespace Proyecto1_Tel.Code
                                          body: body);
                 }
             }
+
+            carrito.Clear();
+
+            HttpContext.Current.Session["Carrito"] = carrito;
+
             return respuesta;
         }
 
@@ -481,7 +512,8 @@ namespace Proyecto1_Tel.Code
         [WebMethod]
         public static string CleanCarrito()
         {
-
+            List<Product> carrito = (HttpContext.Current.Session["Carrito"] != null) ? (List<Product>)HttpContext.Current.Session["Carrito"] : null;
+            /*
             string user = HttpContext.Current.Session["IdUser"].ToString();
             for (int i = 0; i < carrito.Count; i++)
             {
@@ -491,13 +523,17 @@ namespace Proyecto1_Tel.Code
                 }
 
             }
-
+             * */
+            carrito.Clear();
+            HttpContext.Current.Session["Carrito"] = carrito;
             return Graficar();
 
         }
         [WebMethod]
         public static string removecarrito(String codigo)
         {
+            List<Product> carrito = (HttpContext.Current.Session["Carrito"] != null) ? (List<Product>)HttpContext.Current.Session["Carrito"] : null;
+
             string user = HttpContext.Current.Session["IdUser"].ToString();
             for (int i = 0; i < carrito.Count; i++)
             {
@@ -512,6 +548,8 @@ namespace Proyecto1_Tel.Code
                 
 
             }
+
+            HttpContext.Current.Session["Carrito"] = carrito;
             return Graficar();
         }
 
@@ -522,6 +560,9 @@ namespace Proyecto1_Tel.Code
             string cantidad;
             string largo;
             Double total = 0;
+
+            List<Product> carrito = (HttpContext.Current.Session["Carrito"] != null) ? (List<Product>)HttpContext.Current.Session["Carrito"] : null;
+
             string user = HttpContext.Current.Session["IdUser"].ToString();
             for (int i = 0; i < carrito.Count; i++)
             {
@@ -540,6 +581,10 @@ namespace Proyecto1_Tel.Code
                 
 
             }
+
+
+            HttpContext.Current.Session["Carrito"] = carrito;
+
             return total;
         }
 
@@ -583,6 +628,7 @@ namespace Proyecto1_Tel.Code
                         ancho = nDescripcion[0].InnerText;
                     }
 
+                    List<Product> carrito = (HttpContext.Current.Session["Carrito"] != null) ? (List<Product>)HttpContext.Current.Session["Carrito"] : null;
 
                     string user = HttpContext.Current.Session["IdUser"].ToString();
                     Conexion nueva = new Conexion();
@@ -590,6 +636,7 @@ namespace Proyecto1_Tel.Code
                     DataSet abreviatura = nueva.Consulta("select Abreviatura from Producto where producto=" + codigo);
                     carrito.Add(new Product(idventa, cantidad, largo, ancho, codigo, abreviatura.Tables[0].Rows[0][0] + "", producto, datos.Tables[0].Rows[0][0] + "", user));
 
+                    HttpContext.Current.Session["Carrito"] = carrito;
                 }
                 catch (Exception e)
                 {
@@ -628,6 +675,9 @@ namespace Proyecto1_Tel.Code
                     "        <tbody>";
 
             string user = HttpContext.Current.Session["IdUser"].ToString();
+
+            List<Product> carrito = (HttpContext.Current.Session["Carrito"] != null) ? (List<Product>)HttpContext.Current.Session["Carrito"] : null;
+
 
             for (int i = 0; i < carrito.Count; i++)
             {
