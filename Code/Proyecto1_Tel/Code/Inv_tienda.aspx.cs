@@ -427,7 +427,7 @@ namespace Proyecto1_Tel.Code
             {
                 cantidad = "0";
             }
-            else if (metros == "")
+            if (metros == "")
             {
                 metros = "0";
             }

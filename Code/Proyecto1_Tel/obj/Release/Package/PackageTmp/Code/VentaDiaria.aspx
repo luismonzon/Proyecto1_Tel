@@ -126,7 +126,10 @@
 
                         if (response.d == true) {
                             alert("La Venta Ha Sido Eliminada Exitosamente");
-                            reloadTable();
+                            var $modal = $('#ContentPlaceHolder1_modaldetalle');
+                            $modal.html("");
+                            VerTabla();
+                            //reloadTable();
                         } else {
                             alert("La Venta No Pudo Ser Eliminada");
                         }

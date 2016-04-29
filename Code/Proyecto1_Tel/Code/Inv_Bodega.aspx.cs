@@ -149,7 +149,10 @@ namespace Proyecto1_Tel.Code
         [WebMethod]
         public static bool Add(string producto, string cantidad)
         {
-
+            if (cantidad == "")
+            {
+                cantidad = "0";
+            }
 
             Conexion conn = new Conexion();
 
@@ -181,6 +184,12 @@ namespace Proyecto1_Tel.Code
         [WebMethod]
         public static bool Rest(string producto, string cantidad)
         {
+
+
+            if (cantidad == "")
+            {
+                cantidad = "0";
+            }
 
 
             Conexion conn = new Conexion();
