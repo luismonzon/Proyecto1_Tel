@@ -50,7 +50,8 @@ namespace Proyecto1_Tel.Code
             string Condicion = " Venta v, Cliente c, Usuario u \n" +
                                 "where v.Cliente = c.Cliente \n" +
                                 "and v.Usuario = u.Usuario \n" +
-                                "and Fecha = '" + fecha + "' \n";
+                                "and Fecha = '" + fecha + "' \n" +
+                                "order by v.Venta DESC";
             DataSet clientes = conexion.Mostrar(Condicion, Columnas);
             string Row = " SUM (Total) \n " ;
             string Cond = " Venta v, Cliente c, Usuario u \n" +

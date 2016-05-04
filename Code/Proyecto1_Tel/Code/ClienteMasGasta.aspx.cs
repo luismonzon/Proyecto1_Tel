@@ -141,14 +141,14 @@ namespace Proyecto1_Tel.Code
                             "</div>" +
                     "</div>";
 
-            string columnas = " p.Abreviatura, p.Descripcion, Convert(Decimal(15,0), sum(d.Cantidad), 0) Cantidad, Convert(Decimal(15,2), SUM(d.Cantidad*i.Precio), 2) Total \n";
+            string columnas = " p.Abreviatura, p.Descripcion, sum(d.Cantidad) Cantidad, sum(d.Metros) Metros, sum(d.SubTotal) SubTotal  \n";
             string condicion =
-                "Producto p, Venta v, DetalleVenta d, Inventario i \n" +
-"where d.Venta = v.Venta \n" +
-"and p.Producto = d.Producto \n" +
-"and i.Producto = p.Producto \n" +
-"and v.Cliente = "+ id +" \n"+
-"group by p.Abreviatura, p.Descripcion"
+                 "Producto p, Venta v, DetalleVenta d, Inventario i \n" +
+                "where d.Venta = v.Venta \n" +
+                "and p.Producto = d.Producto \n"+
+                "and i.Producto = p.Producto \n" +
+                "and v.Cliente = "+ id +" \n"+
+                "group by p.Abreviatura, p.Descripcion"
             ;
             Conexion con = new Conexion();
             DataSet roles = con.Mostrar(condicion, columnas);
@@ -162,7 +162,8 @@ namespace Proyecto1_Tel.Code
                             "<tr>" +
                                " <th  align =\"center\">Abreviatura</th>" +
                                 "<th align =\"center\">Descripcion</th>" +
-                                "<th align =\"center\">Cantidad de Productos</th>" +
+                                "<th align =\"center\">Cantidad</th>" +
+                                "<th align =\"center\">Metros</th>" +
                                 "<th align =\"center\">Total (Quetzales)</th>" +
                             "</tr>" +
                         "</thead>" + "<tbody>";
@@ -173,7 +174,8 @@ namespace Proyecto1_Tel.Code
                         "<td id=\"codigo\" runat=\"server\" align =\"Center\">" + item["Abreviatura"].ToString() + "</td>" +
                         "<td>" + item["Descripcion"].ToString() + "</td>" +
                         "<td>" + item["Cantidad"].ToString() + "</td>" +
-                        "<td>" + item["Total"].ToString() + "</td>"
+                        "<td>" + item["Metros"].ToString() + "</td>" +
+                        "<td> Q." + item["SubTotal"].ToString() + "</td>"
                         ;
                     data += "</tr>";
                 }
