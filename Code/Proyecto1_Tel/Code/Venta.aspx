@@ -404,7 +404,7 @@
                     success: function (msg) {
                         $("#txtcantidad").val("");
                         $("#txtmetros").val("");
-                        $("#txtmetros").focus();
+                        $("#txtcantidad").focus();
                         $("#detalleproductos").html(msg.d);
                     }
                 });
