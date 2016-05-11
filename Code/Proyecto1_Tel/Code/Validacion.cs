@@ -20,6 +20,7 @@ namespace Proyecto1_Tel.Code
                         case "Cliente":
                         case "ClienteMasGasta":
                         case "ClienteDeuda":
+                        case "Depositos":
                         case "Inicio":
                         case "Inv_Bodega":
                         case "Inv_tienda":
@@ -55,6 +56,7 @@ namespace Proyecto1_Tel.Code
                     {
                             //Venta
                         case "Cliente":
+                        case "Depositos":
                         case "Inv_tienda":
                         case "Venta":
                         case "ClienteDeuda":

@@ -54,6 +54,7 @@ namespace Proyecto1_Tel.Code
                                 "<li><a href=\"Producto.aspx\" title=\"Productos\">Productos</a></li> " +
                                 "<li><a href=\"ClientesDeuda.aspx\" title=\"Clientes con Credito\">Clientes con Credito</a></li>" +
                                 "<li><a href=\"VentaDiaria.aspx\" title=\"Venta Diaria\">Reporte Venta</a></li>" +
+                                        "<li><a href=\"Depositos.aspx\" title=\"Depositos\">Depositos</a></li>" +
                                 "<li><a  title=\"Inventario\" class=\"expand\">Inventario</a> " +
                                    "<ul>" +
                                         "<li><a href=\"Inv_tienda.aspx\" title=\"Tienda\">Tienda</a></li>" +
@@ -108,6 +109,7 @@ namespace Proyecto1_Tel.Code
 			                    "<li>" +
                                     "<a title=\"Ventas\" class=\"expand\">Ventas</a>" +
                                     "<ul>" +
+                                        "<li><a href=\"Depositos.aspx\" title=\"Depositos\">Depositos</a></li>" +
 					                    "<li><a href=\"VentaDiaria.aspx\" title=\"Venta Diaria\">Diaria</a></li>" +
 					                    "<li><a href=\"VentaSemanal.aspx\" title=\"Semanal\">Semanal</a></li>" +
 					                    "<li><a href=\"VentaMensual.aspx\" title=\"Mensual\">Mensual</a></li>" +
