@@ -28,6 +28,7 @@
 	        <div class="navbar">
 	            <div class="navbar-inner">
 	                <h6>Venta Diaria</h6>
+                    <div id="selectU" runat="server"></div>
 
 	                <div class="pick-a-date no-append" id="navdatepicker">
 		                <input type="text" class="datepicker" id="myDate" required="required"/>
@@ -63,11 +64,11 @@
                 var anio = sp[2];
 
                 var fecha = anio + mes + dia;
-
+                var id = document.getElementById("usuarios").value;
                 $.ajax({
                     type: 'POST',
                     url: 'VentaDiaria.aspx/GenerarTabla',
-                    data: JSON.stringify({ fecha: fecha }),
+                    data: JSON.stringify({ fecha: fecha, tipo:id }),
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'json',
                     success: function (response) {
@@ -157,6 +158,8 @@
 
             today = dd + '-' + mm + '-' + yyyy;
             $("#myDate").val(today);
+
+            VerTabla();
         }
 
     </script>

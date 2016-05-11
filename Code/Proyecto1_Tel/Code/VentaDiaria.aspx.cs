@@ -28,8 +28,22 @@ namespace Proyecto1_Tel.Code
                     Response.Redirect("~/Index.aspx");
                 }
 
-            
+                Conexion conexion = new Conexion();
+                DataSet Productos = conexion.Consulta("select Usuario, NickName from Usuario where Rol <> 4 and Rol <> 2");
+                String html = "<select  runat=\"server\" style=\"font-size: 15px;\" data-placeholder=\"Usuario\" class=\"styled\"  onChange=\"VerTabla()\"  id=\"usuarios\">";
+                html += "<option value=\"0\">Venta Diaria</option> ";
+                foreach (DataRow item in Productos.Tables[0].Rows)
+                {
+                    html += "<option value=\"" + item["Usuario"] + "\">" + item["NickName"] + "</option> ";
+                }
+
+                html += "</select>";
+
+
+                this.selectU.InnerHtml = html;
             }
+
+
             Response.Cache.SetCacheability(HttpCacheability.ServerAndNoCache);
             Response.Cache.SetAllowResponseInBrowserHistory(false);
             Response.Cache.SetNoStore();
@@ -39,25 +53,27 @@ namespace Proyecto1_Tel.Code
 
         [WebMethod]
 
-        public static String GenerarTabla(string fecha)
+        public static String GenerarTabla(string fecha,string tipo)
         {
             String innerhtml = "";
 
             string rol = HttpContext.Current.Session["Rol"].ToString();
-
+            
             Conexion conexion = new Conexion();
             string Columnas = " v.Venta Venta, CONVERT(VARCHAR(8),v.Hora,108) Hora, c.Cliente Cliente, c.Nombre Nombre, c.Apellido Apellido, c.Direccion Direccion, u.NickName Vendedor, Tipo_Pago, Total \n";
             string Condicion = " Venta v, Cliente c, Usuario u \n" +
                                 "where v.Cliente = c.Cliente \n" +
                                 "and v.Usuario = u.Usuario \n" +
-                                "and Fecha = '" + fecha + "' \n" +
-                                "order by v.Venta DESC";
+                                "and Fecha = '" + fecha + "' \n";
+            if (!tipo.Equals("0")) { Condicion += "and v.Usuario = '" + tipo + "' \n"; }
+            Condicion +="order by v.Venta DESC";
             DataSet clientes = conexion.Mostrar(Condicion, Columnas);
             string Row = " SUM (Total) \n " ;
             string Cond = " Venta v, Cliente c, Usuario u \n" +
                                 "where v.Cliente = c.Cliente \n" +
-                                "and v.Usuario = u.Usuario \n" +
-                                "and Fecha = '" + fecha + "' \n";
+                                "and v.Usuario = u.Usuario \n";
+            if (!tipo.Equals("0")) { Cond += "and v.Usuario = '" + tipo + "' \n"; }
+            Cond+= "and Fecha = '" + fecha + "' \n";
 
             DataSet total = conexion.Mostrar(Cond,Row) ;
             String data = "No hay Ventas Disponibles";

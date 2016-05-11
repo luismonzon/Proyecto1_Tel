@@ -727,7 +727,10 @@ namespace Proyecto1_Tel.Code
                     string cant = carrito[i].cantidad;
                     if (!carrito[i].ancho.Equals(""))
                     {
-                        cant += "x" + carrito[i].largo;
+                        double metros = Convert.ToDouble(carrito[i].largo, CultureInfo.InvariantCulture);
+                        double pulg = metros * 39.3701;
+                        pulg = Math.Round(pulg, 0);
+                        cant += "x" + carrito[i].largo + "("+pulg+" pulgadas)";
                     }
                     str += "            <tr>" +
                                     "                <td>" + carrito[i].idventa + "</td>" +
