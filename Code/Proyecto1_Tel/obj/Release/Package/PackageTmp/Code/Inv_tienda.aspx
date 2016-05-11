@@ -150,49 +150,62 @@
             var metros = document.getElementById("metros").value;
             var precio = document.getElementById("precio").value;
             var articulo = document.getElementById("tipo2").value;
+            var disponible = document.getElementById("cantidad_bodega").value;
 
+           
             if (articulo == "ARTICULO" || articulo == "Articulo") {
                 metros = "0";
 
             } else {
                 cantidad = "1";
             }
+           
+            var resultado;
+         
+            resultado = parseInt(disponible) >= parseInt(cantidad);
+           
+            if (resultado) {
+                if (metros != "" || cantidad != "") {
 
-            if (metros != "" || cantidad != "") {
+                    $.ajax({
 
-                $.ajax({
-
-                    type: 'POST',
-                    url: 'Inv_tienda.aspx/Add',
-                    data: JSON.stringify({ producto: idproducto, cantidad: cantidad, precio: precio, metros: metros }),
-                    contentType: 'application/json; charset=utf-8',
-                    dataType: 'json',
-                    success: function (response) {
-                        if (response.d == true) {
-                            $('#mensaje').removeClass();
-                            $('#mensaje').addClass('alert alert-success').html('Producto agregado con exito').show(200).delay(2500).hide(200);
-                            document.getElementById("cantidad").value = "";
-                            document.getElementById("precio").value = "";
-                            document.getElementById("metros").value = "";
+                        type: 'POST',
+                        url: 'Inv_tienda.aspx/Add',
+                        data: JSON.stringify({ producto: idproducto, cantidad: cantidad, precio: precio, metros: metros }),
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json',
+                        success: function (response) {
+                            if (response.d == true) {
+                                $('#mensaje').removeClass();
+                                $('#mensaje').addClass('alert alert-success').html('Producto agregado con exito').show(200).delay(2500).hide(200);
+                                document.getElementById("cantidad").value = "";
+                                document.getElementById("precio").value = "";
+                                document.getElementById("metros").value = "";
 
 
-                        } else {
-                            $('#mensaje').removeClass();
-                            $('#mensaje').addClass('alert alert-danger').html('Producto no se pudo agregar').show(200).delay(2500).hide(200);
+                            } else {
+                                $('#mensaje').removeClass();
+                                $('#mensaje').addClass('alert alert-danger').html('Producto no se pudo agregar').show(200).delay(2500).hide(200);
+
+                            }
 
                         }
+                    });
 
-                    }
-                });
+                } else {
+
+
+                    $('#mensaje').removeClass();
+                    $('#mensaje').addClass('alert alert-danger').html('Revise los campos obligatorios marcados con (*)').show(200).delay(2500).hide(200);
+
+                }
+
 
             } else {
-
-                document.getElementById("metros").focus();
-                document.getElementById("cantidad").focus();
                 $('#mensaje').removeClass();
-                $('#mensaje').addClass('alert alert-danger').html('Revise los campos obligatorios marcados con (*)').show(200).delay(2500).hide(200);
-
+                $('#mensaje').addClass('alert alert-danger').html('Lo que desea agregar excede la cantidad en bodega').show(200).delay(2500).hide(200);
             }
+
 
             return false;
         }

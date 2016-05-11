@@ -320,7 +320,7 @@ namespace Proyecto1_Tel.Code
 
             string cantid = cant[0].InnerText;
 
-            if (Convert.ToInt64(cantid) > Convert.ToInt64(cantidad))
+            if (Convert.ToInt64(cantid) >= Convert.ToInt64(cantidad))
             {
 
                 return conn.Modificar("Bodega", "Cantidad =" + (Convert.ToInt64(cantid) - Convert.ToInt64(cantidad)), "Producto=" + producto);

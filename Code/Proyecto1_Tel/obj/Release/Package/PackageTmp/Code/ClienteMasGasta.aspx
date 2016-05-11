@@ -38,6 +38,13 @@
                 success: function (response) {
                     var $modal = $('#ContentPlaceHolder1_modalprodcliente');
                     $modal.html(response.d);
+                    $('#modal-pago').on('show.bs.modal', function () {
+                        $('.modal .modal-body').css('overflow-y', 'auto');
+                        $('.modal .modal-body').css('max-height', $(window).height() * 0.6);
+                        $('.modal .modal-body').css('height', $(window).height() * 0.6);
+                        $('.modal .modal-content').css('height', '450px');
+                        $('.modal .modal-content').css('overflow', 'auto');
+                    });
                     $('#modal-pago').modal({ //
                         show: true, //mostramos el modal registra producto
                         backdrop: 'static' //hace que no se cierre el modal si le dan clic afuera del mismo.
