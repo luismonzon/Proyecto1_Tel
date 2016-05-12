@@ -26,11 +26,13 @@
 
         <div class="widget">
 	        <div class="navbar">
+                <div id="selectU" runat="server"></div>
+                    
 	            <div class="navbar-inner">
 	                <h6>Venta Diaria</h6>
-                    <div id="selectU" runat="server"></div>
 
 	                <div class="pick-a-date no-append" id="navdatepicker">
+                        
 		                <input type="text" class="datepicker" id="myDate" required="required"/>
                         <button type="button" class="btn btn-success" onclick="VerTabla();" id="Ver Productos">Ver</button>
 	                </div>
