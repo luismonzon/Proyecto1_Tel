@@ -13,10 +13,10 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>05/06/2016 03:47:20</publishTime>
     </File>
     <File Include="bin/Proyecto1_Tel.dll">
-      <publishTime>05/10/2016 10:37:54</publishTime>
+      <publishTime>05/11/2016 23:15:45</publishTime>
     </File>
     <File Include="bin/Proyecto1_Tel.dll.config">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>05/11/2016 10:36:29</publishTime>
     </File>
     <File Include="bin/RabbitMQ.Client.dll">
       <publishTime>05/06/2016 03:47:20</publishTime>
@@ -25,7 +25,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>05/06/2016 03:47:19</publishTime>
     </File>
     <File Include="Code/ClienteMasGasta.aspx">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>05/11/2016 10:36:28</publishTime>
     </File>
     <File Include="Code/ClientesDeuda.aspx">
       <publishTime>05/06/2016 03:47:19</publishTime>
@@ -77,6 +77,9 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
     </File>
     <File Include="Code/css/plugins.css">
       <publishTime>05/06/2016 03:47:19</publishTime>
+    </File>
+    <File Include="Code/Depositos.aspx">
+      <publishTime>05/11/2016 10:36:29</publishTime>
     </File>
     <File Include="Code/img/.DS_Store">
       <publishTime>05/06/2016 03:47:19</publishTime>
@@ -496,7 +499,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>05/06/2016 03:47:19</publishTime>
     </File>
     <File Include="Code/Inv_tienda.aspx">
-      <publishTime>05/10/2016 11:26:19</publishTime>
+      <publishTime>05/11/2016 10:36:28</publishTime>
     </File>
     <File Include="Code/js/.DS_Store">
       <publishTime>05/06/2016 03:47:19</publishTime>
@@ -730,13 +733,13 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>05/06/2016 03:47:19</publishTime>
     </File>
     <File Include="Code/Venta.aspx">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>05/11/2016 10:36:28</publishTime>
     </File>
     <File Include="Code/VentaAnual.aspx">
       <publishTime>05/06/2016 03:47:19</publishTime>
     </File>
     <File Include="Code/VentaDiaria.aspx">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>05/11/2016 22:30:13</publishTime>
     </File>
     <File Include="Code/VentaMensual.aspx">
       <publishTime>05/06/2016 03:47:19</publishTime>

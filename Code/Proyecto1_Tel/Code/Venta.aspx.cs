@@ -730,7 +730,7 @@ namespace Proyecto1_Tel.Code
                         double metros = Convert.ToDouble(carrito[i].largo, CultureInfo.InvariantCulture);
                         double pulg = metros * 39.3701;
                         pulg = Math.Round(pulg, 0);
-                        cant += "x" + carrito[i].largo + "("+pulg+" pulgadas)";
+                        cant += "x" + carrito[i].largo + " ("+ pulg +" pulgadas)";
                     }
                     str += "            <tr>" +
                                     "                <td>" + carrito[i].idventa + "</td>" +
