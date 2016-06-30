@@ -137,14 +137,23 @@ namespace Proyecto1_Tel.Code
                             html += "<option value=\"" + item["producto"] + "\">" + item["Abreviatura"] + "</option> ";
                         }
                     }
-
-
-
                 }
 
                 html += "</select>";
 
+                String html2 = "<select  runat=\"server\" style=\"font-size: 15px;\" data-placeholder=\"Nombre del Cliente\" class=\"select span10\"  onChange=\"cambioscliente()\"  id=\"cmbclientes\" tabindex=\"2\">";
+                html2 += "<option value=\"\"></option> ";
 
+                DataSet Clientes = conexion.Consulta("select Nombre, Apellido, Cliente from Cliente");
+
+                foreach (DataRow item in Clientes.Tables[0].Rows)
+                {
+                    html2 += "<option value=\"" + item["Cliente"] + "\">" + item["Nombre"] + " " + item["Nombre"] + " - " + item["Cliente"] + "</option> ";
+                }
+
+
+                html2 += "</select>";
+                this.sclientes.InnerHtml = html2;
                 this.productos.InnerHtml = html;
             }
 

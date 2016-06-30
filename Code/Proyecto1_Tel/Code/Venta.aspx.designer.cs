@@ -13,6 +13,15 @@ namespace Proyecto1_Tel.Code {
     public partial class Venta {
         
         /// <summary>
+        /// Control sclientes.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl sclientes;
+        
+        /// <summary>
         /// Control productos.
         /// </summary>
         /// <remarks>
