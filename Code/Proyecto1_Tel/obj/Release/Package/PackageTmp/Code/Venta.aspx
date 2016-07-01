@@ -28,6 +28,19 @@
 	                            <div class="well">
 	                             <div class="control-group">
 	                                    
+                                        <div class="span1">
+                                            <label class="control-label" style="font-size: 15px;"><b>Buscar:</b></label>
+                                        </div>
+                                        <div class="span2">
+                                            
+                                            <div class="align-left">
+                                                <div id="sclientes" class="span6"  runat="server">
+                                                </div>
+                                             </div>
+                                        </div>
+                                      <input type="text" name="regular" style="font-size: 14px; visibility:hidden;" disabled="disabled" id="codigo_cliente" placeholder="Cod. Cliente" />
+                                       
+                                     <!--
 	                                    <div class="span6">
                                                 <label style="font-size: 15px;" class="control-label"><b>Buscar</b> </label>
                                                 
@@ -43,6 +56,7 @@
                                                 </div>
 	                                    </div>
 	                                
+                                     -->
 	                                </div>
 	                                
 	                                 <div class="control-group">    
@@ -208,6 +222,38 @@
 
 
     <script type="text/javascript">
+
+        function cambioscliente()
+        {
+            var id = document.getElementById('cmbclientes').value;
+            var selected = $("#cmbclientes  option:selected").text();
+
+            $.ajax({
+                type: 'POST',
+                url: 'Venta.aspx/Busca',
+                data: JSON.stringify({ idcliente: id }),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (msg) {
+                    // Notice that msg.d is used to retrieve the result object
+                    if (msg.d == "0") {
+                        alert("Cliente no existe");
+                    }
+                    else {
+                        var datos = JSON.parse(msg.d);
+                        $("#codigo_cliente").val(datos[3]);
+                        $("#nit_cliente").val(datos[1]);
+                        $("#nombre_cliente").val(datos[0]);
+                        $("#comercio").val(datos[2]);
+                        $("#tel_cliente").val(datos[5]);
+                        $("#dir_cliente").val(datos[4]);
+                    }
+                }
+            });
+
+        }
+
+
 
         function cambios() {
 
@@ -502,6 +548,8 @@
 
 	        var tot = document.getElementById("totalpago").value;
 	        var client = document.getElementById("codclientepago").value;
+
+	        var client = document.getElementById('cmbclientes').value;
 	        var tipo = $("#cmbpago").val();
 	        var pago = document.getElementById("totalabonado").value;
 

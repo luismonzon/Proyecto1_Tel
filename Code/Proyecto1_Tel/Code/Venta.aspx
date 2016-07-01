@@ -27,10 +27,19 @@
 
 	                            <div class="well">
 	                             <div class="control-group">
-	                                    <input type="text" name="regular" style="font-size: 14px; visibility:hidden;" disabled="disabled" class="span4" id="codigo_cliente" placeholder="Cod. Cliente" />
-                                        <div class="span12" id="sclientes" runat="server">
-
+	                                    
+                                        <div class="span1">
+                                            <label class="control-label" style="font-size: 15px;"><b>Buscar:</b></label>
                                         </div>
+                                        <div class="span2">
+                                            
+                                            <div class="align-left">
+                                                <div id="sclientes" class="span6"  runat="server">
+                                                </div>
+                                             </div>
+                                        </div>
+                                      <input type="text" name="regular" style="font-size: 14px; visibility:hidden;" disabled="disabled" id="codigo_cliente" placeholder="Cod. Cliente" />
+                                       
                                      <!--
 	                                    <div class="span6">
                                                 <label style="font-size: 15px;" class="control-label"><b>Buscar</b> </label>

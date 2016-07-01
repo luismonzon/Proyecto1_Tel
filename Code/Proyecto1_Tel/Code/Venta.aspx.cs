@@ -141,14 +141,14 @@ namespace Proyecto1_Tel.Code
 
                 html += "</select>";
 
-                String html2 = "<select  runat=\"server\" style=\"font-size: 15px;\" data-placeholder=\"Nombre del Cliente\" class=\"select span10\"  onChange=\"cambioscliente()\"  id=\"cmbclientes\" tabindex=\"2\">";
+                String html2 = "<select  runat=\"server\" style=\"font-size: 15px;\" data-placeholder=\"Nombre del Cliente\" class=\"select span10\"  onChange=\"cambioscliente()\"  id=\"cmbclientes\" tabindex=\"4\">";
                 html2 += "<option value=\"\"></option> ";
 
                 DataSet Clientes = conexion.Consulta("select Nombre, Apellido, Cliente from Cliente");
 
                 foreach (DataRow item in Clientes.Tables[0].Rows)
                 {
-                    html2 += "<option value=\"" + item["Cliente"] + "\">" + item["Nombre"] + " " + item["Nombre"] + " - " + item["Cliente"] + "</option> ";
+                    html2 += "<option value=\"" + item["Cliente"] + "\">"  + item["Nombre"] + " - " + item["Cliente"] + "</option> ";
                 }
 
 
