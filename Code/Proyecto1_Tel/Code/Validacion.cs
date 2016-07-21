@@ -25,8 +25,9 @@ namespace Proyecto1_Tel.Code
                         case "Inv_Bodega":
                         case "Inv_tienda":
                         case "Producto":
-                        case "ProductosInventario":
-                        case "ProductosMasVenden":
+                        case "MasVendidoDia":
+                        case "MasVendidoMes":
+                        case "MasVendidoAnio":
                         case "Usuarios":
                         case "Venta":
                         case "VentaDiaria":

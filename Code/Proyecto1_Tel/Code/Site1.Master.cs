@@ -124,11 +124,12 @@ namespace Proyecto1_Tel.Code
 					                "</ul>" +
 			                    "</li>" +
 			                    "<li>" +
-                                    "<a  title=\"Productos\" class=\"expand\">Productos</a>" +
+                                    "<a  title=\"Productos\" class=\"expand\">Mas Vendido</a>" +
                                     "<ul>" +
-					                    "<li><a href=\"ProductosInventario.aspx\" title=\"Inventarios\">Inventario</a></li>" +
-					                    "<li><a href=\"ProductosMasVenden.aspx\" title=\"Mas Vendido\">Mas Vendido</a></li>" +
-					                "</ul> " +
+					                    "<li><a href=\"MasVendidoDia.aspx\" title=\"Inventarios\">Dia</a></li>" +
+					                    "<li><a href=\"#\" title=\"Mas Vendido\">Mes</a></li>" +
+                                        "<li><a href=\"#\" title=\"Mas Vendido\">Año</a></li>" +
+                                    "</ul> " +
 			                    "</li>" +
 			                "</ul>" +
 			            "</li> " +

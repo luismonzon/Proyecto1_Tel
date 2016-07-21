@@ -19,6 +19,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -275,6 +276,7 @@
     <Content Include="Code\js\plugins\uploader\plupload.html4.js" />
     <Content Include="Code\js\plugins\uploader\plupload.html5.js" />
     <Content Include="Code\js\plugins\uploader\plupload.js" />
+    <Content Include="Code\MasVendidoDia.aspx" />
     <Content Include="Code\ProductosInventario.aspx" />
     <Content Include="Code\ProductosMasVenden.aspx" />
     <Content Include="Code\Inv_Bodega.aspx" />
@@ -390,6 +392,13 @@
     <Compile Include="Code\Inicio.aspx.designer.cs">
       <DependentUpon>Inicio.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Code\MasVendidoDia.aspx.cs">
+      <DependentUpon>MasVendidoDia.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Code\MasVendidoDia.aspx.designer.cs">
+      <DependentUpon>MasVendidoDia.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Code\ProductosInventario.aspx.cs">
       <DependentUpon>ProductosInventario.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -443,7 +452,6 @@
     <Compile Include="Code\Validacion.cs" />
     <Compile Include="Code\Venta.aspx.cs">
       <DependentUpon>Venta.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Code\Venta.aspx.designer.cs">
       <DependentUpon>Venta.aspx</DependentUpon>
