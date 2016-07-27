@@ -127,8 +127,8 @@ namespace Proyecto1_Tel.Code
                                     "<a  title=\"Productos\" class=\"expand\">Mas Vendido</a>" +
                                     "<ul>" +
 					                    "<li><a href=\"MasVendidoDia.aspx\" title=\"Inventarios\">Dia</a></li>" +
-					                    "<li><a href=\"#\" title=\"Mas Vendido\">Mes</a></li>" +
-                                        "<li><a href=\"#\" title=\"Mas Vendido\">Año</a></li>" +
+                                        "<li><a href=\"MasVendidoSemana.aspx\" title=\"Mas Vendido\">Semana</a></li>" +
+                                        "<li><a href=\"#\" title=\"Mas Vendido\">Mas</a></li>" +
                                     "</ul> " +
 			                    "</li>" +
 			                "</ul>" +

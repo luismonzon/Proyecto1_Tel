@@ -3,7 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
      <!--- URL DE LA PAGINA --->
-    <li><a href="VentaDiaria.aspx">Mas Vendidos - Dia</a></li>
+    <li><a href="MAsVendidoDia.aspx">Mas Vendidos - Dia</a></li>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
