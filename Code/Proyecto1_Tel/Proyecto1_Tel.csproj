@@ -277,6 +277,7 @@
     <Content Include="Code\js\plugins\uploader\plupload.html5.js" />
     <Content Include="Code\js\plugins\uploader\plupload.js" />
     <Content Include="Code\MasVendidoDia.aspx" />
+    <Content Include="Code\MasVendidoMes.aspx" />
     <Content Include="Code\MasVendidoSemana.aspx" />
     <Content Include="Code\ProductosInventario.aspx" />
     <Content Include="Code\ProductosMasVenden.aspx" />
@@ -399,6 +400,13 @@
     </Compile>
     <Compile Include="Code\MasVendidoDia.aspx.designer.cs">
       <DependentUpon>MasVendidoDia.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Code\MasVendidoMes.aspx.cs">
+      <DependentUpon>MasVendidoMes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Code\MasVendidoMes.aspx.designer.cs">
+      <DependentUpon>MasVendidoMes.aspx</DependentUpon>
     </Compile>
     <Compile Include="Code\MasVendidoSemana.aspx.cs">
       <DependentUpon>MasVendidoSemana.aspx</DependentUpon>

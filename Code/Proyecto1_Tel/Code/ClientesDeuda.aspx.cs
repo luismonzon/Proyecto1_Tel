@@ -61,15 +61,15 @@ namespace Proyecto1_Tel.Code
         [WebMethod]
         private string LLenar_Tabla()
         {
-            string columnas = "d.Venta, c.Cliente, c.Nombre, c.Apellido, sum(d.Cantidad) Credito , sc.Abono Abonado, SUM(d.Cantidad) - sc.Abono Deuda \n ";
+            string columnas = "d.Venta, c.Cliente, c.Nombre, c.Apellido, LEFT(v.Fecha,10) as Fecha, sum(d.Cantidad) Credito , sc.Abono Abonado, SUM(d.Cantidad) - sc.Abono Deuda \n ";
             string condicion =
                 " Deuda d join Cliente c on c.Cliente = d.Cliente left join ( \n" +
                 "   select d2.Deuda, SUM(p2.Abono) Abono \n" +
                 "   from Pago p2, Deuda d2 \n " +
                 "   where p2.Deuda = d2.Deuda \n " +
                 "   group by d2.Deuda \n" +
-                ") sc on sc.Deuda = d.Deuda \n " +
-                "group by d.Venta, c.Cliente,c.Nombre,c.Apellido, sc.Abono \n" +
+                ") sc on sc.Deuda = d.Deuda join Venta v on v.Venta = d.Venta\n " +
+                "group by d.Venta, c.Cliente,c.Nombre,c.Apellido, v.Fecha, sc.Abono \n" +
                 "having SUM(d.Cantidad) > sc.Abono or sc.Abono is Null \n" +
                 "order by SUM(d.Cantidad) desc \n"
             ;
@@ -84,6 +84,7 @@ namespace Proyecto1_Tel.Code
                             "<tr>" +
                                " <th  align =\"center\">Nombre</th>" +
                                 "<th align =\"center\">Comercio</th>" +
+                                "<th align =\"center\">Fecha</th>" +
                                 "<th align =\"center\">Credito</th>" +
                                 "<th align =\"center\">Abonado</th>" +
                                 "<th align =\"center\">Deuda</th>" +
@@ -97,6 +98,7 @@ namespace Proyecto1_Tel.Code
                     data += "<tr>" +
                         "<td id=\"codigo\" runat=\"server\" align =\"Center\">" + item["Nombre"].ToString() + "</td>" +
                         "<td>" + item["Apellido"].ToString() + "</td>" +
+                        "<td>" + item["Fecha"].ToString() + "</td>" +
                         "<td>" + item["Credito"].ToString() + "</td>";
 
                     if (item["Abonado"].ToString().Equals(""))
@@ -305,12 +307,12 @@ namespace Proyecto1_Tel.Code
                             "</div>" +
                     "</div>";
 
-            string columnas = " p.Abreviatura, p.Marca, dv.Cantidad, LEFT(v.Fecha,10) as Fecha, v.Total";
+            string columnas = " p.Abreviatura, p.Marca, dv.Cantidad , dv.Metros, dv.Subtotal";
             string condicion =
                 "Venta v, DetalleVenta dv, Producto p \n" +
                 "WHERE v.Venta =" + id + "\n" +
-                "AND v.Venta = dv.Venta \n" +
-                "AND dv.Producto = p.Producto \n";
+                "AND dv.Venta = v.Venta \n" +
+                "AND p.Producto = dv.Producto \n";
 
 
             ;
@@ -327,7 +329,7 @@ namespace Proyecto1_Tel.Code
                                " <th  align =\"center\">Producto</th>" +
                                 "<th align =\"center\">Marca</th>" +
                                 "<th align =\"center\">Cantidad</th>" +
-                                "<th align =\"center\">Fecha</th>" +
+                                "<th align =\"center\">Metros</th>" +
                                 "<th align =\"center\">Total</th>" +
                             "</tr>" +
                         "</thead>" + "<tbody>";
@@ -338,8 +340,8 @@ namespace Proyecto1_Tel.Code
                         "<td id=\"codigo\" runat=\"server\" align =\"Center\">" + item["Abreviatura"].ToString() + "</td>" +
                         "<td>" + item["Marca"].ToString() + "</td>" +
                         "<td>" + item["Cantidad"].ToString() + "</td>" +
-                        "<td>" + item["Fecha"].ToString() + "</td>" +
-                        "<td>" + item["Total"].ToString() + "</td>"
+                        "<td>" + item["Metros"].ToString() + "</td>" +
+                        "<td>" + item["Subtotal"].ToString() + "</td>"
                         ;
                     data += "</tr>";
                 }
