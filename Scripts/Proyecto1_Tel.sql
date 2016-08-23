@@ -247,3 +247,16 @@ create table Bodega(
 )
 
 go
+--nueva tabla
+create table Gasto(
+	Gasto int identity(1,1) not null,
+	descripcion varchar(255),
+	valor numeric not null,
+	fecha_gasto date not null,
+	usuario int not null,
+	Constraint fk_Gasto_usuario foreign key (usuario) references Usuario(usuario),
+	Constraint pk_Gasto primary key(Gasto),
+
+	)
+
+go

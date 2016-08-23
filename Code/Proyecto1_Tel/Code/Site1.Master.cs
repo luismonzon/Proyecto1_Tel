@@ -10,6 +10,7 @@ namespace Proyecto1_Tel.Code
 {
     public partial class Site11 : System.Web.UI.MasterPage
     {
+ 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)

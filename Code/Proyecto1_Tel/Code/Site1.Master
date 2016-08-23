@@ -122,6 +122,7 @@
                 <!--- AQUI ESTA EL MENU PARA CADA UNO DE LOS ROLES --->
 
 
+                 
 		        </div>
 
 		        <div id="stuff">
@@ -133,8 +134,17 @@
 		                <div class="inlinepicker datepicker-liquid"></div>
 		            </div>
 		            <!-- /datepicker -->
-
                     
+                    <!-- Datepicker -->
+		        	<div class="widget">
+                        
+		        		<h6 class="widget-name"><i class="ico-shopping-cart"></i>Gastos</h6>
+                        <input  id="descripcion" name="descripcion" placeholder="Descripcion"class="span12" type="text">
+                        <input  id="monto" name="monto" placeholder="Monto"class="span12" type="number">
+                        <button class="btn btn-block btn-info" id="Gasto">Registrar</button>
+		            </div>
+		            <!-- /datepicker -->
+
 			       
 		        </div>
 
@@ -243,6 +253,34 @@
     } 
  
 </script>
+    <script type="text/javascript">
 
+
+
+        $('#Gasto').on('click', function () {
+
+
+            var desc = document.getElementById('descripcion').value;
+            var mon = document.getElementById('monto').value;
+
+            $.ajax({
+                type: 'POST',
+                url: 'Cliente.aspx/agregarPago',
+                data: JSON.stringify({ descripcion: desc, monto: mon }),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (msg) {
+                    // Notice that msg.d is used to retrieve the result object
+                    if (msg.d == "1") {
+                        alert("Gasto guardado exitosamente");
+                    }
+                    else {
+
+                        alert("Ha ocurrido un error");
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>

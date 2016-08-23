@@ -15,6 +15,10 @@ namespace Proyecto1_Tel
             Session.Abandon();
             Session.Clear();
         }
+
+
+       
+
         
         [WebMethod]
         public static string Log(string usuario, string password)

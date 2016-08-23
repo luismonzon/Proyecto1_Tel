@@ -60,7 +60,19 @@ namespace Proyecto1_Tel.Code
             Response.Cache.SetNoStore();
         }
 
-        
+
+        [WebMethod()]
+        public static string agregarPago(string descripcion, string monto)
+        {
+            
+            Conexion bdd = new Conexion();
+ 
+            if(bdd.Crear("Gasto","descripcion,fecha_gasto,valor,usuario","'"+descripcion+"',GETDATE(),"+monto+","+HttpContext.Current.Session["IdUser"]))
+                return "1";
+           return "0";            
+
+        }
+
 
         protected String Llenar_Clientes()
         {

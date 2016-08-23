@@ -7,6 +7,8 @@ using System.Data.SqlClient;
 using System.Xml;
 using System.Web.Configuration;
 using System.Collections;
+using System.Web;
+using System.Web.Services;
 
 
 namespace Proyecto1_Tel.Code
@@ -300,6 +302,8 @@ namespace Proyecto1_Tel.Code
             return respuesta;
         }
 
+
+
         public bool Entrar(string user, string password) {
             bool val = false;
             try
@@ -373,9 +377,6 @@ namespace Proyecto1_Tel.Code
 
             return val;
         }
-
-
-        
         }
     }
 

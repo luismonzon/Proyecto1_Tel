@@ -468,6 +468,7 @@
     <Compile Include="Code\Validacion.cs" />
     <Compile Include="Code\Venta.aspx.cs">
       <DependentUpon>Venta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Code\Venta.aspx.designer.cs">
       <DependentUpon>Venta.aspx</DependentUpon>
