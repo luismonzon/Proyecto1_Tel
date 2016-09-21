@@ -42,3 +42,6 @@ C:\Users\GMG\Downloads\Despachador\Despachador\Despachador\obj\Debug\Despachador
 C:\Users\GMG\Downloads\Despachador\Despachador\Despachador\obj\Debug\Despachador.Form1.resources
 C:\Users\GMG\Downloads\Despachador\Despachador\Despachador\obj\Debug\Despachador.Properties.Resources.resources
 C:\Users\GMG\Downloads\Despachador\Despachador\Despachador\obj\Debug\Despachador.csproj.GenerateResource.Cache
+C:\Users\Wilder\Documents\GitHub\Proyecto1_Tel\Despachador\Despachador\bin\Debug\Despachador.exe.config
+C:\Users\Wilder\Documents\GitHub\Proyecto1_Tel\Despachador\Despachador\obj\Debug\Despachador.exe
+C:\Users\Wilder\Documents\GitHub\Proyecto1_Tel\Despachador\Despachador\obj\Debug\Despachador.pdb

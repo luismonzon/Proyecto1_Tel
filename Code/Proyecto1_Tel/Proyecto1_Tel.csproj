@@ -69,6 +69,7 @@
     <Content Include="bin\Proyecto1_Tel.dll" />
     <Content Include="bin\Proyecto1_Tel.pdb" />
     <Content Include="bin\RabbitMQ.Client.dll" />
+    <Content Include="Code\Balance_Diario.aspx" />
     <Content Include="Code\Cliente.aspx" />
     <Content Include="Code\ClienteMasGasta.aspx" />
     <Content Include="Code\ClientesDeuda.aspx" />
@@ -284,6 +285,8 @@
     <Content Include="Code\Inv_Bodega.aspx" />
     <Content Include="Code\Inv_tienda.aspx" />
     <Content Include="Code\Producto.aspx" />
+    <Content Include="Code\Rep_Gasto.aspx" />
+    <Content Include="Code\Rep_GastoSemana.aspx" />
     <Content Include="Code\Rol.aspx" />
     <Content Include="Code\User.aspx" />
     <Content Include="Code\Venta.aspx" />
@@ -356,6 +359,13 @@
     <Content Include="Code\Site1.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Code\Balance_Diario.aspx.cs">
+      <DependentUpon>Balance_Diario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Code\Balance_Diario.aspx.designer.cs">
+      <DependentUpon>Balance_Diario.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Code\Cliente.aspx.cs">
       <DependentUpon>Cliente.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -449,6 +459,20 @@
     </Compile>
     <Compile Include="Code\Producto.aspx.designer.cs">
       <DependentUpon>Producto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Code\Rep_Gasto.aspx.cs">
+      <DependentUpon>Rep_Gasto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Code\Rep_Gasto.aspx.designer.cs">
+      <DependentUpon>Rep_Gasto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Code\Rep_GastoSemana.aspx.cs">
+      <DependentUpon>Rep_GastoSemana.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Code\Rep_GastoSemana.aspx.designer.cs">
+      <DependentUpon>Rep_GastoSemana.aspx</DependentUpon>
     </Compile>
     <Compile Include="Code\Rol.aspx.cs">
       <DependentUpon>Rol.aspx</DependentUpon>

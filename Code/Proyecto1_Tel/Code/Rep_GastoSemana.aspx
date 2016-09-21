@@ -1,33 +1,33 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Code/Site1.Master" AutoEventWireup="true" CodeBehind="VentaSemanal.aspx.cs" Inherits="Proyecto1_Tel.Code.VentaSemanal" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Code/Site1.Master" AutoEventWireup="true" CodeBehind="Rep_GastoSemana.aspx.cs" Inherits="Proyecto1_Tel.Code.Rep_GastoSemana" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
-    
-    <li><a href="VentaSemanal.aspx">Venta Semanal</a></li>
+
+     <!--- URL DE LA PAGINA --->
+    <li><a href="Rep_GastoSeana.aspx">Gasto Semanal</a></li>
 
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-           
-    <input runat="server" type="text" required="required" readonly="readonly" id="codigo" name="codigo"  style="visibility:hidden; height:5px;"/>
-        <div id="modaldetalle" runat="server">
-        
-        </div>
-
-
-	<h4 class="widget-name"><i class="icon-columns"></i>Venta Semanal</h4>
+    
+	<h4 class="widget-name"><i class="icon-columns"></i>Gasto Semana</h4>
 
         <div class="widget">
 	        <div class="navbar">
+                <div id="selectU" runat="server"></div>
+                    
 	            <div class="navbar-inner">
-	                <h6>Venta Semanal</h6>
-                    <div class="pick-a-date no-append" id="navdatepicker">
+	                <h6>Gasto Diario</h6>
+
+	                <div class="pick-a-date no-append" id="navdatepicker">
+                        
 		                <input type="text" class="datepicker" id="myDate" required="required"/>
-                        <button type="button" class="btn btn-success" onclick="GenerarFecha();" id="ver">Ver</button>
+                        <button type="button" class="btn btn-success" onclick="GenerarFecha();" id="Ver Productos">Ver</button>
 	                </div>
+                    
 	            </div>
 	        </div>
-            <div id="tabla-productos">
+            <div id="tabla-gastos" class="table-overflow">
             </div>
  	    </div>
 
@@ -77,15 +77,15 @@
 
 
                 var fin = anio2 + mes2 + dia2;
-
+                
                 $.ajax({
                     type: 'POST',
-                    url: 'VentaSemanal.aspx/GenerarTabla',
+                    url: 'Rep_GastoSemana.aspx/GenerarTabla',
                     data: JSON.stringify({ start: inicio, end: fin }),
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'json',
                     success: function (response) {
-                        var $modal = $('#tabla-productos');
+                        var $modal = $('#tabla-gastos');
                         $modal.html(response.d);
                     }
                 });
@@ -100,15 +100,5 @@
             return new Date(date.setDate(day)); // add the number of days
         }
 
-
-
-
-
-
-       
-
-
-
-    </script>
-    <script type="text/javascript" src="js/charts/pie.js"></script>
+        </script>
 </asp:Content>

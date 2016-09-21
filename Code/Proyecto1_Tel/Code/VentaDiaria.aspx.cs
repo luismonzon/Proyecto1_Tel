@@ -76,8 +76,8 @@ namespace Proyecto1_Tel.Code
             Cond+= "and Fecha = '" + fecha + "' \n";
 
             DataSet total = conexion.Mostrar(Cond,Row) ;
-            String data = "No hay Ventas Disponibles";
-            if (clientes.Tables.Count > 0)
+            String data = "<div class=\"alert alert-danger\" style=\"font-size: 18px;\" > No hay ventas en este dia! </div>"; ;
+            if (clientes.Tables[0].Rows.Count > 0)
             {
                 if (rol == "1")
                 {

@@ -486,12 +486,15 @@ namespace Proyecto1_Tel.Code
                     string message = "";
                     DataSet venta = nueva.Consulta("(select max(Venta) from venta)");
                     DataSet dcliente = nueva.Consulta("select Direccion, Nombre from Cliente Where Cliente = " + cliente );
+                    string ventastring = venta.Tables[0].Rows[0][0].ToString();
                     string direccioncliente = dcliente.Tables[0].Rows[0][0].ToString();
                     string nombrecliente = dcliente.Tables[0].Rows[0][1].ToString();
 
+                    string Cod_Venta = ventastring.Substring(ventastring.Length - 2, 2); 
+
                     foreach (var item in carrito)
                     {
-                        message +=  venta.Tables[0].Rows[0][0] + ";" + cliente + ";" + nickname + ";" + item.nombre + ";       " + item.cantidad + ";    " + item.largo + ";" + direccioncliente + ";" + nombrecliente +  "~";
+                        message += Cod_Venta + ";" + cliente + ";" + nickname + ";" + item.nombre + ";       " + item.cantidad + ";    " + item.largo + ";" + direccioncliente + ";" + nombrecliente + "~";
                         /*
                         if (item.usuario.Equals(user))
                         {

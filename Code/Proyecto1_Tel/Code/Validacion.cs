@@ -36,6 +36,10 @@ namespace Proyecto1_Tel.Code
                         case "VentaMensual":
                         case "VentaAnual":
                         case "Roles":
+                        case "GastoDiario":
+                        case "GastoSemanal":
+                        case "BalanceDiario":
+
                             return true;
                         default:
                             return false;

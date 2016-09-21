@@ -582,7 +582,7 @@
 
 	                                    var CodVenta = response.d;
 	                                    $('#venta').removeClass();
-	                                    $('#venta').addClass('alert alert-success').html('Codigo de Venta: ' + CodVenta).show(200).delay(2500);
+	                                    $('#venta').addClass('alert alert-success').html('Codigo de Venta: ' + CodVenta.substr(-2)).show(200).delay(2500);
 
 	                                    var c = 0;
 	                                    if (abono != "") {

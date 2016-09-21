@@ -19,6 +19,55 @@ ALTER TABLE DetalleVenta
 ALTER COLUMN SubTotal numeric(18,2) NULL;
 
 
+
+
+SELECT CONVERT(VARCHAR(8),G.hora,108) Hora, G.Descripcion, G.valor , U.nombre
+ FROM  Gasto G, Usuario U
+WHERE G.usuario = U.Usuario 
+AND G.fecha_gasto = '20160920' 
+order by G.hora DESC;
+
+
+SELECT SUM(G.Valor) as Total 
+FROM Gasto G
+WHERE G.fecha_gasto = '20160919'
+GROUP BY G.fecha_gasto; 
+
+SELECT LEFT(G.fecha_gasto,10) as Fecha, CONVERT(VARCHAR(8),G.hora,108) Hora, G.Descripcion, G.valor , U.nombre 
+ FROM  Gasto G, Usuario U
+WHERE G.usuario = U.Usuario 
+and fecha_gasto Between '20160918' and '20160924' 
+order by G.fecha_gasto ASC;
+
+
+-- TOTAL VENTAS DEL DIA
+SELECT SUM(V.Total) AS Tot_Ventas
+FROM Venta as V
+WHERE V.Fecha = CONVERT(date, GETDATE());
+
+SELECT CONVERT(date, GETDATE());
+
+-- GASTOS DEL DIA
+SELECT SUM(G.valor) AS Tot_Gasto
+FROM Gasto as G
+WHERE G.fecha_gasto = CONVERT(date, GETDATE());
+
+-- CANTIDAD DE ORDENES
+SELECT COUNT(V.Venta)
+FROM Venta as V
+WHERE V.Fecha = CONVERT(date, GETDATE());
+
+--BALANCE GENERAL
+SELECT SUM(ISNULL(Ventas.Tot_Ventas ,0) - ISNULL(Gasto.Tot_Gasto,0)) as BALANCE
+FROM ( SELECT SUM(V.Total) AS Tot_Ventas
+FROM Venta as V
+WHERE V.Fecha = CONVERT(date, GETDATE())) as Ventas, (SELECT SUM(G.valor) AS Tot_Gasto
+FROM Gasto as G
+WHERE G.fecha_gasto = CONVERT(date, GETDATE())) as Gasto;
+
+
+
+
 SELECT p.Abreviatura, p.Descripcion, d.Cantidad, d.Metros, d.SubTotal
 FROM Producto p, Venta v, DetalleVenta d
 where d.Venta = v.Venta 
@@ -105,6 +154,8 @@ drop table Producto;
 drop table Tipo;
 drop table Usuario;
 drop table Rol;
+DROP TABLE Gasto;
+
 
 go
 
@@ -248,11 +299,13 @@ create table Bodega(
 
 go
 --nueva tabla
+
 create table Gasto(
 	Gasto int identity(1,1) not null,
 	descripcion varchar(255),
-	valor numeric not null,
+	valor numeric(9,2) not null,
 	fecha_gasto date not null,
+	hora Time(7) not null;
 	usuario int not null,
 	Constraint fk_Gasto_usuario foreign key (usuario) references Usuario(usuario),
 	Constraint pk_Gasto primary key(Gasto),

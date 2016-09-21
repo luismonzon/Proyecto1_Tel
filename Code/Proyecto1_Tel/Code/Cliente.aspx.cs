@@ -66,8 +66,8 @@ namespace Proyecto1_Tel.Code
         {
             
             Conexion bdd = new Conexion();
- 
-            if(bdd.Crear("Gasto","descripcion,fecha_gasto,valor,usuario","'"+descripcion+"',GETDATE(),"+monto+","+HttpContext.Current.Session["IdUser"]))
+
+            if (bdd.Crear("Gasto", "descripcion,fecha_gasto,hora,valor,usuario", "'" + descripcion + "',GETDATE()," + "CONVERT(time, GETDATE()),"  + Convert.ToString(monto).Replace(",", ".") + "," + HttpContext.Current.Session["IdUser"]))
                 return "1";
            return "0";            
 
