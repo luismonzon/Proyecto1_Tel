@@ -305,7 +305,7 @@ create table Gasto(
 	descripcion varchar(255),
 	valor numeric(9,2) not null,
 	fecha_gasto date not null,
-	hora Time(7) not null;
+	hora Time(7) not null,
 	usuario int not null,
 	Constraint fk_Gasto_usuario foreign key (usuario) references Usuario(usuario),
 	Constraint pk_Gasto primary key(Gasto),
