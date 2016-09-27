@@ -229,16 +229,26 @@ namespace Proyecto1_Tel.Code
                         "</li>" +
                         "<li><a  title=\"Reportes\" class=\"expand\"><i class=\"icon-copy\"></i>Reportes<strong>4</strong></a>" +
                             "<ul>" +
+                                //REPORTE VENTAS
                                 "<li>" +
                                     "<a title=\"Ventas\" class=\"expand\">Ventas</a>" +
                                     "<ul>" +
-                                        "<li><a href=\"Depositos.aspx\" title=\"Depositos\">Depositos</a></li>" +
                                         "<li><a href=\"VentaDiaria.aspx\" title=\"Venta Diaria\">Diaria</a></li>" +
                                         "<li><a href=\"VentaSemanal.aspx\" title=\"Semanal\">Semanal</a></li>" +
                                         "<li><a href=\"VentaMensual.aspx\" title=\"Mensual\">Mensual</a></li>" +
                                         "<li><a href=\"VentaAnual.aspx\" title=\"Anual\">Anual</a></li>" +
                                     "</ul>" +
                                 "</li>" +
+                                //REPORTE DEPOSITOS
+                                "<li>" +
+                                    "<a title=\"Ventas\" class=\"expand\">Depositos</a>" +
+                                    "<ul>" +
+                                        "<li><a href=\"Depositos.aspx\" title=\"Diario\">Diaria</a></li>" +
+                                        "<li><a href=\"Depositos_Semana.aspx\" title=\"Semanal\">Semanal</a></li>" +
+                                        "<li><a href=\"Depositos_Mes.aspx\" title=\"Mensual\">Mensual</a></li>" +
+                                    "</ul>" +
+                                "</li>" +
+                                //REPORTE GASTOS
                                  "<li>" +
                                     "<a href=\"content_grid.html\" title=\"Clientes\" class=\"expand\">Gastos</a>" +
                                     "<ul>" +
