@@ -183,12 +183,22 @@ namespace Proyecto1_Tel.Code
                                 "<li>" +
                                     "<a title=\"Ventas\" class=\"expand\">Ventas</a>" +
                                     "<ul>" +
-                                        "<li><a href=\"Depositos.aspx\" title=\"Depositos\">Depositos</a></li>" +
+                                        
                                         "<li><a href=\"VentaDiaria.aspx\" title=\"Venta Diaria\">Diaria</a></li>" +
                                         "<li><a href=\"VentaSemanal.aspx\" title=\"Semanal\">Semanal</a></li>" +
                                         "<li><a href=\"VentaMensual.aspx\" title=\"Mensual\">Mensual</a></li>" +
                                         "<li><a href=\"VentaAnual.aspx\" title=\"Anual\">Anual</a></li>" +
                                     "</ul>" +
+                                    "<a title=\"Ventas\" class=\"expand\">Depositos</a>"+
+                                    "<ul>"+
+                                        "<li><a href=\"Depositos.aspx\" title=\"diario\">Depositos diarios</a></li>" +
+                                        
+                                        "<li><a href=\"Depositos_Semana.aspx\" title=\"semana\">Depositos semanales</a></li>" +
+                                        
+                                        "<li><a href=\"Depositos_Mes.aspx\" title=\"mes\">Depositos mensuales</a></li>" +
+
+
+                                    "</ul>"+
                                 "</li>" +
                                  "<li>" +
                                     "<a href=\"content_grid.html\" title=\"Clientes\" class=\"expand\">Gastos</a>" +
