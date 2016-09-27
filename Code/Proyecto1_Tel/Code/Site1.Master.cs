@@ -92,31 +92,54 @@ namespace Proyecto1_Tel.Code
         private void MenuAdmin()
         {
             //TOTAL DE VENTAS
-            string Columnas = "SUM(V.Total) AS Tot_Ventas \n";
+            string Columnas = "ISNULL(SUM(V.Total),0) AS Tot_Ventas \n";
             string Condicion = " Venta as V \n" +
                                 "WHERE V.Fecha = CONVERT(date, GETDATE())\n";
             //TOTAL DE GASTO
-            string Row = "SUM(G.valor) AS Tot_Gasto";
+            string Row = "ISNULL(SUM(G.valor),0)  AS Tot_Gasto";
             string Cond = " Gasto G \n" +
                                 "WHERE G.fecha_gasto = CONVERT(date, GETDATE()) \n";
             //CANTIDAD DE ORDENES
-            string Col = " COUNT(V.Venta) \n";
+            string Col = "ISNULL(COUNT(V.Total),0) \n";
             string Condi = " Venta as V \n" +
                            " WHERE V.Fecha = CONVERT(date, GETDATE()) \n";
 
+            //CREDITOS
+            string Col_Cre = " ISNULL(SUM(V.Total),0) AS Total_Credi \n";
+            string Cond_Cre = " Venta as V \n" +
+                           " WHERE V.Fecha = CONVERT(date, GETDATE()) \n"+
+                           "AND V.Tipo_Pago = 'Deuda'";
+
+
+
+            //DEPOSITOS
+            string Col_Dep = " ISNULL(SUM(V.Total),0) AS Total_Credi \n";
+            string Cond_Dep = " Venta as V \n" +
+                           " WHERE V.Fecha = CONVERT(date, GETDATE()) \n"+
+                           "AND V.Tipo_Pago = 'Deposito'";
+
             //BALANCE GENERAL
-            string Colu = " SUM(ISNULL(TotalV.Tot_Ventas ,0) - ISNULL(TotalG.Tot_Gasto,0)) as BALANCE \n";
+            string Colu = " SUM(ISNULL(Ventas.Tot_Ventas ,0) - ISNULL(Gasto.Tot_Gasto,0) - ISNULL(Credito.Total_Credi,0) - ISNULL(Depositos.Total_Depo,0)) as BALANCE \n";
             string Condic = "( SELECT SUM(V.Total) AS Tot_Ventas \n" +
                            "FROM Venta as V \n" +
-                           "WHERE V.Fecha = CONVERT(date, GETDATE())) as TotalV, (SELECT SUM(G.valor) AS Tot_Gasto \n" +
+                           "WHERE V.Fecha = CONVERT(date, GETDATE())) as Ventas, (SELECT SUM(G.valor) AS Tot_Gasto \n" +
                             "FROM Gasto as G \n" +
-                            "WHERE G.fecha_gasto = CONVERT(date, GETDATE())) as TotalG \n";
+                            "WHERE G.fecha_gasto = CONVERT(date, GETDATE())) as Gasto, \n"+
+                            " ( SELECT SUM(V.Total) AS Total_Credi FROM Venta as V  \n"+
+                            "WHERE V.Fecha = CONVERT(date, GETDATE()) \n " +
+                            "AND V.Tipo_Pago = 'Deuda') as Credito,( \n" +
+                            "SELECT SUM(V.Total) AS Total_Depo \n" +
+                            "FROM Venta as V \n"+
+                            "WHERE V.Fecha = CONVERT(date, GETDATE())"+
+                            "AND V.Tipo_Pago = 'Deposito') as Depositos";
  
           
 
 
             DataSet Total_Ventas = conexion.Mostrar(Condicion, Columnas);
             DataSet Total_Gastos = conexion.Mostrar(Cond, Row);
+            DataSet Total_Depositos = conexion.Mostrar(Cond_Dep, Col_Dep);
+            DataSet Total_Credito = conexion.Mostrar(Cond_Cre, Col_Cre);
             DataSet Total_Ordenes = conexion.Mostrar(Condi, Col);
             DataSet Balance_Diario = conexion.Mostrar(Condic, Colu);
 
@@ -124,37 +147,63 @@ namespace Proyecto1_Tel.Code
 
             //estadisticas de balance general
             estadisticas.InnerHtml = "<ul class=\"statistics\">" +
+                                //VENTAS TOTALES
                                 "<li>" +
                                     "<div class=\"top-info\">" +
                                         "<a href=\"#\" title=\"\" class=\"blue-square\"><i class=\"icon-plus\"></i></a> " +
                                         "<strong> Q." + Total_Ventas.Tables[0].Rows[0][0] + "</strong>" +
                                     "</div>" +
                                     "<div class=\"progress progress-micro\"><div class=\"bar\" style=\"width: 100%;\"></div></div>" +
-                                    "<span>Ventas del Dia</span>" +
+                                    "<span>Total Ventas</span>" +
                                 "</li>" +
+                                //CREDITO
+                                "<li>" +
+                                    "<div class=\"top-info\">" +
+                                        "<a href=\"#\" title=\"\" class=\"sea-square\"><i class=\"icon-credit-card\"></i></a> " +
+                                        "<strong> Q." + Total_Credito.Tables[0].Rows[0][0] + "</strong>" +
+                                    "</div>" +
+                                    "<div class=\"progress progress-micro\"><div class=\"bar\" style=\"width: 100%;\"></div></div>" +
+                                    "<span>Credito</span>" +
+                                "</li>" +
+
+                                //DEPOSITOS
+
+                                "<li>" +
+                                    "<div class=\"top-info\">" +
+                                        "<a href=\"#\" title=\"\" class=\"dark-blue-square\"><i class=\"icon-money\"></i></a> " +
+                                        "<strong> Q." + Total_Depositos.Tables[0].Rows[0][0] + "</strong>" +
+                                    "</div>" +
+                                    "<div class=\"progress progress-micro\"><div class=\"bar\" style=\"width: 100%;\"></div></div>" +
+                                    "<span>Depositos</span>" +
+                                "</li>" +
+
+                                //GASTOS
                                 "<li>" +
                                     "<div class=\"top-info\">" +
                                         "<a href=\"#\" title=\"\" class=\"red-square\"><i class=\"icon-minus\"></i></a>" +
                                         "<strong>Q. " + Total_Gastos.Tables[0].Rows[0][0] + "</strong>" +
                                     "</div>" +
                                     "<div class=\"progress progress-micro\"><div class=\"bar\" style=\"width: 100%;\"></div></div>" +
-                                    "<span>Gastos del Dia</span>" +
+                                    "<span>Gastos</span>" +
                                 "</li>" +
+                                //ORDENES
                                 "<li>" +
                                     "<div class=\"top-info\">" +
                                         "<a href=\"#\" title=\"\" class=\"purple-square\"><i class=\"icon-shopping-cart\"></i></a>" +
                                         "<strong>" + Total_Ordenes.Tables[0].Rows[0][0] + "</strong>" +
                                     "</div>" +
                                     "<div class=\"progress progress-micro\"><div class=\"bar\" style=\"width: 100%;\"></div></div>" +
-                                    "<span>Ordenes del Dia</span>" +
+                                    "<span>Ordenes</span>" +
                                 "</li>" +
+
+                                //BALANCE
                                 "<li>" +
                                     "<div class=\"top-info\">" +
                                         "<a href=\"#\" title=\"\" class=\"green-square\"><i class=\"icon-ok\"></i></a>" +
                                         "<strong>Q"+Balance_Diario.Tables[0].Rows[0][0]+"</strong>" +
                                     "</div>" +
                                     "<div class=\"progress progress-micro\"><div class=\"bar\" style=\"width: 70%;\"></div></div>" +
-                                    "<span>General balance</span>" +
+                                    "<span>Balance General</span>" +
                                 "</li>" +
                             "</ul>";
 				    
@@ -183,22 +232,12 @@ namespace Proyecto1_Tel.Code
                                 "<li>" +
                                     "<a title=\"Ventas\" class=\"expand\">Ventas</a>" +
                                     "<ul>" +
-                                        
+                                        "<li><a href=\"Depositos.aspx\" title=\"Depositos\">Depositos</a></li>" +
                                         "<li><a href=\"VentaDiaria.aspx\" title=\"Venta Diaria\">Diaria</a></li>" +
                                         "<li><a href=\"VentaSemanal.aspx\" title=\"Semanal\">Semanal</a></li>" +
                                         "<li><a href=\"VentaMensual.aspx\" title=\"Mensual\">Mensual</a></li>" +
                                         "<li><a href=\"VentaAnual.aspx\" title=\"Anual\">Anual</a></li>" +
                                     "</ul>" +
-                                    "<a title=\"Ventas\" class=\"expand\">Depositos</a>"+
-                                    "<ul>"+
-                                        "<li><a href=\"Depositos.aspx\" title=\"diario\">Depositos diarios</a></li>" +
-                                        
-                                        "<li><a href=\"Depositos_Semana.aspx\" title=\"semana\">Depositos semanales</a></li>" +
-                                        
-                                        "<li><a href=\"Depositos_Mes.aspx\" title=\"mes\">Depositos mensuales</a></li>" +
-
-
-                                    "</ul>"+
                                 "</li>" +
                                  "<li>" +
                                     "<a href=\"content_grid.html\" title=\"Clientes\" class=\"expand\">Gastos</a>" +
