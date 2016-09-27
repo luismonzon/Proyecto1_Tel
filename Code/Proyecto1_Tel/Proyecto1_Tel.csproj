@@ -84,6 +84,8 @@
     <Content Include="Code\css\login.css" />
     <Content Include="Code\css\main.css" />
     <Content Include="Code\css\plugins.css" />
+    <Content Include="Code\Depositos_Semana.aspx" />
+    <Content Include="Code\Depositos_Mes.aspx" />
     <Content Include="Code\Depositos.aspx" />
     <Content Include="Code\img\backgrounds\actions.png" />
     <Content Include="Code\img\backgrounds\body_line.png" />
@@ -389,6 +391,20 @@
     </Compile>
     <Compile Include="Code\Conexion.cs">
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Code\Depositos_Semana.aspx.cs">
+      <DependentUpon>Depositos_Semana.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Code\Depositos_Semana.aspx.designer.cs">
+      <DependentUpon>Depositos_Semana.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Code\Depositos_Mes.aspx.cs">
+      <DependentUpon>Depositos_Mes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Code\Depositos_Mes.aspx.designer.cs">
+      <DependentUpon>Depositos_Mes.aspx</DependentUpon>
     </Compile>
     <Compile Include="Code\Depositos.aspx.cs">
       <DependentUpon>Depositos.aspx</DependentUpon>
