@@ -88,7 +88,7 @@
 
 
 
-            var series = 4;
+            var series = 2;
             $.ajax({
                 type: 'POST',
                 url: 'Balance_Diario.aspx/Reporte_Diario',
@@ -99,14 +99,9 @@
                     var Reporte_Diario = JSON.parse(response.d);
                     var Ventas = parseInt(Reporte_Diario[0]);
                     var Gastos = parseInt(Reporte_Diario[1]);
-                    var Depositos = parseInt(Reporte_Diario[2]);
-                    var Credito = parseInt(Reporte_Diario[3]);
-
 
                     data[0] = { label: "Gastos", data: Gastos }
-                    data[1] = { label: "Ventas", data: Ventas }
-                    data[2] = { label: "Depositos", data: Depositos }
-                    data[3] = { label: "Creditos", data: Credito }
+                    data[1] = { label: "Ventas" , data: Ventas}
 
                     
                     $.plot($("#pie"), data,
@@ -123,27 +118,15 @@
                                         radius: 2 / 3,
                                         formatter: function (label, series) {
                                             
-                                            return '<div style="font-size:8pt;text-align:center;padding:9px;color:white;">' + label + '<br/>' + Math.round(series.percent) + '%</div>';
+                                            return '<div style="font-size:8pt;text-align:center;padding:2px;color:white;">' + label + '<br/>' + Math.round(series.percent) + '%</div>';
                                         },
                                         threshold: 0.1
                                     }
                                 }
                             },
                             legend: {
-                                show: true,
-                                noColumns: 1, // number of colums in legend table
-                                labelFormatter: null, // fn: string -> string
-                                labelBoxBorderColor: "#000", // border color for the little label boxes
-                                container: null, // container (as jQuery object) to put legend in, null means default on top of graph
-                                position: "ne", // position of default legend container within plot
-                                margin: [5, 10], // distance from grid edge to default legend container within plot
-                                backgroundColor: "#efefef", // null means auto-detect
-                                backgroundOpacity: 1 // set to 0 to avoid background
-                            },
-                            grid: {
-                                hoverable: true,
-                                clickable: true
-                            },
+                                show: false
+                            }
                         });
 
                     
