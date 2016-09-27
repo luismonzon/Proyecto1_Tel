@@ -140,7 +140,7 @@ namespace Proyecto1_Tel.Code
 
         [WebMethod]
 
-        public static string ModalDetalle(string id)
+        public static string ModalDetalle(string id, string mes, string anio)
         {
             //head del modal
             string innerhtml = "<div class=\"modal fade\" id=\"modal-detalle\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\"> \n" +
@@ -174,7 +174,9 @@ namespace Proyecto1_Tel.Code
                 "Producto p, Venta v, DetalleVenta d \n" +
                 "where d.Venta = v.Venta \n" +
                 "and p.Producto = d.Producto \n" +
-                "and v.Venta = " + id + " \n";
+                "and v.Venta = " + id + " \n" +
+                                "and DATEPART(MONTH,Fecha) = " + mes + " \n" +
+                                "and DATEPART(YEAR,Fecha) = " + anio + " \n" ;
             Conexion con = new Conexion();
             DataSet roles = con.Mostrar(condicion, columnas);
             String data = "No hay Productos Disponibles";

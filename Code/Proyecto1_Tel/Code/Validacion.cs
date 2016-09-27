@@ -19,6 +19,8 @@ namespace Proyecto1_Tel.Code
                             //Administrador tiene acceso a todas las paginas y todas las funciones
                         case "Cliente":
                         case "ClienteMasGasta":
+                        case "ClienteMasGastaSemana":
+                        case "ClienteMasGastaMes":
                         case "ClienteDeuda":
                         case "Depositos":
                         case "Inicio":

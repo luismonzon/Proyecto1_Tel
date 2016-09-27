@@ -41,8 +41,69 @@
 
         function VerTabla() {
 
-
             var str = $('#myDate').val();
+            if (str != "") {
+
+                var prueba = str.toString();
+                var sp = prueba.split("-");
+                var dia = sp[0];
+                var mes = sp[1];
+                var anio = sp[2];
+
+
+                var fecha = anio + mes + dia;
+                var d = new Date();
+                d.setFullYear(anio, mes - 1, dia);
+
+                var start = new Date(d.getFullYear(), 0);
+                var diff = d - start;
+                var oneDay = 1000 * 60 * 60 * 24;
+                var day = Math.ceil(diff / oneDay);
+
+                var startdate = dateFromDay(d.getFullYear(), day - d.getDay());
+                var enddate = dateFromDay(d.getFullYear(), day + (6 - d.getDay()));
+
+
+                var dia1 = startdate.getDate().toString();
+                var m1 = startdate.getMonth() + 1;
+                var mes1 = m1.toString();
+                var anio1 = startdate.getFullYear().toString();
+
+                if (mes1.length == 1) { mes1 = "0" + mes1; }
+                if (dia1.length == 1) { dia1 = "0" + dia1; }
+                var inicio = anio1 + mes1 + dia1;
+                var dia2 = enddate.getDate().toString();
+                var m2 = enddate.getMonth() + 1;
+                var mes2 = m2.toString();
+                if (mes2.length == 1) { mes2 = "0" + mes2; }
+                if (dia2.length == 1) { dia2 = "0" + dia2; }
+                var anio2 = enddate.getFullYear().toString();
+
+
+                var fin = anio2 + mes2 + dia2;
+
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'Depositos_Semana.aspx/GenerarTabla',
+                    data: JSON.stringify({ start:inicio, end:fin }),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function (response) {
+                        var $modal = $('#tabla-productos');
+                        $modal.html(response.d);
+                    }
+                });
+
+            }
+            return false;
+        }
+
+
+        function VerDetalle(id) {
+            
+            var str = $('#myDate').val();
+
             if (str != "") {
                 var prueba = str.toString();
                 var sp = prueba.split("-");
@@ -83,73 +144,27 @@
 
                 $.ajax({
                     type: 'POST',
-                    url: 'Depositos_Semana.aspx/GenerarTabla',
-                    data: JSON.stringify({ start:inicio, end:fin }),
+                    url: 'Depositos_Semana.aspx/Mostrar',
+                    data: JSON.stringify({ id: id, start: inicio, end: fin }),
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'json',
                     success: function (response) {
-                        var $modal = $('#tabla-productos');
+                        var $modal = $('#ContentPlaceHolder1_modaldetalle');
                         $modal.html(response.d);
-                    }
-                });
-
-            }
-            return false;
-        }
-
-
-        function VerDetalle(id) {
-            document.getElementById("<% = codigo.ClientID%>").value = id;
-            var identi = document.getElementById("<% = codigo.ClientID%>").value;
-            $.ajax({
-                type: 'POST',
-                url: 'Depositos.aspx/ModalDetalle',
-                data: JSON.stringify({ id: identi }),
-                contentType: 'application/json; charset=utf-8',
-                dataType: 'json',
-                success: function (response) {
-                    var $modal = $('#ContentPlaceHolder1_modaldetalle');
-                    $modal.html(response.d);
-                    $('#modal-detalle').on('show.bs.modal', function () {
-                        $('.modal .modal-body').css('overflow-y', 'auto');
-                        $('.modal .modal-body').css('max-height', $(window).height() * 0.7);
-                        $('.modal .modal-body').css('height', $(window).height() * 0.7);
-                        $('.modal .modal-content').css('height', '500px');
-                        $('.modal .modal-content').css('overflow', 'auto');
-                    });
+                        $('#modal-detalle').on('show.bs.modal', function () {
+                            $('.modal .modal-body').css('overflow-y', 'auto');
+                            $('.modal .modal-body').css('max-height', $(window).height() * 0.7);
+                            $('.modal .modal-body').css('height', $(window).height() * 0.7);
+                            $('.modal .modal-content').css('height', '500px');
+                            $('.modal .modal-content').css('overflow', 'auto');
+                        });
 
 
-                    $('#modal-detalle').modal({ //
-                        show: true, //mostramos el modal registra producto
-                        backdrop: 'static' //hace que no se cierre el modal si le dan clic afuera del mismo.
-                    });
-                    //$('#modal-pago').modal('hide').data('bs.modal', null);
-                }
-            });
-        }
-
-        function Delete(id) {
-            if (confirm("Esta seguro que desea eliminar la Venta?")) {
-                $.ajax({
-                    type: "POST",
-                    url: "VentaDiaria.aspx/Delete",
-                    data: JSON.stringify({ id: id }),
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-
-                        var str = $('#myDate').val();
-
-                        if (response.d == true) {
-                            alert("La Venta Ha Sido Eliminada Exitosamente");
-                            var $modal = $('#ContentPlaceHolder1_modaldetalle');
-                            $modal.html("");
-                            VerTabla();
-                            //reloadTable();
-                        } else {
-                            alert("La Venta No Pudo Ser Eliminada");
-                        }
-
+                        $('#modal-detalle').modal({ //
+                            show: true, //mostramos el modal registra producto
+                            backdrop: 'static' //hace que no se cierre el modal si le dan clic afuera del mismo.
+                        });
+                        //$('#modal-pago').modal('hide').data('bs.modal', null);
                     }
                 });
             }
@@ -174,6 +189,13 @@
             today = dd + '-' + mm + '-' + yyyy;
             $("#myDate").val(today);
         }
+
+
+        function dateFromDay(year, day) {
+            var date = new Date(year, 0); // initialize a date in `year-01-01`
+            return new Date(date.setDate(day)); // add the number of days
+        }
+
 
     </script>
 

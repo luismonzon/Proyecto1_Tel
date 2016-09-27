@@ -72,6 +72,8 @@
     <Content Include="Code\Balance_Diario.aspx" />
     <Content Include="Code\Cliente.aspx" />
     <Content Include="Code\ClienteMasGasta.aspx" />
+    <Content Include="Code\ClienteMasGastaMensual.aspx" />
+    <Content Include="Code\ClienteMasGastaSemanal.aspx" />
     <Content Include="Code\ClientesDeuda.aspx" />
     <Content Include="Code\css\elfinder.css" />
     <Content Include="Code\css\fam-icons.css" />
@@ -381,6 +383,20 @@
     </Compile>
     <Compile Include="Code\ClienteMasGasta.aspx.designer.cs">
       <DependentUpon>ClienteMasGasta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Code\ClienteMasGastaMensual.aspx.cs">
+      <DependentUpon>ClienteMasGastaMensual.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Code\ClienteMasGastaMensual.aspx.designer.cs">
+      <DependentUpon>ClienteMasGastaMensual.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Code\ClienteMasGastaSemanal.aspx.cs">
+      <DependentUpon>ClienteMasGastaSemanal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Code\ClienteMasGastaSemanal.aspx.designer.cs">
+      <DependentUpon>ClienteMasGastaSemanal.aspx</DependentUpon>
     </Compile>
     <Compile Include="Code\ClientesDeuda.aspx.cs">
       <DependentUpon>ClientesDeuda.aspx</DependentUpon>

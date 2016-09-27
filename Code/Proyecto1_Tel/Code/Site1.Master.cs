@@ -261,7 +261,14 @@ namespace Proyecto1_Tel.Code
                                     "<a href=\"content_grid.html\" title=\"Clientes\" class=\"expand\">Clientes</a>" +
                                     "<ul>" +
                                         "<li><a href=\"ClientesDeuda.aspx\" title=\"Clientes con Credito\">Clientes con Credito</a></li>" +
-                                        "<li><a href=\"ClienteMasGasta.aspx\" title=\"Clientes que mas compran\">Que Mas Compran</a></li>" +
+                                        "<li>" +
+                                            "<a href=\"content_grid.html\" title=\"Que Mas Comprar\" class=\"expand\">Que Mas Comprar</a>" +
+                                            "<ul>" +
+                                                "<li><a href=\"ClienteMasGasta.aspx\" title=\"Clientes que mas compran\">Diario</a></li>" +
+                                                "<li><a href=\"ClienteMasGastaSemanal.aspx\" title=\"Clientes que mas compran\">Semanal</a></li>" +
+                                                "<li><a href=\"ClienteMasGastaMensual.aspx\" title=\"Clientes que mas compran\">Mensual</a></li>" +
+                                            "</ul>" +
+                                        "</li>" +
                                     "</ul>" +
                                 "</li>" +
                                 "<li>" +

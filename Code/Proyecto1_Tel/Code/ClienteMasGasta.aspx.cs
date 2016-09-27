@@ -30,13 +30,13 @@ namespace Proyecto1_Tel.Code
                 }
 
                 conn = new Conexion();
-                Cargar();
+                //Cargar();
             }
 
             Response.Cache.SetCacheability(HttpCacheability.ServerAndNoCache);
             Response.Cache.SetAllowResponseInBrowserHistory(false);
             Response.Cache.SetNoStore();
-         
+
         }
 
         private void Cargar()
@@ -55,19 +55,26 @@ namespace Proyecto1_Tel.Code
                                         "</ul>" +
                                     "</div>" +
                             "</div>" +
-                    "</div>" + LLenar_Tabla();
+                    "</div>";
+            //LLenar_Tabla();
         }
 
-        private string LLenar_Tabla()
+        [WebMethod]
+
+        public static String LLenar_Tabla(string fecha)
         {
-            string columnas = " c.Cliente, c.Nombre, c.Apellido, COUNT(v.Venta)'Cantidad',SUM( v.Total ) Total \n";
-            string condicion =
-                "Cliente c, Venta v \n"+
-"where v.Cliente = c.Cliente \n"+
-"group by c.Cliente, c.Nombre, c.Apellido \n"+
+            String columnas = " c.Cliente, c.Nombre, c.Apellido, COUNT(v.Venta)'Cantidad',SUM( v.Total ) Total \n";
+            String condicion =
+                "Cliente c, Venta v \n" +
+"where v.Cliente = c.Cliente \n" +
+"and v.Fecha = '" + fecha + "' \n" +
+"group by c.Cliente, c.Nombre, c.Apellido \n" +
 "order by Total desc"
             ;
-            DataSet roles = conn.Mostrar(condicion, columnas);
+
+
+            Conexion con = new Conexion();
+            DataSet roles = con.Mostrar(condicion, columnas);
             String data = "No hay Clientes Disponibles";
             if (roles.Tables.Count > 0)
             {
@@ -112,19 +119,19 @@ namespace Proyecto1_Tel.Code
 
         [WebMethod]
 
-        public static string Mostrar(string id)
+        public static string Mostrar(string id, string fecha)
         {
             //head del modal
-            string innerhtml = "<div class=\"modal fade\" id=\"modal-pago\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\"> \n" + 
+            string innerhtml = "<div class=\"modal fade\" id=\"modal-pago\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\"> \n" +
                 "<div class=\"modal-dialog\"> \n" +
                 "<div class=\"modal-content\"> \n" +
-                "<div class=\"modal-header\"> \n"+
+                "<div class=\"modal-header\"> \n" +
                 "<button type=\"button\" onclick=\"reloadTable();\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button> \n" +
                 "<div class=\"step-title\"> \n" +
-                "<i>P</i> \n"+
-                "<h5>Productos</h5> \n"+
-                "<span>Productos Comprados por el cliente </span> \n"+
-                "</div> \n"+
+                "<i>P</i> \n" +
+                "<h5>Productos</h5> \n" +
+                "<span>Productos Comprados por el cliente </span> \n" +
+                "</div> \n" +
                 "</div>\n"
                 ;
             //content del modal
@@ -145,9 +152,10 @@ namespace Proyecto1_Tel.Code
             string condicion =
                  "Producto p, Venta v, DetalleVenta d, Inventario i \n" +
                 "where d.Venta = v.Venta \n" +
-                "and p.Producto = d.Producto \n"+
+                "and p.Producto = d.Producto \n" +
                 "and i.Producto = p.Producto \n" +
-                "and v.Cliente = "+ id +" \n"+
+                "and v.Cliente = " + id + " \n" +
+                "and v.Fecha = '" + fecha + "' \n" +
                 "group by p.Abreviatura, p.Descripcion"
             ;
             Conexion con = new Conexion();
@@ -190,83 +198,15 @@ namespace Proyecto1_Tel.Code
 
             innerhtml += data;
             //footer del modal
-            innerhtml += "</div>\n"+
-            "<div class=\"modal-footer\">\n"+
-                "<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" onclick=\"reloadTable();\" id=\"cerrar\">Cerrar</button>\n"+
-            "</div>\n"+
-            "</div>\n"+
+            innerhtml += "</div>\n" +
+            "<div class=\"modal-footer\">\n" +
+                "<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" onclick=\"reloadTable();\" id=\"cerrar\">Cerrar</button>\n" +
+            "</div>\n" +
+            "</div>\n" +
             "</div>\n"
             ;
 
             return innerhtml;
         }
-
-        /*
-         
-     <div class="modal fade" id="modal-pago" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class=\"modal-content\">
-            <div class=\"modal-header\">
-              <button type=\"button\" onclick=\"reloadTable();\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>
-                
-                <div class=\"step-title\">
-                            	<i>P</i>
-					    		<h5>Productos</h5>
-					    		<span>Productos Comprados por el cliente "+nombre+"</span>
-				</div>
-                        	
-            </div>
-            <form id="formulario-pago" class="form-horizontal row-fluid well">
-            <div class="modal-body">
-				<table border="0" width="100%" >
-                    <tr>
-                         <td style="visibility:hidden; height:5px;" >ID</td>
-                        <td colspan="2"><input runat="server" type="text" required="required" readonly="readonly" id="codigo" name="codigo"  style="visibility:hidden; height:5px;"/></td>
-
-                    </tr>
-                    
-                        <div>
-	                            <div class="control-group">
-	                                <label class="control-label" style="font-size: 15px;" ><b>*Deuda:</b></label>
-                                    <select class="select2"  runat="server" required="required" id="cDeuda">
-                                    </select>
-	                             
-	                            </div>
-
-	                            <div class="control-group">
-	                                <label class="control-label" style="font-size: 15px;" ><b>*Cantidad:</b></label>
-	                                <div class="controls"><input  required="required" style="font-size: 13px;" type="number"  id="cantidad" runat="server" /></div>
-	                                </div>
-                    <tr>
-                    	<td colspan="2">
-                            <div id="mensaje"></div>
-                            <div class="alert margin">
-                                <button type="button"  class="close" data-dismiss="alert">×</button>
-	                                Campos Obligatorios (*)
-
-                            </div>
-                            
-                            
-                        </td>
-                    </tr>
-                </div>
-
-                    </table>
-                 </div>
-                
-                    
-                </form>
-            </div>
-            
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="reloadTable();" id="cerrar">Cerrar</button>
-            	<input type="submit" value="Abonar" class="btn btn-success" id="abonar"/>
-            </div>
-            
-          </div>
-        </div>
-
-         
-         */
     }
 }
