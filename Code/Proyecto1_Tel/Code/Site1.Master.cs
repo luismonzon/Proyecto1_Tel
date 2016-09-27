@@ -227,7 +227,7 @@ namespace Proyecto1_Tel.Code
                                 "</li>" +
                             "</ul>" +
                         "</li>" +
-                        "<li><a  title=\"Reportes\" class=\"expand\"><i class=\"icon-copy\"></i>Reportes<strong>4</strong></a>" +
+                        "<li><a  title=\"Reportes\" class=\"expand\"><i class=\"icon-copy\"></i>Reportes<strong>5</strong></a>" +
                             "<ul>" +
                                 //REPORTE VENTAS
                                 "<li>" +

@@ -152,7 +152,7 @@
                                         <div id="metros" class="span5">
                                             <label class="control-label" style="font-size: 15px;"><b>Metros</b></label>
                                             <div class=" align-left"> 
-                                                <input type="text" style="font-size: 13px;" name="regular"  class="span5" id="txtmetros" placeholder="Metros" />
+                                                <input type="number" step="any" style="font-size: 13px;" name="regular"  class="span5" id="txtmetros" placeholder="Metros" />
                                                        
                                             </div>
                                          </div>

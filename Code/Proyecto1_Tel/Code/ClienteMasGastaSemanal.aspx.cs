@@ -99,7 +99,7 @@ namespace Proyecto1_Tel.Code
                 "<div class=\"modal-dialog\"> \n" +
                 "<div class=\"modal-content\"> \n" +
                 "<div class=\"modal-header\"> \n" +
-                "<button type=\"button\" onclick=\"reloadTable();\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button> \n" +
+                "<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button> \n" +
                 "<div class=\"step-title\"> \n" +
                 "<i>P</i> \n" +
                 "<h5>Productos</h5> \n" +
@@ -173,7 +173,7 @@ namespace Proyecto1_Tel.Code
             //footer del modal
             innerhtml += "</div>\n" +
             "<div class=\"modal-footer\">\n" +
-                "<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" onclick=\"reloadTable();\" id=\"cerrar\">Cerrar</button>\n" +
+                "<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" id=\"cerrar\">Cerrar</button>\n" +
             "</div>\n" +
             "</div>\n" +
             "</div>\n"
