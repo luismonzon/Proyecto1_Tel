@@ -62,7 +62,7 @@ namespace Proyecto1_Tel.Code
             {
                 try
                 {
-                    data = "<div class=\"alert alert-success\" style=\"font-size: 18px;\" > Ganancia Diaria: Q." + total.Tables[0].Rows[0][0] + "</div>" +
+                    data = "<div class=\"alert alert-success\" style=\"font-size: 18px;\" > Ganancia Semanal: Q." + total.Tables[0].Rows[0][0] + "</div>" +
                         "<div class=\"table-overflow\"> " +
                         "<table class=\"table table-striped table-bordered\" id=\"data-table\">" +
                             "<thead>" +

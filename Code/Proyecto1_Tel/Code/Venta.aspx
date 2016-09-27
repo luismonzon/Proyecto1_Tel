@@ -593,7 +593,7 @@
 	                                            c = parseFloat(a - b);
 	                                            $('#vuelto').removeClass();
 	                                            $('#vuelto').addClass('label label-success').html('Vuelto:  Q.' + c).show(200).delay(2500);
-	                                            alert('Su Vuelto es: ' + parseFloat(c));
+	                                            alert(' Su Vuelto es: Q.' + parseFloat(c) + '\n Codigo Venta: ' + CodVenta.substr(-2));
 	                                        }
 	                                    }
 	                                    reloadTable();

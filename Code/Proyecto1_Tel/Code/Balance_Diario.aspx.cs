@@ -74,7 +74,7 @@ namespace Proyecto1_Tel.Code
 
 
             //BALANCE GENERAL
-            string Colu = " SUM(ISNULL(Ventas.Tot_Ventas ,0) - ISNULL(Gasto.Tot_Gasto,0) - ISNULL(Credito.Total_Credi,0) - ISNULL(Depositos.Total_Depo,0)) as BALANCE \n";
+            string Colu = " SUM(ISNULL(Ventas.Tot_Ventas ,0) - ISNULL(Depositos.Total_Depo,0) - ISNULL(Gasto.Tot_Gasto,0) - ISNULL(Credito.Total_Credi,0)) as BALANCE \n";
             string Condic = "( SELECT SUM(V.Total) AS Tot_Ventas \n" +
                            "FROM Venta as V \n" +
                            "WHERE V.Fecha = '"+fecha+"') as Ventas, (SELECT SUM(G.valor) AS Tot_Gasto \n" +

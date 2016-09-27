@@ -13,40 +13,49 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>05/06/2016 03:47:20</publishTime>
     </File>
     <File Include="bin/Proyecto1_Tel.dll">
-      <publishTime>07/01/2016 00:11:34</publishTime>
+      <publishTime>09/27/2016 04:12:15</publishTime>
     </File>
     <File Include="bin/Proyecto1_Tel.dll.config">
-      <publishTime>06/30/2016 22:49:44</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="bin/RabbitMQ.Client.dll">
       <publishTime>05/06/2016 03:47:20</publishTime>
     </File>
+    <File Include="Code/Balance_Diario.aspx">
+      <publishTime>09/27/2016 02:54:26</publishTime>
+    </File>
     <File Include="Code/Cliente.aspx">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/ClienteMasGasta.aspx">
-      <publishTime>05/11/2016 10:36:28</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
+    </File>
+    <File Include="Code/ClienteMasGastaMensual.aspx">
+      <publishTime>09/27/2016 02:54:26</publishTime>
+    </File>
+    <File Include="Code/ClienteMasGastaSemanal.aspx">
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/ClientesDeuda.aspx">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/css/.DS_Store">
       <publishTime>05/06/2016 03:47:19</publishTime>
     </File>
     <File Include="Code/css/elfinder.css">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/css/fam-icons.css">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/css/font-awesome.css">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/css/font/fontawesome-webfont.eot">
       <publishTime>05/06/2016 03:47:19</publishTime>
     </File>
     <File Include="Code/css/font/fontawesome-webfont.svg">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/css/font/fontawesome-webfont.ttf">
       <publishTime>05/06/2016 03:47:19</publishTime>
@@ -58,28 +67,34 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>05/06/2016 03:47:19</publishTime>
     </File>
     <File Include="Code/css/icons.css">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/css/ie8.css">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/css/ie9.css">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/css/jquery.custom.css">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/css/login.css">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/css/main.css">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/css/plugins.css">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/Depositos.aspx">
-      <publishTime>05/11/2016 10:36:29</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
+    </File>
+    <File Include="Code/Depositos_Mes.aspx">
+      <publishTime>09/27/2016 02:54:26</publishTime>
+    </File>
+    <File Include="Code/Depositos_Semana.aspx">
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/img/.DS_Store">
       <publishTime>05/06/2016 03:47:19</publishTime>
@@ -490,16 +505,16 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>05/06/2016 03:47:19</publishTime>
     </File>
     <File Include="Code/Inicio.aspx">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/Inicio.aspx.cs">
       <publishTime>04/18/2016 23:07:00</publishTime>
     </File>
     <File Include="Code/Inv_Bodega.aspx">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/Inv_tienda.aspx">
-      <publishTime>05/11/2016 10:36:28</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/.DS_Store">
       <publishTime>05/06/2016 03:47:19</publishTime>
@@ -508,91 +523,91 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>05/06/2016 03:47:19</publishTime>
     </File>
     <File Include="Code/js/charts/bar.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/charts/chart1.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/charts/chart2.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/charts/chart3.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/charts/donut.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/charts/filled1.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/charts/filled2.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/charts/filled3.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/charts/graph.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/charts/hBar.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/charts/pie.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/charts/pie_full.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/charts/updating.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/charts/updating_widget_1.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/charts/updating_widget_2.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/charts/updating_widget_3.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/files/.DS_Store">
       <publishTime>05/06/2016 03:47:19</publishTime>
     </File>
     <File Include="Code/js/files/bootstrap.min.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/files/functions.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/files/functions_blank.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/files/login.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/Fuente.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/globalize/globalize.culture.de-DE.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/globalize/globalize.culture.ja-JP.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/globalize/globalize.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/jquery-1.8.2.min.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/jquery-ui.min.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/mapsgoogle.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/myjava.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/plugins/.DS_Store">
       <publishTime>05/06/2016 03:47:19</publishTime>
@@ -604,100 +619,100 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>05/06/2016 03:47:19</publishTime>
     </File>
     <File Include="Code/js/plugins/charts/jquery.flot.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/plugins/charts/jquery.flot.orderBars.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/plugins/charts/jquery.flot.pie.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/plugins/charts/jquery.flot.resize.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/plugins/charts/jquery.sparkline.min.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/plugins/forms/.DS_Store">
       <publishTime>05/06/2016 03:47:19</publishTime>
     </File>
     <File Include="Code/js/plugins/forms/jquery.autosize.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/plugins/forms/jquery.form.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/plugins/forms/jquery.form.wizard.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/plugins/forms/jquery.inputlimiter.min.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/plugins/forms/jquery.inputmask.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/plugins/forms/jquery.listbox.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/plugins/forms/jquery.select2.min.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/plugins/forms/jquery.tagsinput.min.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/plugins/forms/jquery.uniform.min.js">
       <publishTime>05/06/2016 03:47:19</publishTime>
     </File>
     <File Include="Code/js/plugins/forms/jquery.validation.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/plugins/forms/jquery.validationEngine-en.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/plugins/jquery-ui.min.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/plugins/jquery.min.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/plugins/tables/jquery.dataTables.min.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/plugins/ui/.DS_Store">
       <publishTime>05/06/2016 03:47:19</publishTime>
     </File>
     <File Include="Code/js/plugins/ui/jquery.bootbox.min.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/plugins/ui/jquery.collapsible.min.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/plugins/ui/jquery.colorpicker.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/plugins/ui/jquery.easytabs.min.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/plugins/ui/jquery.elfinder.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/plugins/ui/jquery.fancybox.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/plugins/ui/jquery.fullcalendar.min.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/plugins/ui/jquery.jgrowl.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/plugins/ui/jquery.mousewheel.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/plugins/ui/jquery.timepicker.min.js">
       <publishTime>05/06/2016 03:47:19</publishTime>
     </File>
     <File Include="Code/js/plugins/ui/prettify.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/js/plugins/uploader/.DS_Store">
       <publishTime>05/06/2016 03:47:19</publishTime>
@@ -712,73 +727,88 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>05/06/2016 03:47:19</publishTime>
     </File>
     <File Include="Code/js/plugins/uploader/plupload.js">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
+    </File>
+    <File Include="Code/MasVendidoDia.aspx">
+      <publishTime>09/27/2016 02:54:26</publishTime>
+    </File>
+    <File Include="Code/MasVendidoMes.aspx">
+      <publishTime>09/27/2016 02:54:26</publishTime>
+    </File>
+    <File Include="Code/MasVendidoSemana.aspx">
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/Producto.aspx">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/ProductosInventario.aspx">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/ProductosMasVenden.aspx">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
+    </File>
+    <File Include="Code/Rep_Gasto.aspx">
+      <publishTime>09/27/2016 02:54:26</publishTime>
+    </File>
+    <File Include="Code/Rep_GastoSemana.aspx">
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/Rol.aspx">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/Site1.Master">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/User.aspx">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/Venta.aspx">
-      <publishTime>06/30/2016 23:47:59</publishTime>
+      <publishTime>09/27/2016 03:34:21</publishTime>
     </File>
     <File Include="Code/VentaAnual.aspx">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/VentaDiaria.aspx">
-      <publishTime>05/11/2016 22:30:13</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/VentaMensual.aspx">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/VentaSemanal.aspx">
-      <publishTime>05/06/2016 03:47:19</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Content/bootstrap-theme.css">
-      <publishTime>05/06/2016 03:47:20</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Content/bootstrap-theme.css.map">
       <publishTime>05/06/2016 03:47:20</publishTime>
     </File>
     <File Include="Content/bootstrap-theme.min.css">
-      <publishTime>05/06/2016 03:47:20</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Content/bootstrap-theme.min.css.map">
       <publishTime>05/06/2016 03:47:20</publishTime>
     </File>
     <File Include="Content/bootstrap.css">
-      <publishTime>05/06/2016 03:47:20</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Content/bootstrap.css.map">
       <publishTime>05/06/2016 03:47:20</publishTime>
     </File>
     <File Include="Content/bootstrap.min.css">
-      <publishTime>05/06/2016 03:47:20</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Content/bootstrap.min.css.map">
       <publishTime>05/06/2016 03:47:20</publishTime>
     </File>
     <File Include="Content/style.css">
-      <publishTime>05/06/2016 03:47:20</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.eot">
       <publishTime>05/06/2016 03:47:20</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.svg">
-      <publishTime>05/06/2016 03:47:20</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.ttf">
       <publishTime>05/06/2016 03:47:20</publishTime>
@@ -829,28 +859,28 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>05/06/2016 03:47:20</publishTime>
     </File>
     <File Include="Index.aspx">
-      <publishTime>05/06/2016 03:47:20</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>05/06/2016 03:47:20</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
-      <publishTime>05/06/2016 03:47:20</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Scripts/bootstrap.min.js">
-      <publishTime>05/06/2016 03:47:20</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Scripts/jquery-1.9.1.js">
-      <publishTime>05/06/2016 03:47:20</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Scripts/jquery-1.9.1.min.js">
-      <publishTime>05/06/2016 03:47:20</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Scripts/jquery-1.9.1.min.map">
       <publishTime>05/06/2016 03:47:20</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/06/2016 03:47:20</publishTime>
+      <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
   </ItemGroup>
 </Project>

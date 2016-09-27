@@ -71,6 +71,8 @@
     <script type="text/javascript" src="js/charts/chart1.js"></script>
     <script type="text/javascript" src="js/charts/chart2.js"></script>
     <script type="text/javascript" src="js/charts/chart3.js"></script>
+    <script type="text/javascript" src="js/plugins/charts/jquery.flot.pie.js"></script>
+    
     
     
     
@@ -115,26 +117,39 @@
 			<div class="sidebar-tabs">
 		        <ul class="tabs-nav two-items">
 		            <li><a href="#general" title=""><i class="icon-reorder"></i></a></li>
-		            <li><a href="#stuff" title=""><i class="icon-cogs"></i></a></li>
+		            <li><a href="#stuff" title=""><i class="icon-calendar"></i></a></li>
 		        </ul>
 
+                
 		        <div id="general" runat="server">
                 <!--- AQUI ESTA EL MENU PARA CADA UNO DE LOS ROLES --->
 
 
+                 
 		        </div>
 
+                
 		        <div id="stuff">
 
 
                     <!-- Datepicker -->
 		        	<div class="widget">
+                        
+		        		<h6 class="widget-name"><i class="ico-shopping-cart"></i>Gastos</h6>
+                        <input  id="monto" name="monto" placeholder="Monto"class="span12" type="number" step="any">
+                        <textarea id="descripcion" placeholder="Descripcion" class="form-control" name="descripcion" rows="3"></textarea>
+                        <button class="btn btn-block btn-info" id="Gasto">Registrar</button>
+		            </div>
+		            
+                    <div class="widget">
 		        		<h6 class="widget-name"><i class="icon-calendar"></i>Calendario</h6>
 		                <div class="inlinepicker datepicker-liquid"></div>
 		            </div>
 		            <!-- /datepicker -->
-
                     
+                    <!-- Datepicker -->
+		        	<!-- /datepicker -->
+
 			       
 		        </div>
 
@@ -180,9 +195,16 @@
 			    	
 			    </div>
 			    <!-- /page header -->
+                
+				  <div id="estadisticas" runat="server">
+                      <!--- Estadisticas de balance general --->
+
+                  </div>
+                        
                     
     			<asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-                         
+                    
+				    	 
     			</asp:ContentPlaceHolder>
             </div>
 
@@ -243,6 +265,38 @@
     } 
  
 </script>
+    <script type="text/javascript">
 
+
+
+        $('#Gasto').on('click', function () {
+
+
+            var desc = document.getElementById('descripcion').value;
+            var mon = document.getElementById('monto').value;
+            
+            $.ajax({
+                type: 'POST',
+                url: 'Cliente.aspx/agregarPago',
+                data: JSON.stringify({ descripcion: desc, monto: mon }),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (msg) {
+                    // Notice that msg.d is used to retrieve the result object
+                    if (msg.d == "1") {
+                        alert("Gasto guardado exitosamente");
+                        $("#descripcion").val("");
+                        $("#monto").val("");
+
+
+                    }
+                    else {
+
+                        alert("Ha ocurrido un error");
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>

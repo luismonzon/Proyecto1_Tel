@@ -8,6 +8,7 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
+           
     <input runat="server" type="text" required="required" readonly="readonly" id="codigo" name="codigo"  style="visibility:hidden; height:5px;"/>
         <div id="modaldetalle" runat="server">
         
@@ -99,6 +100,15 @@
             return new Date(date.setDate(day)); // add the number of days
         }
 
-    </script>
 
+
+
+
+
+       
+
+
+
+    </script>
+    <script type="text/javascript" src="js/charts/pie.js"></script>
 </asp:Content>

@@ -152,7 +152,7 @@
                                         <div id="metros" class="span5">
                                             <label class="control-label" style="font-size: 15px;"><b>Metros</b></label>
                                             <div class=" align-left"> 
-                                                <input type="text" style="font-size: 13px;" name="regular"  class="span5" id="txtmetros" placeholder="Metros" />
+                                                <input type="number" step="any" style="font-size: 13px;" name="regular"  class="span5" id="txtmetros" placeholder="Metros" />
                                                        
                                             </div>
                                          </div>
@@ -582,7 +582,7 @@
 
 	                                    var CodVenta = response.d;
 	                                    $('#venta').removeClass();
-	                                    $('#venta').addClass('alert alert-success').html('Codigo de Venta: ' + CodVenta).show(200).delay(2500);
+	                                    $('#venta').addClass('alert alert-success').html('Codigo de Venta: ' + CodVenta.substr(-2)).show(200).delay(2500);
 
 	                                    var c = 0;
 	                                    if (abono != "") {
@@ -593,7 +593,7 @@
 	                                            c = parseFloat(a - b);
 	                                            $('#vuelto').removeClass();
 	                                            $('#vuelto').addClass('label label-success').html('Vuelto:  Q.' + c).show(200).delay(2500);
-	                                            alert('Su Vuelto es: ' + parseFloat(c));
+	                                            alert(' Su Vuelto es: Q.' + parseFloat(c) + '\n Codigo Venta: ' + CodVenta.substr(-2));
 	                                        }
 	                                    }
 	                                    reloadTable();
