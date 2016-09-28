@@ -52,7 +52,7 @@ namespace Proyecto1_Tel.Code
                                 "and DATEPART(MONTH,fecha) = " + mes + " \n" +
                                 "and DATEPART(YEAR,fecha) = " + anio + " \n"+
                                 "group by p.Abreviatura, p.Descripcion \n" +
-                                "order by sum(d.Subtotal) desc \n";
+                                "order by sum(d.Metros) desc \n";
 
             string Col = "SUM(Total) Total \n";
             string Cond = " Venta v\n" +
