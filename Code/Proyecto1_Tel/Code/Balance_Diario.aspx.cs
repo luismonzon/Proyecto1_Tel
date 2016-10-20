@@ -28,6 +28,20 @@ namespace Proyecto1_Tel.Code
                     Response.Redirect("~/Index.aspx");
                 }
 
+                Conexion conexion = new Conexion();
+                DataSet Productos = conexion.Consulta("select Usuario, NickName from Usuario where Rol <> 4 and Rol <> 2");
+                String html = "<select  runat=\"server\" style=\"font-size: 15px;\" data-placeholder=\"Usuario\" class=\"styled\"  onChange=\"VerTabla()\"  id=\"usuarios\">";
+                html += "<option value=\"0\">Balance General</option> ";
+                foreach (DataRow item in Productos.Tables[0].Rows)
+                {
+                    html += "<option value=\"" + item["Usuario"] + "\">" + item["NickName"] + "</option> ";
+                }
+
+                html += "</select>";
+
+
+                this.selectU.InnerHtml = html;
+
             }
 
             
@@ -41,7 +55,7 @@ namespace Proyecto1_Tel.Code
 
         [WebMethod]
 
-        public static String GenerarTabla(string fecha)
+        public static String GenerarTabla(string fecha, string tipo)
         {
             String innerhtml = "";
 
@@ -51,25 +65,33 @@ namespace Proyecto1_Tel.Code
             string Columnas = "ISNULL(SUM(V.Total),0) AS Tot_Ventas \n";
             string Condicion = " Venta as V \n" +
                                 "WHERE V.Fecha = '" + fecha + "'\n";
+            if (!tipo.Equals("0")) { Condicion += "AND V.Usuario = '" + tipo + "' \n"; }
+
             //TOTAL DE GASTO
             string Row = "ISNULL(SUM(G.valor),0)    AS Tot_Gasto";
             string Cond = " Gasto G \n" +
                                 "WHERE G.fecha_gasto =' " + fecha + "'\n";
+            if (!tipo.Equals("0")) { Cond += "AND G.Usuario = '" + tipo + "' \n"; }
+
             //CANTIDAD DE ORDENES
             string Col = " ISNULL(COUNT(V.Total),0)  \n";
             string Condi = " Venta as V \n" +
                            " WHERE V.Fecha = '" + fecha + "'\n";
+            if (!tipo.Equals("0")) { Condi += "AND V.Usuario = '" + tipo + "' \n"; }
+
             //CREDITOS
             string Col_Cre = "  ISNULL(SUM(V.Total),0)   AS Total_Credi \n";
             string Cond_Cre = " Venta as V \n" +
                            " WHERE V.Fecha = '"+fecha+"' \n" +
                            "AND V.Tipo_Pago = 'Deuda'";
+            if (!tipo.Equals("0")) { Cond_Cre += "AND V.Usuario = '" + tipo + "' \n"; }
 
             //DEPOSITOS
             string Col_Dep = " ISNULL(SUM(V.Total),0)  AS Total_Credi \n";
             string Cond_Dep = " Venta as V \n" +
                            " WHERE V.Fecha = '"+fecha+"' \n" +
                            "AND V.Tipo_Pago = 'Deposito'";
+            if (!tipo.Equals("0")) { Cond_Dep+= "AND V.Usuario = '" + tipo + "' \n"; }
 
 
 
@@ -77,16 +99,25 @@ namespace Proyecto1_Tel.Code
             string Colu = " SUM(ISNULL(Ventas.Tot_Ventas ,0) - ISNULL(Depositos.Total_Depo,0) - ISNULL(Gasto.Tot_Gasto,0) - ISNULL(Credito.Total_Credi,0)) as BALANCE \n";
             string Condic = "( SELECT SUM(V.Total) AS Tot_Ventas \n" +
                            "FROM Venta as V \n" +
-                           "WHERE V.Fecha = '"+fecha+"') as Ventas, (SELECT SUM(G.valor) AS Tot_Gasto \n" +
+                           "WHERE V.Fecha = '"+fecha+"'" ;
+                            if (!tipo.Equals("0")) { Condic += "AND V.Usuario = '" + tipo + "' \n"; }
+                        
+                            
+                            Condic+= ") as Ventas, (SELECT SUM(G.valor) AS Tot_Gasto \n" +
                             "FROM Gasto as G \n" +
-                            "WHERE G.fecha_gasto = '"+fecha+"') as Gasto, \n" +
+                            "WHERE G.fecha_gasto = '"+fecha+"'";
+                            if (!tipo.Equals("0")) { Condic += "AND G.Usuario = '" + tipo + "' \n"; }
+                            Condic += ") as Gasto, \n" +
                             " ( SELECT SUM(V.Total) AS Total_Credi FROM Venta as V  \n" +
-                            "WHERE V.Fecha = '"+ fecha+"' \n " +
-                            "AND V.Tipo_Pago = 'Deuda') as Credito,( \n" +
+                            "WHERE V.Fecha = '" + fecha + "' \n ";
+                            if (!tipo.Equals("0")) { Condic += "AND V.Usuario = '" + tipo + "' \n"; }
+                            Condic += "AND V.Tipo_Pago = 'Deuda') as Credito,( \n" +
                             "SELECT SUM(V.Total) AS Total_Depo \n" +
-                            "FROM Venta as V \n" +
-                            "WHERE V.Fecha = '"+fecha+"' \n" +
-                            "AND V.Tipo_Pago = 'Deposito') as Depositos";
+                            "FROM VENTA as V \n"+
+                            "WHERE V.Fecha = '" + fecha + "' \n";
+                            if (!tipo.Equals("0")) { Condic += "AND V.Usuario = '" + tipo + "' \n"; }
+                            Condic+= "AND V.Tipo_Pago = 'Deposito') as Depositos";
+            
  
 
 
@@ -108,8 +139,8 @@ namespace Proyecto1_Tel.Code
             if (Total_Ventas.Tables[0].Rows.Count > 0)
             {
                 
-                    data = " <div class=\"widget\">"+
-                	"<div class=\"navbar\"><div class=\"navbar-inner\"><h6>Resumen del Dia</h6></div></div>"+
+                    data = " <div>"+
+                	"<div><div><h6 class=\"widget-name\">Resumen del Dia</h6></div></div>"+
                         
                         "<div class=\"table-overflow\"> " +
                     "<table class=\"table\">" +
@@ -118,6 +149,7 @@ namespace Proyecto1_Tel.Code
                                 "<th  align =\"center\">Ventas</th>" +
                                 "<th  align =\"center\">Creditos</th>" +
                                 "<th  align =\"center\">Depositos</th>" +
+                                "<th  align =\"center\">Descuentos</th>" +
                                 "<th  align =\"center\">Gastos</th>" +
                                 "<th  align =\"center\">Balance</th>" +
                         "</thead>" + "<tbody>";
@@ -132,6 +164,7 @@ namespace Proyecto1_Tel.Code
                         "<td id=\"hora\" runat=\"server\" >Q." + Total_Ventas.Tables[0].Rows[0][0] + "</td>" +
                         "<td id=\"hora\" runat=\"server\" >Q." + Total_Credito.Tables[0].Rows[0][0] + "</td>" +
                         "<td id=\"hora\" runat=\"server\" >Q." + Total_Depositos.Tables[0].Rows[0][0] + "</td>" +
+                        "<td id=\"hora\" runat=\"server\" >Q."  +"FALTA"+ "</td>" +
                         "<td id=\"descripcion\" runat=\"server\" >Q." + Total_Gastos.Tables[0].Rows[0][0] + "</td>" +
                         "<td id=\"monto\" runat=\"server\" >Q." + Balance_Diario.Tables[0].Rows[0][0] + "</td>";
 
@@ -172,7 +205,7 @@ namespace Proyecto1_Tel.Code
 
 
         [WebMethod]
-        public static string Reporte_Diario(string fecha)
+        public static string Reporte_Diario(string fecha, string tipo)
         {
             Conexion conn = new Conexion();
 
@@ -181,43 +214,60 @@ namespace Proyecto1_Tel.Code
             string Columnas = "ISNULL(SUM(V.Total),0) AS Tot_Ventas \n";
             string Condicion = " Venta as V \n" +
                                 "WHERE V.Fecha = '" + fecha + "'\n";
+            if (!tipo.Equals("0")) { Condicion += "AND V.Usuario = '" + tipo + "' \n"; }
+
             //TOTAL DE GASTO
             string Row = "ISNULL(SUM(G.valor),0)    AS Tot_Gasto";
             string Cond = " Gasto G \n" +
                                 "WHERE G.fecha_gasto =' " + fecha + "'\n";
+            if (!tipo.Equals("0")) { Cond += "AND G.Usuario = '" + tipo + "' \n"; }
+
             //CANTIDAD DE ORDENES
             string Col = " ISNULL(COUNT(V.Total),0)  \n";
             string Condi = " Venta as V \n" +
                            " WHERE V.Fecha = '" + fecha + "'\n";
+            if (!tipo.Equals("0")) { Condi += "AND V.Usuario = '" + tipo + "' \n"; }
+
             //CREDITOS
             string Col_Cre = "  ISNULL(SUM(V.Total),0)   AS Total_Credi \n";
             string Cond_Cre = " Venta as V \n" +
                            " WHERE V.Fecha = '" + fecha + "' \n" +
                            "AND V.Tipo_Pago = 'Deuda'";
+            if (!tipo.Equals("0")) { Cond_Cre += "AND V.Usuario = '" + tipo + "' \n"; }
 
             //DEPOSITOS
             string Col_Dep = " ISNULL(SUM(V.Total),0)  AS Total_Credi \n";
             string Cond_Dep = " Venta as V \n" +
                            " WHERE V.Fecha = '" + fecha + "' \n" +
                            "AND V.Tipo_Pago = 'Deposito'";
+            if (!tipo.Equals("0")) { Cond_Dep += "AND V.Usuario = '" + tipo + "' \n"; }
 
 
 
             //BALANCE GENERAL
-            string Colu = " SUM(ISNULL(Ventas.Tot_Ventas ,0) - ISNULL(Gasto.Tot_Gasto,0) - ISNULL(Credito.Total_Credi,0) - ISNULL(Depositos.Total_Depo,0)) as BALANCE \n";
+            string Colu = " SUM(ISNULL(Ventas.Tot_Ventas ,0) - ISNULL(Depositos.Total_Depo,0) - ISNULL(Gasto.Tot_Gasto,0) - ISNULL(Credito.Total_Credi,0)) as BALANCE \n";
             string Condic = "( SELECT SUM(V.Total) AS Tot_Ventas \n" +
                            "FROM Venta as V \n" +
-                           "WHERE V.Fecha = '" + fecha + "') as Ventas, (SELECT SUM(G.valor) AS Tot_Gasto \n" +
-                            "FROM Gasto as G \n" +
-                            "WHERE G.fecha_gasto = '" + fecha + "') as Gasto, \n" +
-                            " ( SELECT SUM(V.Total) AS Total_Credi FROM Venta as V  \n" +
-                            "WHERE V.Fecha = '" + fecha + "' \n " +
-                            "AND V.Tipo_Pago = 'Deuda') as Credito,( \n" +
-                            "SELECT SUM(V.Total) AS Total_Depo \n" +
-                            "FROM Venta as V \n" +
-                            "WHERE V.Fecha = '" + fecha + "' \n" +
-                            "AND V.Tipo_Pago = 'Deposito') as Depositos";
+                           "WHERE V.Fecha = '" + fecha + "'";
+            if (!tipo.Equals("0")) { Condic += "AND V.Usuario = '" + tipo + "' \n"; }
 
+
+            Condic += ") as Ventas, (SELECT SUM(G.valor) AS Tot_Gasto \n" +
+            "FROM Gasto as G \n" +
+            "WHERE G.fecha_gasto = '" + fecha + "'";
+            if (!tipo.Equals("0")) { Condic += "AND G.Usuario = '" + tipo + "' \n"; }
+            Condic += ") as Gasto, \n" +
+            " ( SELECT SUM(V.Total) AS Total_Credi FROM Venta as V  \n" +
+            "WHERE V.Fecha = '" + fecha + "' \n ";
+            if (!tipo.Equals("0")) { Condic += "AND V.Usuario = '" + tipo + "' \n"; }
+            Condic += "AND V.Tipo_Pago = 'Deuda') as Credito,( \n" +
+            "SELECT SUM(V.Total) AS Total_Depo \n" +
+            "FROM VENTA as V \n" +
+            "WHERE V.Fecha = '" + fecha + "' \n";
+            if (!tipo.Equals("0")) { Condic += "AND V.Usuario = '" + tipo + "' \n"; }
+            Condic += "AND V.Tipo_Pago = 'Deposito') as Depositos";
+            
+ 
 
 
             DataSet Total_Ventas = conn.Mostrar(Condicion, Columnas);
