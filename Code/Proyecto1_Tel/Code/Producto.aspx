@@ -199,13 +199,16 @@
             
 
             var nAbre = document.getElementById("abreviatura").value;
-            var nDescrip = document.getElementById("descripcion").value;
+            var nDescrip = document.getElementById("descrip").value;
             var nTipopro = document.getElementById("tipopro").value;
             var nMarca = document.getElementById("marca").value;
             var nAncho = document.getElementById("tamano").value;            
             var nporcen = document.getElementById("porc").value; 
             var selected = $("#tipopro  option:selected").text();
             
+            alert(nAncho)
+            alert("DESCRIPCON"+ nDescrip)
+
             if (selected == "Polarizado") {
 
                 if (nAncho != "" && nporcen != "") {

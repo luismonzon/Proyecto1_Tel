@@ -288,7 +288,7 @@ namespace Proyecto1_Tel.Code
                 "</div> \n" +
                 "<div class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Descripcion:</b></label> \n" +
-                "<div class=\"controls\"><input  required=\"required\" style=\"font-size: 14px;\" type=\"text\" placeholder=\"Descripcion\" id=\"descripcion\" name=\"descripcion\" runat=\"server\" class=\"span12\"/></div> \n" +
+                "<div class=\"controls\"><input  required=\"required\" style=\"font-size: 14px;\" type=\"text\" placeholder=\"Descripcion\" id=\"descrip\" name=\"descrip\" runat=\"server\" class=\"span12\"/></div> \n" +
                 "</div> \n" +
                 "<div class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Producto:</b></label> \n" +
