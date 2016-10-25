@@ -313,3 +313,7 @@ create table Gasto(
 	)
 
 go
+
+--Agregar columna descuento a detalle_venta
+alter table DetalleVenta
+add Descuento numeric(9,2) not null default 0;

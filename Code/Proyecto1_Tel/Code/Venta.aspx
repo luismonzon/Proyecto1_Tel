@@ -342,6 +342,18 @@
         });
 
 
+        function modaldescuento(val) {
+            $.ajax({
+                type: 'POST',
+                url: 'Venta.aspx/adddescuento',
+                data: JSON.stringify({ codigo: val }),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (data) {
+                    $("#detalleproductos").html(data.d);
+                }
+            });
+        }
 
         function removecarrito(val) {
             $.ajax({
@@ -711,6 +723,25 @@
 	        var $modal = $('#ContentPlaceHolder1_modaldetalle');
 	        $modal.html("");
 
+	    }
+
+	    function AddDescuento() {
+
+	        var desc = document.getElementById("totaldescuento").value;
+	        if (desc != "" && desc >= 0) {
+	            $.ajax({
+                    
+	                type: 'POST',
+	                url: 'Venta.aspx/Add',
+	                data: JSON.stringify({ nombre: nNombre, nit: nNit, apellido: nApellido, direccion: nDireccion, telefono: nTelefono }),
+	                contentType: 'application/json; charset=utf-8',
+	                dataType: 'json',
+	                success: function (response) {
+
+	                }
+
+	            });
+	        }
 	    }
 
 	    function cambio() {

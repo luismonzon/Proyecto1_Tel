@@ -11,6 +11,8 @@ using System.Globalization;
 using RabbitMQ.Client;
 using System.Text;
 using System.Web.Script.Serialization;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+
 namespace Proyecto1_Tel.Code
 {
     public class Product
@@ -22,6 +24,7 @@ namespace Proyecto1_Tel.Code
         public String codigo;
         public String nombre;
         public Double subTotal;
+        public Double descuento;
         public string precio;
         public string usuario;
         public Product(String idventa, String cant, String largo, String ancho, String cod, String abreviatura, String nombre, string precio, string usuario)
@@ -34,6 +37,7 @@ namespace Proyecto1_Tel.Code
             this.ancho = ancho;
             this.idventa = idventa;
             this.usuario = usuario;
+            descuento = 0.0;
 
             Double Cantidad = Convert.ToDouble(cantidad, CultureInfo.InvariantCulture);
 
@@ -423,7 +427,7 @@ namespace Proyecto1_Tel.Code
                 {
                     if (item.ancho.Equals(""))
                     {
-                        respuesta = nueva.Crear("DetalleVenta", "Venta, producto, cantidad, subtotal", "(select max(Venta) from venta)," + item.codigo + "," + item.cantidad + " , " + Convert.ToString(item.subTotal).Replace(",", "."));
+                        respuesta = nueva.Crear("DetalleVenta", "Venta, producto, cantidad, subtotal, descuento ", "(select max(Venta) from venta)," + item.codigo + "," + item.cantidad + " , " + Convert.ToString(item.subTotal).Replace(",", ".")+" , " + item.descuento);
 
 
                         respuesta = nueva.Modificar(" Inventario ", " Cantidad = Cantidad - " + item.cantidad + " ", " Producto = " + item.codigo + " ");
@@ -435,7 +439,7 @@ namespace Proyecto1_Tel.Code
                         Double Largo = Convert.ToDouble(item.largo, CultureInfo.InvariantCulture);
                         Double Cantidad = Convert.ToDouble(item.cantidad, CultureInfo.InvariantCulture);
                         Double Total = Largo * Cantidad;
-                        respuesta = nueva.Crear("DetalleVenta", "Venta, producto, cantidad, metros, subtotal ", "(select max(Venta) from venta)," + item.codigo + "," + item.cantidad + "," + item.largo + "," + Convert.ToString(item.subTotal).Replace(",", "."));
+                        respuesta = nueva.Crear("DetalleVenta", "Venta, producto, cantidad, metros, subtotal, descuento ", "(select max(Venta) from venta)," + item.codigo + "," + item.cantidad + "," + item.largo + "," + Convert.ToString(item.subTotal).Replace(",", ".") + " , " + item.descuento);
 
                         respuesta = nueva.Modificar(" Inventario ", " Metros_Cuadrados = Metros_Cuadrados - " + Convert.ToString(Total).Replace(",", ".") + " ", " Producto = " + item.codigo + " ");
                     }
@@ -720,6 +724,7 @@ namespace Proyecto1_Tel.Code
                     "                <th>Nombre</th>" +
                     "                <th>Cantidad</th>" +
                     "                <th>Precio Unitario</th>" +
+                    "                <th>Descuento</th>" +
                     "                <th>Precio Total</th>" +
                     "                <th>Acciones</th>" +
                     "            </tr>" +
@@ -751,40 +756,16 @@ namespace Proyecto1_Tel.Code
                                                         cant +
                                     "                </td>" +
                                     "               <td>" + carrito[i].precio + "</td>" +
+                                    "               <td>" + carrito[i].descuento + "</td>" +
                                     "               <td>" + carrito[i].subTotal + "</td>" +
 
                                                     "<td>" +
                                                         "   <ul class=\"table-controls\">" +
                                                   "          <li><a href=\"javascript:removecarrito('" + carrito[i].idventa + "')\"class=\"tip\" title=\"Remover\"><i class=\"fam-cross\"></i></a> </li>" +
+                                                  "          <li><a href=\"javascript:modaldescuento('" + carrito[i].idventa + "')\"class=\"tip\" title=\"Descuento\"><i class=\"fam-accept\"></i></a> </li>" +
                                                  "       </ul>" +
                                                 "    </td>" +
                                                 " </tr>";
-                    /*
-                    if (carrito[i].usuario.Equals(user))
-                    {
-                        string cant = carrito[i].cantidad;
-                        if (!carrito[i].ancho.Equals(""))
-                        {
-                            cant += "x" + carrito[i].largo;
-                        }
-                        str += "            <tr>" +
-                                        "                <td>" + carrito[i].idventa + "</td>" +
-                                        "                <td>" + carrito[i].nombre + "</td>" +
-                                        "                <td>" +
-                                                            cant +
-                                        "                </td>" +
-                                        "               <td>" + carrito[i].precio + "</td>" +
-                                        "               <td>" + carrito[i].subTotal + "</td>" +
-
-                                                        "<td>" +
-                                                            "   <ul class=\"table-controls\">" +
-                                                      "          <li><a href=\"javascript:removecarrito('" + carrito[i].idventa + "')\"class=\"tip\" title=\"Remover\"><i class=\"fam-cross\"></i></a> </li>" +
-                                                     "       </ul>" +
-                                                    "    </td>" +
-                                                    " </tr>";
-                    }
-                    */
-
                 }
                 catch (Exception e)
                 {
@@ -794,10 +775,10 @@ namespace Proyecto1_Tel.Code
 
             }
 
-            str += "</tbody>" +
+               str += "</tbody>" +
         " </table>" +
-    " </div>" +
- "</div>";
+        " </div>" +
+        "</div>";
             return str;
 
         }
@@ -912,6 +893,109 @@ namespace Proyecto1_Tel.Code
 
             return venta;
 
+        }
+
+
+        // modal para descuento
+        [WebMethod]
+        public static String modaldescuento(String codigo) {
+
+           
+            string innerhtml =
+                "<div class=\"modal fade\" id=\"ModalPago\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\"> \n" +
+                "<div class=\"modal-dialog\"> \n" +
+                "<div class=\"modal-content\"> \n" +
+                "<div class=\"modal-header\"> \n" +
+                "<button type=\"button\" onclick=\"closeModalPago();\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button> \n" +
+                "<div class=\"step-title\"> \n" +
+                "<i>D</i> \n" +
+                "<h5>Descuento</h5> \n" +
+                "<span>Aplicar descuento</span> \n" +
+                "</div> \n" +
+                "</div>\n"
+                ;
+            //content del modal
+
+            innerhtml +=
+                "<form id=\"formulario_modal\" class=\"form-horizontal row-fluid well\"> \n" +
+                "<div class=\"modal-body\"> \n" +
+                "<table border=\"0\" width=\"100%\" > \n" +
+                "<div> \n" +
+                 //ID DEL CLIENTE
+                 "<div class=\"control-group\"> \n" +
+                "<div class=\"controls\"><input  style=\"font-size: 15px disabled =\"disabled\" readonly=\"readonly\"  type=\"text\" value=\"" + codigo + "\" id=\"codproddescuento\" runat=\"server\" class=\"span12\"/ visible=\"false\"></div> \n" +
+                "</div> \n" +
+                
+                //ID DEL CLIENTE
+                "<div class=\"control-group\"> \n" +
+                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>Descuento (Q.): </b></label> \n" +
+                "<div class=\"controls\"><input placeholder=\"Cantidad\" style=\"font-size: 15px;\" type=\"text\" name=\"total\" id=\"totaldescuento\" runat=\"server\" class=\"span8\" /></div> \n" +
+                "</div> \n" +
+
+                "<div style=\"font-size: 15px;\" id=\"mensaje\"></div> \n" +
+                "<div style=\"font-size: 20px;\" id=\"vuelto\"></div> \n" +
+                "<div style=\"font-size: 25px;\" id=\"venta\"></div> \n" +
+                "<div class=\"alert margin\"> \n" +
+                "<button type=\"button\"  class=\"close\" data-dismiss=\"alert\">×</button> \n" +
+                "Campos Obligatorios (*) \n" +
+                "</div> \n" +
+                "<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" onclick=\"closeModalPago();\" id=\"cerrar_modal\">Cerrar</button>\n" +
+                "<button type=\"button\" class=\"btn btn-large btn-success\" onclick=\"AddDescuento();\" name=\"reg\" id=\"reg_modal\">Registrar</button>\n" +
+                "</td> \n" +
+                "</tr> \n" +
+                "</div> \n" +
+                "</table> \n" +
+                "</div> \n"
+                ;
+
+
+            //footer del modal
+            innerhtml += "</div>\n" +
+                "</div>\n" +
+                "</div>\n"
+            ;
+
+            return innerhtml;
+
+        }
+
+        //agrega el descuento a la lista de productos
+
+        [WebMethod]
+        public static String adddescuento(string codigo, string descuento)
+        {
+            List<Product> carrito = (HttpContext.Current.Session["Carrito"] != null) ? (List<Product>)HttpContext.Current.Session["Carrito"] : null;
+            int desc = Convert.ToInt32(descuento);
+            string user = HttpContext.Current.Session["IdUser"].ToString();
+            for (int i = 0; i < carrito.Count; i++)
+            {
+
+                if (carrito[i].idventa.Equals(codigo))
+                {
+
+                    int sub = Convert.ToInt32(carrito[i].subTotal);
+                    if (desc < sub)
+                    {
+                        carrito[i].descuento = desc;
+                        sub = sub - desc;
+                        carrito[i].subTotal = sub;
+                    }
+                    else
+                    {
+                        string message = "'El descuento es mayor al subtotal'";
+                        string cleanMessage = message.Replace("'", "\'");
+                        System.Web.UI.Page page = HttpContext.Current.CurrentHandler as System.Web.UI.Page;
+                        string script = string.Format("alert('{0}');", cleanMessage);
+                        if (page != null && !page.ClientScript.IsClientScriptBlockRegistered("alert"))
+                        {
+                            page.ClientScript.RegisterClientScriptBlock(page.GetType(), "alert", script, true /* addScriptTags */);
+                        }
+                    }
+                }
+            }
+
+            HttpContext.Current.Session["Carrito"] = carrito;
+            return Graficar();
         }
 
 
