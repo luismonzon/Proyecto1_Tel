@@ -761,7 +761,7 @@ namespace Proyecto1_Tel.Code
                                                     "<td>" +
                                                         "   <ul class=\"table-controls\">" +
                                                   "          <li><a href=\"javascript:removecarrito('" + carrito[i].idventa + "')\"class=\"tip\" title=\"Remover\"><i class=\"fam-cross\"></i></a> </li>" +
-                                                  "          <li><a href=\"javascript:modaldescuento('" + carrito[i].idventa + "')\"class=\"tip\" title=\"Descuento\"><i class=\"fam-accept\"></i></a> </li>" +
+                                                  "          <li><a href=\"javascript:modaldescuento('" + carrito[i].idventa + "')\"class=\"tip\" title=\"Descuento\"><i class=\"fam-coins-delete\"></i></a> </li>" +
                                                  "       </ul>" +
                                                 "    </td>" +
                                                 " </tr>";

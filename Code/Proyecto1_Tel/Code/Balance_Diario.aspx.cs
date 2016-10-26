@@ -86,12 +86,27 @@ namespace Proyecto1_Tel.Code
                            "AND V.Tipo_Pago = 'Deuda'";
             if (!tipo.Equals("0")) { Cond_Cre += "AND V.Usuario = '" + tipo + "' \n"; }
 
+            //DESCUENTOS
+            /*SELECT   ISNULL(SUM(dv.Descuento),0)   AS Total_Credi 
+                FROM  DetalleVenta dv, Venta as V 
+                WHERE V.Fecha = '20161025' 
+                AND V.Usuario = '4' 
+             ;*/
+
+            string Col_Des = "  ISNULL(SUM(dv.Descuento),0)   AS Total_Descuento \n";
+            string Cond_Des = " DetalleVenta dv, Venta as V \n" +
+                           " WHERE V.Fecha = '" + fecha + "' \n";
+            if (!tipo.Equals("0")) { Cond_Cre += "AND V.Usuario = '" + tipo + "' \n"; }
+
+
             //DEPOSITOS
             string Col_Dep = " ISNULL(SUM(V.Total),0)  AS Total_Credi \n";
             string Cond_Dep = " Venta as V \n" +
                            " WHERE V.Fecha = '"+fecha+"' \n" +
                            "AND V.Tipo_Pago = 'Deposito'";
             if (!tipo.Equals("0")) { Cond_Dep+= "AND V.Usuario = '" + tipo + "' \n"; }
+
+
 
 
 
@@ -126,6 +141,7 @@ namespace Proyecto1_Tel.Code
             DataSet Total_Ordenes = conn.Mostrar(Condi, Col);
             DataSet Total_Depositos = conn.Mostrar(Cond_Dep, Col_Dep);
             DataSet Total_Credito = conn.Mostrar(Cond_Cre, Col_Cre);
+            DataSet Total_Descuento = conn.Mostrar(Cond_Des, Col_Des);
             DataSet Balance_Diario = conn.Mostrar(Condic, Colu);
             
 
@@ -164,7 +180,7 @@ namespace Proyecto1_Tel.Code
                         "<td id=\"hora\" runat=\"server\" >Q." + Total_Ventas.Tables[0].Rows[0][0] + "</td>" +
                         "<td id=\"hora\" runat=\"server\" >Q." + Total_Credito.Tables[0].Rows[0][0] + "</td>" +
                         "<td id=\"hora\" runat=\"server\" >Q." + Total_Depositos.Tables[0].Rows[0][0] + "</td>" +
-                        "<td id=\"hora\" runat=\"server\" >Q."  +"FALTA"+ "</td>" +
+                        "<td id=\"hora\" runat=\"server\" >Q." + Total_Descuento.Tables[0].Rows[0][0] + "</td>" +
                         "<td id=\"descripcion\" runat=\"server\" >Q." + Total_Gastos.Tables[0].Rows[0][0] + "</td>" +
                         "<td id=\"monto\" runat=\"server\" >Q." + Balance_Diario.Tables[0].Rows[0][0] + "</td>";
 
