@@ -317,3 +317,20 @@ go
 --Agregar columna descuento a detalle_venta
 alter table DetalleVenta
 add Descuento numeric(9,2) not null default 0;
+
+
+SELECT   ISNULL(SUM(DV.Descuento),0)   AS Total_Credi 
+ FROM DetalleVenta DV, Venta as V 
+ WHERE V.Fecha = '20160911' 
+ AND DV.Venta = V.Venta
+ AND V.Tipo_Pago = 'Deuda'
+ AND V.Usuario = '1' 
+;
+
+
+ SELECT   ISNULL(SUM(dv.Descuento),0)   AS Total_Credi 
+ FROM  DetalleVenta dv, Venta as V 
+ WHERE V.Fecha = '20161025' 
+ AND V.Usuario = '4' 
+ ;
+
