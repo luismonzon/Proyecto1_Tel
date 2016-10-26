@@ -11,7 +11,6 @@ using System.Globalization;
 using RabbitMQ.Client;
 using System.Text;
 using System.Web.Script.Serialization;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Proyecto1_Tel.Code
 {
@@ -923,7 +922,7 @@ namespace Proyecto1_Tel.Code
                 "<div> \n" +
                  //ID DEL CLIENTE
                  "<div class=\"control-group\"> \n" +
-                "<div class=\"controls\"><input  style=\"font-size: 15px disabled =\"disabled\" readonly=\"readonly\"  type=\"text\" value=\"" + codigo + "\" id=\"codproddescuento\" runat=\"server\" class=\"span12\"/ visible=\"false\"></div> \n" +
+                "<div class=\"controls\"><input  style=\" visibility:hidden; font-size: 15px; disabled =\"disabled\"; readonly=\"readonly\";  type=\"text\"; value=\"" + codigo + "\" id=\"codproddescuento\" runat=\"server\" class=\"span12\"/ ></div> \n" +
                 "</div> \n" +
                 
                 //ID DEL CLIENTE
@@ -933,8 +932,6 @@ namespace Proyecto1_Tel.Code
                 "</div> \n" +
 
                 "<div style=\"font-size: 15px;\" id=\"mensaje\"></div> \n" +
-                "<div style=\"font-size: 20px;\" id=\"vuelto\"></div> \n" +
-                "<div style=\"font-size: 25px;\" id=\"venta\"></div> \n" +
                 "<div class=\"alert margin\"> \n" +
                 "<button type=\"button\"  class=\"close\" data-dismiss=\"alert\">×</button> \n" +
                 "Campos Obligatorios (*) \n" +
@@ -966,6 +963,7 @@ namespace Proyecto1_Tel.Code
         {
             List<Product> carrito = (HttpContext.Current.Session["Carrito"] != null) ? (List<Product>)HttpContext.Current.Session["Carrito"] : null;
             int desc = Convert.ToInt32(descuento);
+            string message = "";
             string user = HttpContext.Current.Session["IdUser"].ToString();
             for (int i = 0; i < carrito.Count; i++)
             {
@@ -979,26 +977,24 @@ namespace Proyecto1_Tel.Code
                         carrito[i].descuento = desc;
                         sub = sub - desc;
                         carrito[i].subTotal = sub;
+                        message = "1";
+
                     }
                     else
                     {
-                        string message = "'El descuento es mayor al subtotal'";
-                        string cleanMessage = message.Replace("'", "\'");
-                        System.Web.UI.Page page = HttpContext.Current.CurrentHandler as System.Web.UI.Page;
-                        string script = string.Format("alert('{0}');", cleanMessage);
-                        if (page != null && !page.ClientScript.IsClientScriptBlockRegistered("alert"))
-                        {
-                            page.ClientScript.RegisterClientScriptBlock(page.GetType(), "alert", script, true /* addScriptTags */);
-                        }
+                        message = "2";
                     }
                 }
             }
 
             HttpContext.Current.Session["Carrito"] = carrito;
-            return Graficar();
+            return message;
         }
 
-
+        [WebMethod]
+        public static String graficarProd() {
+            return Graficar();
+        }
 
 
     }
