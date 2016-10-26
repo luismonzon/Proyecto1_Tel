@@ -96,7 +96,7 @@ namespace Proyecto1_Tel.Code
             string Col_Des = "  ISNULL(SUM(dv.Descuento),0)   AS Total_Descuento \n";
             string Cond_Des = " DetalleVenta dv, Venta as V \n" +
                            " WHERE V.Fecha = '" + fecha + "' \n";
-            if (!tipo.Equals("0")) { Cond_Cre += "AND V.Usuario = '" + tipo + "' \n"; }
+            if (!tipo.Equals("0")) { Cond_Des += "AND V.Usuario = '" + tipo + "' \n"; }
 
 
             //DEPOSITOS

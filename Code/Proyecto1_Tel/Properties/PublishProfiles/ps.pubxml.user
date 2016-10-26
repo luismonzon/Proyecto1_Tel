@@ -13,16 +13,16 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>05/06/2016 03:47:20</publishTime>
     </File>
     <File Include="bin/Proyecto1_Tel.dll">
-      <publishTime>09/27/2016 04:12:15</publishTime>
+      <publishTime>10/26/2016 00:08:52</publishTime>
     </File>
     <File Include="bin/Proyecto1_Tel.dll.config">
-      <publishTime>09/27/2016 02:54:26</publishTime>
+      <publishTime>10/25/2016 23:42:52</publishTime>
     </File>
     <File Include="bin/RabbitMQ.Client.dll">
       <publishTime>05/06/2016 03:47:20</publishTime>
     </File>
     <File Include="Code/Balance_Diario.aspx">
-      <publishTime>09/27/2016 02:54:26</publishTime>
+      <publishTime>10/25/2016 23:42:58</publishTime>
     </File>
     <File Include="Code/Cliente.aspx">
       <publishTime>09/27/2016 02:54:26</publishTime>
@@ -739,7 +739,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/Producto.aspx">
-      <publishTime>09/27/2016 02:54:26</publishTime>
+      <publishTime>10/25/2016 23:42:58</publishTime>
     </File>
     <File Include="Code/ProductosInventario.aspx">
       <publishTime>09/27/2016 02:54:26</publishTime>
@@ -763,7 +763,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>09/27/2016 02:54:26</publishTime>
     </File>
     <File Include="Code/Venta.aspx">
-      <publishTime>09/27/2016 03:34:21</publishTime>
+      <publishTime>10/25/2016 23:42:58</publishTime>
     </File>
     <File Include="Code/VentaAnual.aspx">
       <publishTime>09/27/2016 02:54:26</publishTime>

@@ -6,20 +6,41 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
                     
-			            
-    <div class="row-fluid">
-        <div class="span3">
-            <div class="pick-a-date no-append" >
-		                <input type="text" class="datepicker" id="myDate" required="required"/>
+
+    
+	<h4 class="widget-name"><i class="icon-columns"></i>Balance General</h4>
+    <div id="selectU" runat="server"></div> 
+        <div class="widget">
+	        <div class="navbar">
+                <div id="Div2" runat="server"></div>
+                    
+	            <div class="navbar-inner">
+	                <h6>Balance Diario</h6>
+
+		                
+
+	                <div class="pick-a-date no-append" >
+                        
+                        
+                        <input type="text" class="datepicker" id="myDate" required="required"/>
+                        
+                        
                         <button type="button" class="btn btn-success" onclick="GraficaPie();" id="vergrafica">Ver</button>
 	                </div>
-        
-        </div>
+                    
+	            </div>
+	        </div>
+            <div id="tabla-productos" class="table-overflow">
+            </div>
+ 	    </div>
+
+      
+    <div class="row-fluid">
        
 
         <!-- Pie chart -->
                         
-                    <div class="span4">
+                    <div class="span6">
 			            	<div class="navbar">
 
 			                	<div class="navbar-inner">
@@ -39,7 +60,7 @@
 			            </div>
 			            <!-- /pie chart -->
 
-        <div class="span4" id="tabla_balance">
+        <div class="span6" id="tabla_balance">
 
             <!-- Row styling -->
                 <!-- /row styling -->
@@ -72,11 +93,11 @@
 
                 var data = [];
 
-
+                var id = document.getElementById("usuarios").value;
                 $.ajax({
                     type: 'POST',
                     url: 'Balance_Diario.aspx/GenerarTabla',
-                    data: JSON.stringify({ fecha: fecha }),
+                    data: JSON.stringify({ fecha: fecha, tipo: id}),
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'json',
                     success: function (response) {
@@ -92,7 +113,7 @@
             $.ajax({
                 type: 'POST',
                 url: 'Balance_Diario.aspx/Reporte_Diario',
-                data: JSON.stringify({ fecha: fecha }),
+                data: JSON.stringify({ fecha: fecha, tipo: id }),
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
                 success: function (response) {

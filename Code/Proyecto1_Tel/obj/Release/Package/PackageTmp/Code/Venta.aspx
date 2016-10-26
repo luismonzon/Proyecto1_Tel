@@ -342,6 +342,35 @@
         });
 
 
+        function modaldescuento(val) {
+            $.ajax({
+                type: 'POST',
+                url: 'Venta.aspx/modaldescuento',
+                data: JSON.stringify({ codigo: val }),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (data) {
+                    var $modal = $('#ContentPlaceHolder1_divpago');
+                    $modal.html(data.d);
+                    $('#ModalPago').on('show.bs.modal', function () {
+                        $('.modal .modal-body').css('overflow-y', 'auto');
+                        $('.modal .modal-body').css('max-height', $(window).height() * 0.7);
+                        $('.modal .modal-body').css('height', $(window).height() * 0.7);
+                    });
+
+                    //Modal
+                    $('#formulario_modal')[0].reset(); //formulario lo inicializa con datos vacios
+                    $('#pro_modal').val('Registro'); //crea nuestra caja de procesos y se agrega el valor del registro
+                    $('#reg_modal').show(); //mostramos el boton de registro
+                    $('#edi_modal').hide();//se esconde el boton de editar
+                    $('#ModalPago').modal({ //
+                        show: true, //mostramos el modal registra producto
+                        //backdrop: 'static' //hace que no se cierre el modal si le dan clic afuera del mismo.
+                    });
+
+                }
+            });
+        }
 
         function removecarrito(val) {
             $.ajax({
@@ -653,7 +682,6 @@
 	                dataType: 'json',
 	                success: function (response) {
 	                    if (response.d == true) {
-	                        alert("aqui");
 	                        $.ajax({
 	                            type: 'POST',
 	                            url: 'Venta.aspx/BuscarCliente',
@@ -711,6 +739,44 @@
 	        var $modal = $('#ContentPlaceHolder1_modaldetalle');
 	        $modal.html("");
 
+	    }
+
+	    function AddDescuento() {
+
+	        var desc = document.getElementById("totaldescuento").value;
+	        var cod = document.getElementById("codproddescuento").value;
+	        if (desc != "" && desc >= 0) {
+	            $.ajax({
+                    
+	                type: 'POST',
+	                url: 'Venta.aspx/adddescuento',
+	                data: JSON.stringify({ codigo: cod, descuento: desc }),
+	                contentType: 'application/json; charset=utf-8',
+	                dataType: 'json',
+	                success: function (response) {
+	                    if (response.d == "1") {
+	                        $('#mensaje').removeClass();
+	                        $('#mensaje').addClass('alert alert-success').html('Descuento aplicado').show(200).delay(2500).hide(200);
+	                    } else {
+
+	                        $('#mensaje').removeClass();
+	                        $('#mensaje').addClass('alert alert-danger').html('El descuento no pudo se aplicado').show(200).delay(2500).hide(200);
+	                    }
+
+	                    $.ajax({
+	                        type: 'POST',
+	                        url: 'Venta.aspx/graficarProd',
+	                        contentType: 'application/json; charset=utf-8',
+	                        dataType: 'json',
+	                        success: function (response) {
+	                            $("#detalleproductos").html(response.d);
+	                        }
+	                    });
+
+	                }
+
+	            });
+	        }
 	    }
 
 	    function cambio() {
