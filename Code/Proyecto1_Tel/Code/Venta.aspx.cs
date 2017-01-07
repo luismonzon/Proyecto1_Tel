@@ -524,6 +524,24 @@ namespace Proyecto1_Tel.Code
 
 
         [WebMethod]
+        public static bool AddVale(string total, string cliente)
+        {
+            string tipo_pago = "";
+                    tipo_pago = "Efectivo";
+        
+            Conexion nueva = new Conexion();
+            bool respuesta;
+
+            string user = HttpContext.Current.Session["IdUser"].ToString();
+
+            respuesta = nueva.Crear("Venta", "Cliente, Usuario, Fecha, Total, Tipo_Pago, Hora", cliente + "," + user + ",GETDATE()," + Convert.ToString(total).Replace(",", ".") + ", " + "'" + tipo_pago + "'" + " , CONVERT(time, GETDATE())");
+         
+            return respuesta;
+        }
+
+
+
+        [WebMethod]
         public static bool Add(string nombre, string nit, string apellido, string direccion, string telefono)
         {
 
@@ -894,6 +912,94 @@ namespace Proyecto1_Tel.Code
 
         }
 
+
+
+
+        [WebMethod]
+        public static string MostrarModalVale(string cliente)
+        {
+            Conexion nueva = new Conexion();
+            Double total = 0;
+            
+            string user = HttpContext.Current.Session["IdUser"].ToString();
+            Conexion conexion = new Conexion();
+          
+            
+            string innerhtml =
+                "<div class=\"modal fade\" id=\"ModalVale\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\"> \n" +
+                "<div class=\"modal-dialog\"> \n" +
+                "<div class=\"modal-content\"> \n" +
+                "<div class=\"modal-header\"> \n" +
+                "<button type=\"button\" onclick=\"closeModalPago();\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button> \n" +
+                "<div class=\"step-title\"> \n" +
+                "<i>C</i> \n" +
+                "<h5>Vale</h5> \n" +
+                "<span>Ingresar Vale</span> \n" +
+                "</div> \n" +
+                "</div>\n"
+                ;
+            //content del modal
+
+            innerhtml +=
+                "<form id=\"formulario_modal\" class=\"form-horizontal row-fluid well\"> \n" +
+                "<div class=\"modal-body\"> \n" +
+                "<table border=\"0\" width=\"100%\" > \n" +
+                "<div> \n" +
+                
+
+                //ID DEL CLIENTE
+                "<div class=\"control-group\"> \n" +
+                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>Pago (Q.): </b></label> \n" +
+                "<div class=\"controls\"><input placeholder=\"Cantidad\" style=\"font-size: 15px;\" type=\"text\" name=\"total\" id=\"total_vale\" runat=\"server\" class=\"span8\" /></div> \n" +
+                "</div> \n" +
+
+                "<div class=\"control-group\"> \n" +
+                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>Usuario </b></label> \n" +
+                "<div class=\"controls\">" +
+                "<select style=\"font-size: 15px;\" data-placeholder=\"Seleccionar Usuario\" class=\"select\"  id=\"cmbusuario\" tabindex=\"2\">";
+
+                DataSet usuario=conexion.Buscar_Mostrar("cliente","tipocliente=2");
+                foreach (DataRow item in usuario.Tables[0].Rows)
+                {
+                    innerhtml+= "<option value=\"" + item["cliente"] + "\">" + item["Nombre"] + " - " + item["Apellido"] + "</option> ";
+                }
+                
+                innerhtml+=" </select></div> \n" +
+                "</div> \n" +
+
+                "<div class=\"control-group\"> \n" +
+                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>Descripcion</b></label> \n" +
+                "<div class=\"controls\"><input placeholder=\"Descripcion\"  style=\"font-size: 15px;\" type=\"text\" name=\"total\" id=\"descripcion\" runat=\"server\" class=\"span8\" /></div> \n" +
+                "</div> \n" +
+                    //
+
+                "<tr> \n" +
+                "<td colspan=\"2\"> \n" +
+                "<div class=\"alert margin\"> \n" +
+                "<button type=\"button\"  class=\"close\" data-dismiss=\"alert\">×</button> \n" +
+                "Campos Obligatorios (*) \n" +
+                "</div> \n" +
+                "<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" onclick=\"closeModalPago();\" id=\"cerrar_modal\">Cerrar</button>\n" +
+                "<button type=\"button\" class=\"btn btn-large btn-success\" onclick=\"AddVale();\" name=\"reg\" id=\"reg_modal\">Registrar</button>\n" +
+                "</td> \n" +
+                "</tr> \n" +
+                "</div> \n" +
+                "</table> \n" +
+                "</div> \n"
+                ;
+
+
+            //footer del modal
+            innerhtml += "</div>\n" +
+                "</div>\n" +
+                "</div>\n";
+
+            
+               
+
+
+            return innerhtml;
+        }
 
         // modal para descuento
         [WebMethod]

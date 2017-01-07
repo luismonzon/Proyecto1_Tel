@@ -315,6 +315,7 @@
 
                             //se escribe el modal
                             var $modal = $('#ContentPlaceHolder1_divpago');
+                        
                             $modal.html(response.d);
                             $('#ModalPago').on('show.bs.modal', function () {
                                 $('.modal .modal-body').css('overflow-y', 'auto');

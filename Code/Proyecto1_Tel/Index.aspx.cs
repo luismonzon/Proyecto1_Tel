@@ -23,7 +23,7 @@ namespace Proyecto1_Tel
         [WebMethod]
         public static string Log(string usuario, string password)
         {
-
+            Console.Write("in");
             Conexion conexion = new Conexion();
 
             if (conexion.Entrar(usuario, password))
