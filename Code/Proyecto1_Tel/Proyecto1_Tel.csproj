@@ -293,6 +293,7 @@
     <Content Include="Code\Rep_GastoSemana.aspx" />
     <Content Include="Code\Rol.aspx" />
     <Content Include="Code\User.aspx" />
+    <Content Include="Code\ValesMensual.aspx" />
     <Content Include="Code\Venta.aspx" />
     <Content Include="Code\VentaAnual.aspx" />
     <Content Include="Code\VentaDiaria.aspx" />
@@ -521,10 +522,16 @@
     <Compile Include="Code\User.aspx.designer.cs">
       <DependentUpon>User.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Code\ValesMensual.aspx.cs">
+      <DependentUpon>ValesMensual.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Code\ValesMensual.aspx.designer.cs">
+      <DependentUpon>ValesMensual.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Code\Validacion.cs" />
     <Compile Include="Code\Venta.aspx.cs">
       <DependentUpon>Venta.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Code\Venta.aspx.designer.cs">
       <DependentUpon>Venta.aspx</DependentUpon>

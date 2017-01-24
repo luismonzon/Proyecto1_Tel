@@ -32,6 +32,7 @@ namespace Proyecto1_Tel.Code
                         case "MasVendidoMes":
                         case "MasVendidoSemana":
                         case "Usuarios":
+                        case "ValesMensual":
                         case "Venta":
                         case "VentaDiaria":
                         case "VentaSemanal":
@@ -66,6 +67,7 @@ namespace Proyecto1_Tel.Code
                         case "Cliente":
                         case "Depositos":
                         case "Inv_tienda":
+                        case "ValesMensual":
                         case "Venta":
                         case "ClienteDeuda":
                         case "Inicio":

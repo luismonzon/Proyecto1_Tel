@@ -334,3 +334,20 @@ SELECT   ISNULL(SUM(DV.Descuento),0)   AS Total_Credi
  AND V.Usuario = '4' 
  ;
 
+----- Vales 20/01/17 -----
+
+create table TipoCliente(
+tipocliente int identity(1,1) not null,
+descripcion varchar(50) null,
+Constraint pk_tipocliente Primary Key(tipocliente)
+)
+
+alter table Cliente add  tipocliente int  null default 1
+
+ALTER TABLE Cliente
+ADD CONSTRAINT fk_clientetipo
+FOREIGN KEY (tipocliente)
+REFERENCES TipoCliente(tipocliente)
+
+insert into TipoCliente (descripcion) values('normal')
+insert into TipoCliente (descripcion) values('vale')
