@@ -582,20 +582,28 @@
 	        var client = document.getElementById('cmbclientes').value;
 	        var tipo = $("#cmbpago").val();
 	        var pago = document.getElementById("totalabonado").value;
-
-
+	        
+	        var Tipo_Venta;
+           
 	        var totalventa = parseFloat(tot.replace(",", "."));
 
 	        var pagototal = parseFloat(pago.replace(",", "."));
 
+	        if ($('input:checkbox[name=tipoventa]').prop('checked')) {
+	            Tipo_Venta = 2;
+	        } else {
+	            Tipo_Venta = 1;
+	        }
+	        
+
 	        if (pagototal > totalventa || pagototal == totalventa) {
 	            if (client != "" && tot != "0") {
-
+	                
 
 	                $.ajax({
 	                    type: 'POST',
 	                    url: 'Venta.aspx/AddPago',
-	                    data: JSON.stringify({ total: tot, cliente: client, tipopago: tipo }),
+	                    data: JSON.stringify({ total: tot, cliente: client, tipopago: tipo, tipoventa: Tipo_Venta }),
 	                    contentType: 'application/json; charset=utf-8',
 	                    dataType: 'json',
 	                    success: function (response) {

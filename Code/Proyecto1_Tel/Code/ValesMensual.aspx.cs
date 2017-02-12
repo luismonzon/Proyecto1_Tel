@@ -64,7 +64,7 @@ namespace Proyecto1_Tel.Code
                                 "and v.Usuario = u.Usuario \n" +
                                 "and DATEPART(MONTH,fecha) = " + mes + " \n" +
                                 "and DATEPART(YEAR,fecha) = " + anio + " \n" +
-                                "and c.tipocliente = 2 \n";
+                                "and v.tipoventa = 2 \n";
 
             if (!tipo.Equals("0")) { Condicion += "and c.Cliente = '" + tipo + "' \n"; }
 
@@ -78,7 +78,8 @@ namespace Proyecto1_Tel.Code
                                 "where v.Cliente = c.Cliente \n";
             if (!tipo.Equals("0")) { Cond += "and c.Cliente = '" + tipo + "' \n"; }
             Cond +=             "and DATEPART(MONTH,fecha) = " + mes + " \n" +
-                                "and DATEPART(YEAR,fecha) = " + anio + " \n" ;
+                                "and DATEPART(YEAR,fecha) = " + anio + " \n" +
+                                "and v.tipoventa = 2 ";
 
             DataSet total = conexion.Mostrar(Cond, Row);
 
@@ -112,7 +113,7 @@ namespace Proyecto1_Tel.Code
                     data += " <li><a href=\"javascript:VerDetalle(" + item["Venta"].ToString() + ")\" id=\"view\" class=\"tip\" CssClass=\"Edit\" title=\"Ver Detalle\"><i class=\"fam-eye\"></i></a> </li>";
                     if (rol == "1")
                     {
-                        data += " <li><a href=\"javascript:Delete(" + item["Venta"].ToString() + ")\" id=\"view\" class=\"tip\" CssClass=\"Delete\" title=\"Eliminar Venta\"><i class=\"fam-cross\"></i></a> </li>";
+                        data += " <li><a href=\"javascript:Delete(" + item["Venta"].ToString() + ")\" id=\"view\" class=\"tip\" CssClass=\"Delete\" title=\"Eliminar Vale\"><i class=\"fam-cross\"></i></a> </li>";
                     }
                     data += "</td>";
                     data += "</tr>";
@@ -130,6 +131,95 @@ namespace Proyecto1_Tel.Code
 
             return innerhtml;
         }
+
+        [WebMethod]
+
+        public static string ModalDetalle(string id)
+        {
+            //head del modal
+            string innerhtml = "<div class=\"modal fade\" id=\"modal-detalle\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\"> \n" +
+                "<div class=\"modal-dialog\"> \n" +
+                "<div class=\"modal-content\"> \n" +
+                "<div class=\"modal-header\"> \n" +
+                "<button type=\"button\" onclick=\"closeModalPago();\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button> \n" +
+                "<div class=\"step-title\"> \n" +
+                "<i>P</i> \n" +
+                "<h5>Productos</h5> \n" +
+                "<span>Productos Comprados por el cliente </span> \n" +
+                "</div> \n" +
+                "</div>\n"
+                ;
+            //content del modal
+            innerhtml += "    <div class=\"navbar\"> " + "<div class=\"navbar-inner\">" +
+                                "<h6>Produtos</h6>" +
+                                "  <div class=\"nav pull-right\">" +
+                                    "<a href=\"#\" class=\"dropdown-toggle just-icon\" data-toggle=\"dropdown\"><i class=\"font-cog\"></i></a>" +
+                                        "<ul class=\"dropdown-menu pull-right\">" +
+                                            "<li><a href=\"#\"><i class=\"font-heart\"></i>Favorite it</a></li>" +
+                                            "<li><a href=\"#\"><i class=\"font-refresh\"></i>Reload page</a></li>" +
+                                                "<li><a href=\"#\"><i class=\"font-link\"></i>Attach something</a></li>" +
+                                        "</ul>" +
+                                    "</div>" +
+                            "</div>" +
+                    "</div>";
+
+            string columnas = "p.Abreviatura, p.Descripcion, d.Cantidad, d.Metros, d.SubTotal SubTotal";
+            string condicion =
+                "Producto p, Venta v, DetalleVenta d \n" +
+                "where d.Venta = v.Venta \n" +
+                "and p.Producto = d.Producto \n" +
+                "and v.Venta = " + id + " \n";
+            Conexion con = new Conexion();
+            DataSet roles = con.Mostrar(condicion, columnas);
+            String data = "No hay Productos Disponibles";
+            if (roles.Tables.Count > 0)
+            {
+
+                data = "<div class=\"table-overflow\"> " +
+                    "<table class=\"table table-striped table-bordered\" id=\"data-table\">" +
+                        "<thead>" +
+                            "<tr>" +
+                               " <th  align =\"center\">Abreviatura</th>" +
+                                "<th align =\"center\">Descripcion</th>" +
+                                "<th align =\"center\">Cantidad</th>" +
+                                "<th align =\"center\">Metros</th>" +
+                                "<th align =\"center\">Sub Total</th>" +
+                            "</tr>" +
+                        "</thead>" + "<tbody>";
+
+                foreach (DataRow item in roles.Tables[0].Rows)
+                {
+                    data += "<tr>" +
+                        "<td id=\"codigo\" runat=\"server\" align =\"Center\">" + item["Abreviatura"].ToString() + "</td>" +
+                        "<td>" + item["Descripcion"].ToString() + "</td>" +
+                        "<td>" + item["Cantidad"].ToString() + "</td>" +
+                        "<td>" + item["Metros"].ToString() + "</td>" +
+                        "<td> Q." + item["SubTotal"].ToString() + "</td>"
+                        ;
+                    data += "</tr>";
+                }
+
+
+                data += "</tbody>" +
+                        "</table>" +
+                    "</div>" +
+                "</div>";
+
+            }
+
+            innerhtml += data;
+            //footer del modal
+            innerhtml += "</div>\n" +
+            "<div class=\"modal-footer\">\n" +
+                "<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" onclick=\"CerrarModal();\" id=\"cerrar\">Cerrar</button>\n" +
+            "</div>\n" +
+            "</div>\n" +
+            "</div>\n"
+            ;
+
+            return innerhtml;
+        }
+
 
 
 

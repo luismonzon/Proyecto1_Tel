@@ -351,3 +351,25 @@ REFERENCES TipoCliente(tipocliente)
 
 insert into TipoCliente (descripcion) values('normal')
 insert into TipoCliente (descripcion) values('vale')
+
+
+
+--Agregar Tabla Tipo_Venta y clave foranea en la tabla venta.
+use PROYECT_1;
+create table TipoVenta(
+tipoventa int identity(1,1) not null,
+tipo varchar(50) null,
+Constraint pk_tipoventa Primary Key(tipoventa)
+)
+
+alter table Venta add  tipoventa int  null default 1
+
+ALTER TABLE Venta
+ADD CONSTRAINT fk_ventatipo
+FOREIGN KEY (tipoventa)
+REFERENCES TipoVenta(tipoventa)
+
+insert into TipoVenta(tipo) values('normal')
+insert into TipoVenta (tipo) values('vale')
+
+SELECT * FROM DetalleVenta;

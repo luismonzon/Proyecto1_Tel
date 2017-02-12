@@ -339,7 +339,7 @@ namespace Proyecto1_Tel.Code
                 "</div> \n" +
                 //
 
-                //ID DEL CLIENTE
+          
                 "<div class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>Pago (Q.): </b></label> \n" +
                 "<div class=\"controls\"><input placeholder=\"Cantidad\" style=\"font-size: 15px;\" type=\"text\" name=\"total\" id=\"totalabonado\" runat=\"server\" class=\"span8\" /></div> \n" +
@@ -348,6 +348,10 @@ namespace Proyecto1_Tel.Code
                 "<div class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>Tipo Pago</b></label> \n" +
                 "<div class=\"controls\"><select style=\"font-size: 15px;\" data-placeholder=\"Agregar producto\" class=\"select\"  onChange=\"cambio()\"  id=\"cmbpago\" tabindex=\"2\"><option value=\"1\">Efectivo</option><option value=\"2\">Credito</option> <option value=\"3\">Deposito</option> </select></div> \n" +
+                
+                "</div> \n" +
+                "<div class=\"control-group\"> \n" +
+                "<div style=\"font-size: 20px;\" ><input type=\"checkbox\" name=\"tipoventa\" /> Vale </div>" +
                 "</div> \n" +
 
                 "<tr> \n" +
@@ -355,6 +359,7 @@ namespace Proyecto1_Tel.Code
                 "<div style=\"font-size: 15px;\" id=\"mensaje\"></div> \n" +
                 "<div style=\"font-size: 20px;\" id=\"vuelto\"></div> \n" +
                 "<div style=\"font-size: 25px;\" id=\"venta\"></div> \n" +
+                
                 "<div class=\"alert margin\"> \n" +
                 "<button type=\"button\"  class=\"close\" data-dismiss=\"alert\">×</button> \n" +
                 "Campos Obligatorios (*) \n" +
@@ -382,7 +387,7 @@ namespace Proyecto1_Tel.Code
 
 
         [WebMethod]
-        public static bool AddPago(string total, string cliente, string tipopago)
+        public static bool AddPago(string total, string cliente, string tipopago, string tipoventa)
         {
             string tipo_pago = "";
             switch (tipopago)
@@ -419,7 +424,7 @@ namespace Proyecto1_Tel.Code
 
             if (totalventa == 0) { return false; }
 
-            respuesta = nueva.Crear("Venta", "Cliente, Usuario, Fecha, Total, Tipo_Pago, Hora", cliente + "," + user + ",GETDATE()," + Convert.ToString(total).Replace(",", ".") + ", " + "'" + tipo_pago + "'" + " , CONVERT(time, GETDATE())");
+            respuesta = nueva.Crear("Venta", "Cliente, Usuario, Fecha, Total, Tipo_Pago, Hora, tipoventa", cliente + "," + user + ",GETDATE()," + Convert.ToString(total).Replace(",", ".") + ", " + "'" + tipo_pago + "'" + " , CONVERT(time, GETDATE()) ," + tipoventa);
             if (respuesta == true)
             {
                 foreach (var item in carrito)
@@ -474,47 +479,50 @@ namespace Proyecto1_Tel.Code
                     respuesta = nueva.Crear("Deuda", "Cliente, cantidad, venta", cliente + "," + Convert.ToString(total).Replace(",", ".") + ",(select max(Venta) from venta)");
                 }
 
-
-
-                var factory = new ConnectionFactory() { HostName = "localhost" };
-                using (var connection = factory.CreateConnection())
-                using (var channel = connection.CreateModel())
+                if (tipoventa.Equals("1"))
                 {
-                    channel.QueueDeclare(queue: "hello",
-                                         durable: false,
-                                         exclusive: false,
-                                         autoDelete: false,
-                                         arguments: null);
-
-                    string message = "";
-                    DataSet venta = nueva.Consulta("(select max(Venta) from venta)");
-                    DataSet dcliente = nueva.Consulta("select Direccion, Nombre from Cliente Where Cliente = " + cliente );
-                    string ventastring = venta.Tables[0].Rows[0][0].ToString();
-                    string direccioncliente = dcliente.Tables[0].Rows[0][0].ToString();
-                    string nombrecliente = dcliente.Tables[0].Rows[0][1].ToString();
-
-                    string Cod_Venta = ventastring.Substring(ventastring.Length - 2, 2); 
-
-                    foreach (var item in carrito)
+                    var factory = new ConnectionFactory() { HostName = "localhost" };
+                    using (var connection = factory.CreateConnection())
+                    using (var channel = connection.CreateModel())
                     {
-                        message += Cod_Venta + ";" + cliente + ";" + nickname + ";" + item.nombre + ";       " + item.cantidad + ";    " + item.largo + ";" + direccioncliente + ";" + nombrecliente + "~";
-                        /*
-                        if (item.usuario.Equals(user))
+                        channel.QueueDeclare(queue: "hello",
+                                             durable: false,
+                                             exclusive: false,
+                                             autoDelete: false,
+                                             arguments: null);
+
+                        string message = "";
+                        DataSet venta = nueva.Consulta("(select max(Venta) from venta)");
+                        DataSet dcliente = nueva.Consulta("select Direccion, Nombre from Cliente Where Cliente = " + cliente);
+                        string ventastring = venta.Tables[0].Rows[0][0].ToString();
+                        string direccioncliente = dcliente.Tables[0].Rows[0][0].ToString();
+                        string nombrecliente = dcliente.Tables[0].Rows[0][1].ToString();
+
+                        string Cod_Venta = ventastring.Substring(ventastring.Length - 2, 2);
+
+                        foreach (var item in carrito)
                         {
-                            message += venta.Tables[0].Rows[0][0] + ";" + cliente + ";" + nickname + ";" + item.nombre + ";       " + item.cantidad + ";    " + item.largo + ",";
+                            message += Cod_Venta + ";" + cliente + ";" + nickname + ";" + item.nombre + ";       " + item.cantidad + ";    " + item.largo + ";" + direccioncliente + ";" + nombrecliente + "~";
+                            /*
+                            if (item.usuario.Equals(user))
+                            {
+                                message += venta.Tables[0].Rows[0][0] + ";" + cliente + ";" + nickname + ";" + item.nombre + ";       " + item.cantidad + ";    " + item.largo + ",";
+                            }
+                            */
                         }
-                        */
+
+                        var body = Encoding.UTF8.GetBytes(message);
+
+                        channel.BasicPublish(exchange: "",
+                                             routingKey: "hello",
+                                             basicProperties: null,
+                                             body: body);
                     }
-
-                    var body = Encoding.UTF8.GetBytes(message);
-
-                    channel.BasicPublish(exchange: "",
-                                         routingKey: "hello",
-                                         basicProperties: null,
-                                         body: body);
                 }
-            }
 
+                }
+
+                
             carrito.Clear();
 
             HttpContext.Current.Session["Carrito"] = carrito;

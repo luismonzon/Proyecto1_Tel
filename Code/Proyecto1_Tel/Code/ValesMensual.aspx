@@ -81,7 +81,7 @@
             var identi = document.getElementById("<% = codigo.ClientID%>").value;
             $.ajax({
                 type: 'POST',
-                url: 'VentaDiaria.aspx/ModalDetalle',
+                url: 'ValesMensual.aspx/ModalDetalle',
                 data: JSON.stringify({ id: identi }),
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
