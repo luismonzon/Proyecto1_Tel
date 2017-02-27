@@ -52,6 +52,7 @@ namespace Proyecto1_Tel.Code
                                 "and v.Usuario = u.Usuario \n" +
                                 "and Fecha Between '" + start + "' and '" + end + "' \n" +
                                 "and Tipo_Pago = 'Deposito' \n" +
+                                "and v.TipoVenta = 1 \n" +
                                 "order by v.Venta DESC";
             DataSet clientes = conexion.Mostrar(Condicion, Columnas);
             

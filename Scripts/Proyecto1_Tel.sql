@@ -372,4 +372,12 @@ REFERENCES TipoVenta(tipoventa)
 insert into TipoVenta(tipo) values('normal')
 insert into TipoVenta (tipo) values('vale')
 
+update Venta
+set tipoventa = 1;
+
 SELECT * FROM DetalleVenta;
+
+select * from Usuario
+
+select * from TipoVenta;
+

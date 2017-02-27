@@ -48,6 +48,7 @@ namespace Proyecto1_Tel.Code
                                 "where d.Venta = v.Venta \n" +
                                 "and p.Producto = d.Producto \n" +
                                 "and Fecha Between '" + start + "' and '" + end + "' \n" +
+                                "and v.TipoVenta = 1 \n" +
                                 "group by p.Abreviatura, p.Descripcion \n" +
                                 "order by sum(d.Metros) desc \n";
             DataSet clientes = conexion.Mostrar(Condicion, Columnas);

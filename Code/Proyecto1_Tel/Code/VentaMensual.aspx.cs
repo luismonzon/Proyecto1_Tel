@@ -46,6 +46,7 @@ namespace Proyecto1_Tel.Code
             string Condicion = " Venta v, Cliente c, Usuario u \n" +
                                 "where v.Cliente = c.Cliente \n" +
                                 "and v.Usuario = u.Usuario \n" +
+                                "and v.TipoVenta = 1 \n" +
                                 "and DATEPART(MONTH,fecha) = " + mes + " \n" +
                                 "and DATEPART(YEAR,fecha) = " + anio + " \n" +
                                 "group by c.Nombre, v.Fecha ,c.Apellido, u.NickName \n";

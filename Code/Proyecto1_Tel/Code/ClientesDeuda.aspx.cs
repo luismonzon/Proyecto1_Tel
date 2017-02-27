@@ -69,6 +69,7 @@ namespace Proyecto1_Tel.Code
                 "   where p2.Deuda = d2.Deuda \n " +
                 "   group by d2.Deuda \n" +
                 ") sc on sc.Deuda = d.Deuda join Venta v on v.Venta = d.Venta\n " +
+                "where v.TipoVenta = 1 \n" +
                 "group by d.Venta, c.Cliente,c.Nombre,c.Apellido, v.Fecha, sc.Abono \n" +
                 "having SUM(d.Cantidad) > sc.Abono or sc.Abono is Null \n" +
                 "order by SUM(d.Cantidad) desc \n"

@@ -64,6 +64,7 @@ namespace Proyecto1_Tel.Code
             string Condicion = " Venta v, Cliente c, Usuario u \n" +
                                 "where v.Cliente = c.Cliente \n" +
                                 "and v.Usuario = u.Usuario \n" +
+                                "and v.TipoVenta = 1 \n" +
                                 "and Fecha = '" + fecha + "' \n";
             if (!tipo.Equals("0")) { Condicion += "and v.Usuario = '" + tipo + "' \n"; }
             Condicion +="order by v.Venta DESC";

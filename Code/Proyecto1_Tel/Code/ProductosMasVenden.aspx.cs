@@ -60,10 +60,12 @@ namespace Proyecto1_Tel.Code
         {
             string columnas = " p.Abreviatura, p.Descripcion,Convert(Decimal(15,0),   SUM(d.Cantidad) , 2) Cantidad, Convert(Decimal(15,2), SUM(d.Cantidad*I.Precio), 2)  Total \n ";
             string condicion =
-                " DetalleVenta d, Producto p, Inventario i \n"+
+                " DetalleVenta d, Producto p, Inventario i, Venta v \n"+
                 "where p.Producto = d.Producto \n"+
-                "and i.Producto = d.Producto \n"+
-                "group by p.Abreviatura, p.Descripcion  \n"+
+                "and i.Producto = d.Producto \n" +
+                "and v.Venta = d.Venta \n" +
+                "and v.TipoVenta = 1 \n" +
+                "group by p.Abreviatura, p.Descripcion  \n" +
                 "order by Cantidad, Total \n" 
             ;
             DataSet roles = conn.Mostrar(condicion, columnas);

@@ -44,6 +44,7 @@ namespace Proyecto1_Tel.Code
 "where v.Cliente = c.Cliente \n" +
 "and DATEPART(MONTH,v.fecha) = " + mes + " \n" +
 "and DATEPART(YEAR,v.fecha) = " + anio + " \n" +
+"and v.TipoVenta = 1 \n" +
 "group by c.Cliente, c.Nombre, c.Apellido \n" +
 "order by Total desc"
             ;

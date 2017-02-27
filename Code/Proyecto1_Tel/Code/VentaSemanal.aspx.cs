@@ -48,7 +48,8 @@ namespace Proyecto1_Tel.Code
             string Condicion = " Venta v, Cliente c, Usuario u \n" +
                                 "where v.Cliente = c.Cliente \n" +
                                 "and v.Usuario = u.Usuario \n" +
-                                "and Fecha Between '"+start+"' and '"+end+"' \n" +
+                                "and v.TipoVenta = 1 \n" +
+                                "and Fecha Between '" +start+"' and '"+end+"' \n" +
                                 "group by c.Nombre, Fecha ,c.Apellido, u.NickName \n";
             string Col = "SUM(Total) Total \n";
             string Cond = " Venta v, Cliente c, Usuario u \n" +

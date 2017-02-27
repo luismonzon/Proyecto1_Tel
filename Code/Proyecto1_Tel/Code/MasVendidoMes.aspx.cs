@@ -50,7 +50,8 @@ namespace Proyecto1_Tel.Code
                                 "where d.Venta = v.Venta \n" +
                                 "and p.Producto = d.Producto \n" +
                                 "and DATEPART(MONTH,fecha) = " + mes + " \n" +
-                                "and DATEPART(YEAR,fecha) = " + anio + " \n"+
+                                "and DATEPART(YEAR,fecha) = " + anio + " \n" +
+                                "and v.TipoVenta = 1 \n" +
                                 "group by p.Abreviatura, p.Descripcion \n" +
                                 "order by sum(d.Metros) desc \n";
 

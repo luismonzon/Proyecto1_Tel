@@ -43,6 +43,7 @@ namespace Proyecto1_Tel.Code
                 "Cliente c, Venta v \n" +
 "where v.Cliente = c.Cliente \n" +
                                 "and Fecha Between '" + start + "' and '" + end + "' \n" +
+                                "and v.TipoVenta = 1 \n" +
 "group by c.Cliente, c.Nombre, c.Apellido \n" +
 "order by Total desc"
             ;

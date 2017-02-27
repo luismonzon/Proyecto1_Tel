@@ -53,6 +53,7 @@ namespace Proyecto1_Tel.Code
                                 "and DATEPART(MONTH,Fecha) = " + mes + " \n" +
                                 "and DATEPART(YEAR,Fecha) = " + anio + " \n" +
                                 "and Tipo_Pago = 'Deposito' \n" +
+                                "and v.TipoVenta = 1 \n" +
                                 "order by v.Venta DESC";
             DataSet clientes = conexion.Mostrar(Condicion, Columnas);
             
