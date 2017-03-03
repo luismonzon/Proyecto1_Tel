@@ -404,19 +404,7 @@ create table C_Chica(
 	)
 
 go
-USE PROYECT_1;
 
-SELECT * FROM C_Chica;
-
-SELECT   ISNULL(SUM(CC.valor),0)   AS Total_CC
-FROM  C_Chica CC
-WHERE CC.Fecha = '20170301' 
-AND CC.Usuario = '5' 
-;
-SELECT  ISNULL(SUM(CC.valor),0)   AS Total_CC 
- FROM  C_Chica CC 
- WHERE CC.Fecha = '20170301' 
-AND V.Usuario = '1' 
 ;
 --  CONSULTA PARA REPORTE DE CAJA CHICA
 SELECT C.C_Chica U.nombre as nombre, C.valor as cantidad, C.fecha as fecha,CONVERT(VARCHAR(8),C.Hora,108) AS  Hora
@@ -425,13 +413,4 @@ WHERE U.Usuario = C.usuario
 AND C.fecha = '20170301'
 AND C.usuario = '5';
 
-SELECT  C.C_Chica Caja, U.nombre as Nombre, C.valor as cantidad, C.fecha as fecha,CONVERT(VARCHAR(8),C.Hora,108) AS  Hora 
- FROM  C_Chica C, Usuario U 
-where U.Usuario = C.usuario 
-and C.Fecha = '20170301' 
-;
-
-SELECT  ISNULL(SUM(CC.valor),0)   AS Total_CC 
-  FROM  C_Chica CC 
-where CC.Fecha = '20170301' 
 ;
