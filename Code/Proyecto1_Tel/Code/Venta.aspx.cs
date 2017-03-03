@@ -351,7 +351,7 @@ namespace Proyecto1_Tel.Code
                 
                 "</div> \n" +
                 "<div class=\"control-group\"> \n" +
-                "<div style=\"font-size: 20px;\" ><input type=\"checkbox\" name=\"tipoventa\" /> Vale </div>" +
+                "<div style=\"font-size: 20px;\" ><input type=\"checkbox\" onClick=\"Verificar();\" id=\"tipoventa\" name=\"tipoventa\" /> Vale </div>" +
                 "</div> \n" +
 
                 "<tr> \n" +
@@ -433,8 +433,11 @@ namespace Proyecto1_Tel.Code
                     {
                         respuesta = nueva.Crear("DetalleVenta", "Venta, producto, cantidad, subtotal, descuento ", "(select max(Venta) from venta)," + item.codigo + "," + item.cantidad + " , " + Convert.ToString(item.subTotal).Replace(",", ".")+" , " + item.descuento);
 
-
-                        respuesta = nueva.Modificar(" Inventario ", " Cantidad = Cantidad - " + item.cantidad + " ", " Producto = " + item.codigo + " ");
+                        if (tipoventa.Equals("1"))
+                        {
+                            respuesta = nueva.Modificar(" Inventario ", " Cantidad = Cantidad - " + item.cantidad + " ", " Producto = " + item.codigo + " ");
+                        }
+                        
                     }
                     else
                     {
@@ -445,7 +448,12 @@ namespace Proyecto1_Tel.Code
                         Double Total = Largo * Cantidad;
                         respuesta = nueva.Crear("DetalleVenta", "Venta, producto, cantidad, metros, subtotal, descuento ", "(select max(Venta) from venta)," + item.codigo + "," + item.cantidad + "," + item.largo + "," + Convert.ToString(item.subTotal).Replace(",", ".") + " , " + item.descuento);
 
-                        respuesta = nueva.Modificar(" Inventario ", " Metros_Cuadrados = Metros_Cuadrados - " + Convert.ToString(Total).Replace(",", ".") + " ", " Producto = " + item.codigo + " ");
+                        if (tipoventa.Equals("1"))
+                        {
+                            respuesta = nueva.Modificar(" Inventario ", " Metros_Cuadrados = Metros_Cuadrados - " + Convert.ToString(Total).Replace(",", ".") + " ", " Producto = " + item.codigo + " ");
+                        
+                        }
+                    
                     }
                     /*
                     if (item.usuario.Equals(user))
@@ -532,17 +540,16 @@ namespace Proyecto1_Tel.Code
 
 
         [WebMethod]
-        public static bool AddVale(string total, string cliente)
+        public static bool AddCaja(string total)
         {
-            string tipo_pago = "";
-                    tipo_pago = "Efectivo";
+ 
         
             Conexion nueva = new Conexion();
             bool respuesta;
 
             string user = HttpContext.Current.Session["IdUser"].ToString();
 
-            respuesta = nueva.Crear("Venta", "Cliente, Usuario, Fecha, Total, Tipo_Pago, Hora", cliente + "," + user + ",GETDATE()," + Convert.ToString(total).Replace(",", ".") + ", " + "'" + tipo_pago + "'" + " , CONVERT(time, GETDATE())");
+            respuesta = nueva.Crear("C_Chica", "Usuario, Fecha, Valor, Hora",  user + ",GETDATE()," + Convert.ToString(total).Replace(",", ".")  + " , CONVERT(time, GETDATE())");
          
             return respuesta;
         }
@@ -924,7 +931,7 @@ namespace Proyecto1_Tel.Code
 
 
         [WebMethod]
-        public static string MostrarModalVale(string cliente)
+        public static string MostrarModalCaja(string cliente)
         {
             Conexion nueva = new Conexion();
             Double total = 0;
@@ -934,15 +941,15 @@ namespace Proyecto1_Tel.Code
           
             
             string innerhtml =
-                "<div class=\"modal fade\" id=\"ModalVale\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\"> \n" +
+                "<div class=\"modal fade\" id=\"ModalCaja\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\"> \n" +
                 "<div class=\"modal-dialog\"> \n" +
                 "<div class=\"modal-content\"> \n" +
                 "<div class=\"modal-header\"> \n" +
-                "<button type=\"button\" onclick=\"closeModalPago();\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button> \n" +
+                "<button type=\"button\" onclick=\"closeModalCaja();\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button> \n" +
                 "<div class=\"step-title\"> \n" +
                 "<i>C</i> \n" +
-                "<h5>Vale</h5> \n" +
-                "<span>Ingresar Vale</span> \n" +
+                "<h5>Caja Chica</h5> \n" +
+                "<span>Ingresar Caja Chica</span> \n" +
                 "</div> \n" +
                 "</div>\n"
                 ;
@@ -957,28 +964,12 @@ namespace Proyecto1_Tel.Code
 
                 //ID DEL CLIENTE
                 "<div class=\"control-group\"> \n" +
-                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>Pago (Q.): </b></label> \n" +
-                "<div class=\"controls\"><input placeholder=\"Cantidad\" style=\"font-size: 15px;\" type=\"text\" name=\"total\" id=\"total_vale\" runat=\"server\" class=\"span8\" /></div> \n" +
+                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>Cantidad (Q.): </b></label> \n" +
+                "<div class=\"controls\"><input placeholder=\"Cantidad en quetzales\" style=\"font-size: 15px;\" type=\"text\" name=\"total\" id=\"total_vale\" runat=\"server\" class=\"span8\" /></div> \n" +
                 "</div> \n" +
 
-                "<div class=\"control-group\"> \n" +
-                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>Usuario </b></label> \n" +
-                "<div class=\"controls\">" +
-                "<select style=\"font-size: 15px;\" data-placeholder=\"Seleccionar Usuario\" class=\"select\"  id=\"cmbusuario\" tabindex=\"2\">";
-
-                DataSet usuario=conexion.Buscar_Mostrar("cliente","tipocliente=2");
-                foreach (DataRow item in usuario.Tables[0].Rows)
-                {
-                    innerhtml+= "<option value=\"" + item["cliente"] + "\">" + item["Nombre"] + " - " + item["Apellido"] + "</option> ";
-                }
+               
                 
-                innerhtml+=" </select></div> \n" +
-                "</div> \n" +
-
-                "<div class=\"control-group\"> \n" +
-                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>Descripcion</b></label> \n" +
-                "<div class=\"controls\"><input placeholder=\"Descripcion\"  style=\"font-size: 15px;\" type=\"text\" name=\"total\" id=\"descripcion\" runat=\"server\" class=\"span8\" /></div> \n" +
-                "</div> \n" +
                     //
 
                 "<tr> \n" +

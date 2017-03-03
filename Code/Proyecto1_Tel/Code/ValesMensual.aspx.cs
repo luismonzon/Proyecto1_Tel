@@ -28,7 +28,11 @@ namespace Proyecto1_Tel.Code
                 }
 
                 Conexion conexion = new Conexion();
-                DataSet Productos = conexion.Consulta("select Cliente, Nombre from Cliente where tipocliente = 2");
+                DataSet Productos = conexion.Consulta("SELECT C.Cliente, C.Nombre \n"+
+                        "FROM Cliente C, Venta V \n"+
+                        "WHERE V.Cliente = C.Cliente \n" +
+                        "AND V.tipoventa = 2 \n " +
+                        "GROUP BY C.Cliente, C.Nombre;" ) ;
                 String html = "<select  runat=\"server\" style=\"font-size: 15px;\" data-placeholder=\"Usuario\" class=\"styled\"  id=\"usuarios\">";
                 html += "<option value=\"0\">Todos los Vales</option> ";
                 foreach (DataRow item in Productos.Tables[0].Rows)
@@ -71,7 +75,7 @@ namespace Proyecto1_Tel.Code
             Condicion +=         "group by v.Venta, c.Nombre, v.Fecha ,c.Apellido, u.NickName \n";
  
             DataSet clientes = conexion.Mostrar(Condicion, Columnas);
-            String data = "No hay Ventas Disponibles";
+            String data = "No hay vales en este mes";
 
             string Row = " SUM (Total) \n ";
             string Cond = " Venta v, Cliente c \n" +
@@ -222,7 +226,14 @@ namespace Proyecto1_Tel.Code
 
 
 
+        [WebMethod]
+        public static bool Delete(string id)
+        {
+            Conexion conn = new Conexion();
 
+            return conn.Eliminar("Venta", "Venta = " + id);
+               
+        }
 
     }
 }

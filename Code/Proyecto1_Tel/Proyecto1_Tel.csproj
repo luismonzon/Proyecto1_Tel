@@ -289,6 +289,7 @@
     <Content Include="Code\Inv_Bodega.aspx" />
     <Content Include="Code\Inv_tienda.aspx" />
     <Content Include="Code\Producto.aspx" />
+    <Content Include="Code\Reporte_CChica.aspx" />
     <Content Include="Code\Rep_Gasto.aspx" />
     <Content Include="Code\Rep_GastoSemana.aspx" />
     <Content Include="Code\Rol.aspx" />
@@ -493,6 +494,13 @@
     <Compile Include="Code\Producto.aspx.designer.cs">
       <DependentUpon>Producto.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Code\Reporte_CChica.aspx.cs">
+      <DependentUpon>Reporte_CChica.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Code\Reporte_CChica.aspx.designer.cs">
+      <DependentUpon>Reporte_CChica.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Code\Rep_Gasto.aspx.cs">
       <DependentUpon>Rep_Gasto.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -532,6 +540,7 @@
     <Compile Include="Code\Validacion.cs" />
     <Compile Include="Code\Venta.aspx.cs">
       <DependentUpon>Venta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Code\Venta.aspx.designer.cs">
       <DependentUpon>Venta.aspx</DependentUpon>

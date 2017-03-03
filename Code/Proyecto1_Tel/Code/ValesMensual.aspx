@@ -106,12 +106,42 @@
             });
         }
 
+        function VerTabla() {
 
+
+            var str = $('#myDate').val();
+            if (str != "") {
+             
+                var prueba = str.toString();
+                var sp = prueba.split("-");
+                var mes = parseInt(sp[1]);
+                var anio = parseInt(sp[0]);
+
+                alert(mes)
+                alert(anio)
+                var id = document.getElementById("usuarios").value;
+                alert(id)
+                $.ajax({
+                    type: 'POST',
+                    url: 'ValesMensual.aspx/GenerarTabla',
+                    data: JSON.stringify({ mes: mes, anio:anio, tipo: id }),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function (response) {
+                        alert(response.d)
+                        var $modal = $('#tabla-productos');
+                        $modal.html(response.d);
+                    }
+                });
+
+            }
+            return false;
+        }
         function Delete(id) {
             if (confirm("Esta seguro que desea eliminar este vale?")) {
                 $.ajax({
                     type: "POST",
-                    url: "VentaDiaria.aspx/Delete",
+                    url: "ValesMensual.aspx/Delete",
                     data: JSON.stringify({ id: id }),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
@@ -121,10 +151,8 @@
 
                         if (response.d == true) {
                             alert("El Vale Ha Sido Eliminado Exitosamente");
-                            var $modal = $('#ContentPlaceHolder1_modaldetalle');
-                            $modal.html("");
+                        
                             VerTabla();
-                            reloadTable();
                         } else {
                             alert("El Vale No Pudo Ser Eliminado");
                         }

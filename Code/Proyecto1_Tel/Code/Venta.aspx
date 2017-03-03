@@ -804,6 +804,26 @@
 
 	    }
 
+	    function Verificar() {
+	        if (document.getElementById('tipoventa').checked) {
+	            $("#cmbpago").value = 1;
+
+	            var tipo = $("#cmbpago").val();
+	            var tot = document.getElementById("totalpago").value;
+	            document.getElementById("totalabonado").value = tot;
+	            var abono = document.getElementById("totalabonado").value;
+	            $("#cmbpago").attr("disabled", "disabled");
+	            alert('aqui');
+	            $("#totalabonado").attr("readonly", "readonly");
+	            $("#totalabonado").addClass("readOnly");
+	            	            
+	        } else {
+	            $("#cmbpago").removeAttr("disabled");
+	            alert('aqui');
+	            $("#totalabonado").removeAttr("readonly");
+	        }
+	    }
+
 	</script>                    
 	                    <!-- /horizontal form -->
 

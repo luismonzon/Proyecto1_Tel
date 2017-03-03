@@ -95,7 +95,8 @@ namespace Proyecto1_Tel.Code
             //TOTAL DE VENTAS
             string Columnas = "ISNULL(SUM(V.Total),0) AS Tot_Ventas \n";
             string Condicion = " Venta as V \n" +
-                                "WHERE V.Fecha = CONVERT(date, GETDATE())\n";
+                                "WHERE V.Fecha = CONVERT(date, GETDATE())\n"+
+                                "and v.TipoVenta = 1 \n";
             //TOTAL DE GASTO
             string Row = "ISNULL(SUM(G.valor),0)  AS Tot_Gasto";
             string Cond = " Gasto G \n" +
@@ -103,13 +104,15 @@ namespace Proyecto1_Tel.Code
             //CANTIDAD DE ORDENES
             string Col = "ISNULL(COUNT(V.Total),0) \n";
             string Condi = " Venta as V \n" +
-                           " WHERE V.Fecha = CONVERT(date, GETDATE()) \n";
+                           " WHERE V.Fecha = CONVERT(date, GETDATE()) \n"+
+                           "and v.TipoVenta = 1 \n";
 
             //CREDITOS
             string Col_Cre = " ISNULL(SUM(V.Total),0) AS Total_Credi \n";
             string Cond_Cre = " Venta as V \n" +
                            " WHERE V.Fecha = CONVERT(date, GETDATE()) \n"+
-                           "AND V.Tipo_Pago = 'Deuda'";
+                           "AND V.Tipo_Pago = 'Deuda'"+
+                           "and v.TipoVenta = 1 \n";
 
 
 
@@ -117,22 +120,27 @@ namespace Proyecto1_Tel.Code
             string Col_Dep = " ISNULL(SUM(V.Total),0) AS Total_Credi \n";
             string Cond_Dep = " Venta as V \n" +
                            " WHERE V.Fecha = CONVERT(date, GETDATE()) \n"+
-                           "AND V.Tipo_Pago = 'Deposito'";
+                           "AND V.Tipo_Pago = 'Deposito'"+
+                           "and v.TipoVenta = 1 \n";
 
             //BALANCE GENERAL
-            string Colu = " SUM(ISNULL(Ventas.Tot_Ventas ,0) - ISNULL(Gasto.Tot_Gasto,0) - ISNULL(Credito.Total_Credi,0) - ISNULL(Depositos.Total_Depo,0)) as BALANCE \n";
+            string Colu = " SUM(ISNULL(Ventas.Tot_Ventas ,0) - ISNULL(Gasto.Tot_Gasto,0) - ISNULL(Credito.Total_Credi,0) - ISNULL(Depositos.Total_Depo,0) + ISNULL(CChica.total,0) ) as BALANCE \n";
             string Condic = "( SELECT SUM(V.Total) AS Tot_Ventas \n" +
                            "FROM Venta as V \n" +
-                           "WHERE V.Fecha = CONVERT(date, GETDATE())) as Ventas, (SELECT SUM(G.valor) AS Tot_Gasto \n" +
+                           "WHERE V.Fecha = CONVERT(date, GETDATE()) and v.TipoVenta = 1 \n) as Ventas, (SELECT SUM(G.valor) AS Tot_Gasto \n" +
                             "FROM Gasto as G \n" +
                             "WHERE G.fecha_gasto = CONVERT(date, GETDATE())) as Gasto, \n"+
                             " ( SELECT SUM(V.Total) AS Total_Credi FROM Venta as V  \n"+
-                            "WHERE V.Fecha = CONVERT(date, GETDATE()) \n " +
+                            "WHERE V.Fecha = CONVERT(date, GETDATE()) and v.TipoVenta = 1 \n \n " +
                             "AND V.Tipo_Pago = 'Deuda') as Credito,( \n" +
                             "SELECT SUM(V.Total) AS Total_Depo \n" +
                             "FROM Venta as V \n"+
-                            "WHERE V.Fecha = CONVERT(date, GETDATE())"+
-                            "AND V.Tipo_Pago = 'Deposito') as Depositos";
+                            "WHERE V.Fecha = CONVERT(date, GETDATE()) \n"+
+                            "and v.TipoVenta = 1 \n"+
+                            "AND V.Tipo_Pago = 'Deposito') as Depositos \n"+
+                            ", ( SELECT SUM(CC.valor) as total \n"+
+                            "FROM C_Chica as CC \n "+
+                            "WHERE CC.Fecha = CONVERT(date, GETDATE())) as CChica \n";
  
           
 
@@ -228,7 +236,7 @@ namespace Proyecto1_Tel.Code
                                 "</li>" +
                             "</ul>" +
                         "</li>" +
-                        "<li><a  title=\"Reportes\" class=\"expand\"><i class=\"icon-copy\"></i>Reportes<strong>5</strong></a>" +
+                        "<li><a  title=\"Reportes\" class=\"expand\"><i class=\"icon-copy\"></i>Reportes<strong>7</strong></a>" +
                             "<ul>" +
                                 //REPORTE VENTAS
                                 "<li>" +
@@ -240,7 +248,10 @@ namespace Proyecto1_Tel.Code
                                         "<li><a href=\"VentaAnual.aspx\" title=\"Anual\">Anual</a></li>" +
                                     "</ul>" +
                                 "</li>" +
-                                "<li><a href=\"ValesMensual.aspx\" title=\"Productos\">Vales</a></li> " +
+                                //REPORTE VALES
+                                "<li><a href=\"ValesMensual.aspx\" title=\"Vales\">Vales</a></li> " +
+                                //Reporte CAJA CHICA
+                                "<li><a href=\"Reporte_CChica.aspx\" title=\"Caja Chica\">Caja Chica</a></li> " +
                                 //REPORTE DEPOSITOS
                                 "<li>" +
                                     "<a title=\"Ventas\" class=\"expand\">Depositos</a>" +

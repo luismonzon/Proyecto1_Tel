@@ -266,9 +266,9 @@ namespace Proyecto1_Tel.Code
                     "where p.Producto = d.Producto \n" +
                     "and d.Venta = " + id + " \n";
                 Conexion con = new Conexion();
-                DataSet roles = con.Mostrar(condicion, columnas);
-                if (roles.Tables.Count > 0) {
-                    foreach (DataRow item in roles.Tables[0].Rows) 
+                DataSet productos = con.Mostrar(condicion, columnas);
+                if (productos.Tables.Count > 0) {
+                    foreach (DataRow item in productos.Tables[0].Rows) 
                     {
                         if(item["Tipo"].ToString().Equals("1"))
                         {

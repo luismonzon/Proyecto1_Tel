@@ -298,7 +298,7 @@ create table Bodega(
 )
 
 go
---nueva tabla
+--nueva tabla GASTO
 
 create table Gasto(
 	Gasto int identity(1,1) not null,
@@ -381,3 +381,57 @@ select * from Usuario
 
 select * from TipoVenta;
 
+
+
+SELECT   ISNULL(SUM(dv.Descuento),0)   AS Total_Descuento 
+ FROM  DetalleVenta dv, Venta as V 
+ WHERE V.Fecha = '20160816' 
+ and V.Venta = dv.Venta
+and v.TipoVenta = 1 
+AND V.Usuario = '2' 
+;
+
+--Nueva tabla de CAJA CHICA
+USE PROYECT_1;
+create table C_Chica(
+	C_Chica int identity(1,1) not null,
+	valor numeric(9,2) not null,
+	fecha date not null,
+	hora Time(7) not null,
+	usuario int not null,
+	Constraint fk_caja_usuario foreign key (usuario) references Usuario(usuario),
+	Constraint pk_chica primary key(C_Chica),
+	)
+
+go
+USE PROYECT_1;
+
+SELECT * FROM C_Chica;
+
+SELECT   ISNULL(SUM(CC.valor),0)   AS Total_CC
+FROM  C_Chica CC
+WHERE CC.Fecha = '20170301' 
+AND CC.Usuario = '5' 
+;
+SELECT  ISNULL(SUM(CC.valor),0)   AS Total_CC 
+ FROM  C_Chica CC 
+ WHERE CC.Fecha = '20170301' 
+AND V.Usuario = '1' 
+;
+--  CONSULTA PARA REPORTE DE CAJA CHICA
+SELECT C.C_Chica U.nombre as nombre, C.valor as cantidad, C.fecha as fecha,CONVERT(VARCHAR(8),C.Hora,108) AS  Hora
+FROM C_Chica C, Usuario U
+WHERE U.Usuario = C.usuario
+AND C.fecha = '20170301'
+AND C.usuario = '5';
+
+SELECT  C.C_Chica Caja, U.nombre as Nombre, C.valor as cantidad, C.fecha as fecha,CONVERT(VARCHAR(8),C.Hora,108) AS  Hora 
+ FROM  C_Chica C, Usuario U 
+where U.Usuario = C.usuario 
+and C.Fecha = '20170301' 
+;
+
+SELECT  ISNULL(SUM(CC.valor),0)   AS Total_CC 
+  FROM  C_Chica CC 
+where CC.Fecha = '20170301' 
+;
