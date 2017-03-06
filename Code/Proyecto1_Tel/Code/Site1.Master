@@ -58,7 +58,8 @@
     <script type="text/javascript" src="js/plugins/forms/jquery.validationEngine-en.js"></script>
     <script type="text/javascript" src="js/plugins/forms/jquery.form.wizard.js"></script>
     <script type="text/javascript" src="js/plugins/forms/jquery.form.js"></script>
-    
+    <link rel="stylesheet" href="css/alertify.css" />
+    <link rel="stylesheet" href="css/themes/bootstrap.css">
     <script type="text/javascript" src="js/myjava.js"></script>
     
     <script type="text/javascript" src="js/plugins/tables/jquery.dataTables.min.js"></script>
@@ -72,7 +73,9 @@
     <script type="text/javascript" src="js/charts/chart2.js"></script>
     <script type="text/javascript" src="js/charts/chart3.js"></script>
     <script type="text/javascript" src="js/plugins/charts/jquery.flot.pie.js"></script>
-    
+
+
+    <script src="alertify.js"></script>
     
     
     
@@ -118,7 +121,7 @@
 			<div class="sidebar-tabs">
 		        <ul class="tabs-nav two-items">
 		            <li><a href="#general" title=""><i class="icon-reorder"></i></a></li>
-		            <li><a href="#stuff" title=""><i class="icon-calendar"></i></a></li>
+		            <li><a href="#stuff" title=""><i class="icon-cogs"></i></a></li>
 		        </ul>
 
                 
@@ -145,7 +148,7 @@
                     
 		        	<div class="widget">
                         
-		        		<h6 class="widget-name"><i class="ico-shopping-cart"></i>Caja Chica</h6>
+		        		<h6 class="widget-name"><i class="icon-money"></i>Caja Chica</h6>
                         <button class="btn btn-block btn-info" id="Caja" >Ingresar Caja Chica</button>
 		            </div>
 		            
@@ -319,7 +322,7 @@
                     }
                 });
             } else {
-                alert("Debe elegir un cliente primero!!");
+                alert("Error");
             }
 
 
@@ -351,7 +354,7 @@
                 success: function (msg) {
                     // Notice that msg.d is used to retrieve the result object
                     if (msg.d == "1") {
-                        alert("Gasto guardado exitosamente");
+                        alertify.success("Gasto guardado exitosamente");
                         $("#descripcion").val("");
                         $("#monto").val("");
 
@@ -359,7 +362,7 @@
                     }
                     else {
 
-                        alert("Ha ocurrido un error");
+                        alertify.error("Ha ocurrido un error");
                     }
                 }
             });
@@ -369,7 +372,7 @@
 
 
             var tot = document.getElementById("total_vale").value;
-            alert(tot);
+  
            
 
                     $.ajax({
@@ -382,9 +385,10 @@
                             if (response.d == true) {
                                
                                 closeModalCaja();
-                                alert('Caja insertada exitosamente');
+                                alertify.success('Caja insertada exitosamente');
 
                             } else {
+                                alertify.error('Ha ocurrido un error');
                                 $('#mensaje').removeClass();
                                 $('#mensaje').addClass('alert alert-danger').html('Error al insertar').show(200).delay(2500).hide(200);
 

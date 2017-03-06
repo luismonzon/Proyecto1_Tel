@@ -117,10 +117,9 @@
                 var mes = parseInt(sp[1]);
                 var anio = parseInt(sp[0]);
 
-                alert(mes)
-                alert(anio)
+          
                 var id = document.getElementById("usuarios").value;
-                alert(id)
+        
                 $.ajax({
                     type: 'POST',
                     url: 'ValesMensual.aspx/GenerarTabla',
@@ -128,7 +127,6 @@
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'json',
                     success: function (response) {
-                        alert(response.d)
                         var $modal = $('#tabla-productos');
                         $modal.html(response.d);
                     }
@@ -150,11 +148,11 @@
                         var str = $('#myDate').val();
 
                         if (response.d == true) {
-                            alert("El Vale Ha Sido Eliminado Exitosamente");
+                            alertify.success("<font size=3 color='red'></font>El Vale Ha Sido Eliminado Exitosamente");
                         
                             VerTabla();
                         } else {
-                            alert("El Vale No Pudo Ser Eliminado");
+                            alertify.error("El Vale No Pudo Ser Eliminado");
                         }
 
                     }

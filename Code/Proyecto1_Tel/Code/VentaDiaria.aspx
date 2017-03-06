@@ -114,6 +114,7 @@
             });
         }
 
+
         function Delete(id)
         {
             if (confirm("Esta seguro que desea eliminar la Venta?")) {
@@ -128,13 +129,14 @@
                         var str = $('#myDate').val();
 
                         if (response.d == true) {
-                            alert("La Venta Ha Sido Eliminada Exitosamente");
+                            alertify.success("La Venta Ha Sido Eliminada Exitosamente",3);
+                            
                             var $modal = $('#ContentPlaceHolder1_modaldetalle');
                             $modal.html("");
                             VerTabla();
                             //reloadTable();
                         } else {
-                            alert("La Venta No Pudo Ser Eliminada");
+                            alertify.success("La Venta No Pudo Ser Eliminada");
                         }
                         
                     }

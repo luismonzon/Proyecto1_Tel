@@ -237,7 +237,7 @@
                 success: function (msg) {
                     // Notice that msg.d is used to retrieve the result object
                     if (msg.d == "0") {
-                        alert("Cliente no existe");
+                        alertify.error("Cliente no existe");
                     }
                     else {
                         var datos = JSON.parse(msg.d);
@@ -309,7 +309,7 @@
                     dataType: 'json',
                     success: function (response) {
                         if (response.d == '0') {
-                            alert('Carrito Vacio');
+                            alertify.error('Carrito Vacio');
                         } else {
 
 
@@ -336,7 +336,7 @@
                     }
                 });
             } else {
-                alert("Debe elegir un cliente primero!!");
+                alertify.error("Debe elegir un cliente primero!!");
             }
 
 
@@ -420,7 +420,7 @@
                 success: function (msg) {
                     // Notice that msg.d is used to retrieve the result object
                     if (msg.d == "0") {
-                        alert("Cliente no existe");
+                        alertify.error("Cliente no existe");
                     }
                     else {
                         var str = msg.d + "";
@@ -486,7 +486,7 @@
                 });
 
             } else {
-                alert("La cantidad que desea vender excede a la disponible");
+                alertify.error("La cantidad que desea vender excede a la disponible");
             }
 
         });
@@ -522,7 +522,7 @@
 	            success: function (msg) {
 	                // Notice that msg.d is used to retrieve the result object
 	                if (msg.d == "0") {
-	                    alert("Cliente no existe");
+	                    alertify.error("Cliente no existe");
 	                }
 	                else {
 	                    var datos = JSON.parse(msg.d);
@@ -631,7 +631,25 @@
 	                                            c = parseFloat(a - b);
 	                                            $('#vuelto').removeClass();
 	                                            $('#vuelto').addClass('label label-success').html('Vuelto:  Q.' + c).show(200).delay(2500);
-	                                            alert(' Su Vuelto es: Q.' + parseFloat(c) + '\n Codigo Venta: ' + CodVenta.substr(-2));
+
+	                                            // Extend existing 'alert' dialog
+	                                            if (!alertify.alerta) {
+	                                                //define a new errorAlert base on alert
+	                                                alertify.dialog('alerta', function factory() {
+	                                                    return {
+	                                                        build: function () {
+	                                                            var alertasHeader = '<span class="fam-cart-put" '
+                                                                + 'style="vertical-align:middle;color:#e10000;">'
+                                                                + '</span> Proteccion Solar';
+	                                                            this.setHeader(alertasHeader);
+	                                                        }
+	                                                    };
+	                                                }, true, 'alert');
+	                                            }
+	                                            alertify
+                                             .alerta("<font color='red' size=4> VUELTO Q. " + parseFloat(c) + " </font> <br/><br/><br/> <font size = 2 >No. VENTA: " + CodVenta.substr(-2) + "</font> ");
+
+	                                            
 	                                        }
 	                                    }
 	                                    reloadTable();
@@ -705,7 +723,7 @@
 	                                document.getElementById("codigo").value = idCliente;
 	                                $('#mensaje').removeClass();
 	                                $('#mensaje').addClass('alert alert-success').html('Cliente agregado con exito').show(200).delay(2500).hide(200);
-
+	                                alertify.success("Cliente agregado con exito",4);
 
 	                            }
 
@@ -813,13 +831,13 @@
 	            document.getElementById("totalabonado").value = tot;
 	            var abono = document.getElementById("totalabonado").value;
 	            $("#cmbpago").attr("disabled", "disabled");
-	            alert('aqui');
+	    
 	            $("#totalabonado").attr("readonly", "readonly");
 	            $("#totalabonado").addClass("readOnly");
 	            	            
 	        } else {
 	            $("#cmbpago").removeAttr("disabled");
-	            alert('aqui');
+	           
 	            $("#totalabonado").removeAttr("readonly");
 	        }
 	    }
