@@ -32,6 +32,7 @@ namespace Proyecto1_Tel.Code
             //JARVIS\SQLEXPRESS
             string cadenaConexion = WebConfigurationManager.ConnectionStrings["conn"].ConnectionString;
             //string cadenaConexion = @"Data Source=192.168.1.6;Initial Catalog=PROYECT_1;User ID=sa;Password=Proteccionsolar123";
+            //Data Source=DESKTOP-NG22G5J\SQLEXPRESS;Initial Catalog=PROYECT_1;Integrated Security=True
             try
             {
 

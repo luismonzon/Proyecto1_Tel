@@ -61,7 +61,7 @@ namespace Proyecto1_Tel.Code
         [WebMethod]
         private string LLenar_Tabla()
         {
-            string columnas = "d.Venta, c.Cliente, c.Nombre, c.Apellido, LEFT(v.Fecha,10) as Fecha, sum(d.Cantidad) Credito , sc.Abono Abonado, SUM(d.Cantidad) - sc.Abono Deuda \n ";
+            string columnas = "d.Venta, c.Cliente, c.Nombre, c.Apellido, CONVERT(varchar(10),v.Fecha,103) as Fecha, sum(d.Cantidad) Credito , sc.Abono Abonado, SUM(d.Cantidad) - sc.Abono Deuda \n ";
             string condicion =
                 " Deuda d join Cliente c on c.Cliente = d.Cliente left join ( \n" +
                 "   select d2.Deuda, SUM(p2.Abono) Abono \n" +

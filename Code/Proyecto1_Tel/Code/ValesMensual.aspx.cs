@@ -62,7 +62,7 @@ namespace Proyecto1_Tel.Code
 
             Conexion conexion = new Conexion();
             //" v.Venta Venta, CONVERT(VARCHAR(8),v.Hora,108) Hora, c.Cliente Cliente, c.Nombre Nombre, c.Apellido Apellido, c.Direccion Direccion, u.NickName Vendedor, Tipo_Pago, Total \n"
-            string Columnas = " v.Venta Venta, c.Nombre Nombre, LEFT(v.Fecha,10) as Fecha, c.Apellido Apellido, u.NickName Vendedor, SUM(Total) Total \n";
+            string Columnas = " v.Venta Venta, c.Nombre Nombre, CONVERT(varchar(10),v.Fecha,103) as Fecha, c.Apellido Apellido, u.NickName Vendedor, SUM(Total) Total \n";
             string Condicion = " Venta v, Cliente c, Usuario u \n" +
                                 "where v.Cliente = c.Cliente \n" +
                                 "and v.Usuario = u.Usuario \n" +

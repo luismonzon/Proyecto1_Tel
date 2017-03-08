@@ -44,7 +44,7 @@ namespace Proyecto1_Tel.Code
 
 
             Conexion conexion = new Conexion();
-            string Columnas = " c.Nombre Nombre, LEFT(v.Fecha,10) as Fecha, c.Apellido Apellido, u.NickName Vendedor, SUM(Total) Total \n";
+            string Columnas = " c.Nombre Nombre, CONVERT(varchar(10),v.Fecha,103) as Fecha, c.Apellido Apellido, u.NickName Vendedor, SUM(Total) Total \n";
             string Condicion = " Venta v, Cliente c, Usuario u \n" +
                                 "where v.Cliente = c.Cliente \n" +
                                 "and v.Usuario = u.Usuario \n" +
