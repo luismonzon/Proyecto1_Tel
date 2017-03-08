@@ -643,20 +643,29 @@
                                                                 + '</span> Proteccion Solar';
 	                                                            this.setHeader(alertasHeader);
 	                                                        }
+                                                            
 	                                                    };
+	                                                    
 	                                                }, true, 'alert');
 	                                            }
-	                                            alertify
-                                             .alerta("<font color='red' size=4> VUELTO Q. " + parseFloat(c) + " </font> <br/><br/><br/> <font size = 2 >No. VENTA: " + CodVenta.substr(-2) + "</font> ");
-
+	                                          
 	                                            
+
+	                                            alertify.confirm("<font color='red' size=4> VUELTO Q. " + parseFloat(c) + " </font> <br/><br/><br/> <font size = 2 >No. VENTA: " + CodVenta.substr(-2) + "</font> ",
+                                                  function () {
+                                                      reloadTable();
+                                                  },
+                                                  function () {
+                                                      reloadTable();
+                                                  });
 	                                        }
 	                                    }
-	                                    reloadTable();
+	                                    
 
 	                                }
-	                            });
 
+	                            });
+	                            
 	                        } else {
 	                            $('#mensaje').removeClass();
 	                            $('#mensaje').addClass('alert alert-danger').html('Error al insertar').show(200).delay(2500).hide(200);
@@ -682,7 +691,7 @@
 
 
 
-
+	        
 	        return false;
 
 

@@ -58,7 +58,8 @@
     <script type="text/javascript" src="js/plugins/forms/jquery.validationEngine-en.js"></script>
     <script type="text/javascript" src="js/plugins/forms/jquery.form.wizard.js"></script>
     <script type="text/javascript" src="js/plugins/forms/jquery.form.js"></script>
-    
+    <link rel="stylesheet" href="css/alertify.css" />
+    <link rel="stylesheet" href="css/themes/bootstrap.css">
     <script type="text/javascript" src="js/myjava.js"></script>
     
     <script type="text/javascript" src="js/plugins/tables/jquery.dataTables.min.js"></script>
@@ -72,7 +73,9 @@
     <script type="text/javascript" src="js/charts/chart2.js"></script>
     <script type="text/javascript" src="js/charts/chart3.js"></script>
     <script type="text/javascript" src="js/plugins/charts/jquery.flot.pie.js"></script>
-    
+
+
+    <script src="alertify.js"></script>
     
     
     
@@ -108,6 +111,7 @@
 	<!-- /fixed top -->
 
     
+    <div id="divvale"></div>
 	<!-- Content container -->
 	<div id="container">
 
@@ -117,7 +121,7 @@
 			<div class="sidebar-tabs">
 		        <ul class="tabs-nav two-items">
 		            <li><a href="#general" title=""><i class="icon-reorder"></i></a></li>
-		            <li><a href="#stuff" title=""><i class="icon-calendar"></i></a></li>
+		            <li><a href="#stuff" title=""><i class="icon-cogs"></i></a></li>
 		        </ul>
 
                 
@@ -139,6 +143,13 @@
                         <input  id="monto" name="monto" placeholder="Monto"class="span12" type="number" step="any">
                         <textarea id="descripcion" placeholder="Descripcion" class="form-control" name="descripcion" rows="3"></textarea>
                         <button class="btn btn-block btn-info" id="Gasto">Registrar</button>
+		            </div>
+		            
+                    
+		        	<div class="widget">
+                        
+		        		<h6 class="widget-name"><i class="icon-money"></i>Caja Chica</h6>
+                        <button class="btn btn-block btn-info" id="Caja" >Ingresar Caja Chica</button>
 		            </div>
 		            
                     <div class="widget">
@@ -204,7 +215,10 @@
                     
     			<asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                     
-				    	 
+				        <div id="divpago" runat="server">
+    
+            </div>
+
     			</asp:ContentPlaceHolder>
             </div>
 
@@ -265,7 +279,63 @@
     } 
  
 </script>
+    
     <script type="text/javascript">
+
+
+        $('#Caja').on('click', function () { // modal pago
+            console.log("in");
+            var client = 1;
+            if (client != "") {
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'Venta.aspx/MostrarModalCaja',
+                    data: JSON.stringify({ cliente: client }),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.d == '0') {
+                            alert('Oops! Ocurrio un Error');
+                        } else {
+
+                            console.log(response.d);
+                            //se escribe el modal
+                            var $modal = $('#divvale');
+                            $modal.html(response.d);
+                            $('#ModalCaja').on('show.bs.modal', function () {
+                                $('.modal .modal-body').css('overflow-y', 'auto');
+                                $('.modal .modal-body').css('max-height', 'auto');
+                                $('.modal .modal-body').css('height', 'auto');
+                            });
+
+                            //Modal
+                            $('#formulario_modal')[0].reset(); //formulario lo inicializa con datos vacios
+                            $('#pro_modal').val('Registro'); //crea nuestra caja de procesos y se agrega el valor del registro
+                            $('#reg_modal').show(); //mostramos el boton de registro
+                            $('#edi_modal').hide();//se esconde el boton de editar
+                            $('#ModalCaja').modal({ //
+                                show: true, //mostramos el modal registra producto
+                                //backdrop: 'static' //hace que no se cierre el modal si le dan clic afuera del mismo.
+                            });
+                        }
+                    }
+                });
+            } else {
+                alert("Error");
+            }
+
+
+        });
+
+        function closeModalCaja() {
+
+
+            $('#ModalCaja').modal('toggle');
+            var $modal = $('divvale');
+            $modal.html("");
+
+        }
 
 
 
@@ -284,7 +354,7 @@
                 success: function (msg) {
                     // Notice that msg.d is used to retrieve the result object
                     if (msg.d == "1") {
-                        alert("Gasto guardado exitosamente");
+                        alertify.success("Gasto guardado exitosamente");
                         $("#descripcion").val("");
                         $("#monto").val("");
 
@@ -292,11 +362,50 @@
                     }
                     else {
 
-                        alert("Ha ocurrido un error");
+                        alertify.error("Ha ocurrido un error");
                     }
                 }
             });
         });
+
+        function AddVale() {
+
+
+            var tot = document.getElementById("total_vale").value;
+  
+           
+
+                    $.ajax({
+                        type: 'POST',
+                        url: 'Venta.aspx/AddCaja',
+                        data: JSON.stringify({ total: tot}),
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json',
+                        success: function (response) {
+                            if (response.d == true) {
+                               
+                                closeModalCaja();
+                                alertify.success('Caja insertada exitosamente');
+
+                            } else {
+                                alertify.error('Ha ocurrido un error');
+                                $('#mensaje').removeClass();
+                                $('#mensaje').addClass('alert alert-danger').html('Error al insertar').show(200).delay(2500).hide(200);
+
+                            }
+
+                        }
+                    });
+
+
+
+
+
+            return false;
+
+
+        }
+
     </script>
 </body>
 </html>

@@ -237,7 +237,7 @@
                 success: function (msg) {
                     // Notice that msg.d is used to retrieve the result object
                     if (msg.d == "0") {
-                        alert("Cliente no existe");
+                        alertify.error("Cliente no existe");
                     }
                     else {
                         var datos = JSON.parse(msg.d);
@@ -309,12 +309,13 @@
                     dataType: 'json',
                     success: function (response) {
                         if (response.d == '0') {
-                            alert('Carrito Vacio');
+                            alertify.error('Carrito Vacio');
                         } else {
 
 
                             //se escribe el modal
                             var $modal = $('#ContentPlaceHolder1_divpago');
+                        
                             $modal.html(response.d);
                             $('#ModalPago').on('show.bs.modal', function () {
                                 $('.modal .modal-body').css('overflow-y', 'auto');
@@ -335,7 +336,7 @@
                     }
                 });
             } else {
-                alert("Debe elegir un cliente primero!!");
+                alertify.error("Debe elegir un cliente primero!!");
             }
 
 
@@ -419,7 +420,7 @@
                 success: function (msg) {
                     // Notice that msg.d is used to retrieve the result object
                     if (msg.d == "0") {
-                        alert("Cliente no existe");
+                        alertify.error("Cliente no existe");
                     }
                     else {
                         var str = msg.d + "";
@@ -485,7 +486,7 @@
                 });
 
             } else {
-                alert("La cantidad que desea vender excede a la disponible");
+                alertify.error("La cantidad que desea vender excede a la disponible");
             }
 
         });
@@ -521,7 +522,7 @@
 	            success: function (msg) {
 	                // Notice that msg.d is used to retrieve the result object
 	                if (msg.d == "0") {
-	                    alert("Cliente no existe");
+	                    alertify.error("Cliente no existe");
 	                }
 	                else {
 	                    var datos = JSON.parse(msg.d);
@@ -581,20 +582,28 @@
 	        var client = document.getElementById('cmbclientes').value;
 	        var tipo = $("#cmbpago").val();
 	        var pago = document.getElementById("totalabonado").value;
-
-
+	        
+	        var Tipo_Venta;
+           
 	        var totalventa = parseFloat(tot.replace(",", "."));
 
 	        var pagototal = parseFloat(pago.replace(",", "."));
 
+	        if ($('input:checkbox[name=tipoventa]').prop('checked')) {
+	            Tipo_Venta = 2;
+	        } else {
+	            Tipo_Venta = 1;
+	        }
+	        
+
 	        if (pagototal > totalventa || pagototal == totalventa) {
 	            if (client != "" && tot != "0") {
-
+	                
 
 	                $.ajax({
 	                    type: 'POST',
 	                    url: 'Venta.aspx/AddPago',
-	                    data: JSON.stringify({ total: tot, cliente: client, tipopago: tipo }),
+	                    data: JSON.stringify({ total: tot, cliente: client, tipopago: tipo, tipoventa: Tipo_Venta }),
 	                    contentType: 'application/json; charset=utf-8',
 	                    dataType: 'json',
 	                    success: function (response) {
@@ -622,14 +631,41 @@
 	                                            c = parseFloat(a - b);
 	                                            $('#vuelto').removeClass();
 	                                            $('#vuelto').addClass('label label-success').html('Vuelto:  Q.' + c).show(200).delay(2500);
-	                                            alert(' Su Vuelto es: Q.' + parseFloat(c) + '\n Codigo Venta: ' + CodVenta.substr(-2));
+
+	                                            // Extend existing 'alert' dialog
+	                                            if (!alertify.alerta) {
+	                                                //define a new errorAlert base on alert
+	                                                alertify.dialog('alerta', function factory() {
+	                                                    return {
+	                                                        build: function () {
+	                                                            var alertasHeader = '<span class="fam-cart-put" '
+                                                                + 'style="vertical-align:middle;color:#e10000;">'
+                                                                + '</span> Proteccion Solar';
+	                                                            this.setHeader(alertasHeader);
+	                                                        }
+                                                            
+	                                                    };
+	                                                    
+	                                                }, true, 'alert');
+	                                            }
+	                                          
+	                                            
+
+	                                            alertify.confirm("<font color='red' size=4> VUELTO Q. " + parseFloat(c) + " </font> <br/><br/><br/> <font size = 2 >No. VENTA: " + CodVenta.substr(-2) + "</font> ",
+                                                  function () {
+                                                      reloadTable();
+                                                  },
+                                                  function () {
+                                                      reloadTable();
+                                                  });
 	                                        }
 	                                    }
-	                                    reloadTable();
+	                                    
 
 	                                }
-	                            });
 
+	                            });
+	                            
 	                        } else {
 	                            $('#mensaje').removeClass();
 	                            $('#mensaje').addClass('alert alert-danger').html('Error al insertar').show(200).delay(2500).hide(200);
@@ -655,7 +691,7 @@
 
 
 
-
+	        
 	        return false;
 
 
@@ -696,7 +732,7 @@
 	                                document.getElementById("codigo").value = idCliente;
 	                                $('#mensaje').removeClass();
 	                                $('#mensaje').addClass('alert alert-success').html('Cliente agregado con exito').show(200).delay(2500).hide(200);
-
+	                                alertify.success("Cliente agregado con exito",4);
 
 	                            }
 
@@ -793,6 +829,26 @@
 	        }
 
 
+	    }
+
+	    function Verificar() {
+	        if (document.getElementById('tipoventa').checked) {
+	            $("#cmbpago").value = 1;
+
+	            var tipo = $("#cmbpago").val();
+	            var tot = document.getElementById("totalpago").value;
+	            document.getElementById("totalabonado").value = tot;
+	            var abono = document.getElementById("totalabonado").value;
+	            $("#cmbpago").attr("disabled", "disabled");
+	    
+	            $("#totalabonado").attr("readonly", "readonly");
+	            $("#totalabonado").addClass("readOnly");
+	            	            
+	        } else {
+	            $("#cmbpago").removeAttr("disabled");
+	           
+	            $("#totalabonado").removeAttr("readonly");
+	        }
 	    }
 
 	</script>                    
