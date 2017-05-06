@@ -522,6 +522,11 @@ namespace Proyecto1_Tel.Code
 
         public static string MostrarModal(string id)
         {
+
+            Conexion conexion = new Conexion();
+            DataSet Productos = conexion.Mostrar("Bodega B, Producto P Where B.producto = P.producto and B.Cantidad > 0 Order by ABRE", "B.Producto PROD, P.Abreviatura ABRE"); 
+
+
             string innerhtml =
                 "<div class=\"modal fade\" id=\"Modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\"> \n" +
                 "<div class=\"modal-dialog\"> \n" +
@@ -544,8 +549,18 @@ namespace Proyecto1_Tel.Code
                 "<div> \n" +
                 "<div id=\"cmbproducto\" class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Producto:</b></label> \n" +
-                "<div class=\"controls\"><select style=\"font-size: 15px;\" data-placeholder=\"Buscar Producto...\" name=\"producto-select\" class=\"select\" onChange=\"cambio();\" runat=\"server\" required=\"required\"  id=\"producto\"></select></div> \n" +
-                "</div> \n" +
+                "<div class=\"controls\"><select tabindex=\"2\" style=\"font-size: 15px;\" data-placeholder=\"Buscar Producto...\" name=\"producto-select\" class=\"select\" onChange=\"cambio();\" runat=\"server\"  id=\"producto\">";
+
+
+            foreach (DataRow item in Productos.Tables[0].Rows)
+            {
+
+                innerhtml += "<option value=\"" + item["PROD"] + "\">" + item["ABRE"] + "</option> ";
+            }
+
+
+            innerhtml += "</select></div> \n" +
+            "</div> \n" +
                 //
                 "<div id=\"in_producto\" class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Producto:</b></label> \n" +
@@ -553,8 +568,8 @@ namespace Proyecto1_Tel.Code
                 "</div> \n" +
                 //
                 "<div class=\"control-group\"> \n" +
-                "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Descripcion:</b></label> \n" +
-                "<div class=\"controls\"><input readonly=\"readonly\" style=\"font-size: 14px;\" type=\"text\" placeholder=\"Descripcion\" id=\"descripcion\" name=\"descripcion\" runat=\"server\" class=\"span12\"/></div> \n" +
+                   "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Descripcion:</b></label> \n" +
+                "<div class=\"controls\"><input   readonly=\"readonly\" style=\"font-size: 15px;\"  type=\"text\" class=\"span12\" id=\"descrip\" runat=\"server\" /></div> \n" +
                 "</div> \n" +
                 "<div class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Tipo:</b></label> \n" +
@@ -621,43 +636,7 @@ namespace Proyecto1_Tel.Code
             return innerhtml;
         }
 
-        [WebMethod]
-
-        public static string Fill()
-        {
-            Conexion con = new Conexion();
-
-            DataSet data = con.Mostrar("Bodega B, Producto P Where B.producto = P.producto and B.Cantidad > 0", "B.Producto PROD, P.Abreviatura ABRE");
-
-            XmlDocument xDoc = new XmlDocument();
-            xDoc.LoadXml(data.GetXml());
-
-            XmlNodeList _Deudas = xDoc.GetElementsByTagName("NewDataSet");
-
-
-            string deuda = "";
-            XmlNodeList lista = ((XmlElement)_Deudas[0]).GetElementsByTagName("B.Producto_x0020_PROD_x002C__x0020_P.Abreviatura_x0020_ABRE");
-            int cant = lista.Count;
-            for (int i = 0; i < cant; i++)
-            {
-
-                XmlNodeList key = ((XmlElement)lista[i]).GetElementsByTagName("PROD");
-                XmlNodeList value = ((XmlElement)lista[i]).GetElementsByTagName("ABRE");
-
-                deuda += "{ \"key\":\"" + key[0].InnerText + "\",\"value\":\"" + value[0].InnerText + "\"}";
-                if (i != cant - 1)
-                {
-                    deuda += ",";
-                }
-
-            }
-
-            deuda = "[" + deuda + "]";
-            //string json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(deuda);
-
-            return deuda;
-        }
-
+       
 
 
     }

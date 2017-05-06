@@ -71,8 +71,7 @@
                         $('.modal .modal-body').css('max-height', $(window).height() * 0.7);
                         $('.modal .modal-body').css('height', $(window).height() * 0.7);
                     });
-                    FillCombo();
-
+                    
                     $('#formulario')[0].reset(); //formulario lo inicializa con datos vacios
                     $('#edi').hide(); //escondemos el boton de edicion porque es un nuevo registro
 
@@ -83,7 +82,7 @@
                     $('#radio').hide();
                     $('#reg').show(); //mostramos el boton de registro
 
-
+                    cambio();
                     $('#Modal').modal({ //
                         show: true, //mostramos el modal registra producto
                         backdrop: 'static' //hace que no se cierre el modal si le dan clic afuera del mismo.
@@ -116,8 +115,8 @@
                     var Tipo = produc[2];
                     var Precio = produc[3];
 
-                    document.getElementById("descripcion").value = Descripcion;
-
+                    document.getElementById("descrip").value = Descripcion;
+                
                     document.getElementById("cantidad_bodega").value = Cantidad_Dispo;
 
                     document.getElementById("tipo2").value = Tipo;

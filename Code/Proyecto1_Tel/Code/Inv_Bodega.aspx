@@ -29,7 +29,7 @@
 
 
     <script type="text/javascript">
-        function FillCombo() {
+      /*  function FillCombo() {
             $.ajax({
                 type: 'POST',
                 url: 'Inv_Bodega.aspx/Fill',
@@ -48,7 +48,7 @@
                     cambio();
                 }
             });
-        }
+        }*/
 
 
         $('#nuevo-bodega').on('click', function () {
@@ -68,13 +68,15 @@
                         $('.modal .modal-body').css('max-height', $(window).height() * 0.7);
                         $('.modal .modal-body').css('height', $(window).height() * 0.7);
                     });
-                    FillCombo();
+               //     FillCombo();
 
                     $('#formulario')[0].reset(); //formulario lo inicializa con datos vacios
                     $('#edi').hide(); //escondemos el boton de edicion porque es un nuevo registro
                     $('#divcantidad').hide();
                     $('#radio').hide();
+                    
                     $('#reg').show(); //mostramos el boton de registro
+                    cambio();
                     $('#Modal').modal({ //
                         show: true, //mostramos el modal registra producto
                         backdrop: 'static' //hace que no se cierre el modal si le dan clic afuera del mismo.
@@ -101,8 +103,9 @@
                 success: function (response) {
                     var produc = JSON.parse(response.d);
                     var Descripcion = produc[0];
-                    document.getElementById("descripcion").value = Descripcion;
-
+                   
+                    document.getElementById("descrip").value = Descripcion;
+                    
 
                 }
             });
@@ -167,7 +170,7 @@
                         $('.modal .modal-body').css('max-height', $(window).height() * 0.7);
                         $('.modal .modal-body').css('height', $(window).height() * 0.7);
                     });
-                    FillCombo();
+                   // FillCombo();
 
                     $('#edi').show(); //escondemos el boton de edicion porque es un nuevo registro
                     $('#reg').hide(); //mostramos el boton de registro

@@ -282,6 +282,10 @@ namespace Proyecto1_Tel.Code
 
         public static string MostrarModal(string id)
         {
+            Conexion conexion = new Conexion();
+            DataSet Productos = conexion.Consulta("select producto, abreviatura from Producto Order by abreviatura");
+
+
             string innerhtml =
                 "<div class=\"modal fade\" id=\"Modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\"> \n" +
                 "<div class=\"modal-dialog\"> \n" +
@@ -304,11 +308,21 @@ namespace Proyecto1_Tel.Code
                 "<div> \n" +
                 "<div class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Producto:</b></label> \n" +
-                "<div class=\"controls\"><select tabindex=\"2\" style=\"font-size: 15px;\" data-placeholder=\"Buscar Producto...\" name=\"producto-select\" class=\"select\" onChange=\"cambio();\" runat=\"server\"  id=\"producto\"></select></div> \n" +
+                "<div class=\"controls\"><select tabindex=\"2\" style=\"font-size: 15px;\" data-placeholder=\"Buscar Producto...\" name=\"producto-select\" class=\"select\" onChange=\"cambio();\" runat=\"server\"  id=\"producto\">";
+                
+                
+                foreach (DataRow item in Productos.Tables[0].Rows)
+                {
+                 
+                            innerhtml += "<option value=\"" + item["producto"] + "\">" + item["Abreviatura"] + "</option> ";
+                }
+
+               
+                innerhtml += "</select></div> \n" +
                 "</div> \n" +
                 "<div class=\"control-group\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Descripcion:</b></label> \n" +
-                "<div class=\"controls\"><input readonly=\"readonly\" style=\"font-size: 14px;\" type=\"text\" placeholder=\"Descripcion\" id=\"descripcion\" name=\"descripcion\" runat=\"server\" class=\"span12\"/></div> \n" +
+                "<div class=\"controls\"><input readonly=\"readonly\" style=\"font-size: 14px;\" type=\"text\" placeholder=\"Descripcion\" id=\"descrip\"  runat=\"server\" class=\"span12\"/></div> \n" +
                 "</div> \n" +
                 "<div class=\"control-group\" id=\"divcantidad\"> \n" +
                 "<label class=\"control-label\" style=\"font-size: 15px;\" ><b>*Cantidad Disponible:</b></label> \n" +
@@ -355,7 +369,7 @@ namespace Proyecto1_Tel.Code
             return innerhtml;
         }
 
-        [WebMethod]
+      /*  [WebMethod]
 
         public static string Fill()
         {
@@ -366,11 +380,11 @@ namespace Proyecto1_Tel.Code
             XmlDocument xDoc = new XmlDocument();
             xDoc.LoadXml(data.GetXml());
 
-            XmlNodeList _Deudas = xDoc.GetElementsByTagName("NewDataSet");
+            XmlNodeList _Productos = xDoc.GetElementsByTagName("NewDataSet");
 
 
-            string deuda = "";
-            XmlNodeList lista = ((XmlElement)_Deudas[0]).GetElementsByTagName("Producto_x002C_Abreviatura");
+            string productos = "";
+            XmlNodeList lista = ((XmlElement)_Productos[0]).GetElementsByTagName("Producto_x002C_Abreviatura");
             int cant = lista.Count;
             for (int i = 0; i < cant; i++)
             {
@@ -378,20 +392,20 @@ namespace Proyecto1_Tel.Code
                 XmlNodeList key = ((XmlElement)lista[i]).GetElementsByTagName("Producto");
                 XmlNodeList value = ((XmlElement)lista[i]).GetElementsByTagName("Abreviatura");
 
-                deuda += "{ \"key\":\"" + key[0].InnerText + "\",\"value\":\"" + value[0].InnerText + "\"}";
+                productos += "{ \"key\":\"" + key[0].InnerText + "\",\"value\":\"" + value[0].InnerText + "\"}";
                 if (i != cant - 1)
                 {
-                    deuda += ",";
+                    productos += ",";
                 }
 
             }
 
-            deuda = "[" + deuda + "]";
+            productos = "[" + productos + "]";
             //string json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(deuda);
 
-            return deuda;
+            return productos;
         }
-
+        */
 
 
     }
